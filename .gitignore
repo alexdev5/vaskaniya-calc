@@ -1,0 +1,8 @@
+/node_modules
+/.idea
+#/src/assets/img
+/old
+/_changes
+/notes.txt
+#/fonts
+#/dist/assets/fonts
