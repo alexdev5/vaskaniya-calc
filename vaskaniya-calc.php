@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Vaskaniya Calculator - product cost calculation
+ * Plugin Name: Vaskaniya Calculator
  * Plugin URI:
  * Description: TS/Vue 3/Pinia
  * Author: Olexandr Karakai
@@ -21,22 +21,16 @@ define('VS_CSS', plugins_url('', __FILE__) . '/dist/assets/css/');
 define('VS_IMG', plugins_url('', __FILE__) . '/dist/assets/img/');
 define('VS_BASE_PATH', wp_get_upload_dir());
 
-/*const VS_UPLOAD_DIR = EU_BASE_PATH['basedir'] . DIRECTORY_SEPARATOR . 'customizer';
-const VS_UPLOAD_URI = EU_BASE_PATH['baseurl'] . '/customizer';*/
+require('vendor/autoload.php');
+require(VS_APP . "app.php");
+require(VS_APP . "import.php");
 
-define('EUMAZER_MATERIALS_DIR', 'assets/img/materials/');
-define('EUMAZER_COLORS_DIR', 'assets/img/colors/');
-
-/*
-require_once EUMAZERDIST . 'inc/helpers.php';
-require_once EUMAZERDIST . 'inc/shortcodes.php';
-*/
-
-// create directories
 register_activation_hook(__FILE__, function () {
-    // create DB
-    EuDBClass::createTable();
 
+    // import
+    vascaniaImportTaxonomies();
+    // create DB
+    //EuDBClass::createTable();
     // Create directories
 /*    $pathInfo = wp_get_upload_dir();
     $basedir = $pathInfo['basedir'];
