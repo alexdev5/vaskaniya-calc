@@ -100,7 +100,7 @@ class PostsType implements TaxonomyContract
     }
 
     // Палитра камня и номер
-/*    public function vsPalette() {
+    public function vsPalette() {
         $postType = Config::get('post_type.palette');
 
         $args = array(
@@ -121,14 +121,14 @@ class PostsType implements TaxonomyContract
         );
 
         register_post_type($postType, $args);
-    }*/
+    }
 
 
 
     public function register()
     {
         $this->vsProducts();
-        //$this->vsPalette();
+        $this->vsPalette();
         $this->vsAddons();
         $this->vsServices();
     }

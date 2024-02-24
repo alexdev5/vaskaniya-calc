@@ -9,13 +9,12 @@ class TagTaxonomy implements TaxonomyContract
     public function registerTags()
     {
         $args = [
-            'label' => 'Атрибуты',
+            'label' => 'Теги',
             'hierarchical' => true,
             'show_ui' => true,
             'query_var' => true,
             //'rewrite' => ['slug' => $parent_slug],
             'rewrite' => true,
-            'meta_box_cb' => false,
             'public' => true,
             'show_admin_column' => true,
             'show_in_rest' => true,

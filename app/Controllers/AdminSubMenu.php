@@ -30,6 +30,13 @@ class AdminSubMenu
         );
         add_submenu_page(
             $this->linkEdit,
+            'Палтира',
+            'Палтира',
+            'edit_posts',
+            $this->getEditLink(Config::get('post_type.palette'))
+        );
+        add_submenu_page(
+            $this->linkEdit,
             'Дополнения',
             'Дополнения',
             'edit_posts',
@@ -82,16 +89,17 @@ class AdminSubMenu
 
         if (isset($submenu['edit.php?post_type=' . $this->generalPostType])) {
             /*$menu_items = [
+                18 => ["Калькулятор"],
                 5 => ["Продукты"],
+                19 => ["Палтира"],
+                20 => ["Дополнения"],
+                21 => ["Услуги"],
                 15 => ["Категория камня"],
                 16 => ["Категории"],
-                17 => ["Атрибуты"],
-                18 => ["Калькулятор"],
-                19 => ["Дополнения"],
-                20 => ["Услуги"],
-                21 => ["Настройки"],
+                17 => ["Теги"],
+                22 => ["Настройки"],
             ];*/
-            $desired_order = [18, 5, 19, 20, 15, 16, 17, 21];
+            $desired_order = [18, 5, 19, 20, 21, 15, 16, 17, 21];
 
             $sorted_menu_items = [];
 
@@ -101,15 +109,6 @@ class AdminSubMenu
                 }
             }
             $submenu['edit.php?post_type=' . $this->generalPostType] = $sorted_menu_items;
-           /* $calc = $submenu['edit.php?post_type=' . $this->generalPostType][18];
-            $settings = $submenu['edit.php?post_type=' . $this->generalPostType][21];
-
-           // dd($submenu['edit.php?post_type=' . $this->generalPostType]);
-            unset($submenu['edit.php?post_type=' . $this->generalPostType][18]);
-            unset($submenu['edit.php?post_type=' . $this->generalPostType][21]);
-
-            array_unshift($submenu['edit.php?post_type=' . $this->generalPostType], $calc);
-            $submenu['edit.php?post_type=' . $this->generalPostType][] = $settings;*/
         }
     }
 

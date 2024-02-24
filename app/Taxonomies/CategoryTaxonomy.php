@@ -16,7 +16,6 @@ class CategoryTaxonomy implements TaxonomyContract
             'query_var' => true,
             //'rewrite' => ['slug' => $parent_slug],
             'rewrite' => true,
-            'meta_box_cb' => false,
             'public' => true,
             'show_admin_column' => true,
             'show_in_rest' => true,
@@ -32,6 +31,7 @@ class CategoryTaxonomy implements TaxonomyContract
                 Config::get('post_type.services'),
             ],
             $args);
+        register_taxonomy_for_object_type($category, Config::get('post_type.products'));
     }
 
     public function stonePalette() {
@@ -44,7 +44,6 @@ class CategoryTaxonomy implements TaxonomyContract
             'query_var' => true,
             //'rewrite' => ['slug' => $parent_slug],
             'rewrite' => true,
-            'meta_box_cb' => false,
             'public' => true,
             'show_admin_column' => true,
             'show_in_rest' => true,
@@ -52,7 +51,14 @@ class CategoryTaxonomy implements TaxonomyContract
             'rest_controller_class' => 'WP_REST_Terms_Controller',
             'update_count_callback' => '_update_post_term_count',
         ];
-        register_taxonomy($category, Config::get('post_type.products'), $args);
+        register_taxonomy(
+            $category,
+            [
+                Config::get('post_type.palette'),
+                Config::get('post_type.products')
+            ],
+            $args
+        );
     }
 
     public function register()
