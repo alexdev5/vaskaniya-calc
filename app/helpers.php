@@ -16,10 +16,18 @@ function dd($args) {
     die;
 }
 
-function view() {
+if (!function_exists('vs_view')){
+    function vs_view($file, $args = []){
+        if (is_array($args) && count($args))
+            extract($args);
 
+        ob_start();
+
+        include VS_ROOT_DIR . "templates/$file.view.php";
+        return ob_get_clean();
+    }
 }
 
-function vLog($data) {
+function vsLog($data) {
     error_log(print_r($data, 1));
 }
