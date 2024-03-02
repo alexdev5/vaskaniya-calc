@@ -7,14 +7,12 @@ use App\Contracts\TaxonomyContract;
 class PostsType implements TaxonomyContract
 {
     private $domain = '';
-    private $linkMenu = '';
     private $generalPostType = '';
     public const LabelAdd = 'Добавить';
 
     public function __construct() {
         $this->domain = Config::get('domain');
         $this->generalPostType = Config::get('post_type.products');
-        $this->linkMenu = "edit.php?post_type={$this->generalPostType}";
     }
     
     public function vsProducts()

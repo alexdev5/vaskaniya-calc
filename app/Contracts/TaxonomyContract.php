@@ -1,6 +1,8 @@
 <?php
+
 namespace App\Contracts;
 
-interface TaxonomyContract {
+interface TaxonomyContract
+{
     public function register();
 }

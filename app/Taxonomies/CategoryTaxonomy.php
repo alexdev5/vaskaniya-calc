@@ -38,7 +38,7 @@ class CategoryTaxonomy implements TaxonomyContract
         $category = Config::get('taxonomy.categoryStone');
 
         $args = [
-            'label' => 'Категория камня',
+            'label' => 'Категории камня',
             'hierarchical' => true,
             'show_ui' => true,
             'query_var' => true,

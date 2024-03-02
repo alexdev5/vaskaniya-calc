@@ -1,28 +1,33 @@
 <?php
 
-use App\Controllers\InitController;
+use App\Controllers\TaxonomyController;
 use App\Taxonomies\PostsType;
 use App\Taxonomies\TagTaxonomy;
 use App\Taxonomies\CategoryTaxonomy;
 use App\Controllers\AdminSubMenu;
+use App\Controllers\SeederController;
+
+use App\Seeders\StonePalette\StonePaletteSeeder;
+use App\Seeders\Tags\TagsSeeder;
 
 // register taxonomies and post type
-InitController::init([
-    CategoryTaxonomy::class,
-    TagTaxonomy::class,
-    PostsType::class,
+TaxonomyController::init([
+    new CategoryTaxonomy(),
+    new TagTaxonomy(),
+    new PostsType(),
 ]);
 
 (new AdminSubMenu())->init();
 
-// import
-/*if(isset($_GET['vs_import'])) {
-    add_action('init', function () {
-        TagsSeeder::run();
-        //CategorySeeder::run();
-    });
-}*/
+// Seeders
+if(isset($_GET['vs_import'])) {
+    SeederController::init([
+        new TagsSeeder(),
+        new StonePaletteSeeder(),
+    ]);
+}
 
+// expensive
 register_activation_hook(VS_ROOT_FILE, function () {
 
 });
