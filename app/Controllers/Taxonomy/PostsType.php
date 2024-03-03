@@ -1,5 +1,5 @@
 <?php
-namespace App\Taxonomies;
+namespace App\Controllers\Taxonomy;
 
 use App\Config;
 use App\Contracts\TaxonomyContract;

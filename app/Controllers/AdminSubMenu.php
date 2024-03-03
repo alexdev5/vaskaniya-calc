@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Config;
-use App\Taxonomies\PostsType;
+use App\Controllers\Taxonomy\PostsType;
 
 class AdminSubMenu
 {

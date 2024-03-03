@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Config;
 use WP_Error;
 use App\Contracts\TaxonomyContract;
 
@@ -19,10 +18,6 @@ class TaxonomyController
 
             $instance->register();
         }
-    }
-
-    public function registerCustomField() {
-
     }
 
     public static function init(array $classes)

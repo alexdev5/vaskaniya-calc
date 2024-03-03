@@ -1,15 +1,15 @@
 <?php
-use App\Controllers\TaxonomyController;
-use App\Taxonomies\PostsType;
-use App\Taxonomies\TagTaxonomy;
-use App\Taxonomies\CategoryTaxonomy;
+
+use App\Controllers\Admin\ScriptsAdminController;
 use App\Controllers\AdminSubMenu;
 use App\Controllers\SeederController;
-use App\Controllers\Admin\ScriptsAdminController;
-
+use App\Controllers\Taxonomy\CategoryTaxonomy;
+use App\Controllers\Taxonomy\PostsType;
+use App\Controllers\Taxonomy\TagTaxonomy;
+use App\Controllers\TaxonomyController;
+use App\Seeders\Category\CategorySeeder;
 use App\Seeders\StonePalette\StonePaletteSeeder;
 use App\Seeders\Tags\TagsSeeder;
-use App\Seeders\Category\CategorySeeder;
 
 // register taxonomies and  custom post type
 TaxonomyController::init([
