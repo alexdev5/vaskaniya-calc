@@ -12,7 +12,6 @@ abstract class Seeders implements SeederContract
     {
         if (empty($taxonomies)) {
             new WP_Error('seeder_taxonomy_empty', "seeder_taxonomy_empty");
-
         }
 
         foreach ($taxonomies as $key => $data) {
@@ -47,6 +46,40 @@ abstract class Seeders implements SeederContract
                         'parent' => $parentTermId
                     ]
                 );
+            }
+        }
+    }
+
+    public function cretePosts($taxonomyName, $postsData) {
+        if (empty($postsData)) {
+            return new WP_Error('seeder_posts_empty', "seeder_posts_empty");
+        }
+
+        foreach ($postsData as $postData) {
+            // Проверяем, существует ли уже пост с таким же названием (slug).
+            $existingPost = get_page_by_path($postData['slug'], OBJECT, $taxonomyName);
+
+            if (!$existingPost) {
+                // Создаем новый пост, если он не существует.
+                $postID = wp_insert_post([
+                    'post_title'    => $postData['title'], // Заголовок поста.
+                    'post_content'  => $postData['content'], // Содержимое поста.
+                    'post_status'   => 'publish', // Статус поста.
+                    'post_type'     => $taxonomyName, // Тип поста.
+                    'post_name'     => $postData['slug'], // Slug поста.
+                    // Дополнительные атрибуты, если требуется.
+                ]);
+
+                if (is_wp_error($postID)) {
+                    continue; // Пропускаем итерацию, если произошла ошибка при создании поста.
+                }
+
+                // Присваиваем термины таксономии посту, если требуется.
+                if (!empty($postData['terms']) && is_array($postData['terms'])) {
+                    foreach ($postData['terms'] as $taxonomy => $terms) {
+                        wp_set_object_terms($postID, $terms, $taxonomy);
+                    }
+                }
             }
         }
     }

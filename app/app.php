@@ -1,5 +1,4 @@
 <?php
-
 use App\Controllers\TaxonomyController;
 use App\Taxonomies\PostsType;
 use App\Taxonomies\TagTaxonomy;
@@ -9,8 +8,9 @@ use App\Controllers\SeederController;
 
 use App\Seeders\StonePalette\StonePaletteSeeder;
 use App\Seeders\Tags\TagsSeeder;
+use App\Seeders\Category\CategorySeeder;
 
-// register taxonomies and post type
+// register taxonomies and  custom post type
 TaxonomyController::init([
     new CategoryTaxonomy(),
     new TagTaxonomy(),
@@ -24,6 +24,7 @@ if(isset($_GET['vs_import'])) {
     SeederController::init([
         new TagsSeeder(),
         new StonePaletteSeeder(),
+        new CategorySeeder(),
     ]);
 }
 
