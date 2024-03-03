@@ -16,11 +16,11 @@ define('VS_ADMIN', plugin_dir_path(__FILE__) . 'admin/');
 define('VS_DB', plugin_dir_path(__FILE__) . 'db/');
 define('VS_APP', plugin_dir_path(__FILE__) . 'app/');
 
-define('VS_URL', plugins_url('', __FILE__) . '/dist/');
-define('VS_ASSETS', plugins_url('', __FILE__) . '/dist/assets/');
-define('VS_JS', plugins_url('', __FILE__) . '/dist/assets/js/');
-define('VS_CSS', plugins_url('', __FILE__) . '/dist/assets/css/');
-define('VS_IMG', plugins_url('', __FILE__) . '/dist/assets/img/');
+define('VS_DIST_URL', plugins_url('', __FILE__) . '/dist/');
+define('VS_ASSETS_URL', plugins_url('', __FILE__) . '/dist/assets/');
+define('VS_JS_URL', plugins_url('', __FILE__) . '/dist/assets/js/');
+define('VS_CSS_URL', plugins_url('', __FILE__) . '/dist/assets/css/');
+define('VS_IMG_URL', plugins_url('', __FILE__) . '/dist/assets/img/');
 define('VS_BASE_PATH', wp_get_upload_dir());
 
 require('vendor/autoload.php');

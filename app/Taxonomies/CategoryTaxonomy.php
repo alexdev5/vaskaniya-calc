@@ -3,11 +3,12 @@ namespace App\Taxonomies;
 
 use App\Config;
 use App\Contracts\TaxonomyContract;
+use App\Controllers\Admin\AcfCreator;
 
 class CategoryTaxonomy implements TaxonomyContract
 {
     public function category() {
-        $category = Config::get('taxonomy.categories');
+        $taxonomy = Config::get('taxonomy.categories');
 
         $args = [
             'label' => 'Категории',
@@ -24,18 +25,18 @@ class CategoryTaxonomy implements TaxonomyContract
             'update_count_callback' => '_update_post_term_count',
         ];
         register_taxonomy(
-            $category,
+            $taxonomy,
             [
                 Config::get('post_type.products'),
                 Config::get('post_type.addons'),
                 Config::get('post_type.services'),
             ],
             $args);
-        register_taxonomy_for_object_type($category, Config::get('post_type.products'));
+        register_taxonomy_for_object_type($taxonomy, Config::get('post_type.products'));
     }
 
     public function stonePalette() {
-        $category = Config::get('taxonomy.categoryStone');
+        $taxonomy = Config::get('taxonomy.categoryStone');
 
         $args = [
             'label' => 'Категории камня',
@@ -52,13 +53,24 @@ class CategoryTaxonomy implements TaxonomyContract
             'update_count_callback' => '_update_post_term_count',
         ];
         register_taxonomy(
-            $category,
+            $taxonomy,
             [
                 Config::get('post_type.palette'),
                 Config::get('post_type.products')
             ],
             $args
         );
+
+        $acf = new AcfCreator($taxonomy, 'taxonomy');
+
+        $acf->text('price', 'Цена', [
+            'instructions' => 'Например: цена категории'
+        ]);
+        $acf->image('brand-img', 'Изображение бренда');
+    }
+
+    public function createCustomFields() {
+
     }
 
     public function register()

@@ -8,5 +8,4 @@ return [
         'plumbing-accessories' => 'Сантехнические аксессуары',
         'functional-addons' => 'Функциональные дополнения',
     ]
-
 ];

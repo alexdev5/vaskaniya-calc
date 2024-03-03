@@ -1,23 +1,28 @@
 <?php
+
 use App\Config;
 
-function vConfig($name = '') {
+function vConfig($name = '')
+{
     Config::get($name);
 }
 
-function dump($args) {
+function dump($args)
+{
     echo '<pre>';
     var_dump($args);
     echo '<pre>';
 }
 
-function dd($args) {
+function dd($args)
+{
     dump($args);
     die;
 }
 
-if (!function_exists('vs_view')){
-    function vs_view($file, $args = []){
+if (!function_exists('vs_view')) {
+    function vs_view($file, $args = [])
+    {
         if (is_array($args) && count($args))
             extract($args);
 
@@ -28,6 +33,22 @@ if (!function_exists('vs_view')){
     }
 }
 
-function vsLog($data) {
+function vsLog($data)
+{
     error_log(print_r($data, 1));
 }
+
+if (!function_exists('wp_enqueue_script_version')) {
+    function wp_enqueue_script_version($handle, $src, $depend = [], $in_footer = false)
+    {
+        wp_enqueue_script($handle, VS_DIST_URL . $src, $depend, filemtime(VS_DIST . $src), $in_footer);
+    }
+}
+
+if (!function_exists('wp_enqueue_style_version')) {
+    function wp_enqueue_style_version($handle, $src, $depend = [], $in_footer = false)
+    {
+        wp_enqueue_style($handle, VS_DIST_URL . $src, $depend, filemtime(VS_DIST . $src), $in_footer);
+    }
+}
+

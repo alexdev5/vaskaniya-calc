@@ -3,6 +3,7 @@ namespace App\Taxonomies;
 
 use App\Config;
 use App\Contracts\TaxonomyContract;
+use App\Controllers\Admin\AcfCreator;
 
 class PostsType implements TaxonomyContract
 {
@@ -17,6 +18,8 @@ class PostsType implements TaxonomyContract
     
     public function vsProducts()
     {
+        $postType = Config::get('post_type.products');
+
         $labels = array(
             'name' => __('Vascania Calculator', $this->domain),
             'singular_name' => __('Product', $this->domain),
@@ -43,13 +46,18 @@ class PostsType implements TaxonomyContract
             'menu_icon' => 'dashicons-calculator',
             'show_in_menu' => true,
             'query_var' => true,
-            'rewrite' => ['slug' => $this->generalPostType],
+            'rewrite' => ['slug' => $postType],
             'has_archive' => false,
             'hierarchical' => false,
             'supports' => ['title', 'editor', 'thumbnail', 'excerpt']
         );
 
-        register_post_type($this->generalPostType, $args);
+        register_post_type($postType, $args);
+
+        $acf = new AcfCreator($postType);
+
+        $acf->text('price', 'Стоимость');
+        $acf->text('vendor_code', 'Артикул');
     }
 
     public function vsServices() {
@@ -73,6 +81,10 @@ class PostsType implements TaxonomyContract
         );
 
         register_post_type($postType, $args);
+
+        $acf = new AcfCreator($postType);
+
+        $acf->text('price', 'Стоимость');
     }
 
     public function vsAddons() {
@@ -95,6 +107,15 @@ class PostsType implements TaxonomyContract
         );
 
         register_post_type($postType, $args);
+
+        register_post_type($postType, $args);
+
+        register_post_type($postType, $args);
+
+        $acf = new AcfCreator($postType);
+
+        $acf->text('price', 'Стоимость');
+        $acf->text('vendor_code', 'Артикул');
     }
 
     // Палитра камня и номер
@@ -119,6 +140,13 @@ class PostsType implements TaxonomyContract
         );
 
         register_post_type($postType, $args);
+
+        register_post_type($postType, $args);
+
+        $acf = new AcfCreator($postType);
+
+        $acf->text('price', 'Стоимость');
+        $acf->text('vendor_code', 'Артикул');
     }
 
 
