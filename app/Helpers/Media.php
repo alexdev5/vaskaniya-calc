@@ -7,15 +7,21 @@ require_once ABSPATH . 'wp-admin/includes/media.php';
 
 class Media
 {
-    public static function uploadImage($imagePath) {
+    public const TEMP_DIR = VS_ASSETS_PATH . 'temp/';
+
+    public static function uploadImage($imageFilePath) {
+        $pathExplode = explode('/', $imageFilePath);
+        $fileName = $pathExplode[count($pathExplode) - 1];
+        $copyFileName = self::TEMP_DIR . $fileName;
+
+        if (!copy($imageFilePath, $copyFileName)) return null;
 
         $fileInfo = [
-            'name' => basename($imagePath),
-            'tmp_name' => $imagePath
+            'name' => basename($copyFileName),
+            'tmp_name' => $copyFileName
         ];
 
         $uploadedFile = wp_handle_sideload($fileInfo, ['test_form' => false]);
-//        $uploadedFile = wp_handle_upload($fileInfo, ['test_form' => false]);
 
         if (isset($uploadedFile['error'])) {
             echo 'Ошибка загрузки изображения: ' . $uploadedFile['error'];
