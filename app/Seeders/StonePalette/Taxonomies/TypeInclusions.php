@@ -3,6 +3,7 @@
 
 return [
     'name' => 'Тип вкраплений',
+    'description' => 'Текстура',
     'slug' => 'type-inclusions',
     'children' => [
         'plain-color' => 'Однотонные цвета',

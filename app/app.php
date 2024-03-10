@@ -22,11 +22,11 @@ TaxonomyController::init([
 (new AdminSubMenu())->init();
 
 // seeders
-if(isset($_GET['vs_import'])) {
+if(isset($_GET['vs-import'])) {
     SeederController::init([
         new TagsSeeder(),
-        new StonePaletteSeeder(),
         new CategorySeeder(),
+        new StonePaletteSeeder(),
     ]);
 }
 

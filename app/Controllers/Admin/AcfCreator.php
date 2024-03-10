@@ -65,7 +65,7 @@ class AcfCreator
         $result = [
             'key' => 'key_' . $this->taxonomy . '_' . $name,
             'label' => $params['label'],
-            'name' => 'name_' . $this->taxonomy . '_' . $name,
+            'name' => self::getFieldName($name, $this->taxonomy),
             'type' => $params['type'],
             'parent' => $this->group,
             'required' => 0,
@@ -108,5 +108,10 @@ class AcfCreator
             'active' => true,
             'description' => '',
         ));
+    }
+
+    public static function getFieldName(string $name, string $taxonomy = null): string
+    {
+        return 'name_' . $taxonomy . '_' . $name;
     }
 }

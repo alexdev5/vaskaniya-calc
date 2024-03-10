@@ -11,9 +11,7 @@ class TagsSeeder extends Seeders
 
     public function __construct()
     {
-        $this->taxonomies = $this->getTaxonomies(
-            VS_APP . 'Seeders/Tags/Taxonomies'
-        );
+        $this->taxonomies = $this->getArrayFromFile('Tags/all-import.php');
     }
 
     public function run()

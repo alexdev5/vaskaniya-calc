@@ -12,6 +12,7 @@ const VS_ROOT_FILE = __FILE__;
 
 define('VS_ROOT_DIR', plugin_dir_path(__FILE__));
 define('VS_DIST', plugin_dir_path(__FILE__) . 'dist/');
+define('VS_ASSETS_PATH', plugin_dir_path(__FILE__) . '/dist/assets/');
 define('VS_ADMIN', plugin_dir_path(__FILE__) . 'admin/');
 define('VS_DB', plugin_dir_path(__FILE__) . 'db/');
 define('VS_APP', plugin_dir_path(__FILE__) . 'app/');
