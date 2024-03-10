@@ -32,7 +32,7 @@ class CategoryTaxonomy implements TaxonomyContract
                 Config::get('post_type.services'),
             ],
             $args);
-        register_taxonomy_for_object_type($taxonomy, Config::get('post_type.products'));
+        //register_taxonomy_for_object_type($taxonomy, Config::get('post_type.products'));
     }
 
     public function stonePalette() {

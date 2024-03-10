@@ -23,4 +23,23 @@ return [
             ],
         ]
     ],
+    [
+        'title' => 'Blue Dream',
+        'content' => '',
+        'post_status'  => 'publish',
+        'thumbnail' => $imageDir . 'placeholder.png',
+        'acf' => [
+            'vendor_code' => 'A-402',
+            'price' => 10,
+        ],
+        'terms' => [
+            $categoriesStone => [
+                'brand-grandex',
+                'price-two',
+                'type-middle',
+                'cost-medium',
+                'sentence-new',
+            ],
+        ]
+    ],
 ];

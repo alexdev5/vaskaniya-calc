@@ -29,7 +29,7 @@ abstract class Seeders implements SeederContract
 
             if (!$parentTermExists) {
                 $parentTerm = wp_insert_term(
-                    $termData['name'],
+                    $termData['term'],
                     $taxonomyName,
                     $termData
                 );
