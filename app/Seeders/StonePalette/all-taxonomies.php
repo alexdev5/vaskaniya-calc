@@ -1,112 +1,311 @@
 <?php
 return [
     [
-        'name' => 'Тон камня',
+        'term' => 'Тон камня',
         'slug' => 'stone-color',
         'children' => [
-            'white' => 'Белый',
-            'brown' => 'Коричневый',
-            'light-brown' => 'Светло-коричневый',
-            'grey' => 'Серый',
-            'lactic' => 'Молочный',
-            'dark-brown' => 'Темно коричневый',
-            'beige' => 'Бежевый',
-            'dark-grey' => 'Темно-серый',
-            'black' => 'Черный',
+            [
+                'term' => 'Белый',
+                'description' => '',
+                'slug' => 'color-white'
+            ],
+            [
+                'term' => 'Коричневый',
+                'slug' => 'color-brown'
+            ],
+            [
+                'term' => 'Светло-коричневый',
+                'slug' => 'color-light-brown'
+            ],
+            [
+                'term' => 'Серый',
+                'slug' => 'color-grey'
+            ],
+            [
+                'term' => 'Молочный',
+                'slug' => 'color-lactic'
+            ],
+            [
+                'term' => 'Темно коричневый',
+                'slug' => 'color-dark-brown'
+            ],
+            [
+                'term' => 'Бежевый',
+                'slug' => 'color-beige',
+            ],
+            [
+                'term' => 'Темно-серый',
+                'slug' => 'color-dark-grey',
+            ],
+            [
+                'term' => 'Черный',
+                'slug' => 'color-black',
+            ],
         ]
     ],
     [
-        'name' => 'Фильтр стоимости',
+        'term' => 'Фильтр стоимости',
         'slug' => 'cost-filter',
         'children' => [
-            'cheap' => 'Дешевые',
-            'medium' => 'Средние',
-            'expensive' => 'Дорогие',
+            [
+                'term' => 'Дешевые',
+                'slug' => 'cost-cheap',
+            ],
+            [
+                'term' => 'Средние',
+                'slug' => 'cost-medium',
+            ],
+            [
+                'term' => 'Дорогие',
+                'slug' => 'cost-expensive',
+            ],
         ]
     ],
     [
-        'name' => 'Ценовая категория',
+        'term' => 'Ценовая категория',
         'slug' => 'price-category',
         'children' => [
-            'one' => '1 категория',
-            'two' => '2 категория',
-            'three' => '3 категория',
-            'four' => '4 категория',
-            'five' => '5 категория',
-            'six' => '6 категория',
-            'seven' => '7 категория',
-            'eight' => '8 категория',
-            'nine' => '9 категория',
-            'ten' => '10 категория',
+            [
+                'term' => '1 категория',
+                'slug' => 'price-one',
+            ],
+            [
+                'term' => '2 категория',
+                'slug' => 'price-two',
+            ],
+            [
+                'term' => '3 категория',
+                'slug' => 'price-three',
+            ],
+            [
+                'term' => '4 категория',
+                'slug' => 'price-four',
+            ],
+            [
+                'term' => '5 категория',
+                'slug' => 'price-five',
+            ],
+            [
+                'term' => '6 категория',
+                'slug' => 'price-six',
+            ],
+            [
+                'term' => '7 категория',
+                'slug' => 'price-seven',
+            ],
+            [
+                'term' => '8 категория',
+                'slug' => 'price-eight',
+            ],
+            [
+                'term' => '9 категория',
+                'slug' => 'price-nine',
+            ],
+            [
+                'term' => '10 категория',
+                'slug' => 'price-ten',
+            ],
         ]
     ],
     [
-        'name' => 'Бренд',
+        'term' => 'Бренд',
         'slug' => 'vs-brand',
         'children' => [
-            'grandex' => 'Grandex',
-            'neomarm' => 'Neomarm',
-            'hanex' => 'Hanex',
-            'staron' => 'Staron',
-            'hi-Macs' => 'Hi-Macs',
+            [
+                'term' => 'Grandex',
+                'slug' => 'brand-grandex',
+            ],
+            [
+                'term' => 'Neomarm',
+                'slug' => 'brand-neomarm',
+            ],
+            [
+                'term' => 'Hanex',
+                'slug' => 'brand-hanex',
+            ],
+            [
+                'term' => 'Staron',
+                'slug' => 'brand-staron',
+            ],
+            [
+                'term' => 'Hi-Macs',
+                'slug' => 'brand-hi-Macs',
+            ],
         ]
     ],
     [
-        'name' => 'Категория камня',
+        'term' => 'Категория камня',
         'slug' => 'stone-category',
         'children' => [
-            'N' => 'N',
-            'N100' => 'N100',
-            'N200' => 'N200',
-            'PSD' => 'PSD',
-            'A' => 'A',
-            'EJMС' => 'EJMС',
-            'Solo' => 'Solo',
-            'Duo' => 'Duo',
-            'Trio' => 'Trio',
-            'Concrete' => 'Concrete',
-            'Galleria' => 'Galleria',
-            'Cancade' => 'Cancade',
-            'Stratum' => 'Stratum',
-            'Bellasimo' => 'Bellasimo',
-            'Solid' => 'Solid',
-            'Sanded' => 'Sanded',
-            'Aspen' => 'Aspen',
-            'Metallic' => 'Metallic',
-            'Pebble' => 'Pebble',
-            'Quarry' => 'Quarry',
-            'Mosaic' => 'Mosaic',
-            'Tempest' => 'Tempest',
-            'Supreme' => 'Supreme',
-            'Sand' => 'Sand',
-            'Pearl' => 'Pearl',
-            'Granite' => 'Granite',
-            'Volcanics' => 'Volcanics',
-            'Lucia' => 'Lucia',
-            'Marmo' => 'Marmo',
-            'Calacatta' => 'Calacatta',
-            'Luna' => 'Luna',
+            [
+                'term' => 'N',
+                'slug' => 'category-N',
+            ],
+            [
+                'term' => 'N100',
+                'slug' => 'category-n100',
+            ],
+            [
+                'term' => 'N200',
+                'slug' => 'category-n200',
+            ],
+            [
+                'term' => 'PSD',
+                'slug' => 'category-psd',
+            ],
+            [
+                'term' => 'A',
+                'slug' => 'category-a',
+            ],
+            [
+                'term' => 'EJMС',
+                'slug' => 'category-ejmc',
+            ],
+            [
+                'term' => 'Solo',
+                'slug' => 'category-solo',
+            ],
+            [
+                'term' => 'Duo',
+                'slug' => 'category-duo',
+            ],
+            [
+                'term' => 'Trio',
+                'slug' => 'category-trio',
+            ],
+            [
+                'term' => 'Concrete',
+                'slug' => 'category-concrete',
+            ],
+            [
+                'term' => 'Galleria',
+                'slug' => 'category-galleria',
+            ],
+            [
+                'term' => 'Cancade',
+                'slug' => 'category-cancade',
+            ],
+            [
+                'term' => 'Stratum',
+                'slug' => 'category-stratum',
+            ],
+            [
+                'term' => 'Bellasimo',
+                'slug' => 'category-bellasimo',
+            ],
+            [
+                'term' => 'Solid',
+                'slug' => 'category-solid',
+            ],
+            [
+                'term' => 'Sanded',
+                'slug' => 'category-sanded',
+            ],
+            [
+                'term' => 'Aspen',
+                'slug' => 'category-aspen',
+            ],
+            [
+                'term' => 'Metallic',
+                'slug' => 'category-metallic',
+            ],
+            [
+                'term' => 'Pebble',
+                'slug' => 'category-pebble',
+            ],
+            [
+                'term' => 'Quarry',
+                'slug' => 'category-quarry',
+            ],
+            [
+                'term' => 'Mosaic',
+                'slug' => 'category-mosaic',
+            ],
+            [
+                'term' => 'Tempest',
+                'slug' => 'category-tempest',
+            ],
+            [
+                'term' => 'Supreme',
+                'slug' => 'category-supreme',
+            ],
+            [
+                'term' => 'Sand',
+                'slug' => 'category-sand',
+            ],
+            [
+                'term' => 'Pearl',
+                'slug' => 'category-pearl',
+            ],
+            [
+                'term' => 'Granite',
+                'slug' => 'category-granite',
+            ],
+            [
+                'term' => 'Volcanics',
+                'slug' => 'category-volcanics',
+            ],
+            [
+                'term' => 'Lucia',
+                'slug' => 'category-lucia',
+            ],
+            [
+                'term' => 'Marmo',
+                'slug' => 'category-marmo',
+            ],
+            [
+                'term' => 'Calacatta',
+                'slug' => 'category-calacatta',
+            ],
+            [
+                'term' => 'Luna',
+                'slug' => 'category-luna',
+            ],
         ]
     ],
     [
-        'name' => 'Тип вкраплений',
+        'term' => 'Тип вкраплений',
         'slug' => 'type-inclusions',
         'description' => 'Текстура',
         'children' => [
-            'plain-color' => 'Однотонные цвета',
-            'small' => 'Мелкие вкрапления',
-            'middle' => 'Средние вкрапления',
-            'large' => 'Крупные вкрапления',
-            'marble-stains' => 'Мраморные разводы',
+            [
+                'term' => 'Однотонные цвета',
+                'slug' => 'type-plain-color',
+            ],
+            [
+                'term' => 'Мелкие вкрапления',
+                'slug' => 'type-small',
+            ],
+            [
+                'term' => 'Средние вкрапления',
+                'slug' => 'type-middle',
+            ],
+            [
+                'term' => 'Крупные вкрапления',
+                'slug' => 'type-large',
+            ],
+            [
+                'term' => 'Мраморные разводы',
+                'slug' => 'type-marble-stains',
+            ],
         ]
     ],
     [
-        'name' => 'Тип предложения',
+        'term' => 'Тип предложения',
         'slug' => 'type-sentence',
         'children' => [
-            'new' => 'Новые',
-            'hot' => 'Горячие',
-            'sale' => 'Распродажа',
+            [
+                'term' => 'Новые',
+                'slug' => 'sentence-new',
+            ],
+            [
+                'term' => 'Горячие',
+                'slug' => 'sentence-hot',
+            ],
+            [
+                'term' => 'Распродажа',
+                'slug' => 'sentence-sale',
+            ],
         ]
     ]
 ];

@@ -1,50 +1,119 @@
 <?php
 return [
     [
-        'name' => 'Тип изделия',
+        'term' => 'Тип изделия',
         'slug' => 'product-type',
         'children' => [
-            'countertops' => 'Столешницы',
-            'window-sills' => 'Подоконники',
-            'bar-counters' => 'Барные стойки',
-            'backsplashes' => 'Фартуки',
-            'washbasins' => 'Умывальники',
-            'art-object' => 'Арт-объект',
+            [
+                'term' => 'Столешницы',
+                'slug' => 'countertops',
+            ],
+            [
+                'term' => 'Подоконники',
+                'slug' => 'window-sills',
+            ],
+            [
+                'term' => 'Барные стойки',
+                'slug' => 'bar-counters',
+            ],
+            [
+                'term' => 'Фартуки',
+                'slug' => 'backsplashes',
+            ],
+            [
+                'term' => 'Умывальники',
+                'slug' => 'washbasins',
+            ],
+            [
+                'term' => 'Арт-объект',
+                'slug' => 'art-object',
+            ],
         ]
     ],
     [
-        'name' => 'Категория продукта',
+        'term' => 'Категория продукта',
         'slug' => 'product',
         'children' => [
-            'faucets' => 'Смесители',
-            'plumbing-accessories' => 'Сантехнические аксессуары',
-            'functional-addons' => 'Функциональные дополнения',
+            [
+                'term' => 'Смесители',
+                'slug' => 'faucets',
+            ],
+            [
+                'term' => 'Сантехнические аксессуары',
+                'slug' => 'plumbing-accessories',
+            ],
+            [
+                'term' => 'Функциональные дополнения',
+                'slug' => 'functional-addons',
+            ],
         ]
     ],
     [
-        'name' => 'Тип монтажа мойки',
+        'term' => 'Тип монтажа мойки',
         'slug' => 'sink-installation-type',
         'children' => [
-            'without-sink' => 'без мойки',
-            'integrated' => 'интегрированная',
-            'metal-bottom' => 'металическое дно',
-            'undermount' => 'подстольный монтаж',
-            'drop-in' => 'врезной монтаж',
+            [
+                'term' => 'без мойки',
+                'slug' => 'without-sink',
+            ],
+            [
+                'term' => 'интегрированная',
+                'slug' => 'integrated',
+            ],
+            [
+                'term' => 'металическое дно',
+                'slug' => 'metal-bottom',
+            ],
+            [
+                'term' => 'подстольный монтаж',
+                'slug' => 'undermount',
+            ],
+            [
+                'term' => 'врезной монтаж',
+                'slug' => 'drop-in',
+            ],
         ]
     ],
     [
-        'name' => 'Конфигурация столешницы',
+        'term' => 'Конфигурация столешницы',
         'slug' => 'table-configuration',
         'children' => [
-            'rectangle' => 'Прямая',
-            'g-shaped' => 'Г-образная',
-            'p-shaped' => 'П-образная',
-            'straight-windowsill' => 'прямая + подоконник',
-            'g-shaped-windowsill' => 'Г-образная + подоконник',
-            'p-shaped-windowsill' => 'П-образная + подоконник',
-            'p-shaped-bar-counter' => 'П-образная + барная стойка',
-            'p-shaped-bar-counter-windowsill' => 'П-образная + барная стойка + подоконник',
-            'circle' => 'круглая',
+            [
+                'term' => 'Прямая',
+                'slug' => 'rectangle',
+            ],
+            [
+                'term' => 'Г-образная',
+                'slug' => 'g-shaped',
+            ],
+            [
+                'term' => 'П-образная',
+                'slug' => 'p-shaped',
+            ],
+            [
+                'term' => 'прямая + подоконник',
+                'slug' => 'straight-windowsill',
+            ],
+            [
+                'term' => 'Г-образная + подоконник',
+                'slug' => 'g-shaped-windowsill',
+            ],
+            [
+                'term' => 'П-образная + подоконник',
+                'slug' => 'p-shaped-windowsill',
+            ],
+            [
+                'term' => 'П-образная + барная стойка',
+                'slug' => 'p-shaped-bar-counter',
+            ],
+            [
+                'term' => 'П-образная + барная стойка + подоконник',
+                'slug' => 'p-shaped-bar-counter-windowsill',
+            ],
+            [
+                'term' => 'круглая',
+                'slug' => 'circle',
+            ],
         ]
     ]
 ];

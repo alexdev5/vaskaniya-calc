@@ -22,13 +22,14 @@ class StonePaletteSeeder extends Seeders
             $this->taxonomies
         );
 
-        $this->assignTermsToPost(
+//       $this->assignTermsToPost(
+//           Config::get('post_type.palette'),
+//           $this->posts
+//       );
+
+        $this->createPosts(
             Config::get('post_type.palette'),
             $this->posts
         );
-        /*$this->createPosts(
-            Config::get('post_type.palette'),
-            $this->posts
-        );*/
     }
 }

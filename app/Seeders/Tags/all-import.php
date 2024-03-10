@@ -1,14 +1,29 @@
 <?php
 return [
     [
-        'name' => 'Цвет сантехнических аксессуаров',
+        'term' => 'Цвет сантехнических аксессуаров',
         'slug' => 'plumbing-accessories-color',
         'children' => [
-            'white' => 'Белый',
-            'brown' => 'Коричневый',
-            'light-brown' => 'Светло-коричневый',
-            'grey' => 'Серый',
-            'dark-grey' => 'Темно-серый',
+            'white' => [
+                'term' => 'Белый',
+                'slug' => 'white'
+            ],
+            [
+                'term' => 'Коричневый',
+                'slug' => 'brown'
+            ],
+            [
+                'term' => 'Светло-коричневый',
+                'slug' => 'light-brown'
+            ],
+            [
+                'term' => 'Серый',
+                'slug' => 'grey'
+            ],
+            [
+                'term' => 'Темно-серый',
+                'slug' => 'dark-grey'
+            ],
         ]
     ]
 ];

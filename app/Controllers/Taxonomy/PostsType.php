@@ -108,10 +108,6 @@ class PostsType implements TaxonomyContract
 
         register_post_type($postType, $args);
 
-        register_post_type($postType, $args);
-
-        register_post_type($postType, $args);
-
         $acf = new AcfCreator($postType);
 
         $acf->text('price', 'Стоимость');
@@ -138,8 +134,6 @@ class PostsType implements TaxonomyContract
             'menu_position' => null,
             'supports' => ['title', 'editor', 'thumbnail', 'excerpt']
         );
-
-        register_post_type($postType, $args);
 
         register_post_type($postType, $args);
 

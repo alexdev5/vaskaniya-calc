@@ -11,7 +11,7 @@ class CategorySeeder extends Seeders
 
     public function __construct()
     {
-        $this->taxonomies = $this->getArrayFromFile('Category/Taxonomies/all-import.php');
+        $this->taxonomies = $this->getArrayFromFile('Category/all-import.php');
     }
 
     public function run()
