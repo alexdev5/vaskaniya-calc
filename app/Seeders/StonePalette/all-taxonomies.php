@@ -67,43 +67,43 @@ return [
         'children' => [
             [
                 'term' => '1 категория',
-                'slug' => 'price-one',
+                'slug' => 'price-category-one',
             ],
             [
                 'term' => '2 категория',
-                'slug' => 'price-two',
+                'slug' => 'price-category-two',
             ],
             [
                 'term' => '3 категория',
-                'slug' => 'price-three',
+                'slug' => 'price-category-three',
             ],
             [
                 'term' => '4 категория',
-                'slug' => 'price-four',
+                'slug' => 'price-category-four',
             ],
             [
                 'term' => '5 категория',
-                'slug' => 'price-five',
+                'slug' => 'price-category-five',
             ],
             [
                 'term' => '6 категория',
-                'slug' => 'price-six',
+                'slug' => 'price-category-six',
             ],
             [
                 'term' => '7 категория',
-                'slug' => 'price-seven',
+                'slug' => 'price-category-seven',
             ],
             [
                 'term' => '8 категория',
-                'slug' => 'price-eight',
+                'slug' => 'price-category-eight',
             ],
             [
                 'term' => '9 категория',
-                'slug' => 'price-nine',
+                'slug' => 'price-category-nine',
             ],
             [
                 'term' => '10 категория',
-                'slug' => 'price-ten',
+                'slug' => 'price-category-ten',
             ],
         ]
     ],

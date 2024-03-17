@@ -7,16 +7,20 @@ function vConfig($name = '')
     Config::get($name);
 }
 
-function dump($args)
+function dump($args, $isVarDump = false)
 {
     echo '<pre>';
-    var_dump($args);
+
+    if ($isVarDump) var_dump($args);
+    else print_r($args);
+
     echo '<pre>';
 }
 
-function dd($args)
+function dd($args, $isVarDump = false)
 {
-    dump($args);
+
+    dump($args, $isVarDump);
     die;
 }
 
