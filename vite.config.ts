@@ -8,6 +8,14 @@ export default defineConfig({
     host: '0.0.0.0',
     port: Number(process.env.VUE_APP_PORT || 60600),
   },
+  build: {
+    outDir: './dist/admin/app',
+    rollupOptions: {
+      output: {
+        manualChunks: () => 'vascaniya-calc.js'
+      }
+    },
+  },
   plugins: [vue()],
   resolve: {
     alias: {

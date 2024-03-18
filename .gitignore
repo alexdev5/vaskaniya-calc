@@ -7,5 +7,6 @@
 /_doc-vaskania
 /vendor
 /dist/assets/
+/dist/admin/app
 #/fonts
 #/dist/assets/fonts

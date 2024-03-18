@@ -21,6 +21,8 @@ TaxonomyController::init([
 // set admin menu
 (new AdminSubMenu())->init();
 
+// styles and scripts
+//(new ActivationController)->init();
 // seeders
 if(isset($_GET['vs-import'])) {
     SeederController::init([

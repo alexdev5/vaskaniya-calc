@@ -1,0 +1,21 @@
+<template>
+  <div class="navigation">
+    <ul class="nav-links">
+      <NavLink :to="{ name: RouteName.Dimensions }">Размеры</NavLink>
+      <NavLink :to="{ name: RouteName.Edges }">Кромки</NavLink>
+      <NavLink :to="{ name: RouteName.Palette }">Палитра</NavLink>
+      <NavLink :to="{ name: RouteName.Sinks }">Мойки</NavLink>
+      <NavLink :to="{ name: RouteName.Addons }">Дополнения</NavLink>
+      <NavLink :to="{ name: RouteName.Result }">Результат</NavLink>
+    </ul>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import NavLink from './nav-link.component.vue'
+import { RouteName } from '@/router'
+</script>
+
+<style lang="scss">
+
+</style>

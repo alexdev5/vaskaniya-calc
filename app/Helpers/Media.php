@@ -45,4 +45,35 @@ class Media
 
         return $attachmentId;
     }
+
+    public static function parseScripts($file) {
+        $returned = [
+            'scripts' => [],
+            'styles' => [],
+        ];
+
+        $file = VS_DIST . $file;
+        if (!file_exists($file)) return null;
+
+        $fileContent = file_get_contents($file);
+
+        preg_match_all('/<link\s+[^>]*?rel="stylesheet"[^>]*?href="([^"]+)"[^>]*?>/i', $fileContent, $styleMatches);
+        preg_match_all('/<script\s+[^>]*?src="([^"]+)"[^>]*?><\/script>/i', $fileContent, $scriptMatches);
+
+        foreach ($styleMatches[1] as $styleSrc) {
+            $returned['styles'][] = [
+                'handle' => basename($styleSrc),
+                'src' => $styleSrc
+            ];
+        }
+
+        foreach ($scriptMatches[1] as $scriptSrc) {
+            $returned['scripts'][] = [
+                'handle' => basename($scriptSrc),
+                'src' => $scriptSrc
+            ];
+        }
+
+        return $returned;
+    }
 }
