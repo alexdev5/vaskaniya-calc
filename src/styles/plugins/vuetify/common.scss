@@ -1,0 +1,18 @@
+.app-content, .auth-content {
+
+
+
+
+  .v-progress-circular > svg {
+    color: var(--primary)
+  }
+
+  /*======= Forms ========*/
+  .v-field {
+    font-size: 1rem;
+  }
+
+  .v-label.v-field-label--floating {
+    --v-field-label-scale: 0.9em;
+  }
+}

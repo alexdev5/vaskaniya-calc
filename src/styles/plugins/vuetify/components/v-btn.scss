@@ -1,0 +1,47 @@
+
+.v-btn {
+  text-transform: none !important;
+  letter-spacing: normal !important;
+}
+
+.app-content, .auth-content {
+  .v-btn {
+    &.v-btn--variant-flat.v-btn--disabled {
+      opacity: .5;
+    }
+
+    &.v-btn--loading {
+      background-color: var(--white) !important;
+    }
+
+    &.v-btn-link {
+      display: flex;
+      text-decoration: none;
+    }
+    &.v-btn--variant-flat.v-btn--disabled {
+      opacity: .5;
+    }
+
+    &.v-btn--loading {
+      background-color: var(--white) !important;
+    }
+    /*    &.v-btn--variant-text {
+          --v-btn-height: 0;
+        }*/
+  }
+  .v-btn--size-small {
+    --v-btn-height: 23px;
+  }
+
+  .v-btn--icon {
+    &.v-btn--size-small {
+      width: 32px;
+      height: 32px;
+
+      .v-progress-circular {
+        width: 16px !important;
+        height: 16px !important;
+      }
+    }
+  }
+}

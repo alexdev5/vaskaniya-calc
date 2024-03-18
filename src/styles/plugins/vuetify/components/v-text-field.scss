@@ -1,0 +1,17 @@
+.v-text-field {
+  min-width: 100px;
+
+  &.simple {
+    .v-input__details {
+      display: none;
+    }
+    .v-field__input {
+      padding-block: 6px;
+      min-height: var(--size-small);
+    }
+    .v-field__clearable {
+      padding-top: 0!important;
+      padding-bottom: 0!important;
+    }
+  }
+}

@@ -1,0 +1,25 @@
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+@mixin boxShadow() {
+  box-shadow: $box-shadow;
+}
+
+@mixin trans($prop: 'all') {
+  transition: $prop .2s linear;
+}
+
+@mixin borderBottom {
+  border-bottom: 1px solid var(--gray-light);
+}
