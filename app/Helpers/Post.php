@@ -22,9 +22,9 @@ class Post {
         }
     }
 
-    public static function assignAcf(int $postId, string $postType, array $fields) {
-        foreach ($fields as $key => $value) {
-            update_field(AcfCreator::getFieldName($key, $postType), $value, $postId);
+    public static function assignAcf(int $postId, array $fields) {
+        foreach ($fields as $name => $value) {
+            update_field($name, $value, $postId);
         }
     }
 }

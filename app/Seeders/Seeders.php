@@ -102,7 +102,7 @@ abstract class Seeders implements SeederContract
             }
 
             if (!empty($post['acf'])) {
-                Post::assignAcf($postId, $postType, $post['acf']);
+                Post::assignAcf($postId, $post['acf']);
             }
         }
     }

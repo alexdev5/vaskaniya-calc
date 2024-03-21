@@ -1,6 +1,6 @@
 <template>
-  <div class="navigation">
-    <ul class="nav-links">
+  <div class="vs-navigation">
+    <ul class="vs-navigation-links">
       <NavLink :to="{ name: RouteName.Dimensions }">Размеры</NavLink>
       <NavLink :to="{ name: RouteName.Edges }">Кромки</NavLink>
       <NavLink :to="{ name: RouteName.Palette }">Палитра</NavLink>

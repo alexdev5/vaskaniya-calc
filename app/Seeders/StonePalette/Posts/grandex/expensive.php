@@ -496,6 +496,7 @@ return [
         'title' => 'CambayStone',
         'acf' => [
             'vendor_code' => 'V-502',
+            'price' => '2000',
         ],
         'terms' => [
             $categoriesStone => array_merge($taxonomiesLocal, ['type-large', 'sentence-hot']),

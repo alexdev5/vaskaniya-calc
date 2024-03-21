@@ -1,15 +1,15 @@
 <template>
-  <li class="navigation-item">
+  <li class="vs-navigation-item">
     <slot name="icon-prepend"/>
     <component
-      class="navigation-item--link"
+      class="vs-navigation-item-link"
       :loading="loading"
       :is="renderedComponent"
       v-bind="customProps"
     >
       <slot></slot>
     </component>
-    <span class="navigation-item--badge" v-if="badge">{{ badge }}</span>
+    <span class="vs-navigation-item-badge" v-if="badge">{{ badge }}</span>
     <slot name="append"/>
   </li>
 </template>
@@ -34,7 +34,7 @@ const renderedComponent = props.to ? 'RouterLink' : AppBtn
 const customProps = computed(() => {
   return props.to
     ? { to: props.to }
-    : { text: true, block: true }
+    : { text: false, block: true }
 })
 
 </script>

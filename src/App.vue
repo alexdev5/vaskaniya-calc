@@ -1,6 +1,10 @@
 <template>
-  <Menu />
-  <RouterView />
+  <div class="vs-container">
+    <Menu />
+    <div class="vs-wrapper">
+      <RouterView />
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">

@@ -1,0 +1,18 @@
+.vs-container {
+  .vs-navigation {
+    position: fixed;
+    width: var(--vs-navigation-width);
+  }
+  .vs-navigation-links {
+
+  }
+  .vs-wrapper {
+    margin-inline-start: var(--vs-navigation-width);
+    padding-inline: var(--vs-offset-middle);
+  }
+}
+.wrap {
+  #app {
+    position: relative;
+  }
+}
