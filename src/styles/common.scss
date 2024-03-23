@@ -4,13 +4,35 @@
   .vs-wrapper {
     margin-inline-start: var(--vs-navigation-width);
     padding-inline: var(--vs-offset-middle);
+    padding-block: var(--vs-offset-middle);
+    display: grid;
+    gap: var(--vs-offset-middle);
   }
+
   .vs-color-red {
     color: var(--vs-color-red);
   }
+
+  .vs-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    border-radius: 50%;
+    cursor: pointer;
+    background: var(--vs-color-grey);
+    @include trans;
+
+    &:hover {
+      background: var(--vs-color-primary);
+      color: var(--vs-color-secondary);
+    }
+  }
 }
+
 .wrap {
   #app {
     position: relative;
   }
 }
+

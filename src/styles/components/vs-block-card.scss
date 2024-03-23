@@ -1,0 +1,11 @@
+.vs-block-card {
+  width: 140px;
+  height: 160px;
+  border: 1px solid var(--vs-color-primary);
+  padding: 4px var(--vs-offset-small);
+
+  .vs-block-card-tools {
+    display: flex;
+    gap: var(--vs-offset-small);
+  }
+}
