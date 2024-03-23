@@ -1,0 +1,28 @@
+.vs-navigation {
+  position: fixed;
+  width: var(--vs-navigation-width);
+  background: #F4F3F3;
+
+  .vs-navigation-links {
+    display: grid;
+    padding-inline-end: 10px;
+  }
+}
+.vs-navigation-item-link {
+  text-decoration: none;
+  display: block;
+  padding: 8px 16px;
+  color: var(--vs-color-primary);
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  @include trans;
+
+  &:hover {
+    background: rgba(var(--vs-color-red-rgb), .2)
+  }
+
+  &.router-link-active {
+    background: var(--vs-color-red);
+    color: var(--vs-color-secondary);
+  }
+}

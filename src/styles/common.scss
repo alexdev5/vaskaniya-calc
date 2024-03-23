@@ -1,14 +1,12 @@
 .vs-container {
-  .vs-navigation {
-    position: fixed;
-    width: var(--vs-navigation-width);
-  }
-  .vs-navigation-links {
+  color: var(--vs-color-primary);
 
-  }
   .vs-wrapper {
     margin-inline-start: var(--vs-navigation-width);
     padding-inline: var(--vs-offset-middle);
+  }
+  .vs-color-red {
+    color: var(--vs-color-red);
   }
 }
 .wrap {

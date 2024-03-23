@@ -1,8 +1,17 @@
 :root {
-  --vs-navigation-width: 120px;
+  --vs-navigation-width: 150px;
   --vs-offset-normal: 16px;
   --vs-offset-middle: 24px;
   --vs-offset-large: 32px;
+
+  --vs-color-red: #FF0000;
+  --vs-color-red-rgb: 252,28,25;
+  --vs-color-primary: #2B2A29;
+  --vs-color-secondary: #FFF;
+  --vs-color-light-grey: #F4F3F3;
+  --vs-color-grey: #E8E7E7;
+
+
 }
 
 $green: #28c76f !default;

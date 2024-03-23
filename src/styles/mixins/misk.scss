@@ -16,7 +16,7 @@
   box-shadow: $box-shadow;
 }
 
-@mixin trans($prop: 'all') {
+@mixin trans($prop: all) {
   transition: $prop .2s linear;
 }
 
