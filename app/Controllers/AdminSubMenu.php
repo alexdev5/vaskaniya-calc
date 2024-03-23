@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Config;
-use App\Controllers\Taxonomy\PostsType;
+use App\RegisterEntity\CustomPostsType;
 
 class AdminSubMenu
 {
@@ -76,7 +76,7 @@ class AdminSubMenu
         // Remove add submenu
         if (isset($submenu[$this->linkEdit])) {
             foreach ($submenu[$this->linkEdit] as $key => $item) {
-                if ($item[0] === PostsType::LabelAdd) {
+                if ($item[0] === CustomPostsType::LabelAdd) {
                     unset($submenu[$this->linkEdit][$key]);
                 }
             }

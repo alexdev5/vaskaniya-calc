@@ -5,7 +5,7 @@ namespace App\Controllers;
 use WP_Error;
 use App\Contracts\TaxonomyContract;
 
-class TaxonomyController
+class RegisterEntityController
 {
     public static function register(array $classes)
     {

@@ -1,11 +1,10 @@
 <?php
-namespace App\Controllers\Taxonomy;
+namespace App\RegisterEntity;
 
 use App\Config;
 use App\Contracts\TaxonomyContract;
-use App\Controllers\Admin\AcfCreator;
 
-class PostsType implements TaxonomyContract
+class CustomPostsType implements TaxonomyContract
 {
     private $domain = '';
     private $generalPostType = '';
@@ -53,11 +52,6 @@ class PostsType implements TaxonomyContract
         );
 
         register_post_type($postType, $args);
-
-//        $acf = new AcfCreator($postType);
-//
-//        $acf->text('price', 'Стоимость');
-//        $acf->text('vendor_code', 'Артикул');
     }
 
     public function vsServices() {
@@ -81,10 +75,6 @@ class PostsType implements TaxonomyContract
         );
 
         register_post_type($postType, $args);
-
-        //$acf = new AcfCreator($postType);
-
-        //$acf->text('price', 'Стоимость');
     }
 
     public function vsAddons() {
@@ -107,11 +97,6 @@ class PostsType implements TaxonomyContract
         );
 
         register_post_type($postType, $args);
-
-//        $acf = new AcfCreator($postType);
-//
-//        $acf->text('price', 'Стоимость');
-//        $acf->text('vendor_code', 'Артикул');
     }
 
     // Палитра камня и номер

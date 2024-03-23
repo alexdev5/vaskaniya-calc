@@ -1,11 +1,11 @@
 <?php
-namespace App\Controllers\Taxonomy;
+namespace App\RegisterEntity;
 
 use App\Config;
 use App\Contracts\TaxonomyContract;
 use App\Controllers\Admin\AcfCreator;
 
-class CategoryTaxonomy implements TaxonomyContract
+class CategoriesTaxonomy implements TaxonomyContract
 {
     public function category() {
         $taxonomy = Config::get('taxonomy.categories');

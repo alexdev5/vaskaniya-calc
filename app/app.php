@@ -3,19 +3,19 @@
 use App\Controllers\Admin\ScriptsAdminController;
 use App\Controllers\AdminSubMenu;
 use App\Controllers\SeederController;
-use App\Controllers\Taxonomy\CategoryTaxonomy;
-use App\Controllers\Taxonomy\PostsType;
-use App\Controllers\Taxonomy\TagTaxonomy;
-use App\Controllers\TaxonomyController;
+use App\RegisterEntity\CategoriesTaxonomy;
+use App\RegisterEntity\CustomPostsType;
+use App\RegisterEntity\TagsTaxonomy;
+use App\Controllers\RegisterEntityController;
 use App\Seeders\Category\CategorySeeder;
 use App\Seeders\StonePalette\StonePaletteSeeder;
 use App\Seeders\Tags\TagsSeeder;
 
 // register taxonomies and  custom post type
-TaxonomyController::init([
-    new CategoryTaxonomy(),
-    new TagTaxonomy(),
-    new PostsType(),
+RegisterEntityController::init([
+    new CategoriesTaxonomy(),
+    new TagsTaxonomy(),
+    new CustomPostsType(),
 ]);
 
 // set admin menu

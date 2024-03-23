@@ -1,10 +1,10 @@
 <?php
-namespace App\Controllers\Taxonomy;
+namespace App\RegisterEntity;
 
 use App\Config;
 use App\Contracts\TaxonomyContract;
 
-class TagTaxonomy implements TaxonomyContract
+class TagsTaxonomy implements TaxonomyContract
 {
     public function registerTags()
     {
