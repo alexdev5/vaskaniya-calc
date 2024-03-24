@@ -1,11 +1,10 @@
 import axios from 'axios'
-import { AuthService } from '@/services'
 
 //axios.defaults.baseURL = 'http://api.medicore.loc/api'
 //axios.defaults.withCredentials = true
 
 export abstract class AxiosApi {
-    public apiBaseUrl = 'http://api.medicore.loc/api'
+    public apiBaseUrl = location.origin + '/wp-json/vs-calculator/v1'
 
     protected async post(url: string, fields: any, config?: any): Promise<any> {
         return (
@@ -30,6 +29,7 @@ export abstract class AxiosApi {
     }
 
     protected async get(url: string, fields: any = {}, config?: any): Promise<any> {
+        console.log(this.apiBaseUrl)
         return (
             await this.axios({
                 method: 'get',
@@ -55,7 +55,7 @@ export abstract class AxiosApi {
         const axiosModule = axios.create({
             baseURL: this.apiBaseUrl
         })
-        axiosModule.interceptors.request.use(async (config: any) => {
+       /* axiosModule.interceptors.request.use(async (config: any) => {
             if(AuthService.isValidToken) {
                 config.headers['Accept'] = 'application/json'
                 config.headers['Authorization'] = `Bearer ${AuthService.getToken()}`
@@ -78,7 +78,7 @@ export abstract class AxiosApi {
             }
 
             return Promise.reject(error)
-        })
+        })*/
 
         return axiosModule
     }

@@ -9,6 +9,7 @@ return [
         'title' => 'Poppy Seed',
         'acf' => [
             'vendor_code' => 'D-301',
+            'price' => '3200',
         ],
         'terms' => [
             $categoriesStone => array_merge($taxonomiesLocal, ['type-small']),
@@ -18,6 +19,7 @@ return [
         'title' => 'Morning Coffee',
         'acf' => [
             'vendor_code' => 'D-302',
+            'price' => '1200',
         ],
         'terms' => [
             $categoriesStone => array_merge($taxonomiesLocal, ['type-small']),
@@ -27,6 +29,7 @@ return [
         'title' => 'Raisined Chocolate',
         'acf' => [
             'vendor_code' => 'D-303',
+            'price' => '2300',
         ],
         'terms' => [
             $categoriesStone => array_merge($taxonomiesLocal, ['type-small']),
@@ -36,6 +39,7 @@ return [
         'title' => 'Ice-Cream',
         'acf' => [
             'vendor_code' => 'D-304',
+            'price' => '1400',
         ],
         'terms' => [
             $categoriesStone => array_merge($taxonomiesLocal, ['type-small', 'color-beige']),
@@ -45,6 +49,7 @@ return [
         'title' => 'Melted Butter',
         'acf' => [
             'vendor_code' => 'D-305',
+            'price' => '5200',
         ],
         'terms' => [
             $categoriesStone => array_merge($taxonomiesLocal, ['type-small']),
@@ -54,6 +59,7 @@ return [
         'title' => 'Maple Sirup',
         'acf' => [
             'vendor_code' => 'D-306',
+            'price' => '6200',
         ],
         'terms' => [
             $categoriesStone => array_merge($taxonomiesLocal, ['type-small']),
@@ -63,6 +69,7 @@ return [
         'title' => 'Aspen Pie',
         'acf' => [
             'vendor_code' => 'D-307',
+            'price' => '8200',
         ],
         'terms' => [
             $categoriesStone => array_merge($taxonomiesLocal, ['type-small']),
@@ -72,6 +79,7 @@ return [
         'title' => 'Cubic Mint',
         'acf' => [
             'vendor_code' => 'D-308',
+            'price' => '1200',
         ],
         'terms' => [
             $categoriesStone => array_merge($taxonomiesLocal, ['type-small']),
@@ -81,6 +89,7 @@ return [
         'title' => 'Mushroom Soup',
         'acf' => [
             'vendor_code' => 'D-309',
+            'price' => '3500',
         ],
         'terms' => [
             $categoriesStone => array_merge($taxonomiesLocal, ['type-small']),
@@ -90,6 +99,7 @@ return [
         'title' => 'Herbal Ash',
         'acf' => [
             'vendor_code' => 'D-310',
+            'price' => '3220',
         ],
         'terms' => [
             $categoriesStone => array_merge($taxonomiesLocal, ['type-small']),
@@ -99,6 +109,7 @@ return [
         'title' => 'Natural Detox',
         'acf' => [
             'vendor_code' => 'D-311',
+            'price' => '7200',
         ],
         'terms' => [
             $categoriesStone => array_merge($taxonomiesLocal, ['type-small']),

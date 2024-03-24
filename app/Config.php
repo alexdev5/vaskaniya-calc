@@ -32,7 +32,7 @@ class Config
                 'categoryStone' => 'vs-products-category-stone',
             ],
             'domain' => 'vs', // for text translate __()
-            'api' => 'vs-calculator'
+            'api_namespace' => 'vs-calculator/v1'
         ];
     }
 }

@@ -18,43 +18,44 @@ abstract class Seeders implements SeederContract
             return;
         }
 
-        foreach ($taxonomies as $key => $termData) {
-            if (!is_array($termData)) {
-                vsLog(['tax' => $taxonomies, 'file' => __FILE__ . ' ' . __LINE__]);
-                new WP_Error('taxonomy_empty', "taxonomy data empty");
-                continue;
+        foreach ($taxonomies as $termData) {
+            $this->insertTermRecursive($taxonomyName, $termData);
+        }
+    }
+
+    protected function insertTermRecursive($taxonomyName, $termData, $parentTermId = 0)
+    {
+        if (!is_array($termData) || !isset($termData['term'])) {
+            vsLog('Ошибка создания таксономии' . __LINE__);
+            return; // Логика обработки ошибки или логирования
+        }
+
+        $termExists = term_exists($termData['term'], $taxonomyName);
+
+        if (!$termExists) {
+            $term = wp_insert_term(
+                $termData['term'],
+                $taxonomyName,
+                [
+                    'slug' => $termData['slug'] ?? null,
+                    'parent' => $parentTermId,
+                    'description' => $termData['description'] ?? '',
+                ]
+            );
+
+            if (is_wp_error($term)) {
+                // Логика обработки ошибки или логирования
+                return;
             }
 
-            if(!isset($termData['name'])) continue;
+            $termId = $term['term_id'];
+        } else {
+            $termId = $termExists['term_id'];
+        }
 
-            $parentTermExists = term_exists($termData['name'], $taxonomyName);
-
-            if (!$parentTermExists) {
-                $parentTerm = wp_insert_term(
-                    $termData['term'],
-                    $taxonomyName,
-                    $termData
-                );
-
-                if (is_wp_error($parentTerm)) continue;
-
-                $parentTermId = $parentTerm['term_id'];
-            } else {
-                $parentTermId = $parentTermExists['term_id'];
-            }
-
-            // Добавляем дочерние теги
-            foreach ($termData['children'] as $childKey => $childData) {
-                if (term_exists($childData['term'], $taxonomyName)) continue;
-
-                wp_insert_term(
-                    $childData['term'],
-                    $taxonomyName,
-                    [
-                        'slug' => $childData['slug'],
-                        'parent' => $parentTermId
-                    ]
-                );
+        if (!empty($termData['children']) && is_array($termData['children'])) {
+            foreach ($termData['children'] as $childData) {
+                $this->insertTermRecursive($taxonomyName, $childData, $termId);
             }
         }
     }

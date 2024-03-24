@@ -19,7 +19,6 @@ function dump($args, $isVarDump = false)
 
 function dd($args, $isVarDump = false)
 {
-
     dump($args, $isVarDump);
     die;
 }
