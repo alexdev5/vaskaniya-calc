@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Resources;
+namespace App\Resources\Acf;
+
+use App\Resources\JsonResource;
 
 class AcfImageTerm extends JsonResource
 {

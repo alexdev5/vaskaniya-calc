@@ -32,7 +32,7 @@ class TaxonomyController {
 
         foreach ($terms as $term) {
             $acf_fields = get_fields('term_' . $term->term_id);
-            $childTerms = self::getTermsRecursive($taxonomy, $term->term_id); // Рекурсивный вызов для получения вложенных категорий
+            $childTerms = self::getTermsRecursive($taxonomy, $term->term_id);
 
             $categories[] = [
                 'id' => $term->term_id,
@@ -40,7 +40,7 @@ class TaxonomyController {
                 'slug' => $term->slug,
                 'description' => $term->description,
                 'acf' => $acf_fields,
-                'children' => $childTerms, // Добавляем вложенные категории как дочерние элементы
+                'children' => $childTerms,
             ];
         }
 

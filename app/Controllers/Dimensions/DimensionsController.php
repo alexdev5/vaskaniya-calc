@@ -4,9 +4,9 @@ namespace App\Controllers\Dimensions;
 
 use App\Config;
 use App\Controllers\TaxonomyController;
+use App\Resources\Dimensions\DimensionsResource;
 use WP_REST_Request;
 use WP_REST_Response;
-use App\Resources\DimensionsResource;
 
 class DimensionsController
 {
@@ -14,6 +14,9 @@ class DimensionsController
     public function getAllData(WP_REST_Request $request): WP_REST_Response
     {
         $returned['product-types'] = DimensionsResource::collection($this->getProductTypeCategories());
+
+        //dd($returned['product-types']);
+        //dd($this->getProductTypeCategories());
 
         return new WP_REST_Response(
             $returned,
