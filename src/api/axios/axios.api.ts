@@ -1,10 +1,11 @@
 import axios from 'axios'
 
-//axios.defaults.baseURL = 'http://api.medicore.loc/api'
+const baseApiURL = 'http://vaskania-new.loc'
 //axios.defaults.withCredentials = true
 
 export abstract class AxiosApi {
-    public apiBaseUrl = location.origin + '/wp-json/vs-calculator/v1'
+    //public apiBaseUrl = location.origin + '/wp-json/vs-calculator/v1'
+    public apiBaseUrl = baseApiURL + '/wp-json/vs-calculator/v1'
 
     protected async post(url: string, fields: any, config?: any): Promise<any> {
         return (

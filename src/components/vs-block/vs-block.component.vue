@@ -36,7 +36,7 @@ defineProps({
     type: String
   },
 })
-console.log(location)
+
 const emit = defineEmits([
   'title-updated',
   'title-number-updated',

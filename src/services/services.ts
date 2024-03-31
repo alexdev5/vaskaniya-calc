@@ -1,4 +1,4 @@
 import * as Api from '@/api'
 
-export const PatientService = new Api.Dimensions.DimensionsApi()
+export const DimensionsService = new Api.Dimensions.DimensionsApi()
 

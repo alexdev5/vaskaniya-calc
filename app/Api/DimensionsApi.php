@@ -11,7 +11,7 @@ class DimensionsApi
 
     public static function register()
     {
-        VsRoute::get(self::route('/all-data'), [DimensionsController::class, 'getAllData']);
+        VsRoute::get(self::route('/dimensions'), [DimensionsController::class, 'getAllData']);
     }
 
     private static function route(string $name): string
