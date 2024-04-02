@@ -1,11 +1,33 @@
 .vs-block-card {
-  width: 140px;
-  height: 160px;
+  width: 200px;
+  height: 200px;
   border: 1px solid var(--vs-color-primary);
   padding: 4px var(--vs-offset-small);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @include trans;
 
+  &:hover {
+    cursor: pointer;
+    @include boxShadow
+  }
+  &.vs-block-card-active {
+    border-color: var(--vs-color-red);
+    @include boxShadow
+  }
   .vs-block-card-tools {
     display: flex;
     gap: var(--vs-offset-small);
+  }
+  .vs-block-card-description {
+    font-size: var(--vs-font-size-s);
+  }
+  .vs-block-card-price {
+    font-weight: 600;
+  }
+  .vs-block-card-image {
+    flex-grow: 1;
   }
 }

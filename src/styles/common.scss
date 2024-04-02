@@ -1,5 +1,6 @@
 .vs-container {
   color: var(--vs-color-primary);
+  font-size: var(--vs-font-size-m);
 
   .vs-wrapper {
     margin-inline-start: var(--vs-navigation-width);
@@ -33,6 +34,7 @@
 .wrap {
   #app {
     position: relative;
+    font-size: 14px;
   }
 }
 

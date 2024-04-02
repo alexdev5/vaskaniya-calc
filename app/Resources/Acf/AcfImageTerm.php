@@ -10,10 +10,10 @@ class AcfImageTerm extends JsonResource
     {
         return [
             'id' => $this->id,
-            'url' => $this->url,
-            'name' => $this->name,
-            'modified' => $this->modified,
-            'icon' => $this->icon,
+            'url' => $this->url ?? '',
+            'name' => $this->name ?? '',
+            'modified' => $this->modified ?? '',
+            'icon' => $this->icon ?? '',
         ];
     }
 }

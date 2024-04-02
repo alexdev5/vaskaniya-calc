@@ -6,13 +6,7 @@
     @title-number-updated="numberBlock = $event"
     @settings-opened="openSettings"
   >
-    <VsBlockCard :card-info="{}"/>
-    <VsBlockCard :card-info="{}"/>
-    <VsBlockCard :card-info="{}"/>
-    <VsBlockCard :card-info="{}"/>
-    <VsBlockCard :card-info="{}"/>
-    <VsBlockCard :card-info="{}"/>
-    <VsBlockCard :card-info="{}"/>
+    <slot />
   </VsBlock>
 </template>
 

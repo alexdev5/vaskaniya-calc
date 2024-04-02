@@ -10,12 +10,13 @@ class AcfTerm extends JsonResource
         return [
             'thumbnail' => !empty($this->thumbnail)
                 ? AcfImageTerm::collection($this->thumbnail)
-                : [],
-            'related_image' => !empty($this->related_image)
+                : null,
+            'relatedImage' => !empty($this->related_image)
                 ? AcfImageTerm::collection($this->related_image)
-                : [],
-            'price' => $this->price ?? null,
-            'is_hidden' => $this->is_hidden ?? null,
+                : null,
+            'price' => isset($this->price) ? (int) $this->price : null,
+            'relatedTitle' => isset($this->related_title) ?? null,
+            'isHidden' => $this->is_hidden ?? null,
         ];
     }
 }

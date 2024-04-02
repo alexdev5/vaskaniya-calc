@@ -4,7 +4,7 @@ namespace App\Resources\Dimensions;
 use App\Resources\Acf\AcfTerm;
 use App\Resources\JsonResource;
 
-class DimensionsSimpleResource extends JsonResource
+class TermResource extends JsonResource
 {
     public function toArray(): array
     {

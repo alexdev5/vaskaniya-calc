@@ -4,7 +4,8 @@ namespace App\Controllers\Dimensions;
 
 use App\Config;
 use App\Controllers\TaxonomyController;
-use App\Resources\Dimensions\DimensionsResource;
+use App\Resources\Dimensions\ConfigurationResource;
+use App\Resources\Dimensions\TermResource;
 use WP_REST_Request;
 use WP_REST_Response;
 
@@ -13,10 +14,21 @@ class DimensionsController
 
     public function getAllData(WP_REST_Request $request): WP_REST_Response
     {
-        $returned['product-types'] = DimensionsResource::collection($this->getProductTypeCategories());
+        $productTypes = $this->getProductTypeCategories();
+        $configurations = [];
 
-        //dd($returned['product-types']);
-        //dd($this->getProductTypeCategories());
+        foreach ($productTypes as $productType) {
+            if(!empty($productType['children'])) {
+                foreach ($productType['children'] as $child) {
+                    $configurations[] = array_merge($child, ['productTypeParentId' => $productType['id']]);
+                }
+            }
+        }
+
+        $returned = [
+            'productTypes' => TermResource::collection($productTypes),
+            'configurations' => ConfigurationResource::collection($configurations),
+        ];
 
         return new WP_REST_Response(
             $returned,
@@ -31,5 +43,13 @@ class DimensionsController
             Config::get('taxonomy.categories'),
             'product-type'
         );
+    }
+
+    private function productTypeMapper(array $item) {
+
+    }
+
+    private function productTypeChildrenMapper(array $child) {
+
     }
 }

@@ -30,7 +30,6 @@ export abstract class AxiosApi {
     }
 
     protected async get(url: string, fields: any = {}, config?: any): Promise<any> {
-        console.log(this.apiBaseUrl)
         return (
             await this.axios({
                 method: 'get',
