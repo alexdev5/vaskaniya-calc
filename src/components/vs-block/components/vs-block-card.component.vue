@@ -3,7 +3,7 @@
    <VsBlockCardTools />
 
     <div class="vs-block-card-image">
-
+      <img :src="cardInfo.acf?.thumbnail?.url" alt="">
     </div>
     <div class="vs-block-card-title">
       {{ cardInfo.name }}
@@ -11,7 +11,7 @@
     <div class="vs-block-card-description" v-if="cardInfo.description">
       {{ cardInfo.description }}
     </div>
-    <div class="vs-block-card-price" v-if="cardInfo.acf.price">
+    <div class="vs-block-card-price" v-if="cardInfo.acf?.price">
       {{ cardInfo.acf.price }}
     </div>
   </div>
@@ -24,7 +24,7 @@ import { Dimensions } from '@/models'
 
 defineProps({
   cardInfo: {
-    type: Object as PropType<Dimensions.ProductTypeState>,
+    type: Object as PropType<Dimensions.DimensionTermState>,
     required: true,
   }
 })

@@ -16,7 +16,11 @@
 
     <VsBlockTools
       @settings-opened="emit('settings-opened')"
-    />
+    >
+      <template #settings>
+        <slot name="settings"></slot>
+      </template>
+    </VsBlockTools>
 
     <div class="vs-block-body">
       <slot />

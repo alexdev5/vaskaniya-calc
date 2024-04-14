@@ -1,15 +1,21 @@
 <template>
   <div class="vs-block-tools">
-    <div class="vs-icon-btn" @click="emit('settings-opened')">
-      <IconSettings />
-    </div>
+    <v-menu :close-on-content-click="false" bottom>
+      <template v-slot:activator="{ props }">
+        <div class="vs-icon-btn" v-bind="props" >
+          <IconSettings />
+        </div>
+      </template>
+
+      <div class="vs-block-tools-settings">
+        <slot name="settings" />
+      </div>
+    </v-menu>
   </div>
 </template>
 
 <script lang="ts" setup>
 import IconSettings from '@/components/icons/IconSettings.vue'
-
-const emit = defineEmits(['settings-opened', ])
 </script>
 
 <style lang="scss">

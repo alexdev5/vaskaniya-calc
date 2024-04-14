@@ -15,7 +15,6 @@
     top: 10px;
     right: 10px;
   }
-
   .vs-block-body {
     display: flex;
     flex-wrap: wrap;
@@ -31,4 +30,12 @@
     @include boxShadow;
     border: 1px solid red;
   }
+}
+
+.vs-block-tools-settings {
+  @include boxShadow;
+  background: #fff;
+  border-radius: 4px;
+  padding: 16px;
+  min-width: 300px;
 }

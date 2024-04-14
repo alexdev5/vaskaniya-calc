@@ -1,15 +1,16 @@
 <template>
-  <div class="form-field" :class="classes">
-    <VTextField
+  <div class="app-form-field app-form-field-checkbox" :class="classes">
+    <v-checkbox
         v-bind="{
         ...$attrs,
-        color: 'primary',
+        //color: 'primary',
         label: label,
         id: elementId,
-        density: compact ? 'compact': undefined
+        //rules: computedRules
       }"
+        density="compact"
         :variant="variant"
-        :class="{ simple }"
+        :class="{ simple, 'details-on': detailsOn }"
     >
       <template
           v-for="(_, name) in $slots"
@@ -20,29 +21,28 @@
             v-bind="slotProps || {}"
         />
       </template>
-    </VTextField>
+    </v-checkbox>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { computed, useAttrs } from 'vue'
 
-// TODO: set valid type `FormValidate`
 const props = defineProps({
   classes: {
     type: [Object, String]
   },
-  compact: Boolean,
   simple: Boolean,
   filled: Boolean,
   outlined: Boolean,
   solo: Boolean,
   soloInverted: Boolean,
   soloFilled: Boolean,
+  detailsOn: Boolean,
 })
 
 defineOptions({
-  name: 'AppTextField',
+  name: 'AppCheckbox',
   inheritAttrs: false,
 })
 

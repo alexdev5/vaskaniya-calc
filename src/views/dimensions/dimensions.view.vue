@@ -1,5 +1,5 @@
 <template>
-  <ProductType>
+  <ProductType @child-showing-updated="tableConfigurationCardShowing = $event">
     <VsBlockCard
       v-for="card in store.state.productTypes"
       :class="{ 'vs-block-card-active': card.id === productTypeModel }"
@@ -12,7 +12,7 @@
   <TableConfiguration>
     <template v-for="configuration in store.state.configurations">
       <VsBlockCard
-        v-if="configuration.productTypeParentId === productTypeModel"
+        v-if="configuration.productTypeParentId === productTypeModel || tableConfigurationCardShowing"
         :key="configuration.id"
         :card-info="configuration"
       />
@@ -30,6 +30,7 @@ import { useDimensionsStore } from './dimensions.store.ts'
 
 const store = useDimensionsStore()
 const productTypeModel = ref<number>()
+const tableConfigurationCardShowing = ref(false)
 
 onMounted(async () => {
   await store.loadDimensions()

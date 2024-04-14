@@ -4,27 +4,38 @@
     :title-number-model="numberBlock"
     @title-updated="titleBlock = $event"
     @title-number-updated="numberBlock = $event"
-    @settings-opened="openSettings"
   >
     <slot />
+
+    <template #settings>
+      <AppCheckbox
+        :modelValue="childBlockShowing"
+        @update:modelValue="updateChildShowing"
+        label="Отобразить дочерние блоки"
+      />
+    </template>
   </VsBlock>
+
 </template>
 
 <script lang="ts" setup>
 import VsBlock from '@/components/vs-block/vs-block.component.vue'
-import VsBlockCard from '@/components/vs-block/components/vs-block-card.component.vue'
 
-import { PropType, ref } from 'vue'
+import { ref } from 'vue'
 import { useDimensionsStore } from '@/views/dimensions/dimensions.store.ts'
-import * as Dimensions from '@/models/dimensions'
+import PopoverMenu from '@/components/navigations/popover-menu.component.vue'
+import AppCheckbox from '@/components/forms/app-checkbox.vue'
 
+const emit = defineEmits(['child-showing-updated'])
 const store = useDimensionsStore()
 
 const titleBlock = ref('')
 const numberBlock = ref()
+const childBlockShowing = ref(false)
 
-function openSettings() {
-  console.log('open settings')
+function updateChildShowing(value: boolean) {
+  childBlockShowing.value = value
+  emit('child-showing-updated', value)
 }
 </script>
 

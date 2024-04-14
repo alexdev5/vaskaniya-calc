@@ -12,3 +12,10 @@ export interface Acf {
     thumbnail: Image | null
     relatedImage: Image | null
 }
+
+export interface SettingsFormTerm {
+    title: string
+    description: string
+    price?: number
+    [key: string]: any
+}

@@ -1,6 +1,10 @@
 <template>
   <VBtn
-    :class="{'v-btn-link': $attrs.to}"
+    class="app-btn"
+    :class="{
+      'v-btn-link': $attrs.to,
+      success,
+    }"
     v-bind="{
         ...$attrs,
         color: 'primary',
@@ -35,6 +39,7 @@ const props = defineProps({
   plain: Boolean,
   flat: Boolean,
   tooltip: String,
+  success: String,
   tooltipPos: {
     type: String as PropType<'top | bottom | end | start'>,
     default: 'top'
