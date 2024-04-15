@@ -6,6 +6,7 @@
       :key="card.id"
       :card-info="card"
       @click="productTypeModel = card.id"
+      @settings-saved="saveCardSettings"
     />
   </ProductType>
 
@@ -27,10 +28,15 @@ import VsBlockCard from '@/components/vs-block/components/vs-block-card.componen
 
 import { onMounted, ref } from 'vue'
 import { useDimensionsStore } from './dimensions.store.ts'
+import { SettingsFormTerm } from '@/models/terms'
 
 const store = useDimensionsStore()
 const productTypeModel = ref<number>()
 const tableConfigurationCardShowing = ref(false)
+
+function saveCardSettings(form: SettingsFormTerm) {
+  console.log(form)
+}
 
 onMounted(async () => {
   await store.loadDimensions()

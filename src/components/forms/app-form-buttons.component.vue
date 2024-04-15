@@ -1,7 +1,19 @@
 <template>
   <div class="app-form-buttons">
-    <AppBtn success>{{ labelCansel ? labelCansel : `Отмена` }}</AppBtn>
-    <AppBtn>{{ labelSuccess ? labelCansel : `Сохранить` }}</AppBtn>
+    <AppBtn
+      outlined
+      v-if="!submitOnly"
+      @click="emit('closed')"
+    >
+      {{ labelCansel ? labelCansel : `Отмена` }}
+    </AppBtn>
+    <AppBtn
+      flat
+      :loading="loading"
+      @click="emit('submitted')"
+    >
+      {{ labelSuccess ? labelCansel : `Сохранить` }}
+    </AppBtn>
   </div>
 </template>
 
@@ -15,7 +27,11 @@ defineProps({
   labelSuccess: {
     type: String
   },
+  loading: Boolean,
+  submitOnly: Boolean,
 })
+
+const emit = defineEmits(['closed', 'submitted'])
 </script>
 
 <style lang="scss">

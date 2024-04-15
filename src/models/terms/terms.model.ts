@@ -17,5 +17,7 @@ export interface SettingsFormTerm {
     title: string
     description: string
     price?: number
+    thumbnail: object | null,
+    imageFull: object | null,
     [key: string]: any
 }

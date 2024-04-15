@@ -1,6 +1,6 @@
 <template>
   <div class="vs-block-card">
-   <VsBlockCardTools />
+   <VsBlockCardTools @submitted="emit('settings-saved', $event)"/>
 
     <div class="vs-block-card-image">
       <img :src="cardInfo.acf?.thumbnail?.url" alt="">
@@ -28,6 +28,8 @@ defineProps({
     required: true,
   }
 })
+
+const emit = defineEmits(['settings-saved'])
 </script>
 
 <style lang="scss">

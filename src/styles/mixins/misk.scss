@@ -12,8 +12,8 @@
   }
 }
 
-@mixin boxShadow() {
-  box-shadow: $box-shadow;
+@mixin boxShadow($opacity: .1) {
+  box-shadow: 0 0 15px 0 rgba(34,41,47, $opacity);
 }
 
 @mixin trans($prop: all) {

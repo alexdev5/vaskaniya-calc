@@ -33,7 +33,7 @@
 }
 
 .vs-block-tools-settings {
-  @include boxShadow;
+  @include boxShadow(.3);
   background: #fff;
   border-radius: 4px;
   padding: 16px;
