@@ -23,8 +23,11 @@ import VsBlock from '@/components/vs-block/vs-block.component.vue'
 
 import { ref } from 'vue'
 import { useDimensionsStore } from '@/views/dimensions/dimensions.store.ts'
-import PopoverMenu from '@/components/navigations/popover-menu.component.vue'
 import AppCheckbox from '@/components/forms/app-checkbox.vue'
+
+defineProps({
+  settingsLoading: Boolean
+})
 
 const emit = defineEmits(['child-showing-updated'])
 const store = useDimensionsStore()

@@ -6,7 +6,8 @@
         color: 'primary',
         label: label,
         id: elementId,
-        density: compact ? 'compact': undefined
+        density: compact ? 'compact': undefined,
+        multiple: false
       }"
         accept="image/png, image/jpeg, image/bmp"
         prepend-icon="mdi-camera"
@@ -40,6 +41,7 @@ const props = defineProps({
   solo: Boolean,
   soloInverted: Boolean,
   soloFilled: Boolean,
+  multiple: Boolean
 })
 
 defineOptions({

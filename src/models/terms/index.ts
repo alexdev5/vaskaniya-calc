@@ -1,1 +1,1 @@
-export * from './terms.model.ts'
+export * from './terms.service'

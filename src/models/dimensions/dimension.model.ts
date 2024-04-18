@@ -1,4 +1,5 @@
 import { Terms } from '@/models'
+import { ConfigurationContract, ProductTypeContract } from '@/api/dimensions'
 
 export class DimensionTermState {
     id!: number
@@ -12,21 +13,3 @@ export class DimensionTermState {
         Object.assign(this, copy)
     }
 }
-
-export interface DimensionsContract {
-    productTypes: ProductTypeContract[]
-    configurations: ConfigurationContract[]
-}
-
-export interface ProductTypeContract {
-    id: number
-    slug: string
-    name: string
-    description?: string
-    acf: Terms.Acf
-}
-
-export interface ConfigurationContract extends ProductTypeContract {
-    productTypeParentId: number | null
-}
-

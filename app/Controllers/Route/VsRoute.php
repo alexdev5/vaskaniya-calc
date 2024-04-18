@@ -14,6 +14,8 @@ class VsRoute {
     }
 
     protected static function register_route($method, $route, $callback, $permission_callback, $args) {
+        if (!$args) $args = [];
+
         if (is_array($callback) && class_exists($callback[0])) {
             $callback = [new $callback[0], $callback[1]];
         }

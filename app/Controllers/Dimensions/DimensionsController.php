@@ -45,11 +45,12 @@ class DimensionsController
         );
     }
 
-    private function productTypeMapper(array $item) {
+    public function updateTerm(WP_REST_Request $request): WP_REST_Response {
 
-    }
-
-    private function productTypeChildrenMapper(array $child) {
-
+        dump($request->get_params());
+        return new WP_REST_Response(
+            $request->get_body_params(),
+            200
+        );
     }
 }

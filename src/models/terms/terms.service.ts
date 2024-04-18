@@ -14,10 +14,16 @@ export interface Acf {
 }
 
 export interface SettingsFormTerm {
+    termId: number
     title: string
     description: string
     price?: number
-    thumbnail: object | null,
-    imageFull: object | null,
     [key: string]: any
+}
+
+export interface AddImagesParams {
+    termId: number
+    thumbnail?: object | null
+    imageFull?: object | null
+    relatedImage?: object | null
 }

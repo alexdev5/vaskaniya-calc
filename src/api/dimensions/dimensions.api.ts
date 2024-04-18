@@ -1,14 +1,20 @@
 import { AxiosApi } from '@/api/axios/axios.api'
-import * as Dimensions from '@/models/dimensions'
+import { DimensionsContract } from '@/api/dimensions/dimensions.contracts.ts'
+import { SettingsFormTerm } from '@/models/terms'
 
 export class DimensionsApi extends AxiosApi {
     public baseUrl = '/dimensions'
 
-    async dimensions(): Promise<Dimensions.DimensionsContract> {
-        return this.get(this.baseUrl + '/dimensions')
+    async dimensions(): Promise<DimensionsContract> {
+        return this.get(this.baseUrl)
     }
 
     async create(params: any) {
         return this.post(`${this.baseUrl}`, params)
     }
+
+    async updateTerm(params: SettingsFormTerm) {
+        return this.post(`${this.baseUrl}/update-term`, params)
+    }
+
 }

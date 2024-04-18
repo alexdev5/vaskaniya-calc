@@ -15,7 +15,7 @@ class Post {
     }
 
     public static function assignImage(int $postId, $thumbnail) {
-        $thumbnailId = Media::uploadImage($thumbnail);
+        $thumbnailId = Media::uploadImageByPath($thumbnail);
 
         if (!is_null($thumbnailId)) {
             set_post_thumbnail($postId, $thumbnailId);
