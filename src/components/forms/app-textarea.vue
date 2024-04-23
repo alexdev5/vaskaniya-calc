@@ -1,6 +1,6 @@
 <template>
   <div
-    class="app-textarea form-field"
+    class="app-form-textarea app-form-field"
     :class="$attrs.class"
   >
     <!-- class="mb-1 text-body-2 text-high-emphasis" -->

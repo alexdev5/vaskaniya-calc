@@ -12,7 +12,7 @@
         accept="image/png, image/jpeg, image/bmp"
         prepend-icon="mdi-camera"
         :variant="variant"
-        :class="{ simple }"
+        :class="{ simple, 'details-on': detailsOn }"
     >
       <template
           v-for="(_, name) in $slots"
@@ -31,6 +31,7 @@
 import { computed, useAttrs } from 'vue'
 
 const props = defineProps({
+  detailsOn: Boolean,
   classes: {
     type: [Object, String]
   },

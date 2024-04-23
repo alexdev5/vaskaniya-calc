@@ -1,5 +1,5 @@
 <template>
-  <div class="form-field" :class="classes">
+  <div class="app-form-field" :class="classes">
     <VTextField
         v-bind="{
         ...$attrs,
@@ -9,7 +9,7 @@
         density: compact ? 'compact': undefined
       }"
         :variant="variant"
-        :class="{ simple }"
+        :class="{ simple, 'details-on': detailsOn }"
     >
       <template
           v-for="(_, name) in $slots"
@@ -29,6 +29,7 @@ import { computed, useAttrs } from 'vue'
 
 // TODO: set valid type `FormValidate`
 const props = defineProps({
+  detailsOn: Boolean,
   classes: {
     type: [Object, String]
   },

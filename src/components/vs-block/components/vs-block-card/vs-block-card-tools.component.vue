@@ -23,10 +23,13 @@
           label="Описание"
           v-model="settingsForm.description"
         />
-        <AppFileInput
-          v-model="settingsForm.thumbnail"
-          label="Превью"
-        />
+        <div class="vs-block-tools-settings-thumbnail">
+          <AppFileInput
+            v-model="settingsForm.thumbnail"
+            label="Превью"
+          />
+
+        </div>
         <AppFileInput
           v-model="settingsForm.imageFull"
           label="Полноразмерное изображение"

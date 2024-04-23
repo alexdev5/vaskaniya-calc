@@ -1,6 +1,8 @@
 <?php
+
 namespace App\Helpers;
 
+use WP_Query;
 use WP_REST_Response;
 
 require_once ABSPATH . 'wp-admin/includes/image.php';
@@ -11,7 +13,8 @@ class Media
 {
     public const TEMP_DIR = VS_ASSETS_PATH . 'temp/';
 
-    public static function uploadImageFromFile($file) {
+    public static function uploadImageFromFile($file)
+    {
         if (!isset($file['error']) || is_array($file['error'])) {
             return new WP_REST_Response(['error' => "Load image error", 'body' => $file], 400);
         }
@@ -46,7 +49,8 @@ class Media
         return self::createAttachment($uploadedFile['file']);
     }
 
-    public static function uploadImageByPath($imageFilePath): int {
+    public static function uploadImageByPath($imageFilePath): int
+    {
         $fileName = basename($imageFilePath);
         $copyFileName = self::TEMP_DIR . $fileName;
 
@@ -69,7 +73,8 @@ class Media
         return self::createAttachment($uploadedFile['file']);
     }
 
-    private static function createAttachment($filePath): int {
+    private static function createAttachment($filePath): int
+    {
         $fileType = wp_check_filetype($filePath);
         $attachment = [
             'post_mime_type' => $fileType['type'],
@@ -85,44 +90,8 @@ class Media
         return $attachmentId;
     }
 
-    /*public static function uploadImage($imageFilePath) {
-        $pathExplode = explode('/', $imageFilePath);
-        $fileName = $pathExplode[count($pathExplode) - 1];
-        $copyFileName = self::TEMP_DIR . $fileName;
-
-        if (!copy($imageFilePath, $copyFileName)) return null;
-
-        $fileInfo = [
-            'name' => basename($copyFileName),
-            'tmp_name' => $copyFileName
-        ];
-
-        $uploadedFile = wp_handle_sideload($fileInfo, ['test_form' => false]);
-
-        if (isset($uploadedFile['error'])) {
-            echo 'Upload error: ' . $uploadedFile['error'];
-            return null;
-        }
-
-        $fileName = $uploadedFile['file'];
-        $fileType = wp_check_filetype($fileName);
-
-        $attachment = [
-            'post_mime_type' => $fileType['type'],
-            'post_title' => preg_replace('/\.[^.]+$/', '', basename($fileName)),
-            'post_content' => '',
-            'post_status' => 'inherit'
-        ];
-
-        $attachmentId = wp_insert_attachment($attachment, $fileName);
-
-        $attachData = wp_generate_attachment_metadata($attachmentId, $fileName);
-        wp_update_attachment_metadata($attachmentId, $attachData);
-
-        return $attachmentId;
-    }*/
-
-    public static function parseScripts($file) {
+    public static function parseScripts($file)
+    {
         $returned = [
             'scripts' => [],
             'styles' => [],
