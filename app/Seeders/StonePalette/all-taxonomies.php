@@ -14,6 +14,10 @@ return [
                 'slug' => 'color-brown'
             ],
             [
+                'term' => 'Темно коричневый',
+                'slug' => 'color-dark-brown'
+            ],
+            [
                 'term' => 'Светло-коричневый',
                 'slug' => 'color-light-brown'
             ],
@@ -22,20 +26,20 @@ return [
                 'slug' => 'color-grey'
             ],
             [
-                'term' => 'Молочный',
-                'slug' => 'color-lactic'
+                'term' => 'Темно-серый',
+                'slug' => 'color-dark-grey',
             ],
             [
-                'term' => 'Темно коричневый',
-                'slug' => 'color-dark-brown'
+                'term' => 'Молочный',
+                'slug' => 'color-lactic'
             ],
             [
                 'term' => 'Бежевый',
                 'slug' => 'color-beige',
             ],
             [
-                'term' => 'Темно-серый',
-                'slug' => 'color-dark-grey',
+                'term' => 'Темно-бежевый',
+                'slug' => 'color-beige-dark',
             ],
             [
                 'term' => 'Черный',
