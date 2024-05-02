@@ -120,12 +120,12 @@ return [
                 'slug' => 'brand-grandex',
             ],
             [
-                'term' => 'Neomarm',
-                'slug' => 'brand-neomarm',
-            ],
-            [
                 'term' => 'Hanex',
                 'slug' => 'brand-hanex',
+            ],
+            [
+                'term' => 'Neomarm',
+                'slug' => 'brand-neomarm',
             ],
             [
                 'term' => 'Staron',

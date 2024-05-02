@@ -1,7 +1,7 @@
 <?php
 $imageDir = VS_ASSETS_PATH . 'images/stone-palette/grandex/';
 $categoriesStone = \App\Config::get('taxonomy.categoryStone');
-$taxonomiesLocal = ['brand-hanex', 'cost-expensive', ];
+$taxonomiesLocal = ['brand-hanex', 'cost-expensive'];
 
 return [
     [

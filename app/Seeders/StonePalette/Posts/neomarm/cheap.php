@@ -1,308 +1,293 @@
 <?php
 $imageDir = VS_ASSETS_PATH . 'images/stone-palette/grandex/';
 $categoriesStone = \App\Config::get('taxonomy.categoryStone');
-$taxonomiesLocal = ['brand-hanex', 'cost-medium'];
+$taxonomiesLocal = ['brand-neomarm', 'price-category-seven', 'cost-cheap'];
 
 return [
     [
-        'title' => 'Modern Concrete',
+        'title' => '',
         'content' => '',
         'post_status'  => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
-            'vendor_code' => 'CT-002',
+            'vendor_code' => 'Flex 0280',
             'price' => 0,
         ],
         'terms' => [
-            $categoriesStone => array_merge($taxonomiesLocal, ['color-grey', 'price-category-four']),
+            $categoriesStone => array_merge($taxonomiesLocal, ['color-white', 'type-plain-color', 'sentence-hot']),
         ]
     ],
     [
-        'title' => 'Smoky Concrete',
+        'title' => '',
         'content' => '',
         'post_status'  => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
-            'vendor_code' => 'CT-003',
+            'vendor_code' => 'N-010',
             'price' => 0,
         ],
         'terms' => [
-            $categoriesStone => array_merge($taxonomiesLocal, ['color-dark-grey', 'price-category-four']),
+            $categoriesStone => array_merge($taxonomiesLocal, ['color-white', 'type-plain-color']),
         ]
     ],
     [
-        'title' => 'Organic Cotton',
+        'title' => '',
         'content' => '',
         'post_status'  => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
-            'vendor_code' => 'T-071',
+            'vendor_code' => 'N-101',
             'price' => 0,
         ],
         'terms' => [
-            $categoriesStone => array_merge($taxonomiesLocal, ['color-beige', 'price-category-two', 'type-middle']),
+            $categoriesStone => array_merge($taxonomiesLocal, []),
         ]
     ],
     [
-        'title' => 'Vocalise',
+        'title' => '',
         'content' => '',
         'post_status'  => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
-            'vendor_code' => 'T-089',
+            'vendor_code' => 'N-103',
             'price' => 0,
         ],
         'terms' => [
-            $categoriesStone => array_merge($taxonomiesLocal, ['color-white', 'price-category-two', 'type-middle']),
-        ]
-    ],
-
-
-    [
-        'title' => 'Hidden Glen',
-        'content' => '',
-        'post_status'  => 'publish',
-        'thumbnail' => $imageDir . 'placeholder.png',
-        'acf' => [
-            'vendor_code' => 'T-102',
-            'price' => 0,
-        ],
-        'terms' => [
-            $categoriesStone => array_merge($taxonomiesLocal, ['color-beige', 'price-category-two', 'type-middle']),
+            $categoriesStone => array_merge($taxonomiesLocal, []),
         ]
     ],
     [
-        'title' => 'Quartz Grey',
+        'title' => '',
         'content' => '',
         'post_status'  => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
-            'vendor_code' => 'T-105',
+            'vendor_code' => 'N-159',
             'price' => 0,
         ],
         'terms' => [
-            $categoriesStone => array_merge($taxonomiesLocal, ['color-dark-grey', 'price-category-two', 'type-middle']),
+            $categoriesStone => array_merge($taxonomiesLocal, []),
         ]
     ],
     [
-        'title' => 'Charles Rose',
+        'title' => '',
         'content' => '',
         'post_status'  => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
-            'vendor_code' => 'T-206',
+            'vendor_code' => 'N-218',
             'price' => 0,
         ],
         'terms' => [
-            $categoriesStone => array_merge($taxonomiesLocal, ['color-beige', 'price-category-two', 'type-middle']),
+            $categoriesStone => array_merge($taxonomiesLocal, []),
         ]
     ],
     [
-        'title' => 'Rebeca',
+        'title' => '',
         'content' => '',
         'post_status'  => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
-            'vendor_code' => 'T-210',
+            'vendor_code' => 'N-414',
             'price' => 0,
         ],
         'terms' => [
-            $categoriesStone => array_merge($taxonomiesLocal, ['color-beige-dark', 'price-category-two', 'type-middle']),
+            $categoriesStone => array_merge($taxonomiesLocal, []),
         ]
     ],
     [
-        'title' => 'Unicon',
+        'title' => '',
         'content' => '',
         'post_status'  => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
-            'vendor_code' => 'T-212',
+            'vendor_code' => 'N-420',
             'price' => 0,
         ],
         'terms' => [
-            $categoriesStone => array_merge($taxonomiesLocal, ['color-beige-dark', 'price-category-two', 'type-middle']),
+            $categoriesStone => array_merge($taxonomiesLocal, []),
         ]
     ],
     [
-        'title' => 'L-Beauty',
+        'title' => '',
         'content' => '',
         'post_status'  => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
-            'vendor_code' => 'T-218',
+            'vendor_code' => 'N-421',
             'price' => 0,
         ],
         'terms' => [
-            $categoriesStone => array_merge($taxonomiesLocal, ['color-beige-dark', 'price-category-two', 'type-middle']),
+            $categoriesStone => array_merge($taxonomiesLocal, []),
         ]
     ],
     [
-        'title' => 'L-Blanc',
+        'title' => '',
         'content' => '',
         'post_status'  => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
-            'vendor_code' => 'T-219',
+            'vendor_code' => 'N-423',
             'price' => 0,
         ],
         'terms' => [
-            $categoriesStone => array_merge($taxonomiesLocal, ['color-beige', 'price-category-two', 'type-middle']),
+            $categoriesStone => array_merge($taxonomiesLocal, []),
         ]
     ],
     [
-        'title' => 'L-Mocha',
+        'title' => '',
         'content' => '',
         'post_status'  => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
-            'vendor_code' => 'T-222',
+            'vendor_code' => 'N-430',
             'price' => 0,
         ],
         'terms' => [
-            $categoriesStone => array_merge($taxonomiesLocal, ['color-brown', 'price-category-two', 'type-middle']),
+            $categoriesStone => array_merge($taxonomiesLocal, []),
         ]
     ],
     [
-        'title' => 'Charites',
+        'title' => '',
         'content' => '',
         'post_status'  => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
-            'vendor_code' => 'T-233',
+            'vendor_code' => 'N-440',
             'price' => 0,
         ],
         'terms' => [
-            $categoriesStone => array_merge($taxonomiesLocal, ['color-dark-grey', 'price-category-two', 'type-middle']),
+            $categoriesStone => array_merge($taxonomiesLocal, []),
         ]
     ],
     [
-        'title' => 'Brutus',
+        'title' => '',
         'content' => '',
         'post_status'  => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
-            'vendor_code' => 'T-234',
+            'vendor_code' => 'N-510',
             'price' => 0,
         ],
         'terms' => [
-            $categoriesStone => array_merge($taxonomiesLocal, ['color-brown', 'price-category-two', 'type-middle']),
+            $categoriesStone => array_merge($taxonomiesLocal, []),
         ]
     ],
     [
-        'title' => 'Ice Cube',
+        'title' => '',
         'content' => '',
         'post_status'  => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
-            'vendor_code' => 'T-237',
+            'vendor_code' => 'N-539',
             'price' => 0,
         ],
         'terms' => [
-            $categoriesStone => array_merge($taxonomiesLocal, ['color-white', 'price-category-two', 'type-middle']),
+            $categoriesStone => array_merge($taxonomiesLocal, []),
         ]
     ],
     [
-        'title' => 'Colombia',
+        'title' => '',
         'content' => '',
         'post_status'  => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
-            'vendor_code' => 'T-238',
+            'vendor_code' => 'N-610',
             'price' => 0,
         ],
         'terms' => [
-            $categoriesStone => array_merge($taxonomiesLocal, ['color-beige', 'price-category-two', 'type-middle']),
+            $categoriesStone => array_merge($taxonomiesLocal, []),
         ]
     ],
     [
-        'title' => 'Stone Grey',
+        'title' => '',
         'content' => '',
         'post_status'  => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
-            'vendor_code' => 'T-239',
+            'vendor_code' => 'N-612',
             'price' => 0,
         ],
         'terms' => [
-            $categoriesStone => array_merge($taxonomiesLocal, ['color-grey', 'price-category-two', 'type-middle']),
+            $categoriesStone => array_merge($taxonomiesLocal, []),
         ]
     ],
     [
-        'title' => 'Dark Knight',
+        'title' => '',
         'content' => '',
         'post_status'  => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
-            'vendor_code' => 'T-240',
+            'vendor_code' => 'N-593',
             'price' => 0,
         ],
         'terms' => [
-            $categoriesStone => array_merge($taxonomiesLocal, ['color-dark-grey', 'price-category-two', 'type-middle']),
+            $categoriesStone => array_merge($taxonomiesLocal, ['sentence-new']),
         ]
     ],
     [
-        'title' => 'Brown Cookie',
+        'title' => '',
         'content' => '',
         'post_status'  => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
-            'vendor_code' => 'T-243',
+            'vendor_code' => 'N-810',
             'price' => 0,
         ],
         'terms' => [
-            $categoriesStone => array_merge($taxonomiesLocal, ['color-beige-dark', 'price-category-two', 'type-middle']),
+            $categoriesStone => array_merge($taxonomiesLocal, []),
         ]
     ],
     [
-        'title' => 'Ice Pice',
+        'title' => '',
         'content' => '',
         'post_status'  => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
-            'vendor_code' => 'T-411',
+            'vendor_code' => 'N-811',
             'price' => 0,
         ],
         'terms' => [
-            $categoriesStone => array_merge($taxonomiesLocal, ['color-white', 'price-category-two', 'type-middle']),
+            $categoriesStone => array_merge($taxonomiesLocal, []),
         ]
     ],
     [
-        'title' => 'Serenity',
+        'title' => '',
         'content' => '',
         'post_status'  => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
-            'vendor_code' => 'T-412',
+            'vendor_code' => 'N-820',
             'price' => 0,
         ],
         'terms' => [
-            $categoriesStone => array_merge($taxonomiesLocal, ['color-beige', 'price-category-two', 'type-middle']),
+            $categoriesStone => array_merge($taxonomiesLocal, []),
         ]
     ],
     [
-        'title' => 'H-Sand',
+        'title' => '',
         'content' => '',
         'post_status'  => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
-            'vendor_code' => 'T-507',
+            'vendor_code' => 'N-840',
             'price' => 0,
         ],
         'terms' => [
-            $categoriesStone => array_merge($taxonomiesLocal, ['color-white', 'price-category-two', 'type-middle']),
+            $categoriesStone => array_merge($taxonomiesLocal, []),
         ]
     ],
     [
-        'title' => 'Harvest',
+        'title' => '',
         'content' => '',
         'post_status'  => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
-            'vendor_code' => 'T-509',
+            'vendor_code' => 'N-857',
             'price' => 0,
         ],
         'terms' => [
-            $categoriesStone => array_merge($taxonomiesLocal, ['color-grey', 'price-category-two', 'type-middle']),
+            $categoriesStone => array_merge($taxonomiesLocal, []),
         ]
     ],
 ];
