@@ -45,6 +45,10 @@ return [
                 'term' => 'Черный',
                 'slug' => 'color-black',
             ],
+            [
+                'term' => 'Цветные',
+                'slug' => 'colored',
+            ],
         ]
     ],
     [
