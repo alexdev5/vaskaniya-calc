@@ -108,18 +108,45 @@ abstract class Seeders implements SeederContract
         }
     }
 
+//    public function getArrayFromDirectory(string $directory): array
+//    {
+//        $directory = VS_APP . 'Seeders/' . $directory;
+//
+//        $files = scandir($directory);
+//        $taxonomies = [];
+//
+//        foreach ($files as $file) {
+//            if ($file !== '.' && $file !== '..') {
+//                $path = $directory . '/' . $file;
+//                $posts = require $path;
+//                $taxonomies = array_merge_recursive($taxonomies, $posts);
+//            }
+//        }
+//
+//        return $taxonomies;
+//    }
+
     public function getArrayFromDirectory(string $directory): array
     {
         $directory = VS_APP . 'Seeders/' . $directory;
 
+        return $this->scanDirectory($directory);
+    }
+
+    private function scanDirectory(string $directory): array
+    {
         $files = scandir($directory);
         $taxonomies = [];
 
         foreach ($files as $file) {
             if ($file !== '.' && $file !== '..') {
                 $path = $directory . '/' . $file;
-                $posts = require $path;
-                $taxonomies = array_merge_recursive($taxonomies, $posts);
+                if (is_dir($path)) {
+                    $taxonomies = array_merge_recursive($taxonomies, $this->scanDirectory($path));
+                } else {
+                    $posts = require $path;
+                    $taxonomies = array_merge_recursive($taxonomies, $posts);
+                }
             }
         }
 

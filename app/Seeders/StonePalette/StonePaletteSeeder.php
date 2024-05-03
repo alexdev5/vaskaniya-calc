@@ -13,7 +13,7 @@ class StonePaletteSeeder extends Seeders
     {
         $this->taxonomies = $this->getArrayFromFile('StonePalette/all-taxonomies.php');
         $this->posts = array_merge(
-            $this->getArrayFromDirectory('StonePalette/Posts/grandex'),
+            $this->getArrayFromDirectory('StonePalette/Posts'),
         );
     }
 
