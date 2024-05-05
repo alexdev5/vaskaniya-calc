@@ -41,6 +41,13 @@ const store = useDimensionsStore()
 const productTypeModel = ref<number>()
 const tableConfigurationCardShowing = ref(false)
 const loading = ref(false)
+const currentTaxSeparate = ref()
+
+// Сделать разделение карточек дивами, если включена галочка в
+// настройках блока.
+// Первый просто вывести, дальше сравнить таксономии
+// если они отличаются то выводить второй див.
+// Только нужно подумать когда закрытый открытый тег
 
 async function saveCardSettings(formFields: SettingsFormTerm, termId: number) {
   loading.value = true
@@ -49,6 +56,7 @@ async function saveCardSettings(formFields: SettingsFormTerm, termId: number) {
 
   console.log(formFields)
 
+  return
   try {
     await TermsService.addImages({
       termId,

@@ -1,0 +1,12 @@
+.app-form-field-file-input {
+  .variant-icon {
+    .v-field__field,
+    .v-field__outline,
+    .v-field__append-inner {
+      display: none;
+    }
+    .v-field__prepend-inner {
+      padding: 0 !important;
+    }
+  }
+}

@@ -7,12 +7,12 @@
         label: label,
         id: elementId,
         density: compact ? 'compact': undefined,
-        multiple: false
+        multiple: false,
       }"
         accept="image/png, image/jpeg, image/bmp"
-        prepend-icon="mdi-camera"
+        prepend-icon=""
         :variant="variant"
-        :class="{ simple, 'details-on': detailsOn }"
+        :class="{ simple, 'details-on': detailsOn, 'variant-icon': icon }"
     >
       <template
           v-for="(_, name) in $slots"
@@ -35,6 +35,7 @@ const props = defineProps({
   classes: {
     type: [Object, String]
   },
+  icon: Boolean,
   compact: Boolean,
   simple: Boolean,
   filled: Boolean,

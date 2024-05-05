@@ -18,21 +18,31 @@
           label="Цена"
           v-model="settingsForm.price"
         />
-        <AppTextarea
+<!--        <AppTextarea
           compact
           label="Описание"
           v-model="settingsForm.description"
-        />
-        <div class="vs-block-tools-settings-thumbnail">
-          <AppFileInput
-            v-model="settingsForm.thumbnail"
-            label="Превью"
-          />
+        />-->
 
-        </div>
-        <AppFileInput
-          v-model="settingsForm.imageFull"
-          label="Полноразмерное изображение"
+        <VsBlockCardToolsImages
+            :label="`Превью`"
+            v-model="settingsForm.thumbnail"
+            :buttonLibLoading="false"
+            @lib-opened="openMediaLib(ImageType.Thumbnail)"
+        />
+
+        <VsBlockCardToolsImages
+            :label="`Полноразмерное изображение`"
+            v-model="settingsForm.imageFull"
+            :buttonLibLoading="false"
+            @lib-opened="openMediaLib(ImageType.ImageFull)"
+        />
+
+        <VsBlockCardToolsImages
+            :label="`Изображение связанного блока`"
+            v-model="settingsForm.relatedImage"
+            :buttonLibLoading="false"
+            @lib-opened="openMediaLib(ImageType.RelatedImage)"
         />
 
         <slot name="settings" />
@@ -55,6 +65,15 @@
       <IconEyeOff width="16" height="16" />
     </div>
   </div>
+
+
+  <v-dialog
+      :model-value="mediaModalOpened"
+      @update:model-value="mediaModalOpened = false"
+  >
+    <v-card title="Dialog">
+    </v-card>
+  </v-dialog>
 </template>
 
 <script lang="ts" setup>
@@ -62,13 +81,24 @@ import IconCopy from '@/components/icons/IconCopy.vue'
 import IconSettings from '@/components/icons/IconSettings.vue'
 import IconArrowsMove from '@/components/icons/IconArrowsMove.vue'
 import IconEyeOff from '@/components/icons/IconEyeOff.vue'
+import IconCameraPlus from '@/components/icons/IconCameraPlus.vue'
+import IconListSearch from '@/components/icons/IconListSearch.vue'
 import AppTextField from '@/components/forms/app-textfield.vue'
 import AppFileInput from '@/components/forms/app-fileinput.vue'
 import AppTextarea from '@/components/forms/app-textarea.vue'
+import VsBlockCardToolsImages from './vs-block-card-tools-images.component.vue'
 import AppFormButtons from '@/components/forms/app-form-buttons.component.vue'
+import AppBtn from '@/components/elements/app-btn.component.vue'
 
 import { reactive, ref } from 'vue'
 import { SettingsFormTerm } from '@/models/terms'
+
+enum ImageType {
+  None,
+  Thumbnail,
+  ImageFull,
+  RelatedImage,
+}
 
 const emit = defineEmits([
   'settings-opened',
@@ -83,10 +113,22 @@ const settingsForm = reactive({
   description: '',
   price: null,
   thumbnail: null,
-  imageFull: null
+  imageFull: null,
+  relatedImage: null,
 } as SettingsFormTerm)
 
 const menuModel = ref(false)
+const mediaModalOpened = ref(false)
+const imageTypeOpened = ref<null | ImageType>(null)
+
+async function openMediaLib(imageType: ImageType) {
+  mediaModalOpened.value = true
+  imageTypeOpened.value = imageType
+}
+
+function closeMediaLib() {
+  imageTypeOpened.value = null
+}
 </script>
 
 <style lang="scss" scoped>

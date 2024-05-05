@@ -19,7 +19,9 @@
     display: flex;
     flex-wrap: wrap;
     gap: var(--vs-offset-middle);
+    padding-block-start: 24px;
   }
+  
   .vs-block-title {
     display: grid;
     grid-template-columns: 100px minmax(0, 1fr);
@@ -40,4 +42,10 @@
   min-width: 300px;
   display: grid;
   gap: 16px;
+}
+.vs-block-tools-settings-image-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding-block-start: 16px;
 }
