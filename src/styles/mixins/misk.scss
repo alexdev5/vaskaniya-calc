@@ -16,6 +16,11 @@
   box-shadow: 0 0 15px 0 rgba(34,41,47, $opacity);
 }
 
+@mixin cardHover() {
+  border-color: var(--app-color-red);
+  @include boxShadow;
+}
+
 @mixin trans($prop: all) {
   transition: $prop .2s linear;
 }

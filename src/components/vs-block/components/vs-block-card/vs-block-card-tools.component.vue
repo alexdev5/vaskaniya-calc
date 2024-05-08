@@ -65,15 +65,6 @@
       <IconEyeOff width="16" height="16" />
     </div>
   </div>
-
-
-  <v-dialog
-      :model-value="mediaModalOpened"
-      @update:model-value="mediaModalOpened = false"
-  >
-    <v-card title="Dialog">
-    </v-card>
-  </v-dialog>
 </template>
 
 <script lang="ts" setup>
@@ -91,21 +82,15 @@ import AppFormButtons from '@/components/forms/app-form-buttons.component.vue'
 import AppBtn from '@/components/elements/app-btn.component.vue'
 
 import { reactive, ref } from 'vue'
-import { SettingsFormTerm } from '@/models/terms'
-
-enum ImageType {
-  None,
-  Thumbnail,
-  ImageFull,
-  RelatedImage,
-}
+import { ImageType, SettingsFormTerm } from '@/models/terms'
 
 const emit = defineEmits([
   'settings-opened',
   'copied',
   'moved',
   'hidden',
-  'submitted'
+  'submitted',
+  'load-media-requested',
 ])
 
 const settingsForm = reactive({
@@ -118,16 +103,9 @@ const settingsForm = reactive({
 } as SettingsFormTerm)
 
 const menuModel = ref(false)
-const mediaModalOpened = ref(false)
-const imageTypeOpened = ref<null | ImageType>(null)
 
 async function openMediaLib(imageType: ImageType) {
-  mediaModalOpened.value = true
-  imageTypeOpened.value = imageType
-}
-
-function closeMediaLib() {
-  imageTypeOpened.value = null
+  emit('load-media-requested', imageType)
 }
 </script>
 

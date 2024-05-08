@@ -1,0 +1,24 @@
+.app-modal {
+  --modal-action-height: 54px;
+
+  .v-card-actions {
+    justify-content: flex-end;
+  }
+  .v-card {
+    display: block;
+    padding-block: var(--app-offset-small);
+    padding-inline: var(--app-offset-middle);
+  }
+  .v-card-actions {
+    position: fixed;
+    border-top: 1px solid var(--app-color-grey);
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    height: var(--modal-action-height);
+  }
+  .v-card {
+    padding-bottom: calc(var(--modal-action-height) + var(--app-offset-small));
+  }
+}

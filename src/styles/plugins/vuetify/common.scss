@@ -1,8 +1,4 @@
 .app-content, .auth-content {
-
-
-
-
   .v-progress-circular > svg {
     color: var(--primary)
   }
@@ -15,4 +11,11 @@
   .v-label.v-field-label--floating {
     --v-field-label-scale: 0.9em;
   }
+}
+.v-spacer {
+  height: 1px;
+  background: var(--app-color-grey);
+}
+.app-btn:not(.v-btn--icon) {
+  padding-inline: 24px;
 }

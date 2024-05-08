@@ -27,3 +27,10 @@ export interface AddImagesParams {
     imageFull?: object | null
     relatedImage?: object | null
 }
+
+export enum ImageType {
+    None,
+    Thumbnail,
+    ImageFull,
+    RelatedImage,
+}

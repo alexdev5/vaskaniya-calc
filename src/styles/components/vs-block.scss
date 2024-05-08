@@ -1,7 +1,7 @@
 
 .vs-block {
   position: relative;
-  padding: var(--vs-offset-normal);
+  padding: var(--app-offset-normal);
 
   @include boxShadow;
 
@@ -18,7 +18,7 @@
   .vs-block-body {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--vs-offset-middle);
+    gap: var(--app-offset-middle);
     padding-block-start: 24px;
   }
   

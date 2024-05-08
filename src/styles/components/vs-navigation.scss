@@ -1,8 +1,8 @@
 .vs-navigation {
   position: fixed;
-  width: var(--vs-navigation-width);
+  width: var(--app-navigation-width);
   background: #F4F3F3;
-  font-size: var(--vs-font-size-l);
+  font-size: var(--app-font-size-l);
 
   .vs-navigation-links {
     display: grid;
@@ -13,17 +13,17 @@
   text-decoration: none;
   display: block;
   padding: 8px 16px;
-  color: var(--vs-color-primary);
+  color: var(--app-color-primary);
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
   @include trans;
 
   &:hover {
-    background: rgba(var(--vs-color-red-rgb), .2)
+    background: rgba(var(--app-color-red-rgb), .2)
   }
 
   &.router-link-active {
-    background: var(--vs-color-red);
-    color: var(--vs-color-secondary);
+    background: var(--app-color-red);
+    color: var(--app-color-secondary);
   }
 }

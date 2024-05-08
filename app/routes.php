@@ -1,7 +1,9 @@
 <?php
 use App\Api\DimensionsApi;
+use App\Api\MediaApi;
 use App\Api\TermApi;
 
-// need auth
+// TODO: need auth
 DimensionsApi::register();
 TermApi::register();
+MediaApi::register();

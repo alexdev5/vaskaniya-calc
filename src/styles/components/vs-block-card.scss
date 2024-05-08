@@ -1,8 +1,8 @@
 .vs-block-card {
   width: 200px;
   min-height: 200px;
-  border: 1px solid var(--vs-color-primary);
-  padding: 4px var(--vs-offset-small);
+  border: 1px solid var(--app-color-primary);
+  padding: 4px var(--app-offset-small);
   border-radius: 6px;
   display: flex;
   flex-direction: column;
@@ -14,17 +14,12 @@
     cursor: pointer;
     @include boxShadow
   }
-  &.vs-block-card-active {
-    border-color: var(--vs-color-red);
-    background-color: rgba(var(--vs-color-red-rgb), .2);
-    @include boxShadow
-  }
   .vs-block-card-tools {
     display: flex;
-    gap: var(--vs-offset-small);
+    gap: var(--app-offset-small);
   }
   .vs-block-card-description {
-    font-size: var(--vs-font-size-s);
+    font-size: var(--app-font-size-s);
   }
   .vs-block-card-price {
     font-weight: 600;
@@ -35,6 +30,19 @@
 
     img {
       max-height: 100%;
+    }
+  }
+  .vs-icon-btn {
+    border: 1px solid transparent;
+  }
+
+  &.vs-block-card-active {
+    border-color: var(--app-color-red);
+    background-color: rgba(var(--app-color-red-rgb), .2);
+    @include boxShadow;
+
+    .vs-icon-btn {
+      border: 1px solid #000;
     }
   }
 }

@@ -3,18 +3,15 @@
 namespace App\Api;
 
 use App\Contracts\ApiContract;
+use App\Controllers\MediaController;
 use App\Controllers\Route\VsRoute;
 
 class MediaApi implements ApiContract {
-    const route = '/dimensions';
+    const route = '/media';
 
     public static function register()
     {
-        VsRoute::get(self::route(), [DimensionsController::class, 'getAllData']);
-        VsRoute::post(
-            self::route('/update-term'),
-            [DimensionsController::class, 'updateTerm']
-        );
+        VsRoute::get(self::route('/all'), [MediaController::class, 'getMediaList']);
     }
 
     public static function route(string $name = ''): string

@@ -1,6 +1,9 @@
 <template>
   <div class="vs-block-card">
-   <VsBlockCardTools @submitted="emit('settings-saved', $event)"/>
+   <VsBlockCardTools
+     @submitted="emit('settings-saved', $event)"
+     @load-media-requested="emit('load-media-requested', $event)"
+   />
 
     <div class="vs-block-card-image">
       <img :src="cardInfo.acf?.thumbnail?.url" alt="">
@@ -29,7 +32,7 @@ defineProps({
   }
 })
 
-const emit = defineEmits(['settings-saved'])
+const emit = defineEmits(['settings-saved', 'load-media-requested'])
 </script>
 
 <style lang="scss">

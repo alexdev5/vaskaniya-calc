@@ -1,17 +1,17 @@
 .vs-container {
-  color: var(--vs-color-primary);
-  font-size: var(--vs-font-size-m);
+  color: var(--app-color-primary);
+  font-size: var(--app-font-size-m);
 
   .vs-wrapper {
-    margin-inline-start: var(--vs-navigation-width);
-    padding-inline: var(--vs-offset-middle);
-    padding-block: var(--vs-offset-middle);
+    margin-inline-start: var(--app-navigation-width);
+    padding-inline: var(--app-offset-middle);
+    padding-block: var(--app-offset-middle);
     display: grid;
-    gap: var(--vs-offset-middle);
+    gap: var(--app-offset-middle);
   }
 
   .vs-color-red {
-    color: var(--vs-color-red);
+    color: var(--app-color-red);
   }
 
   .vs-icon-btn {
@@ -21,12 +21,12 @@
     padding: 4px;
     border-radius: 50%;
     cursor: pointer;
-    background: var(--vs-color-grey);
+    background: var(--app-color-grey);
     @include trans;
 
     &:hover {
-      background: var(--vs-color-primary);
-      color: var(--vs-color-secondary);
+      background: var(--app-color-primary);
+      color: var(--app-color-secondary);
     }
   }
 

@@ -1,0 +1,33 @@
+.app-media-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  cursor: pointer;
+  gap: var(--app-offset-normal);
+
+  .app-media-list-item {
+    padding: var(--app-offset-normal);
+    border: 1px solid transparent;
+    @include boxShadow;
+
+    &.active {
+      background-color: rgba(var(--app-color-red-rgb), 0.2);
+    }
+
+    &:hover {
+      @include cardHover();
+    }
+  }
+
+  .app-media-list-item-description {
+    font-size: var(--app-font-size-s);
+
+    p b {
+      min-width: 40px;
+      display: inline-block;
+    }
+  }
+
+  img {
+    max-width: 100%;
+  }
+}
