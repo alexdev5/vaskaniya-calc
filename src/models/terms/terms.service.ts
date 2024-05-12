@@ -13,7 +13,7 @@ export interface Acf {
     relatedImage: Image | null
 }
 
-export interface SettingsFormTerm {
+export interface CommonCategoryParams {
     termId: number
     title: string
     description: string

@@ -2,7 +2,9 @@
 
 namespace App\Controllers\Terms;
 
+use App\Config;
 use App\Helpers\Media;
+use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
 
@@ -34,7 +36,7 @@ class TermsController
         return new WP_REST_Response(null, 200);
     }
 
-    function assignAcfImage($attachmentId, $termId, $fieldName)
+    public function assignAcfImage($attachmentId, $termId, $fieldName)
     {
         //return new WP_REST_Response([$attachmentId, $termId, $fieldName], 200);
         if (!function_exists('update_field')) {
@@ -42,5 +44,40 @@ class TermsController
         }
 
         return update_field($fieldName, $attachmentId, 'term_' . $termId);
+    }
+
+    /* @param array $params {
+     *   termId: int | string,
+     *   title: string,
+     *   description?: int,
+     *   acf: array
+     * }
+     *
+     * @return array
+     */
+    public static function updateById(string $categoryType, array $params) {
+        if (isset($params['termId']))
+            new WP_Error( 'termId_empty in TermsController' );
+
+        $termId = $params['termId'];
+        $title = $params['title'] ?? null;
+        $description = $params['description'] ?? null;
+        $acf = $params['acf'] ?? null;
+
+        $update_result = wp_update_term(
+            $termId,
+            Config::get('taxonomy.categoryStone'),
+            [
+                'name' => $title,
+                'description' => $description
+            ]);
+
+        if (is_wp_error($update_result)) {
+            new WP_Error( 'update term failed in TermsController' );
+        }
+
+        foreach ($acf as $field) {
+            update_field($field['name'], $field['value'], 'term_' . $termId);
+        }
     }
 }

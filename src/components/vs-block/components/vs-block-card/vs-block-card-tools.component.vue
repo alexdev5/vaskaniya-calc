@@ -82,7 +82,7 @@ import AppFormButtons from '@/components/forms/app-form-buttons.component.vue'
 import AppBtn from '@/components/elements/app-btn.component.vue'
 
 import { reactive, ref } from 'vue'
-import { ImageType, SettingsFormTerm } from '@/models/terms'
+import { ImageType, CommonCategoryParams } from '@/models/terms'
 
 const emit = defineEmits([
   'settings-opened',
@@ -100,7 +100,7 @@ const settingsForm = reactive({
   thumbnail: null,
   imageFull: null,
   relatedImage: null,
-} as SettingsFormTerm)
+} as CommonCategoryParams)
 
 const menuModel = ref(false)
 

@@ -43,7 +43,7 @@ import AppMediaModal from '@/components/media/app-media-modal.component.vue'
 
 import { onMounted, reactive, ref } from 'vue'
 import { useDimensionsStore } from './dimensions.store.ts'
-import { ImageType, SettingsFormTerm } from '@/models/terms'
+import { ImageType, CommonCategoryParams } from '@/models/terms'
 import { DimensionsService, TermsService } from '@/services'
 import { useMediaStore } from '@/stores'
 
@@ -98,18 +98,19 @@ async function assignImageToTerm(mediaId: number) {
   }
 }
 
-async function saveCardSettings(formFields: SettingsFormTerm, termId: number) {
+async function saveCardSettings(formFields: CommonCategoryParams, termId: number) {
   loading.value = true
 
   const { imageFull, thumbnail, ...rest } = formFields
 
-  return
+  console.log(rest)
+
   try {
-    await TermsService.addImages({
-      termId,
-      imageFull: imageFull?.[0] ?? null,
-      thumbnail: thumbnail?.[0] ?? null,
-    })
+    // await TermsService.addImages({
+    //   termId,
+    //   imageFull: imageFull?.[0] ?? null,
+    //   thumbnail: thumbnail?.[0] ?? null,
+    // })
 
     await DimensionsService.updateTerm({
       ...rest,
