@@ -12,6 +12,7 @@ class TermApi implements ApiContract
     public static function register()
     {
         VsRoute::post(self::route('/add-images'), [TermsController::class, 'addImages']);
+        VsRoute::post(self::route('/assign-image'), [TermsController::class, 'assignImage']);
     }
 
     public static function route(string $name = ''): string

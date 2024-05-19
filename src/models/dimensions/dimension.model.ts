@@ -4,7 +4,7 @@ import { ConfigurationContract, ProductTypeContract } from '@/api/dimensions'
 export class DimensionTermState {
     id!: number
     slug!: string
-    name!: string
+    title!: string
     description: string = ''
     acf!: Terms.Acf
     productTypeParentId?: number | null

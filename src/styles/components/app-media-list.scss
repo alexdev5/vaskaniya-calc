@@ -7,6 +7,7 @@
   .app-media-list-item {
     padding: var(--app-offset-normal);
     border: 1px solid transparent;
+    display: grid;
     @include boxShadow;
 
     &.active {
@@ -20,6 +21,8 @@
 
   .app-media-list-item-description {
     font-size: var(--app-font-size-s);
+    margin-top: auto;
+    padding-top: var(--app-offset-small);
 
     p b {
       min-width: 40px;

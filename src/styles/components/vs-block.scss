@@ -35,7 +35,6 @@
 }
 
 .vs-block-tools-settings {
-  @include boxShadow(.3);
   background: #fff;
   border-radius: 4px;
   padding: 16px;
@@ -43,6 +42,33 @@
   display: grid;
   gap: 16px;
 }
+.vs-block-tools-settings-container {
+  overflow-y: auto;
+  height: 100%;
+}
+.vs-block-tools-settings-image {
+  border-bottom: 1px solid var(--app-color-grey);
+  padding-bottom: var(--app-offset-normal);
+
+  .vs-label {
+    padding-bottom: 4px;
+  }
+  .existing-image {
+    img {
+      max-width: 150px;
+    }
+  }
+  .existing-image-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .app-hint-small {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
 .vs-block-tools-settings-image-actions {
   display: flex;
   gap: 16px;

@@ -1,21 +1,22 @@
 <template>
   <div class="vs-block-card">
    <VsBlockCardTools
+		 :record="record"
      @submitted="emit('settings-saved', $event)"
      @load-media-requested="emit('load-media-requested', $event)"
    />
 
     <div class="vs-block-card-image">
-      <img :src="cardInfo.acf?.thumbnail?.url" alt="">
+      <img :src="record.acf?.thumbnail?.url" alt="">
     </div>
     <div class="vs-block-card-title">
-      {{ cardInfo.name }}
+      {{ record.title }}
     </div>
-    <div class="vs-block-card-description" v-if="cardInfo.description">
-      {{ cardInfo.description }}
+    <div class="vs-block-card-description" v-if="record.description">
+      {{ record.description }}
     </div>
-    <div class="vs-block-card-price" v-if="cardInfo.acf?.price">
-      {{ cardInfo.acf.price }}
+    <div class="vs-block-card-price" v-if="record.acf?.price">
+      {{ record.acf.price }}
     </div>
   </div>
 </template>
@@ -26,7 +27,7 @@ import VsBlockCardTools from './vs-block-card/vs-block-card-tools.component.vue'
 import { Dimensions } from '@/models'
 
 defineProps({
-  cardInfo: {
+	record: {
     type: Object as PropType<Dimensions.DimensionTermState>,
     required: true,
   }

@@ -5,6 +5,12 @@
     v-model="opened"
     @update:model-value="changeModal"
   >
+    <div
+      v-if="hasSlot('header-fixed')"
+      class="app-modal-header-fixed"
+    >
+      <slot name="header-fixed" />
+    </div>
     <v-card :title="title">
       <slot />
 

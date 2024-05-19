@@ -30,11 +30,15 @@ class MediaService
         $images = [];
 
         foreach ($query->posts as $post) {
-            $images[] = array(
+            $imageUrl = wp_get_attachment_image_url($post->ID, 'full');
+            $pathArray = explode('/', $imageUrl);
+
+            $images[] = [
                 'id' => $post->ID,
                 'title' => $post->post_title,
-                'url' => wp_get_attachment_image_url($post->ID, 'full')
-            );
+                'fullName' => $pathArray[count($pathArray) - 1],
+                'url' => $imageUrl,
+            ];
         }
 
         return $images;

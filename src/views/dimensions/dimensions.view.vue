@@ -7,7 +7,7 @@
       v-for="card in store.state.productTypes"
       :class="{ 'vs-block-card-active': card.id === productTypeModel }"
       :key="card.id"
-      :card-info="card"
+			:record="card"
       @click="productTypeModel = card.id"
       @settings-saved="saveCardSettings($event, card.id)"
       @load-media-requested="loadMedia(card.id, $event)"
@@ -21,6 +21,7 @@
     <template v-for="configuration in store.state.configurations">
       <VsBlockCard
         v-if="configuration.productTypeParentId === productTypeModel || tableConfigurationCardShowing"
+				:record="configuration"
         :key="configuration.id"
         :card-info="configuration"
       />
@@ -29,7 +30,6 @@
 
   <AppMediaModal
     ref="mediaModal"
-    :mediaList="mediaStore.state.media"
     :loading="mediaAssignment"
     @selected="assignImageToTerm"
   />
@@ -48,12 +48,10 @@ import { DimensionsService, TermsService } from '@/services'
 import { useMediaStore } from '@/stores'
 
 const store = useDimensionsStore()
-const mediaStore = useMediaStore()
 
 const productTypeModel = ref<number>()
 const tableConfigurationCardShowing = ref(false)
 const loading = ref(false)
-const mediaLoading = ref(false)
 const mediaAssignment = ref(false)
 const mediaModal = ref()
 const currentTaxSeparate = ref()
@@ -74,23 +72,20 @@ async function loadMedia(termId: number, mediaType: ImageType) {
   mediaFor.termId = termId
 
   mediaModal.value?.open()
-  mediaLoading.value = true
-
-  try {
-    await mediaStore.loadMedia()
-  } catch (error: any) {
-    console.log(error)
-  } finally {
-    mediaLoading.value = false
-  }
 }
 
 async function assignImageToTerm(mediaId: number) {
   mediaAssignment.value = true
-  console.log(mediaId, mediaFor)
 
   try {
-
+    await TermsService.assignImage({
+      termId: mediaFor.termId,
+      imageId: mediaId,
+      type: mediaFor.type,
+    })
+    await store.loadDimensions()
+    mediaModal.value?.close()
+    console.log('Изображение выбрано успешно')
   } catch (error: any) {
     console.log(error)
   } finally {
@@ -101,25 +96,30 @@ async function assignImageToTerm(mediaId: number) {
 async function saveCardSettings(formFields: CommonCategoryParams, termId: number) {
   loading.value = true
 
-  const { imageFull, thumbnail, ...rest } = formFields
-
-  console.log(rest)
-
+	console.log(formFields)
   try {
-    // await TermsService.addImages({
-    //   termId,
-    //   imageFull: imageFull?.[0] ?? null,
-    //   thumbnail: thumbnail?.[0] ?? null,
-    // })
+		if (
+			formFields.imageFullSize?.length ||
+			formFields.thumbnail?.length ||
+			formFields.relatedImage?.length
+		) {
+			await TermsService.addImages({
+				termId,
+				imageFullSize: formFields.imageFullSize?.[0] ?? null,
+				thumbnail: formFields.thumbnail?.[0] ?? null,
+				relatedImage: formFields.relatedImage?.[0] ?? null,
+			})
+		}
 
     await DimensionsService.updateTerm({
-      ...rest,
       termId,
+      title: formFields.title,
+      description: formFields.description,
+      price: formFields.price,
     })
 
-    console.log('Saved')
-
     await store.loadDimensions()
+		console.log('Дані оновлено')
   } catch (error: any) {
     console.error(error)
   } finally {

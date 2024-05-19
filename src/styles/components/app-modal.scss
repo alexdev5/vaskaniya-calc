@@ -1,24 +1,34 @@
 .app-modal {
   --modal-action-height: 54px;
+  --modal-header-fixed-height: 41px;
 
+  .app-modal-header-fixed,
+  .v-card-actions {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    z-index: 2;
+    @include boxShadow;
+  }
+  .app-modal-header-fixed {
+    border-bottom: 1px solid var(--app-color-grey);
+    padding: var(--app-offset-small);
+    min-height: var(--modal-header-fixed-height);
+  }
   .v-card-actions {
     justify-content: flex-end;
+    border-top: 1px solid var(--app-color-grey);
+    min-height: var(--modal-action-height);
+    bottom: 0;
   }
   .v-card {
     display: block;
     padding-block: var(--app-offset-small);
     padding-inline: var(--app-offset-middle);
-  }
-  .v-card-actions {
-    position: fixed;
-    border-top: 1px solid var(--app-color-grey);
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: #fff;
-    height: var(--modal-action-height);
-  }
-  .v-card {
+    padding-top: var(--modal-header-fixed-height);
     padding-bottom: calc(var(--modal-action-height) + var(--app-offset-small));
   }
 }

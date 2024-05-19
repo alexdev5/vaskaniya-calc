@@ -11,7 +11,7 @@ class ConfigurationResource extends JsonResource
         return [
             'id' => $this->id,
             'productTypeParentId' => (int) $this->productTypeParentId,
-            'name' => $this->name ?? null,
+            'title' => $this->name ?? null,
             'slug' => $this->slug ?? null,
             'description' => $this->description ?? null,
             'acf' => !empty($this->acf)

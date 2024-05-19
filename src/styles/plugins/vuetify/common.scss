@@ -19,3 +19,6 @@
 .app-btn:not(.v-btn--icon) {
   padding-inline: 24px;
 }
+.v-menu > .v-overlay__content {
+  @include boxShadow(.3);
+}

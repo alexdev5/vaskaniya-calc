@@ -10,6 +10,27 @@ use WP_REST_Response;
 
 class TermsController
 {
+    public function assignImage(WP_REST_Request $request): WP_REST_Response {
+        $params = $request->get_params();
+
+        switch ($params['type']) {
+            case 1:
+                $this->assignAcfImage($params['imageId'], $params['termId'], TermsAcfEnum::Thumbnail);
+                break;
+            case 2:
+                $this->assignAcfImage($params['imageId'], $params['termId'], TermsAcfEnum::ImageFullSize);
+                break;
+            case 3:
+                $this->assignAcfImage($params['imageId'], $params['termId'], TermsAcfEnum::RelatedImage);
+                break;
+        }
+
+        return new WP_REST_Response([
+            'params' => $params,
+            'message' => 'Assignment successfully',
+        ], 200);
+    }
+
     public function addImages(WP_REST_Request $request): WP_REST_Response
     {
         $termId = $request->get_param('termId');
@@ -66,7 +87,7 @@ class TermsController
 
         $update_result = wp_update_term(
             $termId,
-            Config::get('taxonomy.categoryStone'),
+            $categoryType,
             [
                 'name' => $title,
                 'description' => $description

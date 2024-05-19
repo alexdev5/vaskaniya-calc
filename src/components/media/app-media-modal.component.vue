@@ -1,11 +1,22 @@
 <template>
   <AppModal ref="mediaModal" @closed="close">
+    <template #header-fixed>
+      <div>
+        <p v-if="mediaSelected.title">
+          <span>
+            <b>image:</b> {{ mediaSelected.fullName }} <b>|</b> {{ mediaSelected.id }}
+          </span>
+        </p>
+        <p v-else>Изображение не выбрано</p>
+      </div>
+    </template>
+
     <div class="app-media-list">
       <div
-        v-for="media in mediaList"
+        v-for="media in mediaStore.state.media"
         class="app-media-list-item"
-        :class="{ 'active': mediaSelected === media.id }"
-        @click="mediaSelected = media.id"
+        :class="{ 'active': mediaSelected.id === media.id }"
+        @click="mediaSelected = media"
       >
         <div class="app-media-list-item-img">
           <img :src="media.url" alt="">
@@ -13,8 +24,8 @@
 
         <div class="app-media-list-item-description">
           <p><b>ID:</b> {{ media.id }}</p>
-          <p><b>Name:</b> {{ media.title }}</p>
-          <p><b>url:</b> {{ media.url }}</p>
+          <p><b>Name:</b> {{ media.fullName }}</p>
+          <!--<p><b>url:</b> {{ media.url }}</p>-->
         </div>
       </div>
     </div>
@@ -22,9 +33,9 @@
     <template #actions>
       <AppBtn
         flat
-        :disabled="!mediaSelected"
+        :disabled="!mediaSelected.id"
         :loading="loading"
-        @click="emit('selected', mediaSelected)"
+        @click="emit('selected', mediaSelected.id)"
       >
         Выбрать
       </AppBtn>
@@ -44,27 +55,41 @@ import AppBtn from '@/components/elements/app-btn.component.vue'
 import { ref } from 'vue'
 import { PropType } from 'vue'
 import { Media } from '@/models/terms/terms.contracts.ts'
+import { ImageType } from '@/models/terms'
+import { useMediaStore } from '@/stores'
 
 defineProps({
-  mediaList: {
-    type: Array as PropType<Media[]>,
-    required: true,
-  },
   loading: Boolean,
 })
 
 const emit = defineEmits(['selected'])
 
-const mediaModal = ref()
-const mediaSelected = ref()
+const mediaStore = useMediaStore()
 
-function open() {
+const mediaModal = ref()
+const mediaSelected = ref({} as Media)
+const mediaLoading = ref(false)
+
+async function open() {
   mediaModal.value?.open()
+  await loadMedia()
 }
 
 function close() {
-  mediaSelected.value = null
+  mediaSelected.value = {} as Media
   mediaModal.value?.close()
+}
+
+async function loadMedia() {
+  mediaLoading.value = true
+
+  try {
+    await mediaStore.loadMedia()
+  } catch (error: any) {
+    console.log(error)
+  } finally {
+    mediaLoading.value = false
+  }
 }
 
 defineExpose({

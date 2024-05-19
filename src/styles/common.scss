@@ -38,10 +38,17 @@
   }
 }
 
+.app-list-standard {
+  padding-left: 10px;
+  &.small {
+    font-size: var(--app-font-size-s);
+  }
+}
 .wrap {
   #app {
     position: relative;
     font-size: 14px;
+
   }
 }
 

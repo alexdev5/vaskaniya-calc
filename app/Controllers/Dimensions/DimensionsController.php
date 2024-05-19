@@ -55,32 +55,17 @@ class DimensionsController
     {
         $params = $request->get_body_params();
 
-        TermsController::updateById();
-
-        $term_id = $params['termId'] ?? null;
-        $title = $params['title'] ?? null;
-        $description = $params['description'] ?? null;
-        $price = $params['price'] ?? null;
-
-        if (!$term_id) {
-            return new WP_REST_Response('Missing term ID', 400);
-        }
-
-        $update_result = wp_update_term(
-            $term_id,
+        TermsController::updateById(
             Config::get('taxonomy.categoryStone'),
             [
-                'name' => $title,
-                'description' => $description
-            ]);
-
-        if (is_wp_error($update_result)) {
-            return new WP_REST_Response($update_result->get_error_message(), 400);
-        }
-
-        if ($price !== null) {
-            update_field('price', $price, 'term_' . $term_id);
-        }
+                'termId' => $params['termId'],
+                'title' => $params['title'],
+                'description' => $params['description'],
+                'acf' => [
+                    'price' => $params['price'],
+                ]
+            ],
+        );
 
         return new WP_REST_Response("Term updated successfully", 200);
     }
