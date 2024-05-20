@@ -27,16 +27,16 @@ export interface Acf {
     imageFullSize?: Image | null
 }
 
-export interface AddImagesParams {
+export interface AddImagesCommand {
     termId: number
     thumbnail?: object | null
     imageFullSize?: object | null
     relatedImage?: object | null
 }
 
-export interface AssignImageParams {
+export interface AssignImageCommand {
     termId: number
-    imageId: number
+    imageId: number | null
     type: ImageType
 }
 

@@ -8,9 +8,11 @@
       :class="{ 'vs-block-card-active': card.id === productTypeModel }"
       :key="card.id"
 			:record="card"
+			:deleteLoading="deleteLoading"
       @click="productTypeModel = card.id"
       @settings-saved="saveCardSettings($event, card.id)"
       @load-media-requested="loadMedia(card.id, $event)"
+      @removed="remove(card.id, $event)"
     />
   </ProductType>
 
@@ -52,6 +54,7 @@ const store = useDimensionsStore()
 const productTypeModel = ref<number>()
 const tableConfigurationCardShowing = ref(false)
 const loading = ref(false)
+const deleteLoading = ref({} as Record<ImageType, boolean>)
 const mediaAssignment = ref(false)
 const mediaModal = ref()
 const currentTaxSeparate = ref()
@@ -91,6 +94,24 @@ async function assignImageToTerm(mediaId: number) {
   } finally {
     mediaAssignment.value = false
   }
+}
+
+async function remove(termId: number, mediaType: ImageType) {
+	deleteLoading.value[mediaType] = true
+
+	console.log(deleteLoading.value)
+	try {
+		await TermsService.assignImage({
+			termId,
+			imageId: null,
+			type: mediaType,
+		})
+		await store.loadDimensions()
+	} catch (error: any) {
+		console.log(error)
+	} finally {
+		deleteLoading.value[mediaType] = false
+	}
 }
 
 async function saveCardSettings(formFields: CommonCategoryParams, termId: number) {

@@ -51,8 +51,9 @@
   padding-bottom: var(--app-offset-normal);
 
   .vs-label {
-    padding-bottom: 4px;
+    //padding-bottom: 4px;
   }
+
   .existing-image {
     img {
       max-width: 150px;
@@ -63,9 +64,19 @@
     align-items: center;
     justify-content: space-between;
   }
-  .app-hint-small {
-    display: flex;
-    flex-direction: column;
+
+  .loading-image-info {
+    .app-form-field-file-input {
+      flex-grow: 1;
+    }
+    .v-field {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .v-field__clearable {
+      padding: 0;
+    }
   }
 }
 
@@ -74,4 +85,5 @@
   gap: 16px;
   align-items: center;
   padding-block-start: 16px;
+
 }

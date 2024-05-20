@@ -12,13 +12,22 @@
 					<li>{{ image.modified }}</li>
 				</ul>
 
-				<AppBtn icon x-small>
+				<AppBtn
+					icon
+					x-small
+					:loading="deleteLoading"
+					@click="emit('removed')"
+				>
 					<IconTrash />
 				</AppBtn>
 			</div>
 		</div>
 
-		<div class="vs-block-tools-settings-image-actions" v-else>
+		<div
+			v-else
+			class="vs-block-tools-settings-image-actions"
+			:class="{ 'loading-image-info': modelValue?.[0]?.name }"
+		>
 			<AppFileInput
 				hide-input
 				icon
@@ -40,7 +49,6 @@
 			<AppBtn
 				icon
 				x-small
-				:loading="buttonLibLoading"
 				@click="emit('lib-opened')"
 			>
 				<IconListSearch />
@@ -59,22 +67,24 @@ import IconTrash from '@/components/icons/IconTrash.vue'
 
 import { PropType } from 'vue'
 import { Image } from '@/models/terms'
+import { remove } from 'lodash'
 
 defineProps({
-  label: String,
+	label: String,
 	image: {
-    type: Object as PropType<Image | null>
-  },
-  modelValue: {
-    type: Object as PropType<any>
-  },
-  buttonLibLoading: Boolean
+		type: Object as PropType<Image | null>
+	},
+	modelValue: {
+		type: Object as PropType<any>
+	},
+	deleteLoading: Boolean
 })
 
 function log(data) {
 	console.log(data)
 }
-const emit = defineEmits(['update:model-value', 'lib-opened'])
+
+const emit = defineEmits(['update:model-value', 'lib-opened', 'removed'])
 </script>
 
 <style lang="scss">

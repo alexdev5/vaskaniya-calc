@@ -4,7 +4,7 @@ import { Terms } from '@/models'
 export class TermsApi extends AxiosApi {
     public baseUrl = '/terms'
 
-    async addImages(params: Terms.AddImagesParams) {
+    async addImages(params: Terms.AddImagesCommand) {
         return this.post(`${this.baseUrl}/add-images`, params, {
             headers: {
                 'Content-Type': 'multipart/form-data',
@@ -12,7 +12,7 @@ export class TermsApi extends AxiosApi {
         })
     }
 
-    async assignImage(params: Terms.AssignImageParams) {
+    async assignImage(params: Terms.AssignImageCommand) {
         return this.post(`${this.baseUrl}/assign-image`, params)
     }
 }

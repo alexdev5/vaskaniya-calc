@@ -29,24 +29,27 @@
 						:label="`Превью`"
 						:image="props.record?.acf.thumbnail"
 						v-model="settingsForm.thumbnail"
-						:buttonLibLoading="false"
+						:deleteLoading="deleteLoading?.[ImageType.Thumbnail]"
 						@lib-opened="openMediaLib(ImageType.Thumbnail)"
+						@removed="remove(ImageType.Thumbnail)"
 					/>
 
 					<VsBlockCardToolsImages
 						:label="`Полноразмерное изображение`"
 						:image="props.record?.acf.imageFullSize"
 						v-model="settingsForm.imageFullSize"
-						:buttonLibLoading="false"
+						:deleteLoading="deleteLoading?.[ImageType.ImageFullSize]"
 						@lib-opened="openMediaLib(ImageType.ImageFullSize)"
+						@removed="remove(ImageType.ImageFullSize)"
 					/>
 
 					<VsBlockCardToolsImages
 						:label="`Изображение связанного блока`"
 						:image="props.record?.acf.relatedImage"
 						v-model="settingsForm.relatedImage"
-						:buttonLibLoading="false"
+						:deleteLoading="deleteLoading?.[ImageType.RelatedImage]"
 						@lib-opened="openMediaLib(ImageType.RelatedImage)"
+						@removed="remove(ImageType.RelatedImage)"
 					/>
 
 					<slot name="settings" />
@@ -91,7 +94,8 @@ import { ImageType, CommonCategoryParams } from '@/models/terms'
 import { Dimensions } from '@/models'
 
 const props = defineProps({
-	record: Object as PropType<Dimensions.DimensionTermState>
+	record: Object as PropType<Dimensions.DimensionTermState>,
+	deleteLoading: Object as PropType<Record<ImageType, boolean>>
 })
 
 const emit = defineEmits([
@@ -101,6 +105,7 @@ const emit = defineEmits([
   'hidden',
   'submitted',
   'load-media-requested',
+  'removed',
 ])
 
 const settingsForm = reactive({
@@ -118,12 +123,14 @@ async function openMediaLib(imageType: ImageType) {
   emit('load-media-requested', imageType)
 }
 
+function remove(imageType: ImageType) {
+	emit('removed', imageType)
+}
+
 onMounted(() => {
 	settingsForm.title = props.record?.title ?? ''
 	settingsForm.description = props.record?.description ?? ''
 	settingsForm.price = props.record?.acf?.price
-
-	console.log(props.record)
 })
 </script>
 
