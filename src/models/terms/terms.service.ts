@@ -13,7 +13,7 @@ export interface CommonCategoryParams {
     description?: string
     price?: number
     thumbnail?: Image[]
-    relatedImage?: Image[]
+    childBlockImage?: Image[]
     imageFullSize?: Image[]
     isHidden?: boolean
     [key: string]: any
@@ -23,15 +23,19 @@ export interface Acf {
     isHidden: boolean
     price?: number
     thumbnail: Image | null
-    relatedImage: Image | null
+    childBlockImage: Image | null
     imageFullSize?: Image | null
+    childBlockNumber: string
+    childBlockTitle: string
+    blockNumber: string
+    blockTitle: string
 }
 
 export interface AddImagesCommand {
     termId: number
     thumbnail?: object | null
     imageFullSize?: object | null
-    relatedImage?: object | null
+    childBlockImage?: object | null
 }
 
 export interface AssignImageCommand {
@@ -44,5 +48,5 @@ export enum ImageType {
     None,
     Thumbnail,
     ImageFullSize,
-    RelatedImage,
+    ChildBlockImage,
 }

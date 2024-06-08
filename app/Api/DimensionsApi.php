@@ -17,6 +17,10 @@ class DimensionsApi implements ApiContract
             self::route('/update-term'),
             [DimensionsController::class, 'updateTerm']
         );
+        VsRoute::post(
+            self::route('/update-parent-title'),
+            [DimensionsController::class, 'updateParentTitle']
+        );
     }
 
     public static function route(string $name = ''): string

@@ -21,7 +21,7 @@ class TermsController
                 $this->assignAcfImage($params['imageId'], $params['termId'], TermsAcfEnum::ImageFullSize);
                 break;
             case 3:
-                $this->assignAcfImage($params['imageId'], $params['termId'], TermsAcfEnum::RelatedImage);
+                $this->assignAcfImage($params['imageId'], $params['termId'], TermsAcfEnum::ChildBlockImage);
                 break;
         }
 
@@ -49,9 +49,9 @@ class TermsController
             $this->assignAcfImage($imageId, $termId, TermsAcfEnum::ImageFullSize);
         }
 
-        if ($_FILES[TermsAcfEnum::RelatedImage]) {
-            $imageId = Media::uploadImageFromFile($_FILES[TermsAcfEnum::RelatedImage]);
-            $this->assignAcfImage($imageId, $termId, TermsAcfEnum::RelatedImage);
+        if ($_FILES[TermsAcfEnum::ChildBlockImage]) {
+            $imageId = Media::uploadImageFromFile($_FILES[TermsAcfEnum::ChildBlockImage]);
+            $this->assignAcfImage($imageId, $termId, TermsAcfEnum::ChildBlockImage);
         }
 
         return new WP_REST_Response(null, 200);

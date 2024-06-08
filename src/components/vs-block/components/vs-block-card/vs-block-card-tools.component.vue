@@ -45,11 +45,11 @@
 
 					<VsBlockCardToolsImages
 						:label="`Изображение связанного блока`"
-						:image="props.record?.acf.relatedImage"
-						v-model="settingsForm.relatedImage"
-						:deleteLoading="deleteLoading?.[ImageType.RelatedImage]"
-						@lib-opened="openMediaLib(ImageType.RelatedImage)"
-						@removed="remove(ImageType.RelatedImage)"
+						:image="props.record?.acf.childBlockImage"
+						v-model="settingsForm.childBlockImage"
+						:deleteLoading="deleteLoading?.[ImageType.ChildBlockImage]"
+						@lib-opened="openMediaLib(ImageType.ChildBlockImage)"
+						@removed="remove(ImageType.ChildBlockImage)"
 					/>
 
 					<slot name="settings" />
@@ -114,7 +114,7 @@ const settingsForm = reactive({
   price: null,
   thumbnail: null,
 	imageFullSize: null,
-  relatedImage: null,
+	childBlockImage: null,
 } as CommonCategoryParams)
 
 const menuModel = ref(false)

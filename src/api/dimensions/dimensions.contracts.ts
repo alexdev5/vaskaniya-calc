@@ -1,6 +1,7 @@
 import { Terms } from '@/models'
 
 export interface DimensionsContract {
+    parent: ProductTypeContract
     productTypes: ProductTypeContract[]
     configurations: ConfigurationContract[]
 }
@@ -15,4 +16,10 @@ export interface ProductTypeContract {
 
 export interface ConfigurationContract extends ProductTypeContract {
     productTypeParentId: number | null
+}
+
+export interface UpdateParentTitleCommand {
+    termId: number,
+    title: string,
+    titleNumber: string,
 }

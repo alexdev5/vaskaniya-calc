@@ -10,6 +10,7 @@
         color: 'primary',
         variant: variant,
         size: size,
+        icon: icon,
       }"
   >
     <template
@@ -38,6 +39,7 @@ const props = defineProps({
   text: Boolean,
   plain: Boolean,
   flat: Boolean,
+	icon: Boolean,
   tooltip: String,
   success: String,
   tooltipPos: {
@@ -47,7 +49,7 @@ const props = defineProps({
 })
 
 const size = computed(() => {
-  if (props.xSmall) return 'x-small'
+  if (props.xSmall || props.icon) return 'x-small'
   if (props.small) return 'small'
   if (props.large) return 'large'
   if (props.xLarge) return 'x-large'
@@ -61,6 +63,7 @@ const variant = computed(() => {
   if (props.plain) return 'plain'
   if (props.elevated) return 'elevated'
   if (props.flat) return 'flat'
+
   return 'tonal'
 })
 </script>

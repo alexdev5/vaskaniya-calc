@@ -4,21 +4,25 @@ namespace App\Controllers;
 use WP_Error;
 
 class TaxonomyController {
-    public static function getChildTaxonomiesByParentSlug(string $taxonomy, string $parentSlug) {
-        $parentTerm = get_term_by('slug', $parentSlug, $taxonomy);
-
-        if (!$parentTerm) {
+    public static function getChildTaxonomiesByParentId(string $taxonomy, $parentTermId) {
+        if (!$parentTermId) {
             return new WP_Error('no_category', 'Родительская категория не найдена', ['status' => 404]);
         }
 
         // Рекурсивно получаем дочерние категории
-        $categories = self::getTermsRecursive($taxonomy, $parentTerm->term_id);
+        $categories = self::getTermsRecursive($taxonomy, $parentTermId);
 
         if (empty($categories)) {
-            return new WP_Error('no_categories', 'Дочерние категории не найдены', ['status' => 404]);
+            return new WP_Error('no_categories', 'Children terms not found', ['status' => 404]);
         }
 
         return $categories;
+    }
+
+    public static function getChildTaxonomiesByParentSlug(string $taxonomy, string $parentSlug) {
+        $parentTerm = get_term_by('slug', $parentSlug, $taxonomy);
+
+        return self::getChildTaxonomiesByParentId($taxonomy, $parentTerm->term_id);
     }
 
     protected static function getTermsRecursive(string $taxonomy, $parentTermId) {

@@ -1,9 +1,7 @@
 <template>
   <VsBlock
-    :title-model="titleBlock"
-    :title-number-model="numberBlock"
-    @title-updated="titleBlock = $event"
-    @title-number-updated="numberBlock = $event"
+    :title="titleBlock"
+    :title-number="numberBlock"
     @settings-opened="openSettings"
   >
     <slot />

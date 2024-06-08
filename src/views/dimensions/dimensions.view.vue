@@ -1,5 +1,5 @@
 <template>
-  <ProductType
+  <DimensionsProductType
     @child-showing-updated="tableConfigurationCardShowing = $event"
     :settings-loading="loading"
   >
@@ -14,9 +14,9 @@
       @load-media-requested="loadMedia(card.id, $event)"
       @removed="remove(card.id, $event)"
     />
-  </ProductType>
+  </DimensionsProductType>
 
-  <TableConfiguration
+  <DimensionsTableConfiguration
     @child-showing-updated="tableConfigurationCardShowing = $event"
     :settings-loading="loading"
   >
@@ -28,7 +28,7 @@
         :card-info="configuration"
       />
     </template>
-  </TableConfiguration>
+  </DimensionsTableConfiguration>
 
   <AppMediaModal
     ref="mediaModal"
@@ -38,8 +38,8 @@
 </template>
 
 <script lang="ts" setup>
-import ProductType from './components/blocks/product-type.component.vue'
-import TableConfiguration from './components/blocks/table-configuration.component.vue'
+import DimensionsProductType from './components/blocks/dimensions-product-type.component.vue'
+import DimensionsTableConfiguration from './components/blocks/dimensions-table-configuration.component.vue'
 import VsBlockCard from '@/components/vs-block/components/vs-block-card.component.vue'
 import AppMediaModal from '@/components/media/app-media-modal.component.vue'
 
@@ -128,7 +128,7 @@ async function saveCardSettings(formFields: CommonCategoryParams, termId: number
 				termId,
 				imageFullSize: formFields.imageFullSize?.[0] ?? null,
 				thumbnail: formFields.thumbnail?.[0] ?? null,
-				relatedImage: formFields.relatedImage?.[0] ?? null,
+				childBlockImage: formFields.childBlockImage?.[0] ?? null,
 			})
 		}
 

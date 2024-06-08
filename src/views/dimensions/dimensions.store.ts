@@ -6,6 +6,7 @@ import { DimensionTermState } from '@/models/dimensions'
 
 export const useDimensionsStore = defineStore('dimensions', () => {
     const state = reactive({
+        parent: null as Dimensions.DimensionTermState | null,
         productTypes: null as Dimensions.DimensionTermState[] | null,
         configurations: null as Dimensions.DimensionTermState[] | null,
         loading: false,
@@ -16,12 +17,16 @@ export const useDimensionsStore = defineStore('dimensions', () => {
 
         try {
             const result = await DimensionsService.dimensions()
+
+            state.parent = new DimensionTermState(result.parent)
+
             state.productTypes = (result.productTypes ?? []).map(
                 productType => new DimensionTermState(productType)
             )
             state.configurations = (result.configurations ?? []).map(
                 configuration => new DimensionTermState(configuration)
             )
+
         } catch (error: any) {
             console.log(error)
         } finally {

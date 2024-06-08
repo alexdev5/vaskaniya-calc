@@ -4,14 +4,21 @@
       <AppTextfield
         class="vs-color-red"
         label="Номер"
-        :model-value="titleNumberModel"
-        @update:model-value="emit('title-number-updated', $event)"
+        v-model="titleNumberModel"
       />
       <AppTextfield
         label="Тайтл блока"
-        :model-value="titleModel"
-        @update:model-value="emit('title-updated', $event)"
+        v-model="titleModel"
       />
+
+			<AppBtn
+				icon
+				flat
+				:loading="loading"
+				@click="submit"
+			>
+				<IconSave />
+			</AppBtn>
     </div>
 
     <VsBlockTools
@@ -31,21 +38,33 @@
 <script lang="ts" setup>
 import AppTextfield from '@/components/forms/app-textfield.vue'
 import VsBlockTools from '@/components/vs-block/components/vs-block-tools.component.vue'
+import AppBtn from '@/components/elements/app-btn.component.vue'
+import IconSave from '@/components/icons/IconSave.vue'
+import { ref } from 'vue'
 
-defineProps({
-  titleNumberModel: {
-    type: String
-  },
-  titleModel: {
-    type: String
-  },
-})
+export interface SubmitBlockHeaderEvent {
+	title: string,
+	titleNumber: string,
+}
+
+defineProps<{
+	loading?: boolean
+}>()
+
+const titleModel = ref('')
+const titleNumberModel = ref('')
 
 const emit = defineEmits([
-  'title-updated',
-  'title-number-updated',
   'settings-opened',
+  'submitted',
 ])
+
+function submit() {
+	emit('submitted', {
+		title: titleModel.value,
+		titleNumber: titleNumberModel.value,
+	})
+}
 </script>
 
 <style lang="scss">
