@@ -74,31 +74,31 @@ class TermsController
      *   acf: array
      * }
      *
-     * @return array
+     * @return Boolean | WP_Error
      */
-    public static function updateById(string $categoryType, array $params) {
-        if (isset($params['termId']))
-            new WP_Error( 'termId_empty in TermsController' );
-
-        $termId = $params['termId'];
-        $title = $params['title'] ?? null;
-        $description = $params['description'] ?? null;
-        $acf = $params['acf'] ?? null;
-
-        $update_result = wp_update_term(
-            $termId,
-            $categoryType,
-            [
-                'name' => $title,
-                'description' => $description
-            ]);
-
-        if (is_wp_error($update_result)) {
-            new WP_Error( 'update term failed in TermsController' );
+    public static function updateById($termId, string $taxonomy, array $args) {
+        if (!isset($termId)) {
+            return new WP_Error('missing_parameters', 'termID undefined');
         }
+
+        $term = get_term($termId, $taxonomy);
+
+        if (is_wp_error($term))
+            return new WP_Error('term_retrieval_failed', 'taxonomy undefined');
+
+
+        $result = wp_update_term($termId, $taxonomy, $args);
+
+        if (is_wp_error($result)) {
+            return new WP_Error('term_update_failed', 'Error updating the term: ' . implode(', ', $result->get_error_messages()));
+        }
+
+        $acf = $params['acf'] ?? null;
 
         foreach ($acf as $field) {
             update_field($field['name'], $field['value'], 'term_' . $termId);
         }
+
+        return true;
     }
 }

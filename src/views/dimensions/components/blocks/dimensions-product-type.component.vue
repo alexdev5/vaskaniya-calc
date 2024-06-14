@@ -1,7 +1,7 @@
 <template>
   <VsBlock
-    :title="titleBlock"
-    :title-number="numberBlock"
+    :title="blockTitle"
+    :title-number="blockNumber"
 		@submitted="submit"
   >
     <slot />
@@ -33,8 +33,8 @@ const emit = defineEmits(['child-showing-updated'])
 const store = useDimensionsStore()
 
 const loading = ref(false)
-const titleBlock = ref('')
-const numberBlock = ref('')
+const blockTitle = ref('')
+const blockNumber = ref('')
 const childBlockShowing = ref(false)
 
 function updateChildShowing(value: boolean) {
@@ -51,8 +51,8 @@ async function submit(fields: SubmitBlockHeaderEvent) {
 	try {
 		await DimensionsService.updateParentTitle({
 			termId: store.state.parent.id,
-			title: titleBlock.value,
-			titleNumber: numberBlock.value,
+			blockTitle: fields.blockTitle,
+			blockNumber: fields.blockNumber,
 		})
 	} catch (error: any) {
 		console.error('changeBlockTitle', error)

@@ -4,11 +4,11 @@
       <AppTextfield
         class="vs-color-red"
         label="Номер"
-        v-model="titleNumberModel"
+        v-model="blockNumberModel"
       />
       <AppTextfield
         label="Тайтл блока"
-        v-model="titleModel"
+        v-model="blockTitleModel"
       />
 
 			<AppBtn
@@ -43,16 +43,18 @@ import IconSave from '@/components/icons/IconSave.vue'
 import { ref } from 'vue'
 
 export interface SubmitBlockHeaderEvent {
-	title: string,
-	titleNumber: string,
+	blockTitle: string,
+	blockNumber: string,
 }
 
-defineProps<{
+const props = defineProps<{
 	loading?: boolean
+	blockTitle?: string
+	blockNumber?: string
 }>()
 
-const titleModel = ref('')
-const titleNumberModel = ref('')
+const blockTitleModel = ref(props.blockTitle)
+const blockNumberModel = ref(props.blockNumber)
 
 const emit = defineEmits([
   'settings-opened',
@@ -61,8 +63,8 @@ const emit = defineEmits([
 
 function submit() {
 	emit('submitted', {
-		title: titleModel.value,
-		titleNumber: titleNumberModel.value,
+		blockTitle: blockTitleModel.value,
+		blockNumber: blockNumberModel.value,
 	})
 }
 </script>

@@ -4,6 +4,7 @@ namespace App\Controllers\Dimensions;
 
 use App\Config;
 use App\Controllers\TaxonomyController;
+use App\Controllers\Terms\TermsAcfEnum;
 use App\Controllers\Terms\TermsController;
 use App\Resources\Dimensions\ConfigurationResource;
 use App\Resources\Dimensions\TermResource;
@@ -48,6 +49,11 @@ class DimensionsController
             Config::get('taxonomy.categories')
         );
 
+        if (!empty($parentTerm)) {
+            $parentTerm->acf = get_fields('term_' . $parentTerm->term_id);
+        }
+
+        // children
         $terms = TaxonomyController::getChildTaxonomiesByParentId(
             Config::get('taxonomy.categories'),
             $parentTerm->term_id
@@ -69,10 +75,10 @@ class DimensionsController
         $params = $request->get_params();
 
         TermsController::updateById(
+            $params['termId'],
             Config::get('taxonomy.categories'),
             [
-                'termId' => $params['termId'],
-                'title' => $params['title'],
+                'name' => $params['title'],
                 'description' => $params['description'],
                 'acf' => [
                     'price' => $params['price'],
@@ -80,7 +86,6 @@ class DimensionsController
             ],
         );
 
-        return new WP_REST_Response($params, 200);
         return new WP_REST_Response("Term updated successfully", 200);
     }
 
@@ -88,19 +93,35 @@ class DimensionsController
     {
         $params = $request->get_params();
 
-        TermsController::updateById(
+        $result = TermsController::updateById(
+            $params['termId'],
             Config::get('taxonomy.categories'),
             [
-                'termId' => $params['termId'],
                 'acf' => [
-                    'price' => $params['price'],
+                    TermsAcfEnum::BlockTitle => $params['blockTitle'],
+                    TermsAcfEnum::BlockNumber => $params['blockNumber'],
                 ]
             ],
         );
 
-        return new WP_REST_Response([
-            $params['title'], $params['titleNumber'],
-        ], 200);
-        return new WP_REST_Response("Term updated successfully", 200);
+        // TODO: move to helper `Response::send('success message', 'error message')`
+        if (is_wp_error($result)) {
+            return new WP_REST_Response(
+                [
+                    'status' => 'error',
+                    'code' => $result->get_error_code(),
+                    'message' => $result->get_error_message(),
+                ],
+                400
+            );
+        } else {
+            return new WP_REST_Response(
+                [
+                    'status' => 'success',
+                    'message' => 'Термін успішно оновлено!',
+                ],
+                200
+            );
+        }
     }
 }

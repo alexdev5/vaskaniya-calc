@@ -20,6 +20,6 @@ export interface ConfigurationContract extends ProductTypeContract {
 
 export interface UpdateParentTitleCommand {
     termId: number,
-    title: string,
-    titleNumber: string,
+    blockTitle: string,
+    blockNumber: string,
 }
