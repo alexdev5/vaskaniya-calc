@@ -1,40 +1,42 @@
 <template>
-  <DimensionsProductType
-    @child-showing-updated="tableConfigurationCardShowing = $event"
-    :settings-loading="loading"
-  >
-    <VsBlockCard
-      v-for="card in store.state.productTypes"
-      :class="{ 'vs-block-card-active': card.id === productTypeModel }"
-      :key="card.id"
+	<DimensionsProductType
+		@child-showing-updated="tableConfigurationCardShowing = $event"
+		:settings-loading="loading"
+	>
+		<VsBlockCard
+			v-for="card in store.state.productTypes"
+			:class="{ 'vs-block-card-active': card.id === productTypeModel }"
+			:key="card.id"
 			:record="card"
 			:deleteLoading="deleteLoading"
-      @click="productTypeModel = card.id"
-      @settings-saved="saveCardSettings($event, card.id)"
-      @load-media-requested="loadMedia(card.id, $event)"
-      @removed="remove(card.id, $event)"
-    />
-  </DimensionsProductType>
+			@click="productTypeModel = card.id"
+			@settings-saved="saveCardSettings($event, card.id)"
+			@load-media-requested="loadMedia(card.id, $event)"
+			@removed="remove(card.id, $event)"
+		/>
 
-  <DimensionsTableConfiguration
-    @child-showing-updated="tableConfigurationCardShowing = $event"
-    :settings-loading="loading"
-  >
-    <template v-for="configuration in store.state.configurations">
-      <VsBlockCard
-        v-if="configuration.productTypeParentId === productTypeModel || tableConfigurationCardShowing"
+		<VsBlockAdd />
+	</DimensionsProductType>
+
+	<DimensionsTableConfiguration
+		@child-showing-updated="tableConfigurationCardShowing = $event"
+		:settings-loading="loading"
+	>
+		<template v-for="configuration in store.state.configurations">
+			<VsBlockCard
+				v-if="configuration.productTypeParentId === productTypeModel || tableConfigurationCardShowing"
 				:record="configuration"
-        :key="configuration.id"
-        :card-info="configuration"
-      />
-    </template>
-  </DimensionsTableConfiguration>
+				:key="configuration.id"
+				:card-info="configuration"
+			/>
+		</template>
+	</DimensionsTableConfiguration>
 
-  <AppMediaModal
-    ref="mediaModal"
-    :loading="mediaAssignment"
-    @selected="assignImageToTerm"
-  />
+	<AppMediaModal
+		ref="mediaModal"
+		:loading="mediaAssignment"
+		@selected="assignImageToTerm"
+	/>
 </template>
 
 <script lang="ts" setup>
@@ -42,12 +44,12 @@ import DimensionsProductType from './components/blocks/dimensions-product-type.c
 import DimensionsTableConfiguration from './components/blocks/dimensions-table-configuration.component.vue'
 import VsBlockCard from '@/components/vs-block/components/vs-block-card.component.vue'
 import AppMediaModal from '@/components/media/app-media-modal.component.vue'
+import VsBlockAdd from '@/components/vs-block/components/vs-block-add.component.vue'
 
 import { onMounted, reactive, ref } from 'vue'
 import { useDimensionsStore } from './dimensions.store.ts'
-import { ImageType, CommonCategoryParams } from '@/models/terms'
+import { CommonCategoryParams, ImageType } from '@/models/terms'
 import { DimensionsService, TermsService } from '@/services'
-import { useMediaStore } from '@/stores'
 
 const store = useDimensionsStore()
 
@@ -60,8 +62,8 @@ const mediaModal = ref()
 const currentTaxSeparate = ref()
 
 const mediaFor = reactive({
-  type: ImageType.None,
-  termId: 0
+	type: ImageType.None,
+	termId: 0,
 })
 
 // Сделать разделение карточек дивами, если включена галочка в
@@ -71,29 +73,29 @@ const mediaFor = reactive({
 // Только нужно подумать когда закрытый открытый тег
 
 async function loadMedia(termId: number, mediaType: ImageType) {
-  mediaFor.type = mediaType
-  mediaFor.termId = termId
+	mediaFor.type = mediaType
+	mediaFor.termId = termId
 
-  mediaModal.value?.open()
+	mediaModal.value?.open()
 }
 
 async function assignImageToTerm(mediaId: number) {
-  mediaAssignment.value = true
+	mediaAssignment.value = true
 
-  try {
-    await TermsService.assignImage({
-      termId: mediaFor.termId,
-      imageId: mediaId,
-      type: mediaFor.type,
-    })
-    await store.loadDimensions()
-    mediaModal.value?.close()
-    console.log('Изображение выбрано успешно')
-  } catch (error: any) {
-    console.log(error)
-  } finally {
-    mediaAssignment.value = false
-  }
+	try {
+		await TermsService.assignImage({
+			termId: mediaFor.termId,
+			imageId: mediaId,
+			type: mediaFor.type,
+		})
+		await store.loadDimensions()
+		mediaModal.value?.close()
+		console.log('Изображение выбрано успешно')
+	} catch (error: any) {
+		console.log(error)
+	} finally {
+		mediaAssignment.value = false
+	}
 }
 
 async function remove(termId: number, mediaType: ImageType) {
@@ -115,10 +117,10 @@ async function remove(termId: number, mediaType: ImageType) {
 }
 
 async function saveCardSettings(formFields: CommonCategoryParams, termId: number) {
-  loading.value = true
+	loading.value = true
 
 	console.log(formFields)
-  try {
+	try {
 		if (
 			formFields.imageFullSize?.length ||
 			formFields.thumbnail?.length ||
@@ -132,29 +134,29 @@ async function saveCardSettings(formFields: CommonCategoryParams, termId: number
 			})
 		}
 
-    await DimensionsService.updateTerm({
-      termId,
-      title: formFields.title,
-      description: formFields.description,
-      price: formFields.price,
-    })
+		await DimensionsService.updateTerm({
+			termId,
+			title: formFields.title,
+			description: formFields.description,
+			price: formFields.price,
+		})
 
-    await store.loadDimensions()
+		await store.loadDimensions()
 		console.log('Дані оновлено')
-  } catch (error: any) {
-    console.error(error)
-  } finally {
-    loading.value = true
-  }
+	} catch (error: any) {
+		console.error(error)
+	} finally {
+		loading.value = true
+	}
 }
 
 function setCardDefault() {
-  productTypeModel.value = store.state.productTypes[0]?.id
+	productTypeModel.value = store.state.productTypes[0]?.id
 }
 
 onMounted(async () => {
-  await store.loadDimensions()
-  setCardDefault()
+	await store.loadDimensions()
+	setCardDefault()
 })
 
 </script>
