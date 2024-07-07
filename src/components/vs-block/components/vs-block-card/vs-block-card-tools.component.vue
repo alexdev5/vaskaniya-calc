@@ -1,66 +1,19 @@
 <template>
 	<div class="vs-block-card-tools">
-		<v-menu v-model="menuModel" :close-on-content-click="false" bottom>
+		<v-menu v-model="widgetOpened" :close-on-content-click="false" bottom>
 			<template v-slot:activator="{ props }">
 				<div class="vs-icon-btn" v-bind="props">
 					<IconSettings width="16" height="16" />
 				</div>
 			</template>
 
-			<div class="vs-block-tools-settings-container">
-				<div class="vs-block-tools-settings">
-					<AppTextField
-						compact
-						label="Тайтл"
-						v-model="settingsForm.title"
-					/>
-					<AppTextField
-						compact
-						label="Цена"
-						v-model="settingsForm.price"
-					/>
-					<!--        <AppTextarea
-										compact
-										label="Описание"
-										v-model="settingsForm.description"
-									/>-->
-
-					<VsBlockCardToolsImages
-						:label="`Превью`"
-						:image="props.record?.acf.thumbnail"
-						v-model="settingsForm.thumbnail"
-						:deleteLoading="deleteLoading?.[ImageType.Thumbnail]"
-						@lib-opened="openMediaLib(ImageType.Thumbnail)"
-						@removed="remove(ImageType.Thumbnail)"
-					/>
-
-					<VsBlockCardToolsImages
-						:label="`Полноразмерное изображение`"
-						:image="props.record?.acf.imageFullSize"
-						v-model="settingsForm.imageFullSize"
-						:deleteLoading="deleteLoading?.[ImageType.ImageFullSize]"
-						@lib-opened="openMediaLib(ImageType.ImageFullSize)"
-						@removed="remove(ImageType.ImageFullSize)"
-					/>
-
-					<VsBlockCardToolsImages
-						:label="`Изображение связанного блока`"
-						:image="props.record?.acf.childBlockImage"
-						v-model="settingsForm.childBlockImage"
-						:deleteLoading="deleteLoading?.[ImageType.ChildBlockImage]"
-						@lib-opened="openMediaLib(ImageType.ChildBlockImage)"
-						@removed="remove(ImageType.ChildBlockImage)"
-					/>
-
-					<slot name="settings" />
-
-					<AppFormButtons
-						submit-only
-						@closed="menuModel = false"
-						@submitted="emit('submitted', settingsForm)"
-					/>
-				</div>
-			</div>
+			<VsTermSettingsForm
+				:record="record"
+				@load-image-requested="emit('load-image-requested', $event)"
+				@submitted="emit('submitted', $event)"
+				@remove-image-requested="emit('remove-image-requested', $event)"
+				@closed="close()"
+			/>
 		</v-menu>
 
 		<div class="vs-icon-btn" @click.stop.prevent="emit('duplicated')">
@@ -76,20 +29,17 @@
 </template>
 
 <script lang="ts" setup>
+import VsTermSettingsForm from '@/components/vs-terms/vs-term-settings-form.component.vue'
 import IconCopy from '@/components/icons/IconCopy.vue'
 import IconSettings from '@/components/icons/IconSettings.vue'
 import IconArrowsMove from '@/components/icons/IconArrowsMove.vue'
 import IconEyeOff from '@/components/icons/IconEyeOff.vue'
-import AppTextField from '@/components/forms/app-textfield.vue'
-import VsBlockCardToolsImages from './vs-block-card-tools-images.component.vue'
-import AppFormButtons from '@/components/forms/app-form-buttons.component.vue'
 
-import { onMounted, PropType, reactive, ref } from 'vue'
-import { CommonCategoryParams, ImageType } from '@/models/terms'
-import { Dimensions } from '@/models'
+import { PropType, ref } from 'vue'
+import { ImageType, TermState } from '@/models/terms'
 
 const props = defineProps({
-	record: Object as PropType<Dimensions.DimensionTermState>,
+	record: Object as PropType<TermState>,
 	deleteLoading: Object as PropType<Record<ImageType, boolean>>,
 })
 
@@ -99,33 +49,24 @@ const emit = defineEmits([
 	'moved',
 	'hidden',
 	'submitted',
-	'load-media-requested',
+	'load-image-requested',
 	'removed',
 ])
 
-const settingsForm = reactive({
-	title: '',
-	description: '',
-	price: null,
-	thumbnail: null,
-	imageFullSize: null,
-	childBlockImage: null,
-} as CommonCategoryParams)
 
-const menuModel = ref(false)
+const widgetOpened = ref(false)
 
-async function openMediaLib(imageType: ImageType) {
-	emit('load-media-requested', imageType)
+async function open() {
+	widgetOpened.value = true
 }
 
-function remove(imageType: ImageType) {
-	emit('removed', imageType)
+function close() {
+	widgetOpened.value = false
 }
 
-onMounted(() => {
-	settingsForm.title = props.record?.title ?? ''
-	settingsForm.description = props.record?.description ?? ''
-	settingsForm.price = props.record?.acf?.price
+defineExpose({
+	open,
+	close,
 })
 </script>
 

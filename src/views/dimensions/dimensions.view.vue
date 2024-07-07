@@ -11,7 +11,7 @@
 			:deleteLoading="deleteLoading"
 			@click="productTypeModel = card.id"
 			@settings-saved="saveCardSettings($event, card.id)"
-			@load-media-requested="loadMedia(card.id, $event)"
+			@load-image-requested="loadMedia(card.id, $event)"
 			@removed="remove(card.id, $event)"
 		/>
 
