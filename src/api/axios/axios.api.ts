@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const baseApiURL = 'http://vaskania-new.loc'
+//const baseApiURL = 'http://vaskania-new.loc'
+const baseApiURL = 'http://localhost:8000'
 //axios.defaults.withCredentials = true
 
 export abstract class AxiosApi {

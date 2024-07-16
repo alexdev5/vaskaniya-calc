@@ -24,6 +24,6 @@ define('VS_CSS_URL', plugins_url('', __FILE__) . '/dist/assets/css/');
 define('VS_IMG_URL', plugins_url('', __FILE__) . '/dist/assets/img/');
 define('VS_BASE_PATH', wp_get_upload_dir());
 
-require('vendor/autoload.php');
+require_once __DIR__ . '/vendor/autoload.php';
 require(VS_APP . "routes.php");
 require(VS_APP . "app.php");
