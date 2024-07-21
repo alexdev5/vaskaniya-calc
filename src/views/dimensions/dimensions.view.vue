@@ -15,9 +15,9 @@
 			@removed="remove(card.id, $event)"
 		/>
 
-		<VsBlockAdd @added="" />
-		<AddTerm ref="addTermRef" />
+		<VsBlockAdd @added="addTermRef?.open('Add dimensions')" />
 	</DimensionsProductType>
+	<AddTerm ref="addTermRef" />
 
 	<DimensionsTableConfiguration
 		@child-showing-updated="tableConfigurationCardShowing = $event"
@@ -62,6 +62,7 @@ const deleteLoading = ref({} as Record<ImageType, boolean>)
 const mediaAssignment = ref(false)
 const mediaModal = ref()
 const currentTaxSeparate = ref()
+const addTermRef = ref()
 
 const mediaFor = reactive({
 	type: ImageType.None,

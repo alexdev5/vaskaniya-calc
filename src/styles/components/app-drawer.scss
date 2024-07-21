@@ -1,0 +1,30 @@
+.app-drawer {
+  .v-navigation-drawer {
+    width: 100%!important;
+    max-width: 500px!important;
+  }
+  .v-navigation-drawer__prepend {
+    border-bottom: 1px solid var(--gray-light);
+    overflow: initial;
+  }
+  .v-navigation-drawer__append {
+    border-top: 2px solid var(--gray-light);
+    overflow: initial;
+  }
+  .app-drawer--header {
+    padding: var(--app-offset-normal);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .app-drawer--header-title {
+    font-weight: 500;
+    font-size: var(--font-size-h4);
+  }
+  .v-navigation-drawer__content {
+    padding: var(--app-offset-normal);
+  }
+  .v-navigation-drawer__scrim {
+    position: fixed;
+  }
+}

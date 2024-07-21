@@ -33,6 +33,7 @@
 <script lang="ts" setup>
 import AppBtn from '@/components/elements/app-btn.component.vue'
 import IconCloseCircle from '@/components/icons/IconCloseCircle.vue'
+
 import { useSlots, watch } from 'vue'
 
 const props = defineProps({
@@ -48,7 +49,7 @@ const emit = defineEmits(['update:model-value', 'closed'])
 const slots = useSlots()
 const hasSlot = (name: string) => Boolean(slots[name])
 
-function onClose(event) {
+function onClose() {
   emit('closed', false)
 }
 
