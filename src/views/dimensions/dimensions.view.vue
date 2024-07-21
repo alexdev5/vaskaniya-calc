@@ -15,7 +15,8 @@
 			@removed="remove(card.id, $event)"
 		/>
 
-		<VsBlockAdd />
+		<VsBlockAdd @added="" />
+		<AddTerm ref="addTermRef" />
 	</DimensionsProductType>
 
 	<DimensionsTableConfiguration
@@ -45,6 +46,7 @@ import DimensionsTableConfiguration from './components/blocks/dimensions-table-c
 import VsBlockCard from '@/components/vs-block/components/vs-block-card.component.vue'
 import AppMediaModal from '@/components/media/app-media-modal.component.vue'
 import VsBlockAdd from '@/components/vs-block/components/vs-block-add.component.vue'
+import AddTerm from './components/add-term.component.vue'
 
 import { onMounted, reactive, ref } from 'vue'
 import { useDimensionsStore } from './dimensions.store.ts'
