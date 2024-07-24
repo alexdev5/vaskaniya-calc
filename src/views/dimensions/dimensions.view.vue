@@ -1,15 +1,15 @@
 <template>
 	<DimensionsProductType
-		@child-showing-updated="tableConfigurationCardShowing = $event"
+		@child-showing-updated="store.state.tableConfigurationCardShowing = $event"
 		:settings-loading="loading"
 	>
 		<VsBlockCard
 			v-for="card in store.state.productTypes"
-			:class="{ 'vs-block-card-active': card.id === productTypeModel }"
+			:class="{ 'vs-block-card-active': card.id === store.state.productTypeModel }"
 			:key="card.id"
 			:record="card"
 			:deleteLoading="deleteLoading"
-			@click="productTypeModel = card.id"
+			@click="store.state.productTypeModel = card.id"
 			@settings-saved="saveCardSettings($event, card.id)"
 			@load-image-requested="loadMedia(card.id, $event)"
 			@removed="remove(card.id, $event)"
@@ -20,12 +20,12 @@
 	<AddTerm ref="addTermRef" />
 
 	<DimensionsTableConfiguration
-		@child-showing-updated="tableConfigurationCardShowing = $event"
+		@child-showing-updated="store.state.tableConfigurationCardShowing = $event"
 		:settings-loading="loading"
 	>
 		<template v-for="configuration in store.state.configurations">
 			<VsBlockCard
-				v-if="configuration.productTypeParentId === productTypeModel || tableConfigurationCardShowing"
+				v-if="configuration.productTypeParentId === store.state.productTypeModel || store.state.tableConfigurationCardShowing"
 				:record="configuration"
 				:key="configuration.id"
 				:card-info="configuration"
@@ -55,8 +55,6 @@ import { DimensionsService, TermsService } from '@/services'
 
 const store = useDimensionsStore()
 
-const productTypeModel = ref<number>()
-const tableConfigurationCardShowing = ref(false)
 const loading = ref(false)
 const deleteLoading = ref({} as Record<ImageType, boolean>)
 const mediaAssignment = ref(false)
@@ -154,7 +152,7 @@ async function saveCardSettings(formFields: CommonCategoryParams, termId: number
 }
 
 function setCardDefault() {
-	productTypeModel.value = store.state.productTypes[0]?.id
+	store.state.productTypeModel = store.state.productTypes[0]?.id
 }
 
 onMounted(async () => {

@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Controllers\Terms;
 
-class TermsAcfEnum {
+class TermsAcfEnum
+{
     const Thumbnail = 'thumbnail';
     const ImageFullSize = 'image_full_size';
     const ChildBlockImage = 'child_block_image';
@@ -11,6 +13,9 @@ class TermsAcfEnum {
     const BlockNumber = 'block_number';
     const Price = 'price';
     const IsHidden = 'is_hidden';
+    const SortIndex = 'vs_sort_index';
 
-    private function __construct() {}
+    private function __construct()
+    {
+    }
 }

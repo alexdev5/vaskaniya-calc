@@ -9,6 +9,8 @@ export const useDimensionsStore = defineStore('dimensions', () => {
 		productTypes: null as TermState[] | null,
 		configurations: null as TermState[] | null,
 		loading: false,
+		productTypeModel: 0,
+		tableConfigurationCardShowing: false,
 	})
 
 	async function loadDimensions() {
