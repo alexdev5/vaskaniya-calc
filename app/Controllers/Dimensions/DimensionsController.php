@@ -110,18 +110,21 @@ class DimensionsController
                 [
                     'status' => 'error',
                     'code' => $result->get_error_code(),
+                    // TODO: only develop
+                    'data' => $result->get_error_data(),
                     'message' => $result->get_error_message(),
                 ],
                 400
             );
-        } else {
-            return new WP_REST_Response(
-                [
-                    'status' => 'success',
-                    'message' => 'Термін успішно оновлено!',
-                ],
-                200
-            );
         }
+
+        return new WP_REST_Response(
+            [
+                'status' => 'success',
+                'params' => $params,
+                'message' => 'Термін успішно оновлено!',
+            ],
+            200
+        );
     }
 }

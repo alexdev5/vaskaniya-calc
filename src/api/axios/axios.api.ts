@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseApiURL = 'http://vaskania-new.loc'
+const baseApiURL = 'https://st.wooh.cc'
 //const baseApiURL = 'http://localhost:8000'
 //axios.defaults.withCredentials = true
 

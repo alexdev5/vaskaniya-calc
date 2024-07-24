@@ -93,10 +93,10 @@ class TermsController
             return new WP_Error('term_update_failed', 'Error updating the term: ' . implode(', ', $result->get_error_messages()));
         }
 
-        $acf = $params['acf'] ?? null;
+        $acf = $args['acf'] ?? null;
 
-        foreach ($acf as $field) {
-            update_field($field['name'], $field['value'], 'term_' . $termId);
+        foreach ($acf as $fieldName => $acfValue) {
+            update_field($fieldName, $acfValue, 'term_' . $termId);
         }
 
         return true;

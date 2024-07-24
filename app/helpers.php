@@ -23,6 +23,15 @@ function dd($args, $isVarDump = false)
     die;
 }
 
+function debugRest($data, $message = 'debugRest')
+{
+    return new WP_Error(
+        'debug_rest--' . __CLASS__,
+        $message,
+        $data
+    );
+}
+
 if (!function_exists('vs_view')) {
     function vs_view($file, $args = [])
     {
