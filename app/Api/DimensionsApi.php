@@ -3,8 +3,8 @@
 namespace App\Api;
 
 use App\Contracts\ApiContract;
-use App\Controllers\Route\VsRoute;
 use App\Controllers\Dimensions\DimensionsController;
+use App\Controllers\Route\VsRoute;
 
 class DimensionsApi implements ApiContract
 {
@@ -18,8 +18,8 @@ class DimensionsApi implements ApiContract
             [DimensionsController::class, 'updateTerm']
         );
         VsRoute::post(
-            self::route('/update-parent-title'),
-            [DimensionsController::class, 'updateParentTitle']
+            self::route('/update-term-title'),
+            [DimensionsController::class, 'updateTermTitle']
         );
     }
 

@@ -1,15 +1,15 @@
 <template>
 	<DimensionsProductType
-		@child-showing-updated="store.state.tableConfigurationCardShowing = $event"
+		v-if="store.state.parent"
 		:settings-loading="loading"
 	>
 		<VsBlockCard
 			v-for="card in store.state.productTypes"
-			:class="{ 'vs-block-card-active': card.id === store.state.productTypeModel }"
+			:class="{ 'vs-block-card-active': card.id === store.state.currentProductType?.id }"
 			:key="card.id"
 			:record="card"
 			:deleteLoading="deleteLoading"
-			@click="store.state.productTypeModel = card.id"
+			@click="store.state.currentProductType = card"
 			@settings-saved="saveCardSettings($event, card.id)"
 			@load-image-requested="loadMedia(card.id, $event)"
 			@removed="remove(card.id, $event)"
@@ -19,19 +19,18 @@
 	</DimensionsProductType>
 	<AddTerm ref="addTermRef" />
 
-	<DimensionsTableConfiguration
-		@child-showing-updated="store.state.tableConfigurationCardShowing = $event"
+	<DimensionsConfiguration
 		:settings-loading="loading"
 	>
 		<template v-for="configuration in store.state.configurations">
 			<VsBlockCard
-				v-if="configuration.productTypeParentId === store.state.productTypeModel || store.state.tableConfigurationCardShowing"
+				v-if="configuration.productTypeParentId === store.state.currentProductType?.id || store.setting.showAllConfigurations"
 				:record="configuration"
 				:key="configuration.id"
 				:card-info="configuration"
 			/>
 		</template>
-	</DimensionsTableConfiguration>
+	</DimensionsConfiguration>
 
 	<AppMediaModal
 		ref="mediaModal"
@@ -42,7 +41,7 @@
 
 <script lang="ts" setup>
 import DimensionsProductType from './components/blocks/dimensions-product-type.component.vue'
-import DimensionsTableConfiguration from './components/blocks/dimensions-table-configuration.component.vue'
+import DimensionsConfiguration from './components/blocks/dimensions-configuration.component.vue'
 import VsBlockCard from '@/components/vs-block/components/vs-block-card.component.vue'
 import AppMediaModal from '@/components/media/app-media-modal.component.vue'
 import VsBlockAdd from '@/components/vs-block/components/vs-block-add.component.vue'
@@ -152,7 +151,7 @@ async function saveCardSettings(formFields: CommonCategoryParams, termId: number
 }
 
 function setCardDefault() {
-	store.state.productTypeModel = store.state.productTypes[0]?.id
+	store.state.currentProductType = store.state.productTypes[0]
 }
 
 onMounted(async () => {

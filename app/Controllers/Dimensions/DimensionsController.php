@@ -29,7 +29,7 @@ class DimensionsController
         }
 
         $returned = [
-            'parent' =>  TermResource::collection($productTypesTerms['parent']),
+            'parent' => TermResource::collection($productTypesTerms['parent']),
             'productTypes' => TermResource::collection($productTypesTerms['terms']),
             'configurations' => ConfigurationResource::collection($configurations),
         ];
@@ -89,7 +89,7 @@ class DimensionsController
         return new WP_REST_Response("Term updated successfully", 200);
     }
 
-    public function updateParentTitle(WP_REST_Request $request): WP_REST_Response
+    public function updateTermTitle(WP_REST_Request $request): WP_REST_Response
     {
         $params = $request->get_params();
 

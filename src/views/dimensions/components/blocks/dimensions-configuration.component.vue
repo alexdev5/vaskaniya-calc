@@ -10,6 +10,7 @@
 	>
 		<slot />
 
+		{{ store.setting.showAllConfigurations }}
 		<template #settings>
 			<AppCheckbox
 				:modelValue="childBlockShowing"
@@ -38,8 +39,8 @@ const store = useDimensionsStore()
 
 const loading = ref(false)
 const disabled = ref(true)
-const blockTitle = ref(store.state.parent?.acf?.blockTitle ?? '')
-const blockNumber = ref(store.state.parent?.acf?.blockNumber ?? '')
+const blockTitle = ref('')
+const blockNumber = ref('')
 
 const childBlockShowing = ref(false)
 
@@ -51,7 +52,7 @@ async function submit() {
 
 	try {
 		await DimensionsService.updateTermTitle({
-			termId: store.state.parent.id,
+			termId: store.state.currentProductType!.id,
 			blockTitle: blockTitle.value,
 			blockNumber: blockNumber.value,
 		})
@@ -67,7 +68,18 @@ async function submit() {
 	}
 }
 
-watch([blockTitle, blockNumber], (newValue) => disabled.value = false)
+watch([blockTitle, blockNumber], () => {
+	if (
+		blockTitle.value !== store.state.currentProductType?.acf?.blockTitle ||
+		blockNumber.value !== store.state.currentProductType?.acf?.blockNumber
+	)
+		disabled.value = false
+})
+
+watch(() => store.state.currentProductType, () => {
+	blockTitle.value = store.state.currentProductType?.acf?.blockTitle ?? ''
+	blockNumber.value = store.state.currentProductType?.acf?.blockNumber ?? ''
+}, { immediate: true })
 </script>
 
 <style lang="scss">

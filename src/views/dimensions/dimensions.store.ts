@@ -9,8 +9,11 @@ export const useDimensionsStore = defineStore('dimensions', () => {
 		productTypes: null as TermState[] | null,
 		configurations: null as TermState[] | null,
 		loading: false,
-		productTypeModel: 0,
-		tableConfigurationCardShowing: false,
+		currentProductType: null as TermState | null,
+	})
+
+	const setting = reactive({
+		showAllConfigurations: false,
 	})
 
 	async function loadDimensions() {
@@ -21,6 +24,7 @@ export const useDimensionsStore = defineStore('dimensions', () => {
 
 			state.parent = new TermState(result.parent)
 
+			console.log(state.parent.acf)
 			state.productTypes = (result.productTypes ?? []).map(
 				productType => new TermState(productType),
 			)
@@ -37,6 +41,7 @@ export const useDimensionsStore = defineStore('dimensions', () => {
 
 	return {
 		state,
+		setting,
 		loadDimensions,
 	}
 })
