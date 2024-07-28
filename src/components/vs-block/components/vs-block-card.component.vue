@@ -6,7 +6,7 @@
 			:deleteLoading="deleteLoading"
 			@submitted="emit('settings-saved', $event)"
 			@load-image-requested="emit('load-image-requested', $event)"
-			@removed="emit('removed', $event)"
+			@remove-image-requested="emit('remove-image-requested', $event)"
 		/>
 
 		<div class="vs-block-card-image">
@@ -38,7 +38,7 @@ defineProps({
 	deleteLoading: Object as PropType<Record<ImageType, boolean>>,
 })
 
-const emit = defineEmits(['settings-saved', 'load-image-requested', 'removed'])
+const emit = defineEmits(['settings-saved', 'load-image-requested', 'remove-image-requested'])
 const vsBlockCardToolsRef = ref()
 
 </script>

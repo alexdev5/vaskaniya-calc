@@ -10,7 +10,6 @@
 	>
 		<slot />
 
-		{{ store.setting.showAllConfigurations }}
 		<template #settings>
 			<AppCheckbox
 				:modelValue="childBlockShowing"
@@ -69,11 +68,9 @@ async function submit() {
 }
 
 watch([blockTitle, blockNumber], () => {
-	if (
-		blockTitle.value !== store.state.currentProductType?.acf?.blockTitle ||
-		blockNumber.value !== store.state.currentProductType?.acf?.blockNumber
-	)
-		disabled.value = false
+	disabled.value =
+		blockTitle.value === store.state.currentProductType?.acf?.blockTitle &&
+		blockNumber.value === store.state.currentProductType?.acf?.blockNumber
 })
 
 watch(() => store.state.currentProductType, () => {

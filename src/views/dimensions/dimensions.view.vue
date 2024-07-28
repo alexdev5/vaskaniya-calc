@@ -8,35 +8,38 @@
 			:class="{ 'vs-block-card-active': card.id === store.state.currentProductType?.id }"
 			:key="card.id"
 			:record="card"
-			:deleteLoading="deleteLoading"
+			:deleteLoading="store.imageDeleting"
 			@click="store.state.currentProductType = card"
-			@settings-saved="saveCardSettings($event, card.id)"
-			@load-image-requested="loadMedia(card.id, $event)"
-			@removed="remove(card.id, $event)"
+			@settings-saved="saveCardSettings(card.id, $event)"
+			@load-image-requested="loadImages(card.id, $event)"
+			@remove-image-requested="store.removeImageFromTerm(card.id, $event)"
 		/>
 
-		<VsBlockAdd @added="addTermRef?.open('Add dimensions')" />
+		<VsBlockAdd @added="addTermFromRef?.open('Add dimensions')" />
 	</DimensionsProductType>
-	<AddTerm ref="addTermRef" />
 
 	<DimensionsConfiguration
 		:settings-loading="loading"
 	>
-		<template v-for="configuration in store.state.configurations">
+		<template v-for="configuration in store.state.configurations" :key="configuration.id">
 			<VsBlockCard
-				v-if="configuration.productTypeParentId === store.state.currentProductType?.id || store.setting.showAllConfigurations"
+				v-show="configuration.productTypeParentId === store.state.currentProductType?.id || store.setting.showAllConfigurations"
 				:record="configuration"
-				:key="configuration.id"
-				:card-info="configuration"
+				:deleteLoading="store.imageDeleting"
+				@settings-saved="saveCardSettings(configuration.id, $event)"
+				@load-image-requested="loadImages(configuration.id, $event)"
+				@remove-image-requested="store.removeImageFromTerm(configuration.id, $event)"
 			/>
 		</template>
 	</DimensionsConfiguration>
 
 	<AppMediaModal
 		ref="mediaModal"
-		:loading="mediaAssignment"
-		@selected="assignImageToTerm"
+		:callback="store.loadDimensions"
+		@selected="mediaModal?.assignImageToTerm($event, store.termImageToUpload)"
 	/>
+
+	<AddTermForm ref="addTermFromRef" />
 </template>
 
 <script lang="ts" setup>
@@ -45,9 +48,9 @@ import DimensionsConfiguration from './components/blocks/dimensions-configuratio
 import VsBlockCard from '@/components/vs-block/components/vs-block-card.component.vue'
 import AppMediaModal from '@/components/media/app-media-modal.component.vue'
 import VsBlockAdd from '@/components/vs-block/components/vs-block-add.component.vue'
-import AddTerm from './components/add-term.component.vue'
+import AddTermForm from '@/components/terms/add-term-form.component.vue'
 
-import { onMounted, reactive, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useDimensionsStore } from './dimensions.store.ts'
 import { CommonCategoryParams, ImageType } from '@/models/terms'
 import { DimensionsService, TermsService } from '@/services'
@@ -55,16 +58,10 @@ import { DimensionsService, TermsService } from '@/services'
 const store = useDimensionsStore()
 
 const loading = ref(false)
-const deleteLoading = ref({} as Record<ImageType, boolean>)
-const mediaAssignment = ref(false)
 const mediaModal = ref()
 const currentTaxSeparate = ref()
-const addTermRef = ref()
+const addTermFromRef = ref()
 
-const mediaFor = reactive({
-	type: ImageType.None,
-	termId: 0,
-})
 
 // Сделать разделение карточек дивами, если включена галочка в
 // настройках блока.
@@ -72,54 +69,35 @@ const mediaFor = reactive({
 // если они отличаются то выводить второй див.
 // Только нужно подумать когда закрытый открытый тег
 
-async function loadMedia(termId: number, mediaType: ImageType) {
-	mediaFor.type = mediaType
-	mediaFor.termId = termId
+async function loadImages(termId: number, mediaType: ImageType) {
+	store.termImageToUpload.type = mediaType
+	store.termImageToUpload.termId = termId
 
 	mediaModal.value?.open()
 }
 
-async function assignImageToTerm(mediaId: number) {
-	mediaAssignment.value = true
+// async function assignImageToTerm(mediaId: number) {
+// 	store.termImageToUpload.loading = true
+//
+// 	try {
+// 		await TermsService.assignImage({
+// 			termId: store.termImageToUpload.termId,
+// 			imageId: mediaId,
+// 			type: store.termImageToUpload.type,
+// 		})
+// 		await store.loadDimensions()
+// 		mediaModal.value?.close()
+// 		console.log('Изображение выбрано успешно')
+// 	} catch (error: any) {
+// 		console.log(error)
+// 	} finally {
+// 		store.termImageToUpload.loading = false
+// 	}
+// }
 
-	try {
-		await TermsService.assignImage({
-			termId: mediaFor.termId,
-			imageId: mediaId,
-			type: mediaFor.type,
-		})
-		await store.loadDimensions()
-		mediaModal.value?.close()
-		console.log('Изображение выбрано успешно')
-	} catch (error: any) {
-		console.log(error)
-	} finally {
-		mediaAssignment.value = false
-	}
-}
-
-async function remove(termId: number, mediaType: ImageType) {
-	deleteLoading.value[mediaType] = true
-
-	console.log(deleteLoading.value)
-	try {
-		await TermsService.assignImage({
-			termId,
-			imageId: null,
-			type: mediaType,
-		})
-		await store.loadDimensions()
-	} catch (error: any) {
-		console.log(error)
-	} finally {
-		deleteLoading.value[mediaType] = false
-	}
-}
-
-async function saveCardSettings(formFields: CommonCategoryParams, termId: number) {
+async function saveCardSettings(termId: number, formFields: CommonCategoryParams) {
 	loading.value = true
 
-	console.log(formFields)
 	try {
 		if (
 			formFields.imageFullSize?.length ||
@@ -150,13 +128,9 @@ async function saveCardSettings(formFields: CommonCategoryParams, termId: number
 	}
 }
 
-function setCardDefault() {
-	store.state.currentProductType = store.state.productTypes[0]
-}
-
 onMounted(async () => {
 	await store.loadDimensions()
-	setCardDefault()
+	store.setCardDefault()
 })
 
 </script>

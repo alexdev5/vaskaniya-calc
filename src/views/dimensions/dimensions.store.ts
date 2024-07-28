@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
-import { reactive } from 'vue'
-import { DimensionsService } from '@/services'
-import { TermState } from '@/models/terms'
+import { reactive, ref } from 'vue'
+import { DimensionsService, TermsService } from '@/services'
+import { ImageType, TermState } from '@/models/terms'
 
 export const useDimensionsStore = defineStore('dimensions', () => {
 	const state = reactive({
@@ -16,6 +16,14 @@ export const useDimensionsStore = defineStore('dimensions', () => {
 		showAllConfigurations: false,
 	})
 
+	const termImageToUpload = reactive({
+		type: ImageType.None,
+		termId: 0,
+		loading: false,
+	})
+
+	const imageDeleting = ref({} as Record<ImageType, boolean>)
+
 	async function loadDimensions() {
 		state.loading = true
 
@@ -24,7 +32,6 @@ export const useDimensionsStore = defineStore('dimensions', () => {
 
 			state.parent = new TermState(result.parent)
 
-			console.log(state.parent.acf)
 			state.productTypes = (result.productTypes ?? []).map(
 				productType => new TermState(productType),
 			)
@@ -39,9 +46,34 @@ export const useDimensionsStore = defineStore('dimensions', () => {
 		}
 	}
 
+	async function removeImageFromTerm(termId: number, mediaType: ImageType) {
+		imageDeleting.value[mediaType] = true
+
+		try {
+			await TermsService.assignImage({
+				termId,
+				imageId: null,
+				type: mediaType,
+			})
+			await loadDimensions()
+		} catch (error: any) {
+			console.log(error)
+		} finally {
+			imageDeleting.value[mediaType] = false
+		}
+	}
+
+	function setCardDefault() {
+		state.currentProductType = state.productTypes?.[0] ?? null
+	}
+
 	return {
 		state,
 		setting,
 		loadDimensions,
+		termImageToUpload,
+		removeImageFromTerm,
+		imageDeleting,
+		setCardDefault,
 	}
 })

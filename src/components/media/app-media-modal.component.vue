@@ -1,66 +1,67 @@
 <template>
-  <AppModal ref="mediaModal" @closed="close">
-    <template #header-fixed>
-      <div>
-        <p v-if="mediaSelected.title">
+	<AppModal ref="mediaModal" @closed="close">
+		<template #header-fixed>
+			<div>
+				<p v-if="mediaSelected.title">
           <span>
             <b>image:</b> {{ mediaSelected.fullName }} <b>|</b> {{ mediaSelected.id }}
           </span>
-        </p>
-        <p v-else>Изображение не выбрано</p>
-      </div>
-    </template>
+				</p>
+				<p v-else>Изображение не выбрано</p>
+			</div>
+		</template>
 
-    <div class="app-media-list">
-      <div
-        v-for="media in mediaStore.state.media"
-        class="app-media-list-item"
-        :class="{ 'active': mediaSelected.id === media.id }"
-        @click="mediaSelected = media"
-      >
-        <div class="app-media-list-item-img">
-          <img :src="media.url" alt="">
-        </div>
+		<div class="app-media-list">
+			<div
+				v-for="media in mediaStore.state.media"
+				class="app-media-list-item"
+				:class="{ 'active': mediaSelected.id === media.id }"
+				@click="mediaSelected = media"
+			>
+				<div class="app-media-list-item-img">
+					<img :src="media.url" alt="">
+				</div>
 
-        <div class="app-media-list-item-description">
-          <p><b>ID:</b> {{ media.id }}</p>
-          <p><b>Name:</b> {{ media.fullName }}</p>
-          <!--<p><b>url:</b> {{ media.url }}</p>-->
-        </div>
-      </div>
-    </div>
+				<div class="app-media-list-item-description">
+					<p><b>ID:</b> {{ media.id }}</p>
+					<p><b>Name:</b> {{ media.fullName }}</p>
+					<!--<p><b>url:</b> {{ media.url }}</p>-->
+				</div>
+			</div>
+		</div>
 
-    <template #actions>
-      <AppBtn
-        flat
-        :disabled="!mediaSelected.id"
-        :loading="loading"
-        @click="emit('selected', mediaSelected.id)"
-      >
-        Выбрать
-      </AppBtn>
-      <AppBtn
-        outlined
-        @click="close()"
-      >
-        Закрыть
-      </AppBtn>
-    </template>
-  </AppModal>
+		<template #actions>
+			<AppBtn
+				flat
+				:disabled="!mediaSelected.id"
+				:loading="loading"
+				@click="emit('selected', mediaSelected.id)"
+			>
+				Выбрать
+			</AppBtn>
+			<AppBtn
+				outlined
+				@click="close()"
+			>
+				Закрыть
+			</AppBtn>
+		</template>
+	</AppModal>
 </template>
 
 <script lang="ts" setup>
 import AppModal from '@/components/elements/app-modal.component.vue'
 import AppBtn from '@/components/elements/app-btn.component.vue'
 import { ref } from 'vue'
-import { PropType } from 'vue'
 import { Media } from '@/models/terms/terms.contracts.ts'
-import { ImageType } from '@/models/terms'
 import { useMediaStore } from '@/stores'
+import { TermsService } from '@/services'
+import { Terms } from '@/models'
 
-defineProps({
-  loading: Boolean,
-})
+const props = defineProps<{
+	//loading: boolean
+	callback?: () => Promise<void>
+}>()
 
 const emit = defineEmits(['selected'])
 
@@ -69,32 +70,55 @@ const mediaStore = useMediaStore()
 const mediaModal = ref()
 const mediaSelected = ref({} as Media)
 const mediaLoading = ref(false)
+const loading = ref(false)
 
 async function open() {
-  mediaModal.value?.open()
-  await loadMedia()
+	mediaModal.value?.open()
+	await loadMedia()
 }
 
 function close() {
-  mediaSelected.value = {} as Media
-  mediaModal.value?.close()
+	mediaSelected.value = {} as Media
+	mediaModal.value?.close()
 }
 
 async function loadMedia() {
-  mediaLoading.value = true
+	mediaLoading.value = true
 
-  try {
-    await mediaStore.loadMedia()
-  } catch (error: any) {
-    console.log(error)
-  } finally {
-    mediaLoading.value = false
-  }
+	try {
+		await mediaStore.loadMedia()
+	} catch (error: any) {
+		console.log(error)
+	} finally {
+		mediaLoading.value = false
+	}
+}
+
+async function assignImageToTerm(mediaId: number, params: Terms.AssignImageCommand) {
+	loading.value = true
+
+	console.log(mediaId)
+	console.log(params)
+	try {
+		await TermsService.assignImage({
+			imageId: mediaId,
+			termId: params.termId,
+			type: params.type,
+		})
+		if (props.callback) await props.callback()
+		close()
+		console.log('Изображение выбрано успешно')
+	} catch (error: any) {
+		console.log('assignImageToTerm', error)
+	} finally {
+		loading.value = false
+	}
 }
 
 defineExpose({
-  open,
-  close,
+	open,
+	close,
+	assignImageToTerm,
 })
 </script>
 

@@ -2,7 +2,6 @@
 
 namespace App\Controllers\Terms;
 
-use App\Config;
 use App\Helpers\Media;
 use WP_Error;
 use WP_REST_Request;
@@ -10,7 +9,8 @@ use WP_REST_Response;
 
 class TermsController
 {
-    public function assignImage(WP_REST_Request $request): WP_REST_Response {
+    public function assignImage(WP_REST_Request $request): WP_REST_Response
+    {
         $params = $request->get_params();
 
         switch ($params['type']) {
@@ -39,18 +39,18 @@ class TermsController
             return new WP_REST_Response(['error' => "termId is empty. Images weren't updated"], 400);
         }
 
-        if ($_FILES[TermsAcfEnum::Thumbnail]) {
-            $imageId = Media::uploadImageFromFile($_FILES[TermsAcfEnum::Thumbnail]);
+        if ($_FILES['thumbnail']) {
+            $imageId = Media::uploadImageFromFile($_FILES['thumbnail']);
             $this->assignAcfImage($imageId, $termId, TermsAcfEnum::Thumbnail);
         }
 
-        if ($_FILES[TermsAcfEnum::ImageFullSize]) {
-            $imageId = Media::uploadImageFromFile($_FILES[TermsAcfEnum::ImageFullSize]);
+        if ($_FILES['imageFullSize']) {
+            $imageId = Media::uploadImageFromFile($_FILES['imageFullSize']);
             $this->assignAcfImage($imageId, $termId, TermsAcfEnum::ImageFullSize);
         }
 
-        if ($_FILES[TermsAcfEnum::ChildBlockImage]) {
-            $imageId = Media::uploadImageFromFile($_FILES[TermsAcfEnum::ChildBlockImage]);
+        if ($_FILES['childBlockImage']) {
+            $imageId = Media::uploadImageFromFile($_FILES['childBlockImage']);
             $this->assignAcfImage($imageId, $termId, TermsAcfEnum::ChildBlockImage);
         }
 
@@ -76,7 +76,8 @@ class TermsController
      *
      * @return Boolean | WP_Error
      */
-    public static function updateById($termId, string $taxonomy, array $args) {
+    public static function updateById($termId, string $taxonomy, array $args)
+    {
         if (!isset($termId)) {
             return new WP_Error('missing_parameters', 'termID undefined');
         }

@@ -7,11 +7,11 @@
 				</div>
 			</template>
 
-			<VsTermSettingsForm
+			<TermSettingsForm
 				:record="record"
 				@load-image-requested="emit('load-image-requested', $event)"
-				@submitted="emit('submitted', $event)"
 				@remove-image-requested="emit('remove-image-requested', $event)"
+				@submitted="emit('submitted', $event)"
 				@closed="close()"
 			/>
 		</v-menu>
@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts" setup>
-import VsTermSettingsForm from '@/components/vs-terms/vs-term-settings-form.component.vue'
+import TermSettingsForm from '@/components/terms/term-settings-form.component.vue'
 import IconCopy from '@/components/icons/IconCopy.vue'
 import IconSettings from '@/components/icons/IconSettings.vue'
 import IconArrowsMove from '@/components/icons/IconArrowsMove.vue'
@@ -50,7 +50,7 @@ const emit = defineEmits([
 	'hidden',
 	'submitted',
 	'load-image-requested',
-	'removed',
+	'remove-image-requested',
 ])
 
 

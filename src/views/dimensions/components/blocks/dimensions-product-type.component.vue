@@ -67,7 +67,11 @@ async function submit() {
 	}
 }
 
-watch([blockTitle, blockNumber], (newValue) => disabled.value = false)
+watch([blockTitle, blockNumber], () => {
+	disabled.value =
+		blockTitle.value === store.state.parent?.acf?.blockTitle &&
+		blockNumber.value === store.state.parent?.acf?.blockNumber
+})
 </script>
 
 <style lang="scss">

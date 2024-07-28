@@ -17,7 +17,7 @@
 								v-model="settingsForm.description"
 							/>-->
 
-			<VsTermSettingsImage
+			<TermSettingsImage
 				:label="`Превью`"
 				:image="props.record?.acf.thumbnail"
 				v-model="settingsForm.thumbnail"
@@ -26,7 +26,7 @@
 				@removed="remove(ImageType.Thumbnail)"
 			/>
 
-			<VsTermSettingsImage
+			<TermSettingsImage
 				:label="`Полноразмерное изображение`"
 				:image="props.record?.acf.imageFullSize"
 				v-model="settingsForm.imageFullSize"
@@ -35,7 +35,7 @@
 				@removed="remove(ImageType.ImageFullSize)"
 			/>
 
-			<VsTermSettingsImage
+			<TermSettingsImage
 				:label="`Изображение связанного блока`"
 				:image="props.record?.acf.childBlockImage"
 				v-model="settingsForm.childBlockImage"
@@ -58,7 +58,7 @@
 <script lang="ts" setup>
 import AppTextField from '@/components/forms/app-textfield.vue'
 import AppFormButtons from '@/components/forms/app-form-buttons.component.vue'
-import VsTermSettingsImage from './components/vs-term-settings-image.component.vue'
+import TermSettingsImage from './components/term-settings-image.component.vue'
 
 import { CommonCategoryParams, ImageType, TermState } from '@/models/terms'
 
