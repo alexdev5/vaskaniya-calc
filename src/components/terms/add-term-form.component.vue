@@ -1,17 +1,23 @@
 <template>
 	<AppDrawer :opened="widgetOpened" @closed="close" :title="title">
-		drawer
+		<TermSettingsForm />
+
+		<template #footer>
+
+		</template>
 	</AppDrawer>
 </template>
 
 <script lang="ts" setup>
 import AppDrawer from '@/components/elements/app-drawer.component.vue'
+import TermSettingsForm from '@/components/terms/term-settings-form.component.vue'
 
 import { ref } from 'vue'
 
 const props = defineProps<{
 	callback?: () => Promise<void>
 }>()
+
 const title = ref('')
 const loading = ref(false)
 const widgetOpened = ref(false)

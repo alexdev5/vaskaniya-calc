@@ -3,22 +3,22 @@
 		<div class="vs-block-tools-settings">
 			<AppTextField
 				compact
-				label="Тайтл"
+				:label="content.label.title"
 				v-model="settingsForm.title"
 			/>
 			<AppTextField
 				compact
-				label="Цена"
+				:label="content.label.price"
 				v-model="settingsForm.price"
 			/>
 			<!--        <AppTextarea
 								compact
-								label="Описание"
+								:label="content.label.description"
 								v-model="settingsForm.description"
 							/>-->
 
 			<TermSettingsImage
-				:label="`Превью`"
+				:label="content.label.preview"
 				:image="props.record?.acf.thumbnail"
 				v-model="settingsForm.thumbnail"
 				:deleteLoading="deleteLoading?.[ImageType.Thumbnail]"
@@ -27,7 +27,7 @@
 			/>
 
 			<TermSettingsImage
-				:label="`Полноразмерное изображение`"
+				:label="content.term.fullImage"
 				:image="props.record?.acf.imageFullSize"
 				v-model="settingsForm.imageFullSize"
 				:deleteLoading="deleteLoading?.[ImageType.ImageFullSize]"
@@ -36,7 +36,7 @@
 			/>
 
 			<TermSettingsImage
-				:label="`Изображение связанного блока`"
+				:label="content.term.childImage"
 				:image="props.record?.acf.childBlockImage"
 				v-model="settingsForm.childBlockImage"
 				:deleteLoading="deleteLoading?.[ImageType.ChildBlockImage]"
@@ -60,8 +60,8 @@ import AppTextField from '@/components/forms/app-textfield.vue'
 import AppFormButtons from '@/components/forms/app-form-buttons.component.vue'
 import TermSettingsImage from './components/term-settings-image.component.vue'
 
+import { content } from '@/content'
 import { CommonCategoryParams, ImageType, TermState } from '@/models/terms'
-
 import { onMounted, PropType, reactive } from 'vue'
 
 const props = defineProps({
