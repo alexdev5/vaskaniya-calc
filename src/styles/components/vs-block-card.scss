@@ -14,16 +14,20 @@
     cursor: pointer;
     @include boxShadow
   }
+
   .vs-block-card-tools {
     display: flex;
     gap: var(--app-offset-small);
   }
+
   .vs-block-card-description {
     font-size: var(--app-font-size-s);
   }
+
   .vs-block-card-price {
     font-weight: 600;
   }
+
   .vs-block-card-image {
     flex-grow: 1;
     max-height: 130px;
@@ -32,6 +36,7 @@
       max-height: 100%;
     }
   }
+
   .vs-icon-btn {
     border: 1px solid transparent;
   }
@@ -43,6 +48,12 @@
 
     .vs-icon-btn {
       border: 1px solid #000;
+    }
+  }
+
+  &.is-term-visibility {
+    & > div:not(.vs-block-card-tools) {
+      opacity: 0.2;
     }
   }
 }

@@ -33,17 +33,28 @@
   * {
     box-sizing: border-box;
   }
+
   img {
     max-width: 100%;
   }
 }
 
+.v-overlay-container {
+  box-sizing: border-box;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
 .app-list-standard {
   padding-left: 10px;
+
   &.small {
     font-size: var(--app-font-size-s);
   }
 }
+
 .wrap {
   #app {
     position: relative;

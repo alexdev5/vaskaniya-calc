@@ -2,11 +2,16 @@
 	<div class="vs-block-card">
 		<VsBlockCardTools
 			ref="vsBlockCardToolsRef"
+			:class="{ 'hidden': record.acf.isVisible }"
 			:record="record"
 			:deleteLoading="deleteLoading"
+			:loading="loading"
 			@submitted="emit('settings-saved', $event)"
 			@load-image-requested="emit('load-image-requested', $event)"
 			@remove-image-requested="emit('remove-image-requested', $event)"
+			@visibility-changed="emit('visibility-changed', $event)"
+			@removed="emit('removed')"
+			@duplicated="emit('duplicated')"
 		/>
 
 		<div class="vs-block-card-image">
@@ -36,9 +41,17 @@ defineProps({
 		required: true,
 	},
 	deleteLoading: Object as PropType<Record<ImageType, boolean>>,
+	loading: Boolean,
 })
 
-const emit = defineEmits(['settings-saved', 'load-image-requested', 'remove-image-requested'])
+const emit = defineEmits([
+	'settings-saved',
+	'load-image-requested',
+	'remove-image-requested',
+	'visibility-changed',
+	'removed',
+	'duplicated',
+])
 const vsBlockCardToolsRef = ref()
 
 </script>

@@ -7,23 +7,37 @@
 				</div>
 			</template>
 
-			<TermSettingsForm
-				:record="record"
-				@load-image-requested="emit('load-image-requested', $event)"
-				@remove-image-requested="emit('remove-image-requested', $event)"
-				@submitted="emit('submitted', $event)"
-				@closed="close()"
-			/>
+			<div class="vs-block-tools-settings-container">
+				<TermSettingsForm
+					:record="record"
+					@fields-updated="updateFields"
+					@load-image-requested="emit('load-image-requested', $event)"
+					@remove-image-requested="emit('remove-image-requested', $event)"
+				/>
+
+				<AppFormButtons
+					submit-only
+					:disabled="disabled"
+					:loading="loading"
+					@closed="close()"
+					@submitted="emit('submitted', settingsForm)"
+				/>
+			</div>
 		</v-menu>
 
 		<div class="vs-icon-btn" @click.stop.prevent="emit('duplicated')">
 			<IconCopy width="16" height="16" />
 		</div>
-		<div class="vs-icon-btn" @click.stop.prevent="emit('moved')">
-			<IconArrowsMove width="16" height="16" />
+		<div class="vs-icon-btn" @click.stop.prevent="emit('visibility-changed')">
+			<IconEyeOff width="16" height="16" v-if="record?.acf.isVisible" />
+			<IconEye width="16" height="16" v-else />
 		</div>
-		<div class="vs-icon-btn" @click.stop.prevent="emit('hidden')">
-			<IconEyeOff width="16" height="16" />
+		<div
+			v-if="record?.acf.isVisible"
+			class="vs-icon-btn"
+			@click.stop.prevent="emit('removed')"
+		>
+			<IconTrash width="16" height="16" />
 		</div>
 	</div>
 </template>
@@ -32,27 +46,40 @@
 import TermSettingsForm from '@/components/terms/term-settings-form.component.vue'
 import IconCopy from '@/components/icons/IconCopy.vue'
 import IconSettings from '@/components/icons/IconSettings.vue'
-import IconArrowsMove from '@/components/icons/IconArrowsMove.vue'
 import IconEyeOff from '@/components/icons/IconEyeOff.vue'
+import IconEye from '@/components/icons/IconEye.vue'
 
 import { PropType, ref } from 'vue'
-import { ImageType, TermState } from '@/models/terms'
+import { ImageType, TermFromFields, TermState } from '@/models/terms'
+import IconTrash from '@/components/icons/IconTrash.vue'
+import AppFormButtons from '@/components/forms/app-form-buttons.component.vue'
+import { useTermSettingsForm } from '@/components/terms/term-settings-form.composable.ts'
 
 const props = defineProps({
 	record: Object as PropType<TermState>,
 	deleteLoading: Object as PropType<Record<ImageType, boolean>>,
+	loading: Boolean,
 })
 
 const emit = defineEmits([
 	'settings-opened',
 	'duplicated',
 	'moved',
-	'hidden',
+	'visibility-changed',
 	'submitted',
 	'load-image-requested',
 	'remove-image-requested',
+	'removed',
 ])
 
+const { settingsForm } = useTermSettingsForm()
+const disabled = ref(true)
+
+function updateFields(fields: TermFromFields) {
+	// TODO: dont working disabled
+	disabled.value = false
+	settingsForm.value = fields
+}
 
 const widgetOpened = ref(false)
 
@@ -69,9 +96,3 @@ defineExpose({
 	close,
 })
 </script>
-
-<style lang="scss" scoped>
-.vs-block-tools-settings {
-	min-width: 400px;
-}
-</style>

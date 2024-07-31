@@ -1,68 +1,60 @@
 <template>
-	<div class="vs-block-tools-settings-container">
-		<div class="vs-block-tools-settings">
-			<AppTextField
-				compact
-				:label="content.label.title"
-				v-model="settingsForm.title"
-			/>
-			<AppTextField
-				compact
-				:label="content.label.price"
-				v-model="settingsForm.price"
-			/>
-			<!--        <AppTextarea
-								compact
-								:label="content.label.description"
-								v-model="settingsForm.description"
-							/>-->
+	<div class="vs-block-tools-settings">
+		<AppTextField
+			compact
+			:label="content.label.title"
 
-			<TermSettingsImage
-				:label="content.label.preview"
-				:image="props.record?.acf.thumbnail"
-				v-model="settingsForm.thumbnail"
-				:deleteLoading="deleteLoading?.[ImageType.Thumbnail]"
-				@lib-opened="openMediaLib(ImageType.Thumbnail)"
-				@removed="remove(ImageType.Thumbnail)"
-			/>
+			v-model="settingsForm.title"
+		/>
+		<AppTextField
+			compact
+			:label="content.label.price"
+			v-model="settingsForm.price"
+		/>
+		<!--        <AppTextarea
+							compact
+							:label="content.label.description"
+							v-model="settingsForm.description"
+						/>-->
 
-			<TermSettingsImage
-				:label="content.term.fullImage"
-				:image="props.record?.acf.imageFullSize"
-				v-model="settingsForm.imageFullSize"
-				:deleteLoading="deleteLoading?.[ImageType.ImageFullSize]"
-				@lib-opened="openMediaLib(ImageType.ImageFullSize)"
-				@removed="remove(ImageType.ImageFullSize)"
-			/>
+		<TermSettingsImage
+			:label="content.label.preview"
+			:image="props.record?.acf.thumbnail"
+			v-model="settingsForm.thumbnail"
+			:deleteLoading="deleteLoading?.[ImageType.Thumbnail]"
+			@lib-opened="openMediaLib(ImageType.Thumbnail)"
+			@removed="remove(ImageType.Thumbnail)"
+		/>
 
-			<TermSettingsImage
-				:label="content.term.childImage"
-				:image="props.record?.acf.childBlockImage"
-				v-model="settingsForm.childBlockImage"
-				:deleteLoading="deleteLoading?.[ImageType.ChildBlockImage]"
-				@lib-opened="openMediaLib(ImageType.ChildBlockImage)"
-				@removed="remove(ImageType.ChildBlockImage)"
-			/>
+		<TermSettingsImage
+			:label="content.term.fullImage"
+			:image="props.record?.acf.imageFullSize"
+			v-model="settingsForm.imageFullSize"
+			:deleteLoading="deleteLoading?.[ImageType.ImageFullSize]"
+			@lib-opened="openMediaLib(ImageType.ImageFullSize)"
+			@removed="remove(ImageType.ImageFullSize)"
+		/>
 
-			<slot name="settings" />
+		<TermSettingsImage
+			:label="content.term.childImage"
+			:image="props.record?.acf.childBlockImage"
+			v-model="settingsForm.childBlockImage"
+			:deleteLoading="deleteLoading?.[ImageType.ChildBlockImage]"
+			@lib-opened="openMediaLib(ImageType.ChildBlockImage)"
+			@removed="remove(ImageType.ChildBlockImage)"
+		/>
 
-			<AppFormButtons
-				submit-only
-				@closed="emit('closed')"
-				@submitted="emit('submitted', settingsForm)"
-			/>
-		</div>
+		<slot name="settings" />
 	</div>
 </template>
 
 <script lang="ts" setup>
 import AppTextField from '@/components/forms/app-textfield.vue'
-import AppFormButtons from '@/components/forms/app-form-buttons.component.vue'
 import TermSettingsImage from './components/term-settings-image.component.vue'
 
 import { content } from '@/content'
-import { CommonCategoryParams, ImageType, TermState } from '@/models/terms'
-import { onMounted, PropType, reactive } from 'vue'
+import { ImageType, TermFromFields, TermState } from '@/models/terms'
+import { onMounted, PropType, reactive, watch } from 'vue'
 
 const props = defineProps({
 	record: Object as PropType<TermState>,
@@ -70,10 +62,9 @@ const props = defineProps({
 })
 
 const emit = defineEmits([
-	'submitted',
+	'fields-updated',
 	'load-image-requested',
 	'remove-image-requested',
-	'closed',
 ])
 
 const settingsForm = reactive({
@@ -83,7 +74,7 @@ const settingsForm = reactive({
 	thumbnail: null,
 	imageFullSize: null,
 	childBlockImage: null,
-} as CommonCategoryParams)
+} as TermFromFields)
 
 async function openMediaLib(imageType: ImageType) {
 	emit('load-image-requested', imageType)
@@ -92,6 +83,12 @@ async function openMediaLib(imageType: ImageType) {
 function remove(imageType: ImageType) {
 	emit('remove-image-requested', imageType)
 }
+
+watch(
+	settingsForm,
+	() => {
+		emit('fields-updated', settingsForm)
+	}, { immediate: true })
 
 onMounted(() => {
 	settingsForm.title = props.record?.title ?? ''

@@ -22,4 +22,10 @@ export class TermsApi extends AxiosApi {
 			visible,
 		})
 	}
+
+	async duplicateTerm(parentTermId: number) {
+		return this.post(`${this.baseUrl}/duplicate-term`, {
+			parentTermId,
+		})
+	}
 }

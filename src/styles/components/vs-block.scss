@@ -11,13 +11,14 @@
     top: 10px;
     right: 10px;
   }
+
   .vs-block-body {
     display: flex;
     flex-wrap: wrap;
     gap: var(--app-offset-middle);
     padding-block-start: 24px;
   }
-  
+
   .vs-block-title {
     display: grid;
     align-items: center;
@@ -26,6 +27,7 @@
     gap: 32px;
     padding-inline-end: 40px;
   }
+
   .vs-block-settings {
     @include boxShadow;
     border: 1px solid red;
@@ -33,23 +35,25 @@
 }
 
 .vs-block-tools-settings {
-  background: #fff;
-  border-radius: 4px;
-  padding: 16px;
   min-width: 300px;
+  border-radius: 4px;
   display: grid;
   gap: 16px;
 }
+
 .vs-block-tools-settings-container {
   overflow-y: auto;
   height: 100%;
+  background: #fff;
+  padding: 16px;
 }
+
 .vs-block-tools-settings-image {
   border-bottom: 1px solid var(--app-color-grey);
   padding-bottom: var(--app-offset-normal);
 
-  .vs-label {
-    //padding-bottom: 4px;
+  &:last-child {
+    border: none;
   }
 
   .existing-image {
@@ -57,6 +61,7 @@
       max-width: 150px;
     }
   }
+
   .existing-image-info {
     display: flex;
     align-items: center;
@@ -67,11 +72,13 @@
     .app-form-field-file-input {
       flex-grow: 1;
     }
+
     .v-field {
       display: flex;
       align-items: center;
       gap: 8px;
     }
+
     .v-field__clearable {
       padding: 0;
     }

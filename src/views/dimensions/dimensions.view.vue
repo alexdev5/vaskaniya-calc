@@ -1,36 +1,59 @@
 <template>
-	<DimensionsProductType
-		v-if="store.state.parent"
-		:settings-loading="loading"
-	>
+	<DimensionsProductType v-if="store.state.parent">
 		<VsBlockCard
 			v-for="card in store.state.productTypes"
-			:class="{ 'vs-block-card-active': card.id === store.state.currentProductType?.id }"
+			:class="{
+				'vs-block-card-active': card.id === store.state.currentProductType?.id,
+				'is-term-visibility': card.acf.isVisible,
+			}"
 			:key="card.id"
 			:record="card"
 			:deleteLoading="store.imageDeleting"
+			:loading="loading"
 			@click="store.state.currentProductType = card"
 			@settings-saved="saveCardSettings(card.id, $event)"
 			@load-image-requested="loadImages(card.id, $event)"
 			@remove-image-requested="store.removeImageFromTerm(card.id, $event)"
+			@visibility-changed="changeVisibility(
+					card.id,
+					!card.acf.isVisible,
+					store.loadDimensions
+				)"
+			@duplicated="duplicateTerm(
+				card.id,
+				store.loadDimensions
+			)"
 		/>
 
 		<VsBlockAdd @added="addTermFromRef?.open('Add dimensions')" />
 	</DimensionsProductType>
 
-	<DimensionsConfiguration
-		:settings-loading="loading"
-	>
+	<DimensionsConfiguration v-if="store.state.currentProductType">
 		<template v-for="configuration in store.state.configurations" :key="configuration.id">
 			<VsBlockCard
 				v-show="configuration.productTypeParentId === store.state.currentProductType?.id || store.setting.showAllConfigurations"
+				:class="{
+					'is-term-visibility': configuration.acf.isVisible,
+				}"
 				:record="configuration"
 				:deleteLoading="store.imageDeleting"
+				:loading="loading"
 				@settings-saved="saveCardSettings(configuration.id, $event)"
 				@load-image-requested="loadImages(configuration.id, $event)"
 				@remove-image-requested="store.removeImageFromTerm(configuration.id, $event)"
+				@visibility-changed="changeVisibility(
+					configuration.id,
+					!configuration.acf.isVisible,
+					store.loadDimensions
+				)"
+				@duplicated="duplicateTerm(
+					configuration.id,
+					store.loadDimensions
+				)"
 			/>
 		</template>
+
+		<VsBlockAdd @added="addTermFromRef?.open('Add dimensions')" />
 	</DimensionsConfiguration>
 
 	<AppMediaModal
@@ -54,8 +77,12 @@ import { onMounted, ref } from 'vue'
 import { useDimensionsStore } from './dimensions.store.ts'
 import { CommonCategoryParams, ImageType } from '@/models/terms'
 import { DimensionsService, TermsService } from '@/services'
+import { useTerm } from '@/composables'
+import { content } from '@/content'
 
 const store = useDimensionsStore()
+
+const { changeVisibility, duplicateTerm } = useTerm()
 
 const loading = ref(false)
 const mediaModal = ref()
@@ -75,25 +102,6 @@ async function loadImages(termId: number, mediaType: ImageType) {
 
 	mediaModal.value?.open()
 }
-
-// async function assignImageToTerm(mediaId: number) {
-// 	store.termImageToUpload.loading = true
-//
-// 	try {
-// 		await TermsService.assignImage({
-// 			termId: store.termImageToUpload.termId,
-// 			imageId: mediaId,
-// 			type: store.termImageToUpload.type,
-// 		})
-// 		await store.loadDimensions()
-// 		mediaModal.value?.close()
-// 		console.log('Изображение выбрано успешно')
-// 	} catch (error: any) {
-// 		console.log(error)
-// 	} finally {
-// 		store.termImageToUpload.loading = false
-// 	}
-// }
 
 async function saveCardSettings(termId: number, formFields: CommonCategoryParams) {
 	loading.value = true
@@ -120,11 +128,12 @@ async function saveCardSettings(termId: number, formFields: CommonCategoryParams
 		})
 
 		await store.loadDimensions()
-		console.log('Дані оновлено')
+
+		console.log(content.notifications.updated)
 	} catch (error: any) {
 		console.error(error)
 	} finally {
-		loading.value = true
+		loading.value = false
 	}
 }
 
