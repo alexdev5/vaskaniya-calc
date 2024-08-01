@@ -1,13 +1,13 @@
 <?php
 $imageDir = VS_ASSETS_PATH . 'images/stone-palette/grandex/';
-$categoriesStone = \App\Config::get('taxonomy.categoryStone');
+$categoriesStone = \App\Config\TaxonomyEnum::CategoryStone;
 $taxonomiesLocal = ['brand-neomarm', 'price-category-eight', 'cost-medium'];
 
 return [
     [
         'title' => '',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'NM-101',
@@ -20,7 +20,7 @@ return [
     [
         'title' => '',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'NM-102',
@@ -33,7 +33,7 @@ return [
     [
         'title' => '',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'NM-104',
@@ -46,7 +46,7 @@ return [
     [
         'title' => '',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'NM-107',
@@ -59,7 +59,7 @@ return [
     [
         'title' => '',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'NM-108',
@@ -72,7 +72,7 @@ return [
     [
         'title' => '',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'NM-109',
@@ -85,7 +85,7 @@ return [
     [
         'title' => '',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'NM-110',
@@ -98,7 +98,7 @@ return [
     [
         'title' => '',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'NM-111',
@@ -111,7 +111,7 @@ return [
     [
         'title' => '',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'NM-112',
@@ -124,7 +124,7 @@ return [
     [
         'title' => '',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'NM-113',
@@ -137,7 +137,7 @@ return [
     [
         'title' => '',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'NM-114',
@@ -150,7 +150,7 @@ return [
     [
         'title' => '',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'NM-115',
@@ -163,7 +163,7 @@ return [
     [
         'title' => '',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'NM-119',
@@ -176,7 +176,7 @@ return [
     [
         'title' => '',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'NM-122',

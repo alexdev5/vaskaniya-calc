@@ -8,17 +8,16 @@
 			width="480"
 		>
 			<template #prepend>
-				<slot name="header" v-if="hasSlot('header')" />
-				<slot name="header" v-else>
-					<div class="app-drawer--header">
+				<div class="app-drawer--header">
+					<slot name="header">
 						<div class="app-drawer--header-title">
 							{{ title }}
 						</div>
 						<AppBtn icon small text @click="onClose">
 							<IconCloseCircleFilled />
 						</AppBtn>
-					</div>
-				</slot>
+					</slot>
+				</div>
 			</template>
 
 			<slot></slot>

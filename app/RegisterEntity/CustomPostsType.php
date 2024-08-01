@@ -1,7 +1,9 @@
 <?php
+
 namespace App\RegisterEntity;
 
-use App\Config;
+use App\Config\DefaultEnum;
+use App\Config\PostTypeEnum;
 use App\Contracts\TaxonomyContract;
 
 class CustomPostsType implements TaxonomyContract
@@ -10,14 +12,15 @@ class CustomPostsType implements TaxonomyContract
     private $generalPostType = '';
     public const LabelAdd = 'Добавить';
 
-    public function __construct() {
-        $this->domain = Config::get('domain');
-        $this->generalPostType = Config::get('post_type.products');
+    public function __construct()
+    {
+        $this->domain = DefaultEnum::Domain;
+        $this->generalPostType = PostTypeEnum::Products;
     }
-    
+
     public function vsProducts()
     {
-        $postType = Config::get('post_type.products');
+        $postType = PostTypeEnum::Products;
 
         $labels = array(
             'name' => __('Vascania Calculator', $this->domain),
@@ -54,8 +57,9 @@ class CustomPostsType implements TaxonomyContract
         register_post_type($postType, $args);
     }
 
-    public function vsServices() {
-        $postType = Config::get('post_type.services');
+    public function vsServices()
+    {
+        $postType = PostTypeEnum::Services;
 
         $args = array(
             'labels' => [
@@ -77,8 +81,9 @@ class CustomPostsType implements TaxonomyContract
         register_post_type($postType, $args);
     }
 
-    public function vsAddons() {
-        $postType = Config::get('post_type.addons');
+    public function vsAddons()
+    {
+        $postType = PostTypeEnum::Addons;
 
         $args = array(
             'labels' => [
@@ -100,8 +105,9 @@ class CustomPostsType implements TaxonomyContract
     }
 
     // Палитра камня и номер
-    public function vsPalette() {
-        $postType = Config::get('post_type.palette');
+    public function vsPalette()
+    {
+        $postType = PostTypeEnum::Palette;
 
         $args = array(
             'labels' => [
@@ -127,7 +133,6 @@ class CustomPostsType implements TaxonomyContract
 //        $acf->text('price', 'Стоимость');
 //        $acf->text('vendor_code', 'Артикул');
     }
-
 
 
     public function register()

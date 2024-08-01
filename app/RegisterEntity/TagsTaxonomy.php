@@ -1,7 +1,9 @@
 <?php
+
 namespace App\RegisterEntity;
 
-use App\Config;
+use App\Config\PostTypeEnum;
+use App\Config\TaxonomyEnum;
 use App\Contracts\TaxonomyContract;
 
 class TagsTaxonomy implements TaxonomyContract
@@ -23,11 +25,11 @@ class TagsTaxonomy implements TaxonomyContract
             'update_count_callback' => '_update_post_term_count',
         ];
         register_taxonomy(
-            Config::get('taxonomy.tags'),
+            TaxonomyEnum::Tags,
             [
-                Config::get('post_type.products'),
-                Config::get('post_type.addons'),
-                Config::get('post_type.services'),
+                PostTypeEnum::Products,
+                PostTypeEnum::Addons,
+                PostTypeEnum::Services,
             ],
             $args
         );

@@ -1,12 +1,5 @@
 <?php
 
-use App\Config;
-
-function vConfig($name = '')
-{
-    Config::get($name);
-}
-
 function dump($args, $isVarDump = false)
 {
     echo '<pre>';

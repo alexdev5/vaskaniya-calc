@@ -1,14 +1,17 @@
 <?php
+
 namespace App\RegisterEntity;
 
-use App\Config;
+use App\Config\PostTypeEnum;
+use App\Config\TaxonomyEnum;
 use App\Contracts\TaxonomyContract;
 use App\Controllers\Admin\AcfCreator;
 
 class CategoriesTaxonomy implements TaxonomyContract
 {
-    public function category() {
-        $taxonomy = Config::get('taxonomy.categories');
+    public function category()
+    {
+        $taxonomy = TaxonomyEnum::Categories;
 
         $args = [
             'label' => 'Категории',
@@ -27,16 +30,17 @@ class CategoriesTaxonomy implements TaxonomyContract
         register_taxonomy(
             $taxonomy,
             [
-                Config::get('post_type.products'),
-                Config::get('post_type.addons'),
-                Config::get('post_type.services'),
+                PostTypeEnum::Products,
+                PostTypeEnum::Addons,
+                PostTypeEnum::Services,
             ],
             $args);
         //register_taxonomy_for_object_type($taxonomy, Config::get('post_type.products'));
     }
 
-    public function stonePalette() {
-        $taxonomy = Config::get('taxonomy.categoryStone');
+    public function stonePalette()
+    {
+        $taxonomy = TaxonomyEnum::CategoryStone;
 
         $args = [
             'label' => 'Категории камня',
@@ -55,8 +59,8 @@ class CategoriesTaxonomy implements TaxonomyContract
         register_taxonomy(
             $taxonomy,
             [
-                Config::get('post_type.palette'),
-                Config::get('post_type.products')
+                PostTypeEnum::Palette,
+                PostTypeEnum::Products
             ],
             $args
         );
@@ -69,7 +73,8 @@ class CategoriesTaxonomy implements TaxonomyContract
         $acf->image('brand-img', 'Изображение бренда');
     }
 
-    public function createCustomFields() {
+    public function createCustomFields()
+    {
 
     }
 

@@ -1,13 +1,13 @@
 <?php
 $imageDir = VS_ASSETS_PATH . 'images/stone-palette/grandex/';
-$categoriesStone = \App\Config::get('taxonomy.categoryStone');
+$categoriesStone = \App\Config\TaxonomyEnum::CategoryStone;
 $taxonomiesLocal = ['brand-hanex', 'cost-expensive'];
 
 return [
     [
         'title' => 'Wild Fire',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'B-039',
@@ -20,7 +20,7 @@ return [
     [
         'title' => 'Kashmere',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'BL-201',
@@ -33,7 +33,7 @@ return [
     [
         'title' => 'Sedimentary',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'BL-205',
@@ -46,7 +46,7 @@ return [
     [
         'title' => 'Slate Grey',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'BL-206',
@@ -59,7 +59,7 @@ return [
     [
         'title' => 'Macassar',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'BL-209',
@@ -72,7 +72,7 @@ return [
     [
         'title' => 'Marfim',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'BL-219',
@@ -85,7 +85,7 @@ return [
     [
         'title' => 'Mountain Frost',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'BL-256',
@@ -98,7 +98,7 @@ return [
     [
         'title' => 'Cascade Ice',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'CC-001',
@@ -111,7 +111,7 @@ return [
     [
         'title' => 'Cascade Cream',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'CC-002',
@@ -124,7 +124,7 @@ return [
     [
         'title' => 'Cascade Gray',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'CC-003',
@@ -137,7 +137,7 @@ return [
     [
         'title' => 'Cascade Beige',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'CC-004',
@@ -150,7 +150,7 @@ return [
     [
         'title' => 'Cascade White',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'CC-005',
@@ -163,7 +163,7 @@ return [
     [
         'title' => 'Cascade Black',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'CC-006',
@@ -176,7 +176,7 @@ return [
     [
         'title' => 'Omega',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'GAD-003',
@@ -189,7 +189,7 @@ return [
     [
         'title' => 'Juno',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'GAD-007',
@@ -202,7 +202,7 @@ return [
     [
         'title' => 'Gaia',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'GAD-020',
@@ -215,7 +215,7 @@ return [
     [
         'title' => 'Aftersnow',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'GAM-001',
@@ -228,7 +228,7 @@ return [
     [
         'title' => 'Sandflower',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'GAM-004',
@@ -241,7 +241,7 @@ return [
     [
         'title' => 'Clara',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'ST-101',
@@ -254,7 +254,7 @@ return [
     [
         'title' => 'Marelinho',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'ST-102',
@@ -267,7 +267,7 @@ return [
     [
         'title' => 'Nublado',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'ST-103',
@@ -280,7 +280,7 @@ return [
     [
         'title' => 'Ardosia',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'ST-104',
@@ -293,7 +293,7 @@ return [
     [
         'title' => 'Moreno',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'ST-105',
@@ -306,7 +306,7 @@ return [
     [
         'title' => 'Grenicio',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'ST-106',
@@ -319,7 +319,7 @@ return [
     [
         'title' => 'Romano',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'ST-201',
@@ -332,7 +332,7 @@ return [
     [
         'title' => 'Marron',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'ST-204',
@@ -345,7 +345,7 @@ return [
     [
         'title' => 'Caramel Drizzle',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'ST-205',
@@ -358,7 +358,7 @@ return [
     [
         'title' => 'Bianco Classico',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'ST-302',
@@ -371,7 +371,7 @@ return [
     [
         'title' => 'Volare',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'ST-303',
@@ -384,7 +384,7 @@ return [
     [
         'title' => 'Venato Sparkle',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'VM-001',
@@ -397,7 +397,7 @@ return [
     [
         'title' => 'Venato Snow',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'VM-002',

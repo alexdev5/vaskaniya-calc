@@ -8,7 +8,7 @@
 			</template>
 
 			<div class="vs-block-tools-settings-container">
-				<TermSettingsForm
+				<TermFormFields
 					:record="record"
 					@fields-updated="updateFields"
 					@load-image-requested="emit('load-image-requested', $event)"
@@ -43,7 +43,7 @@
 </template>
 
 <script lang="ts" setup>
-import TermSettingsForm from '@/components/terms/term-settings-form.component.vue'
+import TermFormFields from '@/components/terms/components/term-form-fields.component.vue'
 import IconCopy from '@/components/icons/IconCopy.vue'
 import IconSettings from '@/components/icons/IconSettings.vue'
 import IconEyeOff from '@/components/icons/IconEyeOff.vue'
@@ -53,7 +53,7 @@ import { PropType, ref } from 'vue'
 import { ImageType, TermFromFields, TermState } from '@/models/terms'
 import IconTrash from '@/components/icons/IconTrash.vue'
 import AppFormButtons from '@/components/forms/app-form-buttons.component.vue'
-import { useTermSettingsForm } from '@/components/terms/term-settings-form.composable.ts'
+import { useTermFormFields } from '@/components/terms/term-form-fields.composable.ts'
 
 const props = defineProps({
 	record: Object as PropType<TermState>,
@@ -72,7 +72,7 @@ const emit = defineEmits([
 	'removed',
 ])
 
-const { settingsForm } = useTermSettingsForm()
+const { settingsForm } = useTermFormFields()
 const disabled = ref(true)
 
 function updateFields(fields: TermFromFields) {

@@ -1,13 +1,13 @@
 <?php
 $imageDir = VS_ASSETS_PATH . 'images/stone-palette/grandex/';
-$categoriesStone = \App\Config::get('taxonomy.categoryStone');
+$categoriesStone = \App\Config\TaxonomyEnum::CategoryStone;
 $taxonomiesLocal = ['brand-staron', 'price-category-one'];
 
 return [
     [
         'title' => 'Aspen Brown',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'AB-632',
@@ -20,7 +20,7 @@ return [
     [
         'title' => 'Aspen Glacier',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'AG-612',
@@ -33,7 +33,7 @@ return [
     [
         'title' => 'Aspen Gold Rush',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'AG-614',
@@ -46,7 +46,7 @@ return [
     [
         'title' => 'Aspen Grey',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'AG-620',
@@ -59,7 +59,7 @@ return [
     [
         'title' => 'Aspen Mine',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'AM-633',
@@ -72,7 +72,7 @@ return [
     [
         'title' => 'Aspen Misto',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'AM-681',
@@ -85,7 +85,7 @@ return [
     [
         'title' => 'Aspen Pepper',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'AP-640',
@@ -98,7 +98,7 @@ return [
     [
         'title' => 'Aspen Snow',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'AS-610',
@@ -111,7 +111,7 @@ return [
     [
         'title' => 'Aspen Seashell',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'AS-642',
@@ -124,7 +124,7 @@ return [
     [
         'title' => 'Aspen Sky',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'AS-670',
@@ -137,7 +137,7 @@ return [
     [
         'title' => 'Sanded Dark Nebula',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'DN-421',
@@ -150,7 +150,7 @@ return [
     [
         'title' => 'Sanded Onyx',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'S0-423',
@@ -163,7 +163,7 @@ return [
     [
         'title' => 'Sanded Birch',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'SB-412',
@@ -176,7 +176,7 @@ return [
     [
         'title' => 'Sanded Cornmeal',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'SC-433',
@@ -189,7 +189,7 @@ return [
     [
         'title' => 'Sanded Chesnut',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'SC-457',
@@ -202,7 +202,7 @@ return [
     [
         'title' => 'Sanded Grey',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'SG-420',
@@ -215,7 +215,7 @@ return [
     [
         'title' => 'Sanded Goose',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'SG-428',
@@ -228,7 +228,7 @@ return [
     [
         'title' => 'Sanded Gold Dust',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'SG-441',
@@ -241,7 +241,7 @@ return [
     [
         'title' => 'Sanded Icicle',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'SI-414',
@@ -254,7 +254,7 @@ return [
     [
         'title' => 'Sanded Cream',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'SM-421',
@@ -267,7 +267,7 @@ return [
     [
         'title' => 'Sanded Mocha',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'SM-453',
@@ -280,7 +280,7 @@ return [
     [
         'title' => 'Sanded Oatmeal',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'SO-446',
@@ -293,7 +293,7 @@ return [
     [
         'title' => 'Sanded Stratus',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'SS-418',
@@ -306,7 +306,7 @@ return [
     [
         'title' => 'Sanded Sahara',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'SS-440',
@@ -319,7 +319,7 @@ return [
     [
         'title' => 'Sanded Vermillion',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'SV-430',
@@ -332,7 +332,7 @@ return [
     [
         'title' => 'Sanded White Pepper',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'WP-410',
@@ -345,7 +345,7 @@ return [
     [
         'title' => 'Bright White',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'BW-010',
@@ -358,7 +358,7 @@ return [
     [
         'title' => 'California Poppy',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'SC-052',
@@ -371,7 +371,7 @@ return [
     [
         'title' => 'Dazzling White',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'SD-001',
@@ -384,7 +384,7 @@ return [
     [
         'title' => 'Fog',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'SF-020',
@@ -397,7 +397,7 @@ return [
     [
         'title' => 'Ivory',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'SI-040',
@@ -410,7 +410,7 @@ return [
     [
         'title' => 'Pearl',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'SP-011',
@@ -423,7 +423,7 @@ return [
     [
         'title' => 'Quasar White',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'SQ-019',
@@ -436,7 +436,7 @@ return [
     [
         'title' => 'Steel',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'ST-023',
@@ -449,7 +449,7 @@ return [
     [
         'title' => 'Natural',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'SV-041',
@@ -462,7 +462,7 @@ return [
     [
         'title' => 'Tempest Rime',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'FR-118',
@@ -475,7 +475,7 @@ return [
     [
         'title' => 'Bliss',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'SB-022',
@@ -488,7 +488,7 @@ return [
     [
         'title' => 'Sanded Tundra',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'ST-482',

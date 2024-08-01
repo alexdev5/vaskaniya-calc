@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Config;
+use App\Config\PostTypeEnum;
 use App\RegisterEntity\CustomPostsType;
 
 class AdminSubMenu
@@ -12,7 +12,7 @@ class AdminSubMenu
 
     public function __construct()
     {
-        $this->generalPostType = Config::get('post_type.products');
+        $this->generalPostType = PostTypeEnum::Products;
         $this->linkEdit = "edit.php?post_type={$this->generalPostType}";
     }
 
@@ -33,21 +33,21 @@ class AdminSubMenu
             'Палтира',
             'Палтира',
             'edit_posts',
-            $this->getEditLink(Config::get('post_type.palette'))
+            $this->getEditLink(PostTypeEnum::Palette)
         );
         add_submenu_page(
             $this->linkEdit,
             'Дополнения',
             'Дополнения',
             'edit_posts',
-            $this->getEditLink(Config::get('post_type.addons'))
+            $this->getEditLink(PostTypeEnum::Addons)
         );
         add_submenu_page(
             $this->linkEdit,
             'Услуги',
             'Услуги',
             'edit_posts',
-            $this->getEditLink(Config::get('post_type.services'))
+            $this->getEditLink(PostTypeEnum::Services)
         );
         add_submenu_page(
             $this->linkEdit,
@@ -64,7 +64,7 @@ class AdminSubMenu
 
     public function getEditLink($postType, $tax = ''): string
     {
-        if($tax) return "edit-tags.php?taxonomy={$tax}&post_type={$postType}";
+        if ($tax) return "edit-tags.php?taxonomy={$tax}&post_type={$postType}";
 
         return "edit.php?post_type={$postType}";
     }

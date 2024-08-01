@@ -2,7 +2,7 @@
 
 namespace App\Seeders\Tags;
 
-use App\Config;
+use App\Config\TaxonomyEnum;
 use App\Seeders\Seeders;
 
 class TagsSeeder extends Seeders
@@ -17,7 +17,7 @@ class TagsSeeder extends Seeders
     public function run()
     {
         $this->createTerms(
-            Config::get('taxonomy.tags'),
+            TaxonomyEnum::Tags,
             $this->taxonomies
         );
     }

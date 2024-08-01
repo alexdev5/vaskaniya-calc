@@ -62,7 +62,7 @@
 		@selected="mediaModal?.assignImageToTerm($event, store.termImageToUpload)"
 	/>
 
-	<AddTermForm ref="addTermFromRef" />
+	<AddTermForm ref="addTermFromRef" :callback="store.loadDimensions" />
 </template>
 
 <script lang="ts" setup>
@@ -71,7 +71,7 @@ import DimensionsConfiguration from './components/blocks/dimensions-configuratio
 import VsBlockCard from '@/components/vs-block/components/vs-block-card.component.vue'
 import AppMediaModal from '@/components/media/app-media-modal.component.vue'
 import VsBlockAdd from '@/components/vs-block/components/vs-block-add.component.vue'
-import AddTermForm from '@/components/terms/add-term-form.component.vue'
+import AddTermForm from '@/components/terms/add-term-form.drawer.vue'
 
 import { onMounted, ref } from 'vue'
 import { useDimensionsStore } from './dimensions.store.ts'

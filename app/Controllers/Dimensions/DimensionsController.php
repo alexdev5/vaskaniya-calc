@@ -2,7 +2,7 @@
 
 namespace App\Controllers\Dimensions;
 
-use App\Config;
+use App\Config\TaxonomyEnum;
 use App\Controllers\TaxonomyController;
 use App\Controllers\Terms\TermsAcfEnum;
 use App\Controllers\Terms\TermsController;
@@ -29,6 +29,7 @@ class DimensionsController
         }
 
         $returned = [
+            'taxonomy' => TaxonomyEnum::Categories,
             'parent' => TermResource::collection($productTypesTerms['parent']),
             'productTypes' => TermResource::collection($productTypesTerms['terms']),
             'configurations' => ConfigurationResource::collection($configurations),
@@ -46,7 +47,7 @@ class DimensionsController
         $parentTerm = get_term_by(
             'slug',
             'product-type',
-            Config::get('taxonomy.categories')
+            TaxonomyEnum::Categories
         );
 
         if (!empty($parentTerm)) {
@@ -55,7 +56,7 @@ class DimensionsController
 
         // children
         $terms = TaxonomyController::getChildTaxonomiesByParentId(
-            Config::get('taxonomy.categories'),
+            TaxonomyEnum::Categories,
             $parentTerm->term_id
         );
 
@@ -76,7 +77,7 @@ class DimensionsController
 
         TermsController::updateById(
             $params['termId'],
-            Config::get('taxonomy.categories'),
+            TaxonomyEnum::Categories,
             [
                 'name' => $params['title'],
                 'description' => $params['description'],
@@ -95,7 +96,7 @@ class DimensionsController
 
         $result = TermsController::updateById(
             $params['termId'],
-            Config::get('taxonomy.categories'),
+            TaxonomyEnum::Categories,
             [
                 'acf' => [
                     TermsAcfEnum::BlockTitle => $params['blockTitle'],

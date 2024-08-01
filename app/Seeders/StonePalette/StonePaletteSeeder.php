@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Seeders\StonePalette;
 
-use App\Config;
+use App\Config\PostTypeEnum;
+use App\Config\TaxonomyEnum;
 use App\Seeders\Seeders;
 
 class StonePaletteSeeder extends Seeders
@@ -20,7 +22,7 @@ class StonePaletteSeeder extends Seeders
     public function run()
     {
         $this->createTerms(
-            Config::get('taxonomy.categoryStone'),
+            TaxonomyEnum::CategoryStone,
             $this->taxonomies
         );
 
@@ -30,7 +32,7 @@ class StonePaletteSeeder extends Seeders
 //       );
 
         $this->createPosts(
-            Config::get('post_type.palette'),
+            PostTypeEnum::Palette,
             $this->posts
         );
     }

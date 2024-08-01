@@ -55,3 +55,9 @@ export enum ImageType {
 	ImageFullSize,
 	ChildBlockImage,
 }
+
+export interface CreateTermInDrawerParams {
+	taxonomy: string
+	title: string
+	parentId?: number
+}

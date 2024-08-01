@@ -47,6 +47,7 @@
 			</AppFileInput>
 
 			<AppBtn
+				v-if="!noSelectImage"
 				icon
 				x-small
 				@click="emit('lib-opened')"
@@ -64,24 +65,15 @@ import IconCameraPlus from '@/components/icons/IconCameraPlus.vue'
 import AppBtn from '@/components/elements/app-btn.component.vue'
 import IconListSearch from '@/components/icons/IconListSearch.vue'
 import IconTrash from '@/components/icons/IconTrash.vue'
-
-import { PropType } from 'vue'
 import { Image } from '@/models/terms'
 
-defineProps({
-	label: String,
-	image: {
-		type: Object as PropType<Image | null>,
-	},
-	modelValue: {
-		type: Object as PropType<any>,
-	},
-	deleteLoading: Boolean,
-})
-
-function log(data) {
-	console.log(data)
-}
+const props = defineProps<{
+	label?: string,
+	image?: Image,
+	modelValue: any,
+	deleteLoading?: boolean,
+	noSelectImage?: boolean
+}>()
 
 const emit = defineEmits(['update:model-value', 'lib-opened', 'removed'])
 </script>

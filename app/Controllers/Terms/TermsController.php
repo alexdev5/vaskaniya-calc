@@ -102,4 +102,49 @@ class TermsController
 
         return true;
     }
+
+    public static function changeVisible(WP_REST_Request $request): WP_REST_Response
+    {
+        $termId = $request->get_param('termId');
+
+        update_field(TermsAcfEnum::IsVisible, $request->get_param('visible'), 'term_' . $termId);
+
+        return new WP_REST_Response([
+            'message' => 'Visibility changed successfully',
+        ], 200);
+    }
+
+    public static function create(WP_REST_Request $request): WP_REST_Response
+    {
+//        string $taxonomy, string $termName, array $args, $parentId = null
+        if (!isset($termName) || !isset($taxonomy)) {
+            return new WP_Error('missing_parameters', 'termName or taxonomy undefined');
+        }
+
+        // Додавання батьківського ID до аргументів, якщо він наданий
+        if ($parentId !== null) {
+            $args['parent'] = $parentId;
+        }
+
+        $result = wp_insert_term($termName, $taxonomy, $args);
+
+        if (is_wp_error($result)) {
+            return new WP_Error('term_creation_failed', 'Error creating the term: ' . implode(', ', $result->get_error_messages()));
+        }
+
+        $termId = $result['term_id'];
+        $acf = $args['acf'] ?? null;
+
+        // Оновлення ACF полів, якщо вони надані
+        if ($acf) {
+            foreach ($acf as $fieldName => $acfValue) {
+                update_field($fieldName, $acfValue, 'term_' . $termId);
+            }
+        }
+
+        return $termId;
+        return new WP_REST_Response([
+            'message' => 'Visibility changed successfully',
+        ], 200);
+    }
 }

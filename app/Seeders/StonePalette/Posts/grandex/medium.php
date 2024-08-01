@@ -1,13 +1,13 @@
 <?php
 $imageDir = VS_ASSETS_PATH . 'images/stone-palette/grandex/';
-$categoriesStone = \App\Config::get('taxonomy.categoryStone');
-$taxonomiesLocal = ['brand-grandex', 'price-category-two', 'cost-medium', ];
+$categoriesStone = \App\Config\TaxonomyEnum::CategoryStone;
+$taxonomiesLocal = ['brand-grandex', 'price-category-two', 'cost-medium',];
 
 return [
     [
         'title' => 'Cloudy Mount',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'A-401',
@@ -20,7 +20,7 @@ return [
     [
         'title' => 'Blue Dream',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'acf' => [
             'vendor_code' => 'A-402',
             'price' => 0,
@@ -32,7 +32,7 @@ return [
     [
         'title' => 'Asphalt Material',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'acf' => [
             'vendor_code' => 'A-403',
             'price' => 0,
@@ -44,7 +44,7 @@ return [
     [
         'title' => 'Arctic Air',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'acf' => [
             'vendor_code' => 'A-404',
             'price' => 0,
@@ -56,7 +56,7 @@ return [
     [
         'title' => 'Peach Fruit',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'acf' => [
             'vendor_code' => 'A-405',
             'price' => 0,
@@ -68,7 +68,7 @@ return [
     [
         'title' => 'Space Galaxy',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'acf' => [
             'vendor_code' => 'A-406',
             'price' => 0,
@@ -80,7 +80,7 @@ return [
     [
         'title' => 'Grand Canyon',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'acf' => [
             'vendor_code' => 'A-407',
             'price' => 0,
@@ -91,7 +91,7 @@ return [
     ],
     [
         'title' => 'Cacao Tree',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'acf' => [
             'vendor_code' => 'A-408',
             'price' => 0,
@@ -102,7 +102,7 @@ return [
     ],
     [
         'title' => 'South Coast',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'acf' => [
             'vendor_code' => 'A-409',
             'price' => 0,
@@ -113,7 +113,7 @@ return [
     ],
     [
         'title' => 'Cotton Wool',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'acf' => [
             'vendor_code' => 'A-410',
         ],

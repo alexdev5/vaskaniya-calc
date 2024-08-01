@@ -1,13 +1,13 @@
 <?php
 $imageDir = VS_ASSETS_PATH . 'images/stone-palette/grandex/';
-$categoriesStone = \App\Config::get('taxonomy.categoryStone');
+$categoriesStone = \App\Config\TaxonomyEnum::CategoryStone;
 $taxonomiesLocal = ['brand-staron', 'price-category-two', 'cost-medium'];
 
 return [
     [
         'title' => 'Metallic Beach',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'EB-545',
@@ -20,7 +20,7 @@ return [
     [
         'title' => 'Metallic Cosmos',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'EC-596',
@@ -33,7 +33,7 @@ return [
     [
         'title' => 'Metallic Galaxy',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'EG-595',
@@ -46,7 +46,7 @@ return [
     [
         'title' => 'Metallic Yukon',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'EY-510',
@@ -59,7 +59,7 @@ return [
     [
         'title' => 'Pebble Aqua',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'PA-860',
@@ -72,7 +72,7 @@ return [
     [
         'title' => 'Pebble Blue',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'PB-870',
@@ -85,7 +85,7 @@ return [
     [
         'title' => 'Pebble Ebony',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'PE-814',
@@ -98,7 +98,7 @@ return [
     [
         'title' => 'Pebble Grey',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'PG-810',
@@ -111,7 +111,7 @@ return [
     [
         'title' => 'Pebble Gold',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'PG-840',
@@ -124,7 +124,7 @@ return [
     [
         'title' => 'Pebble Ice',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'PI-811',
@@ -137,7 +137,7 @@ return [
     [
         'title' => 'Pebble Kernel',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'PK-843',
@@ -150,7 +150,7 @@ return [
     [
         'title' => 'Pebble Ponderosa',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'PP-868',
@@ -163,7 +163,7 @@ return [
     [
         'title' => 'Pebble Rose',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'PR-850',
@@ -176,7 +176,7 @@ return [
     [
         'title' => 'Pebble Swan',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'PS-813',
@@ -189,7 +189,7 @@ return [
     [
         'title' => 'Pebble Saratoga',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'PS-820',
@@ -202,7 +202,7 @@ return [
     [
         'title' => 'Pebble Terrian',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'PT-857',
@@ -215,7 +215,7 @@ return [
     [
         'title' => 'Metallic Sleeksilver',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'ES-582',

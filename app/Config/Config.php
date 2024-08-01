@@ -1,5 +1,6 @@
 <?php
-namespace App;
+
+namespace Api\Config;
 
 class Config
 {
@@ -9,7 +10,7 @@ class Config
         $value = '';
 
         foreach ($keys as $key) {
-            if($value) $value = $value[$key];
+            if ($value) $value = $value[$key];
             else $value = self::getList()[$key] ?? '';
         }
 
@@ -21,10 +22,10 @@ class Config
         return [
             'title' => 'VS Calculator',
             'post_type' => [
-              'products' => 'vs-products',
-              'palette' => 'vs-products-palette', // палитра
-              'addons' => 'vs-products-addons',
-              'services' => 'vs-products-services',
+                'products' => 'vs-products',
+                'palette' => 'vs-products-palette', // палитра
+                'addons' => 'vs-products-addons',
+                'services' => 'vs-products-services',
             ],
             'taxonomy' => [
                 'tags' => 'vs-products-tags',

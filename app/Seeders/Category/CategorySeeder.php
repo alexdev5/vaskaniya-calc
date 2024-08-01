@@ -2,7 +2,7 @@
 
 namespace App\Seeders\Category;
 
-use App\Config;
+use App\Config\TaxonomyEnum;
 use App\Seeders\Seeders;
 
 class CategorySeeder extends Seeders
@@ -17,7 +17,7 @@ class CategorySeeder extends Seeders
     public function run()
     {
         $this->createTerms(
-            Config::get('taxonomy.categories'),
+            TaxonomyEnum::Categories,
             $this->taxonomies
         );
     }

@@ -1,13 +1,13 @@
 <?php
 $imageDir = VS_ASSETS_PATH . 'images/stone-palette/grandex/';
-$categoriesStone = \App\Config::get('taxonomy.categoryStone');
+$categoriesStone = \App\Config\TaxonomyEnum::CategoryStone;
 $taxonomiesLocal = ['brand-staron', 'cost-expensive'];
 
 return [
     [
         'title' => 'Mosaic Dalmatian',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'QD-212',
@@ -20,7 +20,7 @@ return [
     [
         'title' => 'Mosaic Nimbus',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'QN-287',
@@ -33,7 +33,7 @@ return [
     [
         'title' => 'Quarry Minette',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'QM-289',
@@ -46,7 +46,7 @@ return [
     [
         'title' => 'Quarry (Talus) Oyster',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'T0-310',
@@ -59,7 +59,7 @@ return [
     [
         'title' => 'Onyx',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'ON-095',
@@ -72,7 +72,7 @@ return [
     [
         'title' => 'Onyx',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'ON-095',
@@ -85,7 +85,7 @@ return [
     [
         'title' => 'Beige Granite',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'VB-172',
@@ -98,7 +98,7 @@ return [
     [
         'title' => 'Cotton White',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'VC-110',
@@ -111,7 +111,7 @@ return [
     [
         'title' => 'Cloudbank',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'VC-118',
@@ -124,7 +124,7 @@ return [
     [
         'title' => 'Concerto',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'VC-157',
@@ -137,7 +137,7 @@ return [
     [
         'title' => 'Supreme Dawn',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'VD-126',
@@ -150,7 +150,7 @@ return [
     [
         'title' => 'Supreme Desert Wind',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'VD-173',
@@ -163,7 +163,7 @@ return [
     [
         'title' => 'Supreme Dandelion',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'VD-175',
@@ -176,7 +176,7 @@ return [
     [
         'title' => 'Supreme Loam',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'VL-155',
@@ -189,7 +189,7 @@ return [
     [
         'title' => 'Supreme Magnolia',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'VM-143',
@@ -202,7 +202,7 @@ return [
     [
         'title' => 'Supreme Natural Bridge',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'VN-144',
@@ -215,7 +215,7 @@ return [
     [
         'title' => 'Supreme Noir Concrete',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'VN-180',
@@ -228,7 +228,7 @@ return [
     [
         'title' => 'Supreme Ocean View',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'VO-171',
@@ -241,7 +241,7 @@ return [
     [
         'title' => 'Supreme Odyssey',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'VO-173',
@@ -254,7 +254,7 @@ return [
     [
         'title' => 'Supreme Pastoral',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'VP-177',
@@ -267,7 +267,7 @@ return [
     [
         'title' => 'Supreme Rainier',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'VR-173',
@@ -280,7 +280,7 @@ return [
     [
         'title' => 'Supreme Tranquil',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'VT-115',
@@ -293,7 +293,7 @@ return [
     [
         'title' => 'Supreme Urban Grey',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'VU-127',
@@ -306,7 +306,7 @@ return [
     [
         'title' => 'Tempest Adamantine',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'FA-159',
@@ -319,7 +319,7 @@ return [
     [
         'title' => 'Tempest Blaze',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'FB-147',
@@ -332,7 +332,7 @@ return [
     [
         'title' => 'Tempest Bronzestar',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'FB-154',
@@ -345,7 +345,7 @@ return [
     [
         'title' => 'Bronzestar',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'FB-154',
@@ -358,7 +358,7 @@ return [
     [
         'title' => 'Tempest Coffe Bean',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'FC-158',
@@ -371,7 +371,7 @@ return [
     [
         'title' => 'Tempest Caviar',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'FC-188',
@@ -384,7 +384,7 @@ return [
     [
         'title' => 'Tempest Dapple',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'FD-187',
@@ -397,7 +397,7 @@ return [
     [
         'title' => 'Tempest Dazzle',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'FD-191',
@@ -410,7 +410,7 @@ return [
     [
         'title' => 'Tempest Glimmer',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'FG-144',
@@ -423,7 +423,7 @@ return [
     [
         'title' => 'Tempest Genesis',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'FG-174',
@@ -436,7 +436,7 @@ return [
     [
         'title' => 'Tempest Gold Leaf',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'FG-196',
@@ -449,7 +449,7 @@ return [
     [
         'title' => 'Tempest Horizon',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'FH-114',
@@ -462,7 +462,7 @@ return [
     [
         'title' => 'Tempest Meteor',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'FM-111',
@@ -475,7 +475,7 @@ return [
     [
         'title' => 'Tempest Peak',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'FP-100',
@@ -488,7 +488,7 @@ return [
     [
         'title' => 'Tempest Prairie',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'FP-142',
@@ -501,7 +501,7 @@ return [
     [
         'title' => 'Tempest Rattan',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'FR-124',
@@ -514,7 +514,7 @@ return [
     [
         'title' => 'Tempest Shimmer',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'FR-148',
@@ -527,7 +527,7 @@ return [
     [
         'title' => 'Tempest Shell',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'FS-115',
@@ -540,7 +540,7 @@ return [
     [
         'title' => 'Tempest Zenith',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'FZ-184',
@@ -553,7 +553,7 @@ return [
     [
         'title' => 'Quarry Starred',
         'content' => '',
-        'post_status'  => 'publish',
+        'post_status' => 'publish',
         'thumbnail' => $imageDir . 'placeholder.png',
         'acf' => [
             'vendor_code' => 'QS-288',

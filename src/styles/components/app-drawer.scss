@@ -12,6 +12,7 @@
   .v-navigation-drawer__append {
     border-top: 2px solid var(--gray-light);
     overflow: initial;
+    padding: var(--app-offset-normal);
   }
 
   .app-drawer--header {
