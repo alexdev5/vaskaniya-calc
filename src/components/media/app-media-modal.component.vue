@@ -53,7 +53,7 @@
 import AppModal from '@/components/elements/app-modal.component.vue'
 import AppBtn from '@/components/elements/app-btn.component.vue'
 import { ref } from 'vue'
-import { Media } from '@/models/terms/terms.contracts.ts'
+import { TermImage } from '@/api/terms/terms.contracts'
 import { useMediaStore } from '@/stores'
 import { TermsService } from '@/services'
 import { Terms } from '@/models'
@@ -68,7 +68,7 @@ const emit = defineEmits(['selected'])
 const mediaStore = useMediaStore()
 
 const mediaModal = ref()
-const mediaSelected = ref({} as Media)
+const mediaSelected = ref({} as TermImage)
 const mediaLoading = ref(false)
 const loading = ref(false)
 
@@ -78,7 +78,7 @@ async function open() {
 }
 
 function close() {
-	mediaSelected.value = {} as Media
+	mediaSelected.value = {} as TermImage
 	mediaModal.value?.close()
 }
 

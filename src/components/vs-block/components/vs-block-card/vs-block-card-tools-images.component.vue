@@ -66,18 +66,17 @@ import IconListSearch from '@/components/icons/IconListSearch.vue'
 import IconTrash from '@/components/icons/IconTrash.vue'
 
 import { PropType } from 'vue'
-import { Image } from '@/models/terms'
-import { remove } from 'lodash'
+import { ImageContract } from '@/api/terms'
 
 defineProps({
 	label: String,
 	image: {
-		type: Object as PropType<Image | null>
+		type: Object as PropType<ImageContract | null>,
 	},
 	modelValue: {
-		type: Object as PropType<any>
+		type: Object as PropType<any>,
 	},
-	deleteLoading: Boolean
+	deleteLoading: Boolean,
 })
 
 function log(data) {

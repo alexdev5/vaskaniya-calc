@@ -1,35 +1,16 @@
-export interface Image {
-	id: number
-	icon: string
-	modified: string
-	name: string
-	fullName: string
-	url: string
-}
+import { ImageContract, TaxonomyName, UpdateTermCommand } from '@/api/terms/terms.contracts'
 
-export interface CommonCategoryParams {
-	termId: number
-	title: string
-	description?: string
-	price?: number
-	thumbnail?: Image[]
-	childBlockImage?: Image[]
-	imageFullSize?: Image[]
-	isVisible?: boolean
 
-	[key: string]: any
-}
-
-export interface TermFromFields extends Omit<CommonCategoryParams, 'termId'> {
+export interface TermFromFields extends Omit<UpdateTermCommand, 'termId'> {
 
 }
 
 export interface Acf {
 	isVisible: boolean
 	price?: number
-	thumbnail: Image | null
-	childBlockImage: Image | null
-	imageFullSize?: Image | null
+	thumbnail: ImageContract | null
+	childBlockImage: ImageContract | null
+	imageFullSize?: ImageContract | null
 	childBlockNumber: string
 	childBlockTitle: string
 	blockNumber: string
@@ -57,7 +38,7 @@ export enum ImageType {
 }
 
 export interface CreateTermInDrawerParams {
-	taxonomy: string
+	taxonomy: TaxonomyName
 	title: string
 	parentId?: number
 }

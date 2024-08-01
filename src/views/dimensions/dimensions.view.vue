@@ -25,7 +25,11 @@
 			)"
 		/>
 
-		<VsBlockAdd @added="addTermFromRef?.open('Add dimensions')" />
+		<VsBlockAdd @added="addTermFromRef?.open({
+			title: 'Add configuration',
+			taxonomy: store.state.taxonomy,
+			parentId: store.state.parent?.id,
+		})" />
 	</DimensionsProductType>
 
 	<DimensionsConfiguration v-if="store.state.currentProductType">
@@ -53,7 +57,11 @@
 			/>
 		</template>
 
-		<VsBlockAdd @added="addTermFromRef?.open('Add dimensions')" />
+		<VsBlockAdd @added="addTermFromRef?.open({
+			title: 'Add dimensions',
+			taxonomy: store.state.taxonomy,
+			parentId: store.state.currentProductType?.id,
+		})" />
 	</DimensionsConfiguration>
 
 	<AppMediaModal
@@ -75,7 +83,8 @@ import AddTermForm from '@/components/terms/add-term-form.drawer.vue'
 
 import { onMounted, ref } from 'vue'
 import { useDimensionsStore } from './dimensions.store.ts'
-import { CommonCategoryParams, ImageType } from '@/models/terms'
+import { UpdateTermCommand } from '@/api/terms'
+import { ImageType } from '@/models/terms'
 import { DimensionsService, TermsService } from '@/services'
 import { useTerm } from '@/composables'
 import { content } from '@/content'
@@ -103,14 +112,14 @@ async function loadImages(termId: number, mediaType: ImageType) {
 	mediaModal.value?.open()
 }
 
-async function saveCardSettings(termId: number, formFields: CommonCategoryParams) {
+async function saveCardSettings(termId: number, formFields: UpdateTermCommand) {
 	loading.value = true
 
 	try {
 		if (
 			formFields.imageFullSize?.length ||
 			formFields.thumbnail?.length ||
-			formFields.relatedImage?.length
+			formFields.childBlockImage?.length
 		) {
 			await TermsService.addImages({
 				termId,

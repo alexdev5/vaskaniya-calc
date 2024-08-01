@@ -1,6 +1,8 @@
 import { Terms } from '@/models'
+import { TaxonomyName } from '@/api/terms/terms.contracts'
 
 export interface DimensionsContract {
+	taxonomy: TaxonomyName
 	parent: ProductTypeContract
 	productTypes: ProductTypeContract[]
 	configurations: ConfigurationContract[]

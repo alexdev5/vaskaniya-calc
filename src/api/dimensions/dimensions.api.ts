@@ -1,6 +1,6 @@
 import { AxiosApi } from '@/api/axios/axios.api'
 import { DimensionsContract, UpdateTermTitleCommand } from '@/api/dimensions/dimensions.contracts.ts'
-import { CommonCategoryParams } from '@/models/terms'
+import { UpdateTermCommand } from '@/api/terms'
 
 export class DimensionsApi extends AxiosApi {
 	public baseUrl = '/dimensions'
@@ -13,7 +13,7 @@ export class DimensionsApi extends AxiosApi {
 		return this.post(`${this.baseUrl}`, params)
 	}
 
-	async updateTerm(params: CommonCategoryParams) {
+	async updateTerm(params: UpdateTermCommand) {
 		return this.post(`${this.baseUrl}/update-term`, params)
 	}
 

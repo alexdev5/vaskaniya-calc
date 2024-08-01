@@ -2,9 +2,11 @@ import { defineStore } from 'pinia'
 import { reactive, ref } from 'vue'
 import { DimensionsService, TermsService } from '@/services'
 import { ImageType, TermState } from '@/models/terms'
+import { TaxonomyName } from '@/api/terms'
 
 export const useDimensionsStore = defineStore('dimensions', () => {
 	const state = reactive({
+		taxonomy: '' as TaxonomyName,
 		parent: null as TermState | null,
 		productTypes: null as TermState[] | null,
 		configurations: null as TermState[] | null,
@@ -30,6 +32,7 @@ export const useDimensionsStore = defineStore('dimensions', () => {
 		try {
 			const result = await DimensionsService.dimensions()
 
+			state.taxonomy = result.taxonomy
 			state.parent = new TermState(result.parent)
 
 			state.productTypes = (result.productTypes ?? []).map(

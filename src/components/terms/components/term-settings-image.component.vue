@@ -65,11 +65,11 @@ import IconCameraPlus from '@/components/icons/IconCameraPlus.vue'
 import AppBtn from '@/components/elements/app-btn.component.vue'
 import IconListSearch from '@/components/icons/IconListSearch.vue'
 import IconTrash from '@/components/icons/IconTrash.vue'
-import { Image } from '@/models/terms'
+import { ImageContract } from '@/api/terms'
 
 const props = defineProps<{
 	label?: string,
-	image?: Image,
+	image?: ImageContract,
 	modelValue: any,
 	deleteLoading?: boolean,
 	noSelectImage?: boolean

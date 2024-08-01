@@ -1,5 +1,6 @@
 import { AxiosApi } from '@/api/axios'
 import { Terms } from '@/models'
+import { CreateTaxonomyCommand } from '@/api/terms/terms.contracts'
 
 export class TermsApi extends AxiosApi {
 	public baseUrl = '/terms'
@@ -29,9 +30,7 @@ export class TermsApi extends AxiosApi {
 		})
 	}
 
-	async create(parentTermId: number) {
-		return this.post(`${this.baseUrl}/duplicate-term`, {
-			parentTermId,
-		})
+	async create(command: CreateTaxonomyCommand) {
+		return this.post(`${this.baseUrl}/duplicate-term`, command)
 	}
 }

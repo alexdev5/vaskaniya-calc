@@ -1,5 +1,5 @@
 <template>
-	<AppDrawer :opened="widgetOpened" @closed="close" :title="title">
+	<AppDrawer :opened="widgetOpened" @closed="close" :title="params?.title ?? ''">
 		<TermFormFields @fields-updated="updateFields" no-select-image />
 
 		<template #footer>
@@ -19,7 +19,7 @@ import TermFormFields from '@/components/terms/components/term-form-fields.compo
 import AppFormButtons from '@/components/forms/app-form-buttons.component.vue'
 
 import { ref } from 'vue'
-import { TermFromFields } from '@/models/terms'
+import { CreateTermInDrawerParams, TermFromFields } from '@/models/terms'
 import { TermsService } from '@/services'
 import { content } from '@/content'
 
@@ -27,38 +27,40 @@ const props = defineProps<{
 	callback?: () => Promise<void>
 }>()
 
-const settingsForm = ref<TermFromFields | null>(null)
+const formFields = ref<TermFromFields | null>(null)
 
-const title = ref('')
+const params = ref<CreateTermInDrawerParams | null>(null)
 const loading = ref(false)
 const disabled = ref(false)
 const widgetOpened = ref(false)
 
 async function submit() {
+	if (!formFields.value) throw new Error('formFields is null in add-term-form-drawer')
+
 	loading.value = true
 
-	console.log(settingsForm.value)
+	console.log(formFields.value)
 	return
 
 	try {
 
-		await TermsService.create({
-			termId,
+		const termId = await TermsService.create({
+			parentId: params.value.,
 			title: formFields.title,
-			description: formFields.description,
+			description: formFields?.description ?? null,
 			price: formFields.price,
 		})
 
 		if (
-			formFields.imageFullSize?.length ||
-			formFields.thumbnail?.length ||
-			formFields.relatedImage?.length
+			formFields.value?.imageFullSize?.length ||
+			formFields.value?.thumbnail?.length ||
+			formFields.value?.childBlockImage?.length
 		) {
 			await TermsService.addImages({
 				termId,
-				imageFullSize: formFields.imageFullSize?.[0] ?? null,
-				thumbnail: formFields.thumbnail?.[0] ?? null,
-				childBlockImage: formFields.childBlockImage?.[0] ?? null,
+				imageFullSize: formFields.value?.imageFullSize?.[0] ?? null,
+				thumbnail: formFields.value?.thumbnail?.[0] ?? null,
+				childBlockImage: formFields.value?.childBlockImage?.[0] ?? null,
 			})
 		}
 
@@ -74,17 +76,18 @@ async function submit() {
 	}
 }
 
-async function open(_title: string) {
-	title.value = _title
+async function open(_params: CreateTermInDrawerParams) {
+	params.value = _params
 	widgetOpened.value = true
 }
 
 function close() {
 	widgetOpened.value = false
+	params.value = null
 }
 
 function updateFields(fields: TermFromFields) {
-	settingsForm.value = fields
+	formFields.value = fields
 	disabled.value =
 		!Object.values(fields).filter(value => Boolean(value)).length || !fields.title
 }
