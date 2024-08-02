@@ -41,7 +41,8 @@ export const useDimensionsStore = defineStore('dimensions', () => {
 			state.configurations = (result.configurations ?? []).map(
 				configuration => new TermState(configuration),
 			)
-
+			
+			setCardDefault()
 		} catch (error: any) {
 			console.log(error)
 		} finally {

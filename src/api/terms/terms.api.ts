@@ -24,9 +24,17 @@ export class TermsApi extends AxiosApi {
 		})
 	}
 
-	async duplicateTerm(parentTermId: number) {
-		return this.post(`${this.baseUrl}/duplicate-term`, {
-			parentTermId,
+	async duplicate(id: number, taxonomy: string) {
+		return this.post(`${this.baseUrl}/duplicate`, {
+			id,
+			taxonomy,
+		})
+	}
+
+	async remove(id: number, taxonomy: string) {
+		return this.post(`${this.baseUrl}/remove`, {
+			id,
+			taxonomy,
 		})
 	}
 

@@ -9,20 +9,14 @@
 			:key="card.id"
 			:record="card"
 			:deleteLoading="store.imageDeleting"
-			:loading="loading"
+			:loading="progress.savingCardSettings"
 			@click="store.state.currentProductType = card"
 			@settings-saved="saveCardSettings(card.id, $event)"
 			@load-image-requested="loadImages(card.id, $event)"
 			@remove-image-requested="store.removeImageFromTerm(card.id, $event)"
-			@visibility-changed="changeVisibility(
-					card.id,
-					!card.acf.isVisible,
-					store.loadDimensions
-				)"
-			@duplicated="duplicateTerm(
-				card.id,
-				store.loadDimensions
-			)"
+			@visibility-changed="changeVisibility(card.id, !card.acf.isVisible)"
+			@duplicated="duplicateTerm(card.id, store.state.taxonomy)"
+			@removed="removeTerm(card.id, store.state.taxonomy)"
 		/>
 
 		<VsBlockAdd @added="addTermFromRef?.open({
@@ -41,19 +35,13 @@
 				}"
 				:record="configuration"
 				:deleteLoading="store.imageDeleting"
-				:loading="loading"
+				:loading="progress.savingCardSettings"
 				@settings-saved="saveCardSettings(configuration.id, $event)"
 				@load-image-requested="loadImages(configuration.id, $event)"
 				@remove-image-requested="store.removeImageFromTerm(configuration.id, $event)"
-				@visibility-changed="changeVisibility(
-					configuration.id,
-					!configuration.acf.isVisible,
-					store.loadDimensions
-				)"
-				@duplicated="duplicateTerm(
-					configuration.id,
-					store.loadDimensions
-				)"
+				@visibility-changed="changeVisibility(configuration.id, !configuration.acf.isVisible)"
+				@duplicated="duplicateTerm(configuration.id, store.state.taxonomy)"
+				@removed="removeTerm(configuration.id, store.state.taxonomy)"
 			/>
 		</template>
 
@@ -81,19 +69,22 @@ import AppMediaModal from '@/components/media/app-media-modal.component.vue'
 import VsBlockAdd from '@/components/vs-block/components/vs-block-add.component.vue'
 import AddTermForm from '@/components/terms/add-term-form.drawer.vue'
 
-import { onMounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import { useDimensionsStore } from './dimensions.store.ts'
-import { UpdateTermCommand } from '@/api/terms'
 import { ImageType } from '@/models/terms'
-import { DimensionsService, TermsService } from '@/services'
 import { useTerm } from '@/composables'
-import { content } from '@/content'
 
 const store = useDimensionsStore()
 
-const { changeVisibility, duplicateTerm } = useTerm()
+const {
+	changeVisibility,
+	duplicateTerm,
+	saveCardSettings,
+	removeTerm,
+	loading,
+	progress,
+} = useTerm(store.loadDimensions)
 
-const loading = ref(false)
 const mediaModal = ref()
 const currentTaxSeparate = ref()
 const addTermFromRef = ref()
@@ -112,43 +103,11 @@ async function loadImages(termId: number, mediaType: ImageType) {
 	mediaModal.value?.open()
 }
 
-async function saveCardSettings(termId: number, formFields: UpdateTermCommand) {
-	loading.value = true
-
-	try {
-		if (
-			formFields.imageFullSize?.length ||
-			formFields.thumbnail?.length ||
-			formFields.childBlockImage?.length
-		) {
-			await TermsService.addImages({
-				termId,
-				imageFullSize: formFields.imageFullSize?.[0] ?? null,
-				thumbnail: formFields.thumbnail?.[0] ?? null,
-				childBlockImage: formFields.childBlockImage?.[0] ?? null,
-			})
-		}
-
-		await DimensionsService.updateTerm({
-			termId,
-			title: formFields.title,
-			description: formFields.description,
-			price: formFields.price,
-		})
-
-		await store.loadDimensions()
-
-		console.log(content.notifications.updated)
-	} catch (error: any) {
-		console.error(error)
-	} finally {
-		loading.value = false
-	}
-}
-
 onMounted(async () => {
 	await store.loadDimensions()
-	store.setCardDefault()
 })
 
+onUnmounted(() => {
+
+})
 </script>

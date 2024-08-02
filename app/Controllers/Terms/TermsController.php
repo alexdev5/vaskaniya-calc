@@ -148,4 +148,64 @@ class TermsController
 
         return new WP_REST_Response($termId, 201);
     }
+
+    public static function remove(WP_REST_Request $request): WP_REST_Response
+    {
+        $termId = $request->get_param('id');
+        $taxonomy = $request->get_param('taxonomy');
+
+        if (!isset($termId) || !isset($taxonomy)) {
+            return debugRest('termId or taxonomy undefined');
+        }
+
+        $result = wp_delete_term($termId, $taxonomy);
+
+        if (is_wp_error($result)) {
+            return debugRest('term_deletion_failed');
+        }
+
+        return new WP_REST_Response(null, 204);
+    }
+
+    public static function duplicate(WP_REST_Request $request): WP_REST_Response
+    {
+        $termId = $request->get_param('id');
+        $taxonomy = $request->get_param('taxonomy');
+
+        if (!isset($termId) || !isset($taxonomy)) {
+            return debugRest('termId or taxonomy undefined');
+        }
+
+        $term = get_term($termId, $taxonomy);
+
+        if (is_wp_error($term) || !$term) {
+            return debugRest('term_not_found');
+        }
+
+        $newTermName = $term->name . ' copy';
+        $newTermSlug = wp_unique_term_slug($term->slug . '-copy', (object)['taxonomy' => $taxonomy]);
+        $args = [
+            'description' => $term->description,
+            'slug' => $newTermSlug,
+            'parent' => $term->parent,
+        ];
+
+        $result = wp_insert_term($newTermName, $taxonomy, $args);
+
+        if (is_wp_error($result)) {
+            return debugRest('term_creation_failed');
+        }
+
+        $newTermId = $result['term_id'];
+
+        $fields = get_fields('term_' . $termId);
+        if ($fields) {
+            foreach ($fields as $key => $value) {
+                update_field($key, $value, 'term_' . $newTermId);
+            }
+        }
+
+        return new WP_REST_Response($newTermId, 201);
+    }
+
 }
