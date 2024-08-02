@@ -29,8 +29,8 @@
 			<IconCopy width="16" height="16" />
 		</div>
 		<div class="vs-icon-btn" @click.stop.prevent="emit('visibility-changed')">
-			<IconEyeOff width="16" height="16" v-if="record?.acf.isVisible" />
-			<IconEye width="16" height="16" v-else />
+			<IconEye width="16" height="16" v-if="record?.acf.isVisible" />
+			<IconEyeOff width="16" height="16" v-else />
 		</div>
 		<div
 			v-if="record?.acf.isVisible"

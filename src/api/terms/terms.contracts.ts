@@ -35,6 +35,7 @@ export enum TaxonomyName {
 
 export interface CreateTaxonomyCommand {
 	title: string
+	taxonomy: string
 	parentId?: number
 	description?: string
 	price?: number

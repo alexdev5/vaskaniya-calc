@@ -31,6 +31,6 @@ export class TermsApi extends AxiosApi {
 	}
 
 	async create(command: CreateTaxonomyCommand) {
-		return this.post(`${this.baseUrl}/duplicate-term`, command)
+		return this.post(`${this.baseUrl}/create`, command)
 	}
 }

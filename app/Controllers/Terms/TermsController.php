@@ -116,9 +116,14 @@ class TermsController
 
     public static function create(WP_REST_Request $request): WP_REST_Response
     {
-//        string $taxonomy, string $termName, array $args, $parentId = null
+        $taxonomy = $request->get_param('taxonomy');
+        $parentId = $request->get_param('parentId');
+        $termName = $request->get_param('title');
+        $description = $request->get_param('description');
+        $price = $request->get_param('price');
+
         if (!isset($termName) || !isset($taxonomy)) {
-            return new WP_Error('missing_parameters', 'termName or taxonomy undefined');
+            return debugRest('termName or taxonomy undefined');
         }
 
         // Додавання батьківського ID до аргументів, якщо він наданий
@@ -126,25 +131,21 @@ class TermsController
             $args['parent'] = $parentId;
         }
 
-        $result = wp_insert_term($termName, $taxonomy, $args);
+        $result = wp_insert_term($termName, $taxonomy, [
+            'description' => $description,
+            'parent' => $parentId,
+        ]);
 
         if (is_wp_error($result)) {
-            return new WP_Error('term_creation_failed', 'Error creating the term: ' . implode(', ', $result->get_error_messages()));
+            return debugRest('term_creation_failed');
         }
 
         $termId = $result['term_id'];
-        $acf = $args['acf'] ?? null;
 
-        // Оновлення ACF полів, якщо вони надані
-        if ($acf) {
-            foreach ($acf as $fieldName => $acfValue) {
-                update_field($fieldName, $acfValue, 'term_' . $termId);
-            }
+        if ($price) {
+            update_field(TermsAcfEnum::Price, $price, 'term_' . $termId);
         }
 
-        return $termId;
-        return new WP_REST_Response([
-            'message' => 'Visibility changed successfully',
-        ], 200);
+        return new WP_REST_Response($termId, 201);
     }
 }

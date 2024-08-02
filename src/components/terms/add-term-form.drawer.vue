@@ -1,6 +1,11 @@
 <template>
 	<AppDrawer :opened="widgetOpened" @closed="close" :title="params?.title ?? ''">
-		<TermFormFields @fields-updated="updateFields" no-select-image />
+		
+		<TermFormFields
+			v-if="widgetOpened"
+			no-select-image
+			@fields-updated="updateFields"
+		/>
 
 		<template #footer>
 			<AppFormButtons
@@ -36,19 +41,18 @@ const widgetOpened = ref(false)
 
 async function submit() {
 	if (!formFields.value) throw new Error('formFields is null in add-term-form-drawer')
+	if (!params.value || !params.value?.taxonomy) throw new Error('params is not passed in add-term-form-drawer')
 
 	loading.value = true
-
-	console.log(formFields.value)
-	return
 
 	try {
 
 		const termId = await TermsService.create({
-			parentId: params.value.,
-			title: formFields.title,
-			description: formFields?.description ?? null,
-			price: formFields.price,
+			parentId: params.value?.parentId,
+			taxonomy: params.value!.taxonomy,
+			title: formFields.value!.title,
+			description: formFields.value?.description,
+			price: formFields.value?.price,
 		})
 
 		if (
@@ -84,6 +88,7 @@ async function open(_params: CreateTermInDrawerParams) {
 function close() {
 	widgetOpened.value = false
 	params.value = null
+	formFields.value = null
 }
 
 function updateFields(fields: TermFromFields) {
