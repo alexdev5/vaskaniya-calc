@@ -158,14 +158,54 @@ class TermsController
             return debugRest('termId or taxonomy undefined');
         }
 
-        $result = wp_delete_term($termId, $taxonomy);
+        function delete_term_and_children($termId, $taxonomy)
+        {
+            $children = get_terms([
+                'taxonomy' => $taxonomy,
+                'parent' => $termId,
+                'hide_empty' => false,
+            ]);
 
-        if (is_wp_error($result)) {
+            foreach ($children as $child) {
+                delete_term_and_children($child->term_id, $taxonomy);
+            }
+
+            $result = wp_delete_term($termId, $taxonomy);
+
+            if (is_wp_error($result)) {
+                return $result;
+            }
+
+            return true;
+        }
+
+        $deletion_result = delete_term_and_children($termId, $taxonomy);
+
+        if (is_wp_error($deletion_result)) {
             return debugRest('term_deletion_failed');
         }
 
         return new WP_REST_Response(null, 204);
     }
+
+
+//    public static function remove(WP_REST_Request $request): WP_REST_Response
+//    {
+//        $termId = $request->get_param('id');
+//        $taxonomy = $request->get_param('taxonomy');
+//
+//        if (!isset($termId) || !isset($taxonomy)) {
+//            return debugRest('termId or taxonomy undefined');
+//        }
+//
+//        $result = wp_delete_term($termId, $taxonomy);
+//
+//        if (is_wp_error($result)) {
+//            return debugRest('term_deletion_failed');
+//        }
+//
+//        return new WP_REST_Response(null, 204);
+//    }
 
     public static function duplicate(WP_REST_Request $request): WP_REST_Response
     {

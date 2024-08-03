@@ -12,11 +12,11 @@
     right: 10px;
   }
 
-  .vs-block-body {
+  .vs-block-body, .block-draggable {
     display: flex;
     flex-wrap: wrap;
     gap: var(--app-offset-middle);
-    padding-block-start: 24px;
+    //padding-block-start: 24px;
   }
 
   .vs-block-title {
@@ -26,6 +26,7 @@
     width: 100%;
     gap: 32px;
     padding-inline-end: 40px;
+    margin-bottom: 24px;
   }
 
   .vs-block-settings {

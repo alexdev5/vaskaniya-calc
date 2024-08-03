@@ -1,55 +1,65 @@
 <template>
 	<DimensionsProductType v-if="store.state.parent">
-		<VsBlockCard
-			v-for="card in store.state.productTypes"
-			:class="{
-				'vs-block-card-active': card.id === store.state.currentProductType?.id,
-				'is-term-visibility': card.acf.isVisible,
-			}"
-			:key="card.id"
-			:record="card"
-			:deleteLoading="store.imageDeleting"
-			:loading="progress.savingCardSettings"
-			@click="store.state.currentProductType = card"
-			@settings-saved="saveCardSettings(card.id, $event)"
-			@load-image-requested="loadImages(card.id, $event)"
-			@remove-image-requested="store.removeImageFromTerm(card.id, $event)"
-			@visibility-changed="changeVisibility(card.id, !card.acf.isVisible)"
-			@duplicated="duplicateTerm(card.id, store.state.taxonomy)"
-			@removed="removeTerm(card.id, store.state.taxonomy)"
-		/>
+		<draggable v-model="store.state.productTypes" @end="onDragEnd" class="block-draggable" item-key="id">
+			<template #item="{ element, index }">
+				<VsBlockCard
+					:class="{
+						'vs-block-card-active': element.id === store.state.currentProductType?.id,
+						'is-term-visibility': element.acf.isVisible,
+					}"
+					:key="element.id"
+					:record="element"
+					:deleteLoading="store.imageDeleting"
+					:loading="progress.savingCardSettings"
+					@click="store.state.currentProductType = element"
+					@settings-saved="saveCardSettings(element.id, $event)"
+					@load-image-requested="loadImages(element.id, $event)"
+					@remove-image-requested="store.removeImageFromTerm(element.id, $event)"
+					@visibility-changed="changeVisibility(element.id, !element.acf.isVisible)"
+					@duplicated="duplicateTerm(element.id, store.state.taxonomy)"
+					@removed="removeTerm(element.id, store.state.taxonomy)"
+				/>
+			</template>
 
-		<VsBlockAdd @added="addTermFromRef?.open({
-			title: 'Add configuration',
-			taxonomy: store.state.taxonomy,
-			parentId: store.state.parent?.id,
-		})" />
+			<template #footer>
+				<VsBlockAdd :sort="false" @added="addTermFromRef?.open({
+					title: 'Add configuration',
+					taxonomy: store.state.taxonomy,
+					parentId: store.state.parent?.id,
+				})" />
+			</template>
+		</draggable>
 	</DimensionsProductType>
 
 	<DimensionsConfiguration v-if="store.state.currentProductType">
-		<template v-for="configuration in store.state.configurations" :key="configuration.id">
-			<VsBlockCard
-				v-show="configuration.productTypeParentId === store.state.currentProductType?.id || store.setting.showAllConfigurations"
-				:class="{
-					'is-term-visibility': configuration.acf.isVisible,
-				}"
-				:record="configuration"
-				:deleteLoading="store.imageDeleting"
-				:loading="progress.savingCardSettings"
-				@settings-saved="saveCardSettings(configuration.id, $event)"
-				@load-image-requested="loadImages(configuration.id, $event)"
-				@remove-image-requested="store.removeImageFromTerm(configuration.id, $event)"
-				@visibility-changed="changeVisibility(configuration.id, !configuration.acf.isVisible)"
-				@duplicated="duplicateTerm(configuration.id, store.state.taxonomy)"
-				@removed="removeTerm(configuration.id, store.state.taxonomy)"
-			/>
-		</template>
+		<draggable v-model="store.state.configurations" @end="onDragEnd" class="block-draggable" item-key="id">
+			<template #item="{ element, index }">
+				<VsBlockCard
+					v-show="element.productTypeParentId === store.state.currentProductType?.id || store.setting.showAllConfigurations"
+					:class="{
+						'is-term-visibility': element.acf.isVisible,
+					}"
+					:record="element"
+					:deleteLoading="store.imageDeleting"
+					:loading="progress.savingCardSettings"
+					@settings-saved="saveCardSettings(element.id, $event)"
+					@load-image-requested="loadImages(element.id, $event)"
+					@remove-image-requested="store.removeImageFromTerm(element.id, $event)"
+					@visibility-changed="changeVisibility(element.id, !element.acf.isVisible)"
+					@duplicated="duplicateTerm(element.id, store.state.taxonomy)"
+					@removed="removeTerm(element.id, store.state.taxonomy)"
+				/>
+			</template>
 
-		<VsBlockAdd @added="addTermFromRef?.open({
-			title: 'Add dimensions',
-			taxonomy: store.state.taxonomy,
-			parentId: store.state.currentProductType?.id,
-		})" />
+			<template #footer>
+				<VsBlockAdd @added="addTermFromRef?.open({
+				title: 'Add dimensions',
+				taxonomy: store.state.taxonomy,
+				parentId: store.state.currentProductType?.id,
+			})" />
+			</template>
+
+		</draggable>
 	</DimensionsConfiguration>
 
 	<AppMediaModal
@@ -68,6 +78,8 @@ import VsBlockCard from '@/components/vs-block/components/vs-block-card.componen
 import AppMediaModal from '@/components/media/app-media-modal.component.vue'
 import VsBlockAdd from '@/components/vs-block/components/vs-block-add.component.vue'
 import AddTermForm from '@/components/terms/add-term-form.drawer.vue'
+
+import draggable from 'vuedraggable'
 
 import { onMounted, onUnmounted, ref } from 'vue'
 import { useDimensionsStore } from './dimensions.store.ts'
@@ -103,8 +115,13 @@ async function loadImages(termId: number, mediaType: ImageType) {
 	mediaModal.value?.open()
 }
 
+async function onDragEnd(data) {
+	console.log(data)
+}
+
 onMounted(async () => {
 	await store.loadDimensions()
+	store.setCardDefault()
 })
 
 onUnmounted(() => {

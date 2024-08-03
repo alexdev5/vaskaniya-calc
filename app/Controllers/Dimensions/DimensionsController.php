@@ -14,7 +14,7 @@ use WP_REST_Response;
 class DimensionsController
 {
 
-    public function getAllData(WP_REST_Request $request): WP_REST_Response
+    public function getAll(WP_REST_Request $request): WP_REST_Response
     {
         $productTypesTerms = $this->getProductTypeCategories();
 
@@ -27,6 +27,9 @@ class DimensionsController
                 }
             }
         }
+
+        // TODO: Place all data in one array.
+        // To implement on the client the ability to create additional blocks at the root of the parent taxonomy.
 
         $returned = [
             'taxonomy' => TaxonomyEnum::Categories,

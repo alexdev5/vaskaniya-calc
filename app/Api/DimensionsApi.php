@@ -12,7 +12,7 @@ class DimensionsApi implements ApiContract
 
     public static function register()
     {
-        VsRoute::get(self::route(), [DimensionsController::class, 'getAllData']);
+        VsRoute::get(self::route(), [DimensionsController::class, 'getAll']);
         VsRoute::post(
             self::route('/update-term'),
             [DimensionsController::class, 'updateTerm']

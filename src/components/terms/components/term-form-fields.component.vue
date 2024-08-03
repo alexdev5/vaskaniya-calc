@@ -1,11 +1,27 @@
 <template>
 	<div class="vs-block-tools-settings">
 		<AppTextField
+			v-if="settingsForm.id"
+			:label="content.label.id"
+			v-model="settingsForm.id"
+			compact
+			disabled
+		/>
+		<AppTextField
+			v-if="settingsForm.slug"
+			:label="content.label.slug"
+			v-model="settingsForm.slug"
+			compact
+			disabled
+		/>
+
+		<AppTextField
 			compact
 			:label="content.label.title"
 
 			v-model="settingsForm.title"
 		/>
+
 		<AppTextField
 			compact
 			:label="content.label.price"
@@ -72,6 +88,8 @@ const emit = defineEmits([
 ])
 
 const settingsForm = reactive({
+	id: 0,
+	slug: '',
 	title: '',
 	description: '',
 	price: null,
@@ -95,6 +113,8 @@ watch(
 	}, { immediate: true })
 
 onMounted(() => {
+	settingsForm.id = props.record?.id
+	settingsForm.slug = props.record?.slug
 	settingsForm.title = props.record?.title ?? ''
 	settingsForm.description = props.record?.description ?? ''
 	settingsForm.price = props.record?.acf?.price

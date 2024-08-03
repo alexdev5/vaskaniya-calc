@@ -3,6 +3,8 @@ export const content = {
 		blockTitle: 'Тайтл блока',
 		number: 'Номер',
 		title: 'Тайтл',
+		id: 'ID',
+		slug: 'Slug',
 		price: 'Цена',
 		description: 'Описание',
 		preview: 'Превью',

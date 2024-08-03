@@ -2,7 +2,8 @@ import { ImageContract, TaxonomyName, UpdateTermCommand } from '@/api/terms/term
 
 
 export interface TermFromFields extends Omit<UpdateTermCommand, 'termId'> {
-
+	id?: number,
+	slug?: string,
 }
 
 export interface Acf {
