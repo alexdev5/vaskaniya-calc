@@ -1,21 +1,30 @@
 <template>
 	<DimensionsProductType v-if="store.state.parent">
-		<draggable v-model="store.state.productTypes" @end="dragTerm" class="block-draggable" item-key="id">
+		<draggable
+			v-model="store.state.productTypes"
+			@end="dragTerm($event, {
+				parentId: store.state.parent!.id,
+				taxonomy: store.state.taxonomy
+			})"
+			class="block-draggable"
+			item-key="id"
+		>
 			<template #item="{ element, index }">
 				<VsBlockCard
 					:class="{
 						'vs-block-card-active': element.id === store.state.currentProductType?.id,
-						'is-term-visibility': element.acf.isVisible,
+						'is-term-visibility': element.acf.isHidden,
 					}"
 					:key="element.id"
 					:record="element"
 					:deleteLoading="store.imageDeleting"
 					:loading="progress.savingCardSettings"
+					:data-id="element.id"
 					@click="store.state.currentProductType = element"
 					@settings-saved="saveCardSettings(element.id, $event)"
 					@load-image-requested="loadImages(element.id, $event)"
 					@remove-image-requested="store.removeImageFromTerm(element.id, $event)"
-					@visibility-changed="changeVisibility(element.id, !element.acf.isVisible)"
+					@visibility-changed="changeVisibility(element.id, !element.acf.isHidden)"
 					@duplicated="duplicateTerm(element.id, store.state.taxonomy)"
 					@removed="removeTerm(element.id, store.state.taxonomy)"
 				/>
@@ -32,20 +41,29 @@
 	</DimensionsProductType>
 
 	<DimensionsConfiguration v-if="store.state.currentProductType">
-		<draggable v-model="store.state.configurations" @end="dragTerm" class="block-draggable" item-key="id">
+		<draggable
+			v-model="store.state.configurations"
+			@end="dragTerm($event, {
+				parentId: store.state.currentProductType!.id,
+				taxonomy: store.state.taxonomy
+			})"
+			class="block-draggable"
+			item-key="id"
+		>
 			<template #item="{ element, index }">
 				<VsBlockCard
 					v-show="element.productTypeParentId === store.state.currentProductType?.id || store.setting.showAllConfigurations"
 					:class="{
-						'is-term-visibility': element.acf.isVisible,
+						'is-term-visibility': element.acf.isHidden,
 					}"
 					:record="element"
 					:deleteLoading="store.imageDeleting"
 					:loading="progress.savingCardSettings"
+					:data-id="element.id"
 					@settings-saved="saveCardSettings(element.id, $event)"
 					@load-image-requested="loadImages(element.id, $event)"
 					@remove-image-requested="store.removeImageFromTerm(element.id, $event)"
-					@visibility-changed="changeVisibility(element.id, !element.acf.isVisible)"
+					@visibility-changed="changeVisibility(element.id, !element.acf.isHidden)"
 					@duplicated="duplicateTerm(element.id, store.state.taxonomy)"
 					@removed="removeTerm(element.id, store.state.taxonomy)"
 				/>

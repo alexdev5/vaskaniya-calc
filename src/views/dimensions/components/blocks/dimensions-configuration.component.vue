@@ -10,15 +10,7 @@
 	>
 		<slot />
 
-		<template #settings>
-			<AppCheckbox
-				:modelValue="childBlockShowing"
-				@update:modelValue="store.setting.showAllConfigurations = $event"
-				label="Отобразить дочерние блоки"
-			/>
-		</template>
 	</VsBlock>
-
 </template>
 
 <script lang="ts" setup>
@@ -26,7 +18,6 @@ import VsBlock from '@/components/vs-block/vs-block.component.vue'
 
 import { ref, watch } from 'vue'
 import { useDimensionsStore } from '@/views/dimensions/dimensions.store.ts'
-import AppCheckbox from '@/components/forms/app-checkbox.vue'
 import { dimensionsApi } from '@/services'
 
 defineProps({

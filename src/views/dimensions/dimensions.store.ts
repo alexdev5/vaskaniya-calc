@@ -16,6 +16,7 @@ export const useDimensionsStore = defineStore('dimensions', () => {
 
 	const setting = reactive({
 		showAllConfigurations: false,
+		showHiddenFields: false,
 	})
 
 	const termImageToUpload = reactive({

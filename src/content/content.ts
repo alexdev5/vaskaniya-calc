@@ -22,4 +22,8 @@ export const content = {
 	notifications: {
 		updated: 'Данные обновлены успешно',
 	},
+	blockSettings: {
+		showHiddenFields: 'Показать информационные поля',
+		showAllConfigurations: 'Отобразить дочерние блоки',
+	},
 }

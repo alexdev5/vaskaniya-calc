@@ -4,7 +4,6 @@ namespace App\Seeders;
 
 use App\Contracts\SeederContract;
 use App\Helpers\Post;
-
 use WP_Error;
 
 abstract class Seeders implements SeederContract
@@ -60,10 +59,11 @@ abstract class Seeders implements SeederContract
         }
     }
 
-    public function getPostByTitle(string $title, string $postType) {
+    public function getPostByTitle(string $title, string $postType)
+    {
         global $wpdb;
 
-        $query = $wpdb->prepare( "SELECT * FROM $wpdb->posts WHERE post_title = %s AND post_type = %s LIMIT 1", $title, $postType );
+        $query = $wpdb->prepare("SELECT * FROM $wpdb->posts WHERE post_title = %s AND post_type = %s LIMIT 1", $title, $postType);
 
         return $wpdb->get_results($query);
     }
@@ -107,24 +107,6 @@ abstract class Seeders implements SeederContract
             }
         }
     }
-
-//    public function getArrayFromDirectory(string $directory): array
-//    {
-//        $directory = VS_APP . 'Seeders/' . $directory;
-//
-//        $files = scandir($directory);
-//        $taxonomies = [];
-//
-//        foreach ($files as $file) {
-//            if ($file !== '.' && $file !== '..') {
-//                $path = $directory . '/' . $file;
-//                $posts = require $path;
-//                $taxonomies = array_merge_recursive($taxonomies, $posts);
-//            }
-//        }
-//
-//        return $taxonomies;
-//    }
 
     public function getArrayFromDirectory(string $directory): array
     {

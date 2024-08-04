@@ -22,7 +22,7 @@ export interface UpdateTermCommand {
 	thumbnail?: ImageContract[] // todo: remove
 	childBlockImage?: ImageContract[] // todo: remove
 	imageFullSize?: ImageContract[] // todo: remove
-	isVisible?: boolean
+	isHidden?: boolean
 
 	[key: string]: any
 }

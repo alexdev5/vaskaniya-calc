@@ -25,6 +25,7 @@
 		</div>
 
 		<VsBlockTools
+			v-if="hasSlot('settings')"
 			@settings-opened="emit('settings-opened')"
 		>
 			<template #settings>
@@ -44,6 +45,7 @@ import VsBlockTools from '@/components/vs-block/components/vs-block-tools.compon
 import AppBtn from '@/components/elements/app-btn.component.vue'
 import IconSave from '@/components/icons/IconSave.vue'
 import { content } from '@/content'
+import { useSlots } from 'vue'
 
 const props = defineProps<{
 	loading?: boolean
@@ -58,6 +60,9 @@ const emit = defineEmits([
 	'update:title',
 	'update:title-number',
 ])
+
+const slots = useSlots()
+const hasSlot = (name: string) => Boolean(slots[name])
 </script>
 
 <style lang="scss">

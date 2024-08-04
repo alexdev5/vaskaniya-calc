@@ -12,7 +12,7 @@ class TermsAcfEnum
     const BlockTitle = 'block_title';
     const BlockNumber = 'block_number';
     const Price = 'price';
-    const IsVisible = 'is_visible';
+    const IsHidden = 'is_hidden';
     const SortIndex = 'vs_sort_index';
 
     private function __construct()

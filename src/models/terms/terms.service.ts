@@ -7,7 +7,7 @@ export interface TermFromFields extends Omit<UpdateTermCommand, 'termId'> {
 }
 
 export interface Acf {
-	isVisible: boolean
+	isHidden: boolean
 	price?: number
 	thumbnail: ImageContract | null
 	childBlockImage: ImageContract | null

@@ -2,7 +2,7 @@
 	<div class="vs-block-card">
 		<VsBlockCardTools
 			ref="vsBlockCardToolsRef"
-			:class="{ 'hidden': record.acf.isVisible }"
+			:class="{ 'hidden': record.acf.isHidden }"
 			:record="record"
 			:deleteLoading="deleteLoading"
 			:loading="loading"

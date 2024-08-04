@@ -12,9 +12,12 @@
 
 		<template #settings>
 			<AppCheckbox
-				:modelValue="childBlockShowing"
-				@update:modelValue="store.setting.showAllConfigurations = $event"
+				v-model="store.setting.showAllConfigurations"
 				label="Отобразить дочерние блоки"
+			/>
+			<AppCheckbox
+				v-model="store.setting.showHiddenFields"
+				label="Показать информационные поля"
 			/>
 		</template>
 	</VsBlock>

@@ -1,7 +1,7 @@
 import { dimensionsApi, termsApi } from '@/services'
 import { content } from '@/content'
 import { computed, reactive } from 'vue'
-import { UpdateTermCommand } from '@/api/terms'
+import { UpdateSortIndexCommand, UpdateTermCommand } from '@/api/terms'
 
 export function useTerm(callback?: () => Promise<void>) {
 	const progress = reactive({
@@ -10,6 +10,7 @@ export function useTerm(callback?: () => Promise<void>) {
 		duplicating: false,
 		removing: false,
 		savingCardSettings: false,
+		moving: false,
 	})
 
 	const loading = computed(() =>
@@ -17,6 +18,7 @@ export function useTerm(callback?: () => Promise<void>) {
 		progress.changing ||
 		progress.duplicating ||
 		progress.removing ||
+		progress.moving ||
 		progress.savingCardSettings,
 	)
 
@@ -111,8 +113,23 @@ export function useTerm(callback?: () => Promise<void>) {
 		}
 	}
 
-	async function dragTerm(element: any) {
-		console.log(element)
+	async function dragTerm(element: any, params: Omit<UpdateSortIndexCommand, 'id' | 'sortIndex'>) {
+		if (!Number(element.item.dataset.id)) throw new Error('data-id is empty')
+
+		progress.moving = true
+
+		try {
+			await termsApi.updateSortIndex({
+				id: Number(element.item.dataset.id),
+				sortIndex: element.newIndex,
+				parentId: params.parentId,
+				taxonomy: params.taxonomy,
+			})
+		} catch (error) {
+			console.log(error)
+		} finally {
+			progress.moving = false
+		}
 	}
 
 	return {

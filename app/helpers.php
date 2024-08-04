@@ -19,10 +19,18 @@ function dd($args, $isVarDump = false)
 function debugRest($data, $message = 'debugRest')
 {
     return new WP_Error(
-        'debug_rest--' . __CLASS__,
+        'debug_rest',
         $message,
         $data
     );
+}
+
+function wpResponseError($data, $message = 'Bad request'): WP_REST_Response
+{
+    return new WP_REST_Response([
+        'data' => $data,
+        'message' => $message,
+    ], 400);
 }
 
 if (!function_exists('vs_view')) {

@@ -107,7 +107,7 @@ class TermsController
     {
         $termId = $request->get_param('termId');
 
-        update_field(TermsAcfEnum::IsVisible, $request->get_param('visible'), 'term_' . $termId);
+        update_field(TermsAcfEnum::IsHidden, $request->get_param('visible'), 'term_' . $termId);
 
         return new WP_REST_Response([
             'message' => 'Visibility changed successfully',
@@ -229,10 +229,58 @@ class TermsController
         return new WP_REST_Response($newTermId, 201);
     }
 
+    /**
+     * 'Category Order and Taxonomy Terms Order' must by activated
+     * */
     function updateSortIndex(WP_REST_Request $request)
     {
+        global $wpdb;
+
         $params = $request->get_params();
 
-        return debugRest('updateSortIndex', $params);
+        if (
+            !isset($params['id']) ||
+            !isset($params['parentId']) ||
+            !isset($params['sortIndex']) ||
+            !isset($params['taxonomy'])
+        ) {
+            return wpResponseError($params, 'Required fields not set');
+        }
+
+        $termId = $params['id'];
+
+        $terms = get_terms([
+            'taxonomy' => $params['taxonomy'],
+            'parent' => $params['parentId'],
+            'hide_empty' => false,
+            'orderby' => 'term_order',
+            'order' => 'ASC',
+        ]);
+
+        $termToMove = array_values(array_filter($terms, function ($term) use ($termId) {
+            return $term->term_id == $termId;
+        }))[0];
+
+        if (!$termToMove) return wpResponseError(null, 'Moved term not found');
+
+        $termsFiltered = array_values(array_filter($terms, function ($term) use ($termId) {
+            return $term->term_id != $termId;
+        }));
+
+        array_splice($termsFiltered, $params['sortIndex'], 0, [$termToMove]);
+
+        foreach ($termsFiltered as $index => $term) {
+            $wpdb->update(
+                $wpdb->terms,
+                ['term_order' => $index],
+                ['term_id' => $term->term_id]
+            );
+        }
+
+        return new WP_REST_Response([
+            'termToMove' => $termToMove,
+            'termsFiltered' => $termsFiltered,
+            'params' => $params,
+        ], 200);
     }
 }
