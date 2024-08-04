@@ -15,7 +15,7 @@
 		/>
 
 		<div class="vs-block-card-image">
-			<img :src="record.acf?.thumbnail?.url" alt="">
+			<img :src="record.thumbnailImageUrl" alt="">
 		</div>
 		<div class="vs-block-card-title">
 			{{ record.title }}

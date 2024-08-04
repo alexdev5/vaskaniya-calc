@@ -97,8 +97,6 @@ async function loadMedia() {
 async function assignImageToTerm(mediaId: number, params: Terms.AssignImageCommand) {
 	loading.value = true
 
-	console.log(mediaId)
-	console.log(params)
 	try {
 		await TermsService.assignImage({
 			imageId: mediaId,

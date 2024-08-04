@@ -111,6 +111,10 @@ export function useTerm(callback?: () => Promise<void>) {
 		}
 	}
 
+	async function dragTerm(element: any) {
+		console.log(element)
+	}
+
 	return {
 		progress,
 		loading,
@@ -118,5 +122,6 @@ export function useTerm(callback?: () => Promise<void>) {
 		saveCardSettings,
 		duplicateTerm,
 		changeVisibility,
+		dragTerm,
 	}
 }

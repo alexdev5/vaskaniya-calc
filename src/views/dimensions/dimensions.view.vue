@@ -1,6 +1,6 @@
 <template>
 	<DimensionsProductType v-if="store.state.parent">
-		<draggable v-model="store.state.productTypes" @end="onDragEnd" class="block-draggable" item-key="id">
+		<draggable v-model="store.state.productTypes" @end="dragTerm" class="block-draggable" item-key="id">
 			<template #item="{ element, index }">
 				<VsBlockCard
 					:class="{
@@ -32,7 +32,7 @@
 	</DimensionsProductType>
 
 	<DimensionsConfiguration v-if="store.state.currentProductType">
-		<draggable v-model="store.state.configurations" @end="onDragEnd" class="block-draggable" item-key="id">
+		<draggable v-model="store.state.configurations" @end="dragTerm" class="block-draggable" item-key="id">
 			<template #item="{ element, index }">
 				<VsBlockCard
 					v-show="element.productTypeParentId === store.state.currentProductType?.id || store.setting.showAllConfigurations"
@@ -93,6 +93,7 @@ const {
 	duplicateTerm,
 	saveCardSettings,
 	removeTerm,
+	dragTerm,
 	loading,
 	progress,
 } = useTerm(store.loadDimensions)
@@ -115,9 +116,6 @@ async function loadImages(termId: number, mediaType: ImageType) {
 	mediaModal.value?.open()
 }
 
-async function onDragEnd(data) {
-	console.log(data)
-}
 
 onMounted(async () => {
 	await store.loadDimensions()
