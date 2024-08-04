@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { reactive, ref } from 'vue'
-import { DimensionsService, TermsService } from '@/services'
+import { dimensionsApi, termsApi } from '@/services'
 import { ImageType, TermState } from '@/models/terms'
 import { TaxonomyName } from '@/api/terms'
 
@@ -30,7 +30,7 @@ export const useDimensionsStore = defineStore('dimensions', () => {
 		state.loading = true
 
 		try {
-			const result = await DimensionsService.dimensions()
+			const result = await dimensionsApi.dimensions()
 
 			state.taxonomy = result.taxonomy
 			state.parent = new TermState(result.parent)
@@ -52,7 +52,7 @@ export const useDimensionsStore = defineStore('dimensions', () => {
 		imageDeleting.value[mediaType] = true
 
 		try {
-			await TermsService.assignImage({
+			await termsApi.assignImage({
 				termId,
 				imageId: null,
 				type: mediaType,

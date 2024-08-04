@@ -1,6 +1,6 @@
 import * as Api from '@/api'
 
-export const DimensionsService = new Api.Dimensions.DimensionsApi()
-export const TermsService = new Api.Terms.TermsApi()
-export const MediaService = new Api.Media.MediaApi()
+export const dimensionsApi = new Api.Dimensions.DimensionsApi()
+export const termsApi = new Api.Terms.TermsApi()
+export const mediaApi = new Api.Media.MediaApi()
 

@@ -27,7 +27,7 @@ import VsBlock from '@/components/vs-block/vs-block.component.vue'
 import { ref, watch } from 'vue'
 import { useDimensionsStore } from '@/views/dimensions/dimensions.store.ts'
 import AppCheckbox from '@/components/forms/app-checkbox.vue'
-import { DimensionsService } from '@/services'
+import { dimensionsApi } from '@/services'
 
 defineProps({
 	settingsLoading: Boolean,
@@ -50,7 +50,7 @@ async function submit() {
 		throw new Error('Parent term empty')
 
 	try {
-		await DimensionsService.updateTermTitle({
+		await dimensionsApi.updateTermTitle({
 			termId: store.state.currentProductType!.id,
 			blockTitle: blockTitle.value,
 			blockNumber: blockNumber.value,

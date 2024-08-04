@@ -1,6 +1,6 @@
 import { AxiosApi } from '@/api/axios'
 import { Terms } from '@/models'
-import { CreateTaxonomyCommand } from '@/api/terms/terms.contracts'
+import { CreateTaxonomyCommand, UpdateSortIndexCommand } from '@/api/terms/terms.contracts'
 
 export class TermsApi extends AxiosApi {
 	public baseUrl = '/terms'
@@ -41,4 +41,10 @@ export class TermsApi extends AxiosApi {
 	async create(command: CreateTaxonomyCommand) {
 		return this.post(`${this.baseUrl}/create`, command)
 	}
+
+	async updateSortIndex(command: UpdateSortIndexCommand) {
+		return this.post(`${this.baseUrl}/update-sort-index`, command)
+	}
+
+
 }

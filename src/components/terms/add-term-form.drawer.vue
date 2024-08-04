@@ -1,6 +1,6 @@
 <template>
 	<AppDrawer :opened="widgetOpened" @closed="close" :title="params?.title ?? ''">
-		
+
 		<TermFormFields
 			v-if="widgetOpened"
 			no-select-image
@@ -25,7 +25,7 @@ import AppFormButtons from '@/components/forms/app-form-buttons.component.vue'
 
 import { ref } from 'vue'
 import { CreateTermInDrawerParams, TermFromFields } from '@/models/terms'
-import { TermsService } from '@/services'
+import { termsApi } from '@/services'
 import { content } from '@/content'
 
 const props = defineProps<{
@@ -47,7 +47,7 @@ async function submit() {
 
 	try {
 
-		const termId = await TermsService.create({
+		const termId = await termsApi.create({
 			parentId: params.value?.parentId,
 			taxonomy: params.value!.taxonomy,
 			title: formFields.value!.title,
@@ -60,7 +60,7 @@ async function submit() {
 			formFields.value?.thumbnail?.length ||
 			formFields.value?.childBlockImage?.length
 		) {
-			await TermsService.addImages({
+			await termsApi.addImages({
 				termId,
 				imageFullSize: formFields.value?.imageFullSize?.[0] ?? null,
 				thumbnail: formFields.value?.thumbnail?.[0] ?? null,

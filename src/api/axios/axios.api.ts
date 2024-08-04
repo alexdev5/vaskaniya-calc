@@ -1,12 +1,10 @@
 import axios from 'axios'
+import { configConstants } from '@/config'
 
-const baseApiURL = 'https://st.wooh.cc'
-//const baseApiURL = 'http://localhost:8000'
 //axios.defaults.withCredentials = true
 
 export abstract class AxiosApi {
-	//public apiBaseUrl = location.origin + '/wp-json/vs-calculator/v1'
-	public apiBaseUrl = baseApiURL + '/wp-json/vs-calculator/v1'
+	public apiBaseUrl = configConstants.baseApiURL + '/wp-json/vs-calculator/v1'
 
 	protected async post(url: string, fields: any, config?: any): Promise<any> {
 		return (

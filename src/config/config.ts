@@ -1,8 +1,10 @@
 const baseApiURL = 'https://st.wooh.cc'
+const restApiURL = '/wp-json/vs-calculator/v1'
 const apiDistDir = baseApiURL + '/wp-content/plugins/vaskaniya-calc/dist'
 
 export const configConstants = {
 	baseApiURL,
+	restApiURL,
 	apiDistDir,
 	apiAssetsDir: apiDistDir + '/assets',
 	apiImagesDir: apiDistDir + '/assets/images',

@@ -40,3 +40,10 @@ export interface CreateTaxonomyCommand {
 	description?: string
 	price?: number
 }
+
+export interface UpdateSortIndexCommand {
+	id: number
+	parentId: number
+	sortIndex: number
+	taxonomy: string
+}

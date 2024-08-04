@@ -55,7 +55,7 @@ import AppBtn from '@/components/elements/app-btn.component.vue'
 import { ref } from 'vue'
 import { TermImage } from '@/api/terms/terms.contracts'
 import { useMediaStore } from '@/stores'
-import { TermsService } from '@/services'
+import { termsApi } from '@/services'
 import { Terms } from '@/models'
 
 const props = defineProps<{
@@ -98,7 +98,7 @@ async function assignImageToTerm(mediaId: number, params: Terms.AssignImageComma
 	loading.value = true
 
 	try {
-		await TermsService.assignImage({
+		await termsApi.assignImage({
 			imageId: mediaId,
 			termId: params.termId,
 			type: params.type,

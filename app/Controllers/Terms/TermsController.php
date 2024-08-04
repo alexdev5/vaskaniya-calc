@@ -188,25 +188,6 @@ class TermsController
         return new WP_REST_Response(null, 204);
     }
 
-
-//    public static function remove(WP_REST_Request $request): WP_REST_Response
-//    {
-//        $termId = $request->get_param('id');
-//        $taxonomy = $request->get_param('taxonomy');
-//
-//        if (!isset($termId) || !isset($taxonomy)) {
-//            return debugRest('termId or taxonomy undefined');
-//        }
-//
-//        $result = wp_delete_term($termId, $taxonomy);
-//
-//        if (is_wp_error($result)) {
-//            return debugRest('term_deletion_failed');
-//        }
-//
-//        return new WP_REST_Response(null, 204);
-//    }
-
     public static function duplicate(WP_REST_Request $request): WP_REST_Response
     {
         $termId = $request->get_param('id');
@@ -248,4 +229,10 @@ class TermsController
         return new WP_REST_Response($newTermId, 201);
     }
 
+    function updateSortIndex(WP_REST_Request $request)
+    {
+        $params = $request->get_params();
+
+        return debugRest('updateSortIndex', $params);
+    }
 }

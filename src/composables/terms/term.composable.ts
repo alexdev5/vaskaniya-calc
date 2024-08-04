@@ -1,4 +1,4 @@
-import { DimensionsService, TermsService } from '@/services'
+import { dimensionsApi, termsApi } from '@/services'
 import { content } from '@/content'
 import { computed, reactive } from 'vue'
 import { UpdateTermCommand } from '@/api/terms'
@@ -27,7 +27,7 @@ export function useTerm(callback?: () => Promise<void>) {
 		progress.changing = true
 
 		try {
-			await TermsService.changeVisible(termId, visibility)
+			await termsApi.changeVisible(termId, visibility)
 
 			if (callback) await callback()
 
@@ -46,7 +46,7 @@ export function useTerm(callback?: () => Promise<void>) {
 		progress.duplicating = true
 
 		try {
-			await TermsService.duplicate(id, taxonomy)
+			await termsApi.duplicate(id, taxonomy)
 
 			if (callback) await callback()
 
@@ -65,7 +65,7 @@ export function useTerm(callback?: () => Promise<void>) {
 		progress.removing = true
 
 		try {
-			await TermsService.remove(id, taxonomy)
+			await termsApi.remove(id, taxonomy)
 
 			if (callback) await callback()
 
@@ -86,7 +86,7 @@ export function useTerm(callback?: () => Promise<void>) {
 				formFields.thumbnail?.length ||
 				formFields.childBlockImage?.length
 			) {
-				await TermsService.addImages({
+				await termsApi.addImages({
 					termId,
 					imageFullSize: formFields.imageFullSize?.[0] ?? null,
 					thumbnail: formFields.thumbnail?.[0] ?? null,
@@ -94,7 +94,7 @@ export function useTerm(callback?: () => Promise<void>) {
 				})
 			}
 
-			await DimensionsService.updateTerm({
+			await dimensionsApi.updateTerm({
 				termId,
 				title: formFields.title,
 				description: formFields.description,
