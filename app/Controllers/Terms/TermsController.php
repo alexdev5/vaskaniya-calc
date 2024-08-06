@@ -283,4 +283,28 @@ class TermsController
             'params' => $params,
         ], 200);
     }
+
+    public function updateInfoBlock(WP_REST_Request $request): WP_REST_Response
+    {
+        $params = $request->get_params();
+
+        $result = TermsController::updateById(
+            $params['id'],
+            $params['taxonomy'],
+            [
+                'acf' => [
+                    TermsAcfEnum::BlockTitle => $params['title'],
+                    TermsAcfEnum::BlockNumber => $params['number'],
+                    TermsAcfEnum::BlockInfo => $params['info'],
+                ]
+            ],
+        );
+
+        // TODO: move to helper `Response::send('success message', 'error message')`
+        if (is_wp_error($result)) {
+            return wpResponseError($result->get_error_data(), __LINE__ . ':: ' . $result->get_error_message());
+        }
+
+        return wpResponseSuccess($params, 'Saved');
+    }
 }

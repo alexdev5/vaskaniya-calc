@@ -24,8 +24,8 @@ class AcfTerm extends JsonResource
             'childBlockNumber' => $this->{TermsAcfEnum::ChildBlockNumber} ?? null,
             'blockTitle' => $this->{TermsAcfEnum::BlockTitle} ?? null,
             'blockNumber' => $this->{TermsAcfEnum::BlockNumber} ?? null,
-            'isHidden' => $this->{TermsAcfEnum::IsHidden} ?? null,
-            'sortIndex' => $this->{TermsAcfEnum::SortIndex} ?? null,
+            'blockInfo' => $this->{TermsAcfEnum::BlockInfo} ?? null,
+            'isHidden' => $this->{TermsAcfEnum::IsHidden} ?? null
         ];
     }
 }

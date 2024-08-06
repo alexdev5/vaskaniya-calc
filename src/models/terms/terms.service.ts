@@ -16,6 +16,7 @@ export interface Acf {
 	childBlockTitle: string
 	blockNumber: string
 	blockTitle: string
+	blockInfo: string
 }
 
 export interface AddImagesCommand {

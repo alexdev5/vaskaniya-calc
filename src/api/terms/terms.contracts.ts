@@ -47,3 +47,11 @@ export interface UpdateSortIndexCommand {
 	sortIndex: number
 	taxonomy: string
 }
+
+export interface UpdateTermInfoBlockCommand {
+	id: number
+	taxonomy: TaxonomyName
+	number: number
+	title: string
+	info?: string
+}

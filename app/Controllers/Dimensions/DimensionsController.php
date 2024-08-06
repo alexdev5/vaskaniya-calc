@@ -4,7 +4,6 @@ namespace App\Controllers\Dimensions;
 
 use App\Config\TaxonomyEnum;
 use App\Controllers\TaxonomyController;
-use App\Controllers\Terms\TermsAcfEnum;
 use App\Controllers\Terms\TermsController;
 use App\Resources\Dimensions\ConfigurationResource;
 use App\Resources\Dimensions\TermResource;
@@ -91,44 +90,5 @@ class DimensionsController
         );
 
         return new WP_REST_Response("Term updated successfully", 200);
-    }
-
-    public function updateTermTitle(WP_REST_Request $request): WP_REST_Response
-    {
-        $params = $request->get_params();
-
-        $result = TermsController::updateById(
-            $params['termId'],
-            TaxonomyEnum::Categories,
-            [
-                'acf' => [
-                    TermsAcfEnum::BlockTitle => $params['blockTitle'],
-                    TermsAcfEnum::BlockNumber => $params['blockNumber'],
-                ]
-            ],
-        );
-
-        // TODO: move to helper `Response::send('success message', 'error message')`
-        if (is_wp_error($result)) {
-            return new WP_REST_Response(
-                [
-                    'status' => 'error',
-                    'code' => $result->get_error_code(),
-                    // TODO: only develop
-                    'data' => $result->get_error_data(),
-                    'message' => $result->get_error_message(),
-                ],
-                400
-            );
-        }
-
-        return new WP_REST_Response(
-            [
-                'status' => 'success',
-                'params' => $params,
-                'message' => 'Термін успішно оновлено!',
-            ],
-            200
-        );
     }
 }

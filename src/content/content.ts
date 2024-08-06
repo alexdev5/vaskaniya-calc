@@ -14,6 +14,9 @@ export const content = {
 		childImage: 'Изображение связанного блока',
 		visibilityChangedSuccessfully: 'Видимость изменена успешно',
 		duplicatedSuccessfully: 'Дублировано успешно',
+		notifications: {
+			blockInfoUpdated: 'Сохранено',
+		},
 	},
 	button: {
 		save: 'Сохранить',
@@ -25,5 +28,8 @@ export const content = {
 	blockSettings: {
 		showHiddenFields: 'Показать информационные поля',
 		showAllConfigurations: 'Отобразить дочерние блоки',
+	},
+	editBlockInfo: {
+		title: 'Инфо блока',
 	},
 }

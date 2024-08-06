@@ -11,9 +11,9 @@ class TermsAcfEnum
     const ChildBlockNumber = 'child_block_number';
     const BlockTitle = 'block_title';
     const BlockNumber = 'block_number';
+    const BlockInfo = 'block_info';
     const Price = 'price';
     const IsHidden = 'is_hidden';
-    const SortIndex = 'vs_sort_index';
 
     private function __construct()
     {

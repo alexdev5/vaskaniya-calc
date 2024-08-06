@@ -1,28 +1,14 @@
 <template>
-	<div class="vs-block">
-		<div class="vs-block-title">
-			<AppTextfield
-				class="vs-color-red"
-				:label="content.label.number"
-				:model-value="titleNumber"
-				@update:model-value="emit('update:title-number', $event)"
-			/>
-			<AppTextfield
-				:label="content.label.blockTitle"
-				:model-value="title"
-				@update:model-value="emit('update:title', $event)"
-			/>
+	<div class="app-term-info-block">
+		<template v-if="term">
+			<p class="app-color-red">{{ term.acf?.blockNumber }}</p>
+			<p>{{ term.acf?.blockTitle }}</p>
+			<p>{{ term.acf?.blockInfo }}</p>
+		</template>
 
-			<AppBtn
-				icon
-				flat
-				:loading="loading"
-				:disabled="disabled"
-				@click="emit('submitted')"
-			>
-				<IconSave />
-			</AppBtn>
-		</div>
+		<AppBtn icon flat @click="emit('edit-info-requested')">
+			<IconEdit />
+		</AppBtn>
 
 		<VsBlockTools
 			v-if="hasSlot('settings')"
@@ -40,26 +26,17 @@
 </template>
 
 <script lang="ts" setup>
-import AppTextfield from '@/components/forms/app-textfield.vue'
 import VsBlockTools from '@/components/vs-block/components/vs-block-tools.component.vue'
 import AppBtn from '@/components/elements/app-btn.component.vue'
-import IconSave from '@/components/icons/IconSave.vue'
-import { content } from '@/content'
 import { useSlots } from 'vue'
+import IconEdit from '@/components/icons/IconEdit.vue'
+import { TermState } from '@/models/terms'
 
-const props = defineProps<{
-	loading?: boolean
-	disabled?: boolean
-	title?: string
-	titleNumber?: string
+defineProps<{
+	term: TermState | null
 }>()
 
-const emit = defineEmits([
-	'settings-opened',
-	'submitted',
-	'update:title',
-	'update:title-number',
-])
+const emit = defineEmits(['edit-info-requested', 'settings-opened'])
 
 const slots = useSlots()
 const hasSlot = (name: string) => Boolean(slots[name])

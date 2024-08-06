@@ -1,5 +1,5 @@
 
-.vs-block {
+.app-term-info-block {
   position: relative;
   padding: var(--app-offset-normal);
 
@@ -19,15 +19,15 @@
     //padding-block-start: 24px;
   }
 
-  .vs-block-title {
-    display: grid;
-    align-items: center;
-    grid-template-columns: 100px minmax(0, 1fr) 32px;
-    width: 100%;
-    gap: 32px;
-    padding-inline-end: 40px;
-    margin-bottom: 24px;
-  }
+  //.vs-block-title {
+  //  display: grid;
+  //  align-items: center;
+  //  grid-template-columns: 100px minmax(0, 1fr) 32px;
+  //  width: 100%;
+  //  gap: 32px;
+  //  padding-inline-end: 40px;
+  //  margin-bottom: 24px;
+  //}
 
   .vs-block-settings {
     @include boxShadow;
