@@ -12,22 +12,42 @@
     right: 10px;
   }
 
-  .vs-block-body, .block-draggable {
+  .app-term-info-block-header {
+    display: grid;
+    grid-template-columns: min-content 1fr min-content;
+    align-items: center;
+    gap: 8px var(--app-offset-normal);
+    margin-inline-end: 40px;
+    margin-bottom: 24px;
+    padding: 8px 12px;
+    width: 97%;
+    border: 1px solid var(--app-color-grey);
+    background: var(--app-color-light-grey);
+    font-size: var(--app-font-size-l);
+    border-radius: 6px;
+    position: relative;
+
+    .app-term-info-block-header-info {
+      font-size: var(--app-font-size-base);
+      align-items: center;
+      grid-column: 1/-1;
+      grid-row: 2;
+    }
+
+    .app-color-red {
+      white-space: nowrap;
+    }
+
+    .app-btn {
+      margin-left: auto;
+    }
+  }
+
+  .app-term-block-body, .block-draggable {
     display: flex;
     flex-wrap: wrap;
     gap: var(--app-offset-middle);
-    //padding-block-start: 24px;
   }
-
-  //.vs-block-title {
-  //  display: grid;
-  //  align-items: center;
-  //  grid-template-columns: 100px minmax(0, 1fr) 32px;
-  //  width: 100%;
-  //  gap: 32px;
-  //  padding-inline-end: 40px;
-  //  margin-bottom: 24px;
-  //}
 
   .vs-block-settings {
     @include boxShadow;

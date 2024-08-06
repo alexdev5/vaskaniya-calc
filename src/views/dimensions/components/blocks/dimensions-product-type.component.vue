@@ -1,13 +1,5 @@
 <template>
-	<VsBlock
-		:title="blockTitle"
-		@update:title="blockTitle = $event"
-		:title-number="blockNumber"
-		@update:title-number="blockNumber = $event"
-		:loading="loading"
-		:disabled="disabled"
-		@submitted="submit"
-	>
+	<VsBlock :term="store.state.parent" @edit-info-requested="openTermInfoBlock">
 		<slot />
 
 		<template #settings>
@@ -26,55 +18,26 @@
 
 <script lang="ts" setup>
 import VsBlock from '@/components/vs-block/vs-block.component.vue'
-
-import { ref, watch } from 'vue'
-import { useDimensionsStore } from '@/views/dimensions/dimensions.store.ts'
 import AppCheckbox from '@/components/forms/app-checkbox.vue'
-import { dimensionsApi } from '@/services'
+import { useDimensionsStore } from '@/views/dimensions/dimensions.store.ts'
 
-defineProps({
-	settingsLoading: Boolean,
-})
-
-const emit = defineEmits(['child-showing-updated'])
+const emit = defineEmits(['edit-info-requested'])
 const store = useDimensionsStore()
 
-const loading = ref(false)
-const disabled = ref(true)
-const blockTitle = ref(store.state.parent?.acf?.blockTitle ?? '')
-const blockNumber = ref(store.state.parent?.acf?.blockNumber ?? '')
-
-const childBlockShowing = ref(false)
-
-async function submit() {
-	loading.value = true
-
-	if (!store.state.parent)
-		throw new Error('Parent term empty')
-
-	try {
-		await dimensionsApi.updateTermTitle({
-			termId: store.state.parent.id,
-			blockTitle: blockTitle.value,
-			blockNumber: blockNumber.value,
-		})
-
-		await store.loadDimensions()
-
-		disabled.value = true
-		console.log('update success')
-	} catch (error: any) {
-		console.error('changeBlockTitle', error)
-	} finally {
-		loading.value = false
+function openTermInfoBlock() {
+	if (!store.state.parent) {
+		console.error('store.state.parent: ', store.state.parent)
+		return
 	}
-}
 
-watch([blockTitle, blockNumber], () => {
-	disabled.value =
-		blockTitle.value === store.state.parent?.acf?.blockTitle &&
-		blockNumber.value === store.state.parent?.acf?.blockNumber
-})
+	emit('edit-info-requested', {
+		id: store.state.parent.id,
+		taxonomy: store.state.taxonomy,
+		number: store.state.parent.acf.blockNumber,
+		title: store.state.parent.acf.blockTitle,
+		info: store.state.parent.acf.blockInfo,
+	})
+}
 </script>
 
 <style lang="scss">

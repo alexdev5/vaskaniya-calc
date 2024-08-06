@@ -1,5 +1,8 @@
 <template>
-	<DimensionsProductType v-if="store.state.parent">
+	<DimensionsProductType
+		v-if="store.state.parent"
+		@edit-info-requested="editTermInfoBlockFormRef?.open($event)"
+	>
 		<draggable
 			v-model="store.state.productTypes"
 			@end="dragTerm($event, {
@@ -40,7 +43,10 @@
 		</draggable>
 	</DimensionsProductType>
 
-	<DimensionsConfiguration v-if="store.state.currentProductType">
+	<DimensionsConfiguration
+		v-if="store.state.currentProductType"
+		@edit-info-requested="editTermInfoBlockFormRef?.open($event)"
+	>
 		<draggable
 			v-model="store.state.configurations"
 			@end="dragTerm($event, {
@@ -87,6 +93,7 @@
 	/>
 
 	<AddTermForm ref="addTermFromRef" :callback="store.loadDimensions" />
+	<EditTermInfoBlockForm ref="editTermInfoBlockFormRef" :callback="store.loadDimensions" />
 </template>
 
 <script lang="ts" setup>
@@ -95,7 +102,8 @@ import DimensionsConfiguration from './components/blocks/dimensions-configuratio
 import VsBlockCard from '@/components/vs-block/components/vs-block-card.component.vue'
 import AppMediaModal from '@/components/media/app-media-modal.component.vue'
 import VsBlockAdd from '@/components/vs-block/components/vs-block-add.component.vue'
-import AddTermForm from '@/components/terms/add-term-form.drawer.vue'
+import AddTermForm from '@/components/terms/add/add-term-form.drawer.vue'
+import EditTermInfoBlockForm from '@/components/terms/edit-info/edit-term-info-block-form.drawer.vue'
 
 import draggable from 'vuedraggable'
 
@@ -119,6 +127,7 @@ const {
 const mediaModal = ref()
 const currentTaxSeparate = ref()
 const addTermFromRef = ref()
+const editTermInfoBlockFormRef = ref()
 
 
 // Сделать разделение карточек дивами, если включена галочка в

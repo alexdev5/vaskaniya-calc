@@ -1,0 +1,30 @@
+.vs-container {
+
+  .app-flex {
+    display: flex;
+  }
+
+  .app-grid {
+    display: grid;
+  }
+
+  .app-gap-xs {
+    gap: 4px;
+  }
+
+  .app-gap-s {
+    gap: 8px;
+  }
+
+  .app-gap {
+    gap: 16px;
+  }
+
+  .app-gap-l {
+    gap: 24px;
+  }
+
+  .app-gap-xl {
+    gap: 32px;
+  }
+}

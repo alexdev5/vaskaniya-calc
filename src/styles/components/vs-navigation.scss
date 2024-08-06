@@ -2,13 +2,14 @@
   position: fixed;
   width: var(--app-navigation-width);
   background: #F4F3F3;
-  font-size: var(--app-font-size-l);
+  font-size: var(--app-font-size-m);
 
   .vs-navigation-links {
     display: grid;
     padding-inline-end: 10px;
   }
 }
+
 .vs-navigation-item-link {
   text-decoration: none;
   display: block;

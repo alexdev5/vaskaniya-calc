@@ -1,14 +1,17 @@
 <template>
 	<div class="app-term-info-block">
-		<template v-if="term">
-			<p class="app-color-red">{{ term.acf?.blockNumber }}</p>
+		<div v-if="term" class="app-term-info-block-header">
+			<p class="app-color-red bold">{{ term.acf?.blockNumber }}</p>
 			<p>{{ term.acf?.blockTitle }}</p>
-			<p>{{ term.acf?.blockInfo }}</p>
-		</template>
+			<p class="app-term-info-block-header-info app-flex app-gap-xs" v-if="term.acf?.blockInfo">
+				<IconInfoCircle />
+				{{ term.acf?.blockInfo }}
+			</p>
 
-		<AppBtn icon flat @click="emit('edit-info-requested')">
-			<IconEdit />
-		</AppBtn>
+			<AppBtn icon flat @click="emit('edit-info-requested')">
+				<IconEdit />
+			</AppBtn>
+		</div>
 
 		<VsBlockTools
 			v-if="hasSlot('settings')"
@@ -19,7 +22,7 @@
 			</template>
 		</VsBlockTools>
 
-		<div class="vs-block-body">
+		<div class="app-term-block-body">
 			<slot />
 		</div>
 	</div>
@@ -28,8 +31,10 @@
 <script lang="ts" setup>
 import VsBlockTools from '@/components/vs-block/components/vs-block-tools.component.vue'
 import AppBtn from '@/components/elements/app-btn.component.vue'
-import { useSlots } from 'vue'
+import IconInfoCircle from '@/components/icons/IconInfoCircle.vue'
 import IconEdit from '@/components/icons/IconEdit.vue'
+
+import { useSlots } from 'vue'
 import { TermState } from '@/models/terms'
 
 defineProps<{

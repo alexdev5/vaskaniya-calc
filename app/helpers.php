@@ -33,6 +33,17 @@ function wpResponseError($data, $message = 'Bad request'): WP_REST_Response
     ], 400);
 }
 
+function wpResponseSuccess($data, $message = 'Saved', $status = 200): WP_REST_Response
+{
+    return new WP_REST_Response(
+        [
+            'data' => $data,
+            'message' => $message,
+        ],
+        $status
+    );
+}
+
 if (!function_exists('vs_view')) {
     function vs_view($file, $args = [])
     {

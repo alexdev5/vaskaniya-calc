@@ -20,7 +20,7 @@
 
 <script lang="ts" setup>
 import AppDrawer from '@/components/elements/app-drawer.component.vue'
-import TermFormFields from '@/components/terms/components/term-form-fields.component.vue'
+import TermFormFields from './components/term-form-fields.component.vue'
 import AppFormButtons from '@/components/forms/app-form-buttons.component.vue'
 
 import { ref } from 'vue'

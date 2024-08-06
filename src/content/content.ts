@@ -1,7 +1,8 @@
 export const content = {
 	label: {
-		blockTitle: 'Тайтл блока',
 		number: 'Номер',
+		blockTitle: 'Тайтл',
+		blockInfo: 'Инфо',
 		title: 'Тайтл',
 		id: 'ID',
 		slug: 'Slug',

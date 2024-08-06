@@ -43,7 +43,7 @@
 </template>
 
 <script lang="ts" setup>
-import TermFormFields from '@/components/terms/components/term-form-fields.component.vue'
+import TermFormFields from '@/components/terms/add/components/term-form-fields.component.vue'
 import IconCopy from '@/components/icons/IconCopy.vue'
 import IconSettings from '@/components/icons/IconSettings.vue'
 import IconEyeOff from '@/components/icons/IconEyeOff.vue'
@@ -53,7 +53,7 @@ import { PropType, ref } from 'vue'
 import { ImageType, TermFromFields, TermState } from '@/models/terms'
 import IconTrash from '@/components/icons/IconTrash.vue'
 import AppFormButtons from '@/components/forms/app-form-buttons.component.vue'
-import { useTermFormFields } from '@/components/terms/term-form-fields.composable.ts'
+import { useTermFormFields } from '@/components/terms/add/term-form-fields.composable.ts'
 
 const props = defineProps({
 	record: Object as PropType<TermState>,

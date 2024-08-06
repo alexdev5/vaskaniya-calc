@@ -1,6 +1,6 @@
 .vs-container {
   color: var(--app-color-primary);
-  font-size: var(--app-font-size-m);
+  font-size: var(--app-font-size-base);
 
   .vs-wrapper {
     margin-inline-start: var(--app-navigation-width);
@@ -10,8 +10,12 @@
     gap: var(--app-offset-middle);
   }
 
-  .vs-color-red {
+  .app-color-red {
     color: var(--app-color-red);
+  }
+  
+  .bold {
+    font-weight: 600;
   }
 
   .vs-icon-btn {
