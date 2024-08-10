@@ -1,11 +1,11 @@
 <template>
 	<div class="app-term-info-block">
-		<div v-if="term" class="app-term-info-block-header">
-			<p class="app-color-red bold">{{ term.acf?.blockNumber }}</p>
-			<p>{{ term.acf?.blockTitle }}</p>
-			<p class="app-term-info-block-header-info app-flex app-gap-xs" v-if="term.acf?.blockInfo">
+		<div class="app-term-info-block-header">
+			<p class="app-color-red bold">{{ info.number }}</p>
+			<p>{{ info.title }}</p>
+			<p class="app-term-info-block-header-info app-flex app-gap-xs" v-if="info.info">
 				<IconInfoCircle />
-				{{ term.acf?.blockInfo }}
+				{{ info.info }}
 			</p>
 
 			<AppBtn icon flat @click="emit('edit-info-requested')">
@@ -35,10 +35,15 @@ import IconInfoCircle from '@/components/icons/IconInfoCircle.vue'
 import IconEdit from '@/components/icons/IconEdit.vue'
 
 import { useSlots } from 'vue'
-import { TermState } from '@/models/terms'
+
+export interface BlockInfo {
+	number: string | number
+	title: string
+	info?: string
+}
 
 defineProps<{
-	term: TermState | null
+	info: BlockInfo
 }>()
 
 const emit = defineEmits(['edit-info-requested', 'settings-opened'])

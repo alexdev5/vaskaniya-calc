@@ -1,67 +1,66 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-import Main from '@/views/main/main.view.vue'
-import Edges from '@/views/edges/edges.view.vue'
-import Palette from '@/views/palette/palette.view.vue'
-import Dimensions from '@/views/dimensions/dimensions.view.vue'
-import Sinks from '@/views/sinks/sinks.view.vue'
-import Addons from '@/views/addons/addons.view.vue'
-import Result from '@/views/result/result.view.vue'
 
 export enum RouteName {
-    Main = 'main',
-    Dimensions = 'dimensions',
-    Edges = 'edges',
-    Palette = 'palette',
-    Sinks = 'sinks',
-    Addons = 'addons',
-    Result = 'result',
-    NotFound = 'notFound',
+	Home = 'home',
+	Dimensions = 'dimensions',
+	Edges = 'edges',
+	Palette = 'palette',
+	Sinks = 'sinks',
+	Addons = 'addons',
+	Result = 'result',
+	Settings = 'settings',
+	NotFound = 'notFound',
 }
 
 const routes: Array<RouteRecordRaw> = [
-    {
-        path: '/',
-        name: RouteName.Main,
-        meta: { title: 'Home title' },
-        //redirect: { name: RouteName.Login },
-        component: Main
-    },
-    {
-        path: '/edges',
-        name: RouteName.Edges,
-        meta: { title: 'Sites' },
-        component: Edges
-    },
-    {
-        path: '/palette',
-        name: RouteName.Palette,
-        meta: { title: 'Palette' },
-        component: Palette
-    },
-    {
-        path: '/dimensions',
-        name: RouteName.Dimensions,
-        meta: { title: 'Dimensions' },
-        component: Dimensions
-    },
-    {
-        path: '/sinks',
-        name: RouteName.Sinks,
-        meta: { title: 'Sinks' },
-        component: Sinks
-    },
-    {
-        path: '/addons',
-        name: RouteName.Addons,
-        meta: { title: 'Addons' },
-        component: Addons
-    },
-    {
-        path: '/result',
-        name: RouteName.Result,
-        meta: { title: 'Result' },
-        component: Result
-    },
+	{
+		path: '/',
+		name: RouteName.Home,
+		meta: { title: 'Home title' },
+		component: () => import('@/views/home/home.view.vue'),
+	},
+	{
+		path: '/edges',
+		name: RouteName.Edges,
+		meta: { title: 'Sites' },
+		component: () => import('@/views/edges/edges.view.vue'),
+	},
+	{
+		path: '/palette',
+		name: RouteName.Palette,
+		meta: { title: 'Palette' },
+		component: () => import('@/views/palette/palette.view.vue'),
+	},
+	{
+		path: '/dimensions',
+		name: RouteName.Dimensions,
+		meta: { title: 'Dimensions' },
+		component: () => import('@/views/dimensions/dimensions.view.vue'),
+	},
+	{
+		path: '/sinks',
+		name: RouteName.Sinks,
+		meta: { title: 'Sinks' },
+		component: () => import('@/views/sinks/sinks.view.vue'),
+	},
+	{
+		path: '/addons',
+		name: RouteName.Addons,
+		meta: { title: 'Addons' },
+		component: () => import('@/views/addons/addons.view.vue'),
+	},
+	{
+		path: '/result',
+		name: RouteName.Result,
+		meta: { title: 'Result' },
+		component: () => import('@/views/result/result.view.vue'),
+	},
+	{
+		path: '/Settings',
+		name: RouteName.Settings,
+		meta: { title: 'Result' },
+		component: () => import('@/views/settings/settings.view.vue'),
+	},
 ]
 
 /*const serviceRoutes: Array<RouteRecordRaw> = [
@@ -82,8 +81,8 @@ const routes: Array<RouteRecordRaw> = [
 ]*/
 
 export default function () {
-    return createRouter({
-        history: createWebHashHistory(),
-        routes
-    })
+	return createRouter({
+		history: createWebHashHistory(),
+		routes,
+	})
 }

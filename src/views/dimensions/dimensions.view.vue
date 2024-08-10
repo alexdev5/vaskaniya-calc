@@ -12,7 +12,7 @@
 			class="block-draggable"
 			item-key="id"
 		>
-			<template #item="{ element, index }">
+			<template #item="{ element }">
 				<VsBlockCard
 					:class="{
 						'vs-block-card-active': element.id === store.state.currentProductType?.id,
@@ -56,7 +56,7 @@
 			class="block-draggable"
 			item-key="id"
 		>
-			<template #item="{ element, index }">
+			<template #item="{ element }">
 				<VsBlockCard
 					v-show="element.productTypeParentId === store.state.currentProductType?.id || store.setting.showAllConfigurations"
 					:class="{

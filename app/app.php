@@ -2,11 +2,12 @@
 
 use App\Controllers\Admin\ScriptsAdminController;
 use App\Controllers\AdminSubMenu;
+use App\Controllers\RegisterEntityController;
 use App\Controllers\SeederController;
+use App\Db\Db;
 use App\RegisterEntity\CategoriesTaxonomy;
 use App\RegisterEntity\CustomPostsType;
 use App\RegisterEntity\TagsTaxonomy;
-use App\Controllers\RegisterEntityController;
 use App\Seeders\Category\CategorySeeder;
 use App\Seeders\StonePalette\StonePaletteSeeder;
 use App\Seeders\Tags\TagsSeeder;
@@ -24,7 +25,7 @@ RegisterEntityController::init([
 // styles and scripts
 //(new ActivationController)->init();
 // seeders
-if(isset($_GET['vs-import'])) {
+if (isset($_GET['vs-import'])) {
     SeederController::init([
         new TagsSeeder(),
         new CategorySeeder(),
@@ -37,5 +38,6 @@ if(isset($_GET['vs-import'])) {
 
 // expensive
 register_activation_hook(VS_ROOT_FILE, function () {
-
+    $db = new Db();
+    $db->create();
 });

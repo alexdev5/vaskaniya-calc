@@ -10,10 +10,15 @@
   }
 }
 
-.vs-navigation-item-link {
+.app-navigation-item {
+}
+
+.app-navigation-item-link {
   text-decoration: none;
-  display: block;
+  display: flex;
+  align-items: center;
   padding: 8px 16px;
+  gap: 8px;
   color: var(--app-color-primary);
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;

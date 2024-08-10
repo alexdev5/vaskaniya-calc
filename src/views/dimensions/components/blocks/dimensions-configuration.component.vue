@@ -1,12 +1,13 @@
 <template>
-	<VsBlock :term="store.state.currentProductType" @edit-info-requested="openTermInfoBlock">
+	<VsBlock :info="infoForBlock" @edit-info-requested="openTermInfoBlock">
 		<slot />
 	</VsBlock>
 </template>
 
 <script lang="ts" setup>
-import VsBlock from '@/components/vs-block/vs-block.component.vue'
+import VsBlock, { BlockInfo } from '@/components/vs-block/vs-block.component.vue'
 import { useDimensionsStore } from '@/views/dimensions/dimensions.store.ts'
+import { computed } from 'vue'
 
 defineProps({
 	settingsLoading: Boolean,
@@ -14,6 +15,12 @@ defineProps({
 
 const emit = defineEmits(['edit-info-requested'])
 const store = useDimensionsStore()
+
+const infoForBlock = computed(() => ({
+	number: store.state.currentProductType?.acf.blockNumber,
+	title: store.state.currentProductType?.acf.blockTitle,
+	info: store.state.currentProductType?.acf.blockInfo,
+} as BlockInfo))
 
 function openTermInfoBlock() {
 	if (!store.state.currentProductType) {

@@ -1,5 +1,5 @@
 <template>
-	<VsBlock :term="store.state.parent" @edit-info-requested="openTermInfoBlock">
+	<VsBlock :info="infoForBlock" @edit-info-requested="openTermInfoBlock">
 		<slot />
 
 		<template #settings>
@@ -17,12 +17,19 @@
 </template>
 
 <script lang="ts" setup>
-import VsBlock from '@/components/vs-block/vs-block.component.vue'
+import VsBlock, { BlockInfo } from '@/components/vs-block/vs-block.component.vue'
 import AppCheckbox from '@/components/forms/app-checkbox.vue'
 import { useDimensionsStore } from '@/views/dimensions/dimensions.store.ts'
+import { computed } from 'vue'
 
 const emit = defineEmits(['edit-info-requested'])
 const store = useDimensionsStore()
+
+const infoForBlock = computed(() => ({
+	number: store.state.parent?.acf.blockNumber,
+	title: store.state.parent?.acf.blockTitle,
+	info: store.state.parent?.acf.blockInfo,
+} as BlockInfo))
 
 function openTermInfoBlock() {
 	if (!store.state.parent) {

@@ -33,4 +33,21 @@ export const content = {
 	editBlockInfo: {
 		title: 'Инфо блока',
 	},
+	menu: {
+		dimensions: 'Размеры',
+		edges: 'Кромки',
+		palette: 'Палитра',
+		sinks: 'Мойки',
+		addons: 'Дополнения',
+		result: 'Результат',
+		settings: 'Настройки',
+	},
+	dimensions: {
+		productType: {
+			title: 'Тип продукта',
+		},
+		configuration: {
+			title: 'Конфигурация {name}',
+		},
+	},
 }
