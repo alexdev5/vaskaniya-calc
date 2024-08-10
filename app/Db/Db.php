@@ -25,24 +25,23 @@ class Db
         global $wpdb;
 
         $table_name = $wpdb->prefix . self::TableName;
+        $exists = $wpdb->get_var("SELECT COUNT(*) FROM $table_name WHERE id = " . self::DefaultId);
 
-        if ($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
-            $charset_collate = $wpdb->get_charset_collate();
-
-            $sql = "CREATE TABLE $table_name (
-            id mediumint(9) NOT NULL AUTO_INCREMENT,
-            dimensions longtext NOT NULL,
-            edges longtext NOT NULL,
-            palette longtext NOT NULL,
-            sinks longtext NOT NULL,
-            addons longtext NOT NULL,
-            result longtext NOT NULL,
-            settings longtext NOT NULL,
-            PRIMARY KEY  (id)
-        ) $charset_collate;";
-
-            require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-            dbDelta($sql);
+        if (!$exists) {
+            $wpdb->insert(
+                $table_name,
+                [
+                    'id' => self::DefaultId,
+                    self::Dimensions => json_encode([]),
+                    self::Edges => json_encode([]),
+                    self::Palette => json_encode([]),
+                    self::Sinks => json_encode([]),
+                    self::Addons => json_encode([]),
+                    self::Result => json_encode([]),
+                    self::Settings => json_encode([])
+                ],
+                ['%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s']
+            );
         }
     }
 
