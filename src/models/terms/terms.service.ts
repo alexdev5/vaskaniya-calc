@@ -12,8 +12,9 @@ export interface Acf {
 	thumbnail: ImageContract | null
 	childBlockImage: ImageContract | null
 	imageFullSize?: ImageContract | null
-	childBlockNumber: string
-	childBlockTitle: string
+	lastChildBlockNumber: string
+	lastChildBlockTitle: string
+	lastChildBlockInfo: string
 	blockNumber: string
 	blockTitle: string
 	blockInfo: string

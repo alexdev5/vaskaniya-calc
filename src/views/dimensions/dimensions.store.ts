@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { reactive, ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import { dimensionsApi, termsApi } from '@/services'
 import { ImageType, TermState } from '@/models/terms'
 import { TaxonomyName } from '@/api/terms'
@@ -11,7 +11,8 @@ export const useDimensionsStore = defineStore('dimensions', () => {
 		productTypes: null as TermState[] | null,
 		configurations: null as TermState[] | null,
 		loading: false,
-		currentProductType: null as TermState | null,
+		selectedProductTypeId: 0 as number,
+		selectedConfigurationId: 0 as number,
 	})
 
 	const setting = reactive({
@@ -23,6 +24,18 @@ export const useDimensionsStore = defineStore('dimensions', () => {
 		type: ImageType.None,
 		termId: 0,
 		loading: false,
+	})
+
+	const selectedProductType = computed((): TermState | null => {
+		if (!state.productTypes?.length) return null
+
+		return state.productTypes.find(item => item.id === state.selectedProductTypeId) ?? null
+	})
+
+	const selectedConfiguration = computed((): TermState | null => {
+		if (!state.configurations?.length) return null
+
+		return state.configurations.find(item => item.id === state.selectedConfigurationId) ?? null
 	})
 
 	const imageDeleting = ref({} as Record<ImageType, boolean>)
@@ -67,7 +80,8 @@ export const useDimensionsStore = defineStore('dimensions', () => {
 	}
 
 	function setCardDefault() {
-		state.currentProductType = state.productTypes?.[0] ?? null
+		state.selectedProductTypeId = state.productTypes?.[0]?.id ?? 0
+		state.selectedConfigurationId = state.productTypes?.[0]?.id ?? 0
 	}
 
 	return {
@@ -78,5 +92,7 @@ export const useDimensionsStore = defineStore('dimensions', () => {
 		removeImageFromTerm,
 		imageDeleting,
 		setCardDefault,
+		selectedProductType,
+		selectedConfiguration,
 	}
 })

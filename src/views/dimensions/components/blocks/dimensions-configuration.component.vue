@@ -17,23 +17,23 @@ const emit = defineEmits(['edit-info-requested'])
 const store = useDimensionsStore()
 
 const infoForBlock = computed(() => ({
-	number: store.state.currentProductType?.acf.blockNumber,
-	title: store.state.currentProductType?.acf.blockTitle,
-	info: store.state.currentProductType?.acf.blockInfo,
+	number: store.selectedProductType?.acf.blockNumber,
+	title: store.selectedProductType?.acf.blockTitle,
+	info: store.selectedProductType?.acf.blockInfo,
 } as BlockInfo))
 
 function openTermInfoBlock() {
-	if (!store.state.currentProductType) {
-		console.error('store.state.currentProductType: ', store.state.currentProductType)
+	if (!store.selectedProductType) {
+		console.error('store.state.selectedProductTypeId: ', store.selectedProductType)
 		return
 	}
 
 	emit('edit-info-requested', {
-		id: store.state.currentProductType.id,
+		id: store.state.selectedProductTypeId,
 		taxonomy: store.state.taxonomy,
-		number: store.state.currentProductType.acf.blockNumber,
-		title: store.state.currentProductType.acf.blockTitle,
-		info: store.state.currentProductType.acf.blockInfo,
+		number: store.selectedProductType.acf.blockNumber,
+		title: store.selectedProductType.acf.blockTitle,
+		info: store.selectedProductType.acf.blockInfo,
 	})
 }
 </script>

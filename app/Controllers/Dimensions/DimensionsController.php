@@ -35,6 +35,7 @@ class DimensionsController
             'parent' => TermResource::collection($productTypesTerms['parent']),
             'productTypes' => TermResource::collection($productTypesTerms['terms']),
             'configurations' => ConfigurationResource::collection($configurations),
+            'figures' => ConfigurationResource::collection($configurations), // post
         ];
 
         return new WP_REST_Response(

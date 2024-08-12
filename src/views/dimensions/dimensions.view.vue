@@ -15,7 +15,7 @@
 			<template #item="{ element }">
 				<VsBlockCard
 					:class="{
-						'vs-block-card-active': element.id === store.state.currentProductType?.id,
+						'app-block-card-active': element.id === store.state.selectedProductTypeId,
 						'is-term-visibility': element.acf.isHidden,
 					}"
 					:key="element.id"
@@ -23,7 +23,7 @@
 					:deleteLoading="store.imageDeleting"
 					:loading="progress.savingCardSettings"
 					:data-id="element.id"
-					@click="store.state.currentProductType = element"
+					@click="store.state.selectedProductTypeId = element.id"
 					@settings-saved="saveCardSettings(element.id, $event)"
 					@load-image-requested="loadImages(element.id, $event)"
 					@remove-image-requested="store.removeImageFromTerm(element.id, $event)"
@@ -44,13 +44,13 @@
 	</DimensionsProductType>
 
 	<DimensionsConfiguration
-		v-if="store.state.currentProductType"
+		v-if="store.state.selectedProductTypeId"
 		@edit-info-requested="editTermInfoBlockFormRef?.open($event)"
 	>
 		<draggable
 			v-model="store.state.configurations"
 			@end="dragTerm($event, {
-				parentId: store.state.currentProductType!.id,
+				parentId: store.state.selectedProductTypeId,
 				taxonomy: store.state.taxonomy
 			})"
 			class="block-draggable"
@@ -58,9 +58,10 @@
 		>
 			<template #item="{ element }">
 				<VsBlockCard
-					v-show="element.productTypeParentId === store.state.currentProductType?.id || store.setting.showAllConfigurations"
+					v-show="element.productTypeParentId === store.state.selectedProductTypeId || store.setting.showAllConfigurations"
 					:class="{
 						'is-term-visibility': element.acf.isHidden,
+						'app-block-card-active': element.id === store.state.selectedConfigurationId,
 					}"
 					:record="element"
 					:deleteLoading="store.imageDeleting"
@@ -72,6 +73,7 @@
 					@visibility-changed="changeVisibility(element.id, !element.acf.isHidden)"
 					@duplicated="duplicateTerm(element.id, store.state.taxonomy)"
 					@removed="removeTerm(element.id, store.state.taxonomy)"
+					@click="store.state.selectedConfigurationId = element.id"
 				/>
 			</template>
 
@@ -79,12 +81,20 @@
 				<VsBlockAdd @added="addTermFromRef?.open({
 				title: 'Add dimensions',
 				taxonomy: store.state.taxonomy,
-				parentId: store.state.currentProductType?.id,
+				parentId: store.state.selectedProductTypeId,
 			})" />
 			</template>
 
 		</draggable>
 	</DimensionsConfiguration>
+
+	<DimensionsFigure>
+		<VsBlockAdd :sort="false" @added="addTermFromRef?.open({
+					title: 'Add configuration',
+					taxonomy: store.state.taxonomy,
+					parentId: store.state.parent?.id,
+				})" />
+	</DimensionsFigure>
 
 	<AppMediaModal
 		ref="mediaModal"
@@ -104,6 +114,7 @@ import AppMediaModal from '@/components/media/app-media-modal.component.vue'
 import VsBlockAdd from '@/components/vs-block/components/vs-block-add.component.vue'
 import AddTermForm from '@/components/terms/add/add-term-form.drawer.vue'
 import EditTermInfoBlockForm from '@/components/terms/edit-info/edit-term-info-block-form.drawer.vue'
+import DimensionsFigure from './components/blocks/dimensions-figure.component.vue'
 
 import draggable from 'vuedraggable'
 

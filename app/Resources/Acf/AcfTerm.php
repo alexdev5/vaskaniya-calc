@@ -20,8 +20,9 @@ class AcfTerm extends JsonResource
                 ? AcfImageTerm::collection($this->{TermsAcfEnum::ImageFullSize})
                 : null,
             'price' => isset($this->price) ? (int)$this->{TermsAcfEnum::Price} : null,
-            'childBlockTitle' => $this->{TermsAcfEnum::ChildBlockTitle} ?? null,
-            'childBlockNumber' => $this->{TermsAcfEnum::ChildBlockNumber} ?? null,
+            'lastChildBlockNumber' => $this->{TermsAcfEnum::LastChildBlockNumber} ?? null,
+            'lastChildBlockTitle' => $this->{TermsAcfEnum::LastChildBlockTitle} ?? null,
+            'lastChildBlockInfo' => $this->{TermsAcfEnum::LastChildBlockInfo} ?? null,
             'blockTitle' => $this->{TermsAcfEnum::BlockTitle} ?? null,
             'blockNumber' => $this->{TermsAcfEnum::BlockNumber} ?? null,
             'blockInfo' => $this->{TermsAcfEnum::BlockInfo} ?? null,

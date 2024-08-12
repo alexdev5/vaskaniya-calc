@@ -26,7 +26,7 @@ abstract class Seeders implements SeederContract
     {
         if (!is_array($termData) || !isset($termData['term'])) {
             vsLog('Ошибка создания таксономии' . __LINE__);
-            return; // Логика обработки ошибки или логирования
+            return;
         }
 
         $termExists = term_exists($termData['term'], $taxonomyName);
@@ -43,7 +43,6 @@ abstract class Seeders implements SeederContract
             );
 
             if (is_wp_error($term)) {
-                // Логика обработки ошибки или логирования
                 return;
             }
 

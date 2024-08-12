@@ -55,3 +55,11 @@ export interface UpdateTermInfoBlockCommand {
 	title: string
 	info?: string
 }
+
+export interface UpdateTermChildInfoBlockCommand {
+	id: number
+	taxonomy: TaxonomyName
+	childNumber: number
+	childTitle: string
+	childInfo?: string
+}

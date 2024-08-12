@@ -19,7 +19,8 @@ class TermApi implements ApiContract
         VsRoute::post(self::route('/remove'), [TermsController::class, 'remove']);
         VsRoute::post(self::route('/duplicate'), [TermsController::class, 'duplicate']);
         VsRoute::post(self::route('/update-sort-index'), [TermsController::class, 'updateSortIndex']);
-        VsRoute::post(self::route('/update-info-block'), [TermsController::class, 'updateInfoBlock']);
+        VsRoute::post(self::route('/update-info-block'), [TermsController::class, 'updateBlockInfo']);
+        VsRoute::post(self::route('/update-child-info-block'), [TermsController::class, 'updateChildBlockInfo']);
     }
 
     public static function route(string $name = ''): string

@@ -41,7 +41,7 @@
     border: 1px solid transparent;
   }
 
-  &.vs-block-card-active {
+  &.app-block-card-active {
     border-color: var(--app-color-red);
     background-color: rgba(var(--app-color-red-rgb), .2);
     @include boxShadow;
