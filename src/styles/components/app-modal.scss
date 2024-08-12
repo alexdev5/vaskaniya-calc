@@ -13,22 +13,25 @@
     z-index: 2;
     @include boxShadow;
   }
+
   .app-modal-header-fixed {
     border-bottom: 1px solid var(--app-color-grey);
-    padding: var(--app-offset-small);
+    padding: var(--app-offset-s);
     min-height: var(--modal-header-fixed-height);
   }
+
   .v-card-actions {
     justify-content: flex-end;
     border-top: 1px solid var(--app-color-grey);
     min-height: var(--modal-action-height);
     bottom: 0;
   }
+
   .v-card {
     display: block;
-    padding-block: var(--app-offset-small);
+    padding-block: var(--app-offset-s);
     padding-inline: var(--app-offset-middle);
     padding-top: var(--modal-header-fixed-height);
-    padding-bottom: calc(var(--modal-action-height) + var(--app-offset-small));
+    padding-bottom: calc(var(--modal-action-height) + var(--app-offset-s));
   }
 }

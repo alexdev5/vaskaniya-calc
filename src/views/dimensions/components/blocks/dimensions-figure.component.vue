@@ -1,5 +1,9 @@
 <template>
 	<VsBlock :info="blockInfo" @edit-info-requested="openTermChildInfoBlock">
+		<template #prepend>
+			<DesignationsDescription />
+		</template>
+
 		<slot />
 
 		<template #settings>
@@ -20,6 +24,7 @@
 <script lang="ts" setup>
 import AppCheckbox from '@/components/forms/app-checkbox.vue'
 import VsBlock, { BlockInfo } from '@/components/vs-block/vs-block.component.vue'
+import DesignationsDescription from '@/components/figure/designations-description.component.vue'
 
 import { computed, ref } from 'vue'
 import { useDimensionsStore } from '@/views/dimensions/dimensions.store.ts'

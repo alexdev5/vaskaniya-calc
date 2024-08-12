@@ -22,8 +22,16 @@
 			</template>
 		</VsBlockTools>
 
+		<div class="app-term-block-prepend" v-if="hasSlot('prepend')">
+			<slot name="prepend" />
+		</div>
+
 		<div class="app-term-block-body">
 			<slot />
+		</div>
+
+		<div class="app-term-block-prepend" v-if="hasSlot('append')">
+			<slot name="append" />
 		</div>
 	</div>
 </template>

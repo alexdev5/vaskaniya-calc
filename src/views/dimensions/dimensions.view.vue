@@ -88,12 +88,15 @@
 		</draggable>
 	</DimensionsConfiguration>
 
-	<DimensionsFigure>
-		<VsBlockAdd :sort="false" @added="addTermFromRef?.open({
+	<DimensionsFigure v-if="store.state.selectedProductTypeId">
+
+		<template v-if="store.state.selectedConfigurationId">
+			<VsBlockAdd :sort="false" @added="addTermFromRef?.open({
 					title: 'Add configuration',
 					taxonomy: store.state.taxonomy,
 					parentId: store.state.parent?.id,
 				})" />
+		</template>
 	</DimensionsFigure>
 
 	<AppMediaModal

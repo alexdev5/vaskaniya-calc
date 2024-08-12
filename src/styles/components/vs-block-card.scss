@@ -2,7 +2,7 @@
   width: 200px;
   min-height: 200px;
   border: 1px solid var(--app-color-primary);
-  padding: 4px var(--app-offset-small);
+  padding: 4px var(--app-offset-s);
   border-radius: 6px;
   display: flex;
   flex-direction: column;
@@ -17,7 +17,7 @@
 
   .vs-block-card-tools {
     display: flex;
-    gap: var(--app-offset-small);
+    gap: var(--app-offset-s);
   }
 
   .vs-block-card-description {

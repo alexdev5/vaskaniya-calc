@@ -50,4 +50,12 @@ export const content = {
 			title: 'Конфигурация {name}',
 		},
 	},
+	designations: {
+		title: 'Обозначения',
+		frontChamfer: 'Лицо с фаской',
+		roundingChamfer: 'Подгиб с фаской',
+		frontWithoutChamfer: 'Лицо без фаски',
+		sideSkirting: 'Плинтус приставной',
+		integratedSkirting: 'Плинтус интегрированный',
+	},
 }

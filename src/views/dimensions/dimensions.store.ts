@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { computed, reactive, ref } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
 import { dimensionsApi, termsApi } from '@/services'
 import { ImageType, TermState } from '@/models/terms'
 import { TaxonomyName } from '@/api/terms'
@@ -84,6 +84,9 @@ export const useDimensionsStore = defineStore('dimensions', () => {
 		state.selectedConfigurationId = state.productTypes?.[0]?.id ?? 0
 	}
 
+	watch(() => state.selectedProductTypeId, () => {
+		state.selectedConfigurationId = 0
+	})
 	return {
 		state,
 		setting,
