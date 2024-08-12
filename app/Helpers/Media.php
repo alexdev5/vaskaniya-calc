@@ -2,7 +2,6 @@
 
 namespace App\Helpers;
 
-use WP_Query;
 use WP_REST_Response;
 
 require_once ABSPATH . 'wp-admin/includes/image.php';
@@ -19,7 +18,6 @@ class Media
             return new WP_REST_Response(['error' => "Load image error", 'body' => $file], 400);
         }
 
-        // Проверка на ошибки загрузки
         switch ($file['error']) {
             case UPLOAD_ERR_OK:
                 break;

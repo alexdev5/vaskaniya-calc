@@ -3,7 +3,7 @@
 namespace App\Seeders;
 
 use App\Contracts\SeederContract;
-use App\Helpers\Post;
+use App\Services\Post\Post;
 use WP_Error;
 
 abstract class Seeders implements SeederContract
@@ -89,6 +89,7 @@ abstract class Seeders implements SeederContract
                 ]));
 
             if (is_wp_error($postId)) {
+                vsLog('CreatePost' . __LINE__);
                 vsLog($existingPost);
                 continue;
             }
@@ -98,7 +99,7 @@ abstract class Seeders implements SeederContract
             }
 
             if (!empty($post['thumbnail'])) {
-                Post::assignImage($postId, $post['thumbnail']);
+                Post::assignImageByPath($postId, $post['thumbnail']);
             }
 
             if (!empty($post['acf'])) {
@@ -158,7 +159,7 @@ abstract class Seeders implements SeederContract
             }
 
             if (!empty($post['thumbnail'])) {
-                Post::assignImage($postId, $post['thumbnail']);
+                Post::assignImageByPath($postId, $post['thumbnail']);
             }
         }
     }
