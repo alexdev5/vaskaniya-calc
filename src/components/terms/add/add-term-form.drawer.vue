@@ -3,7 +3,7 @@
 
 		<TermFormFields
 			v-if="widgetOpened"
-			no-select-image
+			image-selected
 			@fields-updated="updateFields"
 		/>
 

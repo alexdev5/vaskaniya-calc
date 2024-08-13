@@ -1,26 +1,14 @@
 <template>
-	<VsBlock :info="blockInfo" @edit-info-requested="openTermChildInfoBlock">
+	<VsBlock :info="blockInfo" @edit-info-requested="openTermChildInfoBlock" v-if="store.state.parent">
 		<template #prepend>
 			<DesignationsDescription />
 		</template>
 
 		<template v-if="store.state.selectedConfigurationId">
-			<VsBlockAdd :sort="false" @added="changePostFigureRef?.open({
-					title: 'Add configuration',
-					taxonomy: store.state.taxonomy,
+			<VsBlockAdd @added="changePostFigureRef?.open({
+					taxonomies: [store.state.selectedProductTypeId, store.state.selectedConfigurationId],
 					parentId: store.state.parent?.id,
-				})" />
-		</template>
-
-		<template #settings>
-			<AppCheckbox
-				v-model="store.setting.showAllConfigurations"
-				label="Отобразить дочерние блоки"
-			/>
-			<AppCheckbox
-				v-model="store.setting.showHiddenFields"
-				label="Показать информационные поля"
-			/>
+				}, drawerTitle)" />
 		</template>
 	</VsBlock>
 
@@ -29,21 +17,21 @@
 </template>
 
 <script lang="ts" setup>
-import AppCheckbox from '@/components/forms/app-checkbox.vue'
 import VsBlock, { BlockInfo } from '@/components/vs-block/vs-block.component.vue'
 import DesignationsDescription from '@/components/figure/designations-description.component.vue'
 import EditLastChildInfo from '@/components/terms/edit-last-child-info/edit-last-child-info.drawer.vue'
 import VsBlockAdd from '@/components/vs-block/components/vs-block-add.component.vue'
-import ChangePostFigure from '@/components/post/change-post-figure.drawer.vue'
+import ChangePostFigure from '../forms/change-post-figure.drawer.vue'
 
 import { computed, ref } from 'vue'
 import { useDimensionsStore } from '@/views/dimensions/dimensions.store.ts'
+import { content } from '@/content'
 
 const emit = defineEmits(['edit-info-requested'])
 const store = useDimensionsStore()
 
 const editLastChildInfoRef = ref()
-const addTermFromRef = ref()
+const changePostFigureRef = ref()
 
 const blockInfo = computed(() => ({
 	number: store.selectedProductType?.acf.lastChildBlockNumber,
@@ -65,6 +53,11 @@ function openTermChildInfoBlock() {
 		childInfo: store.selectedProductType.acf.lastChildBlockInfo,
 	})
 }
+
+const drawerTitle = computed(() =>
+	`${content.dimensions.chapter}: ${store.selectedProductType?.title}\n
+	${content.dimensions.type}: ${store.selectedConfiguration?.title}`,
+)
 </script>
 
 <style lang="scss">

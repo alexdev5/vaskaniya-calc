@@ -1,5 +1,5 @@
 import { AxiosApi } from '@/api/axios/axios.api'
-import { DimensionsContract } from '@/api/dimensions/dimensions.contracts.ts'
+import { CreateFigureCommand, DimensionsContract } from '@/api/dimensions/dimensions.contracts.ts'
 import { UpdateTermCommand } from '@/api/terms'
 
 export class DimensionsApi extends AxiosApi {
@@ -15,5 +15,10 @@ export class DimensionsApi extends AxiosApi {
 
 	async updateTerm(params: UpdateTermCommand) {
 		return this.post(`${this.baseUrl}/update-term`, params)
+	}
+
+	// create-or-update
+	async changeFigure(params: CreateFigureCommand) {
+		return this.post(`${this.baseUrl}/change-figure`, params)
 	}
 }

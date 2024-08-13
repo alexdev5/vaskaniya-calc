@@ -6,8 +6,9 @@ use App\Contracts\ApiContract;
 use App\Controllers\MediaController;
 use App\Controllers\Route\VsRoute;
 
-class MediaApi implements ApiContract {
-    const route = '/media';
+class MediaApi implements ApiContract
+{
+    const baseRoute = '/media';
 
     public static function register()
     {
@@ -16,6 +17,6 @@ class MediaApi implements ApiContract {
 
     public static function route(string $name = ''): string
     {
-        return self::route . $name;
+        return self::baseRoute . $name;
     }
 }

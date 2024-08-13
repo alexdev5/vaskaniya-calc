@@ -2,7 +2,8 @@
 
 namespace App\Services\Post;
 
-use App\Helpers\Media;
+use App\Services\MediaService;
+use App\Services\Response;
 use WP_Error;
 
 class Post
@@ -13,14 +14,13 @@ class Post
             $result = wp_set_object_terms($postId, $terms, $taxonomy);
             if (is_wp_error($result)) {
                 return new WP_Error('assignTerms', 'Assign terms failed', $result->get_error_message());
-                //vsLog($result->get_error_message());
             }
         }
     }
 
     public static function assignImageByPath(int $postId, $thumbnail)
     {
-        $thumbnailId = Media::uploadImageByPath($thumbnail);
+        $thumbnailId = MediaService::uploadImageByPath($thumbnail);
 
         if (!is_null($thumbnailId)) {
             set_post_thumbnail($postId, $thumbnailId);
@@ -35,6 +35,25 @@ class Post
         } else {
             return new WP_Error('invalid_attachment', 'Attachment is not an image or does not exist.');
         }
+    }
+
+    public static function uploadImageThenAssign(int $postId, $file)
+    {
+        $thumbnailId = MediaService::uploadImageFromFile($file);
+
+        if (is_wp_error($thumbnailId)) Response::error($thumbnailId, '');
+
+        if (wp_attachment_is_image($thumbnailId)) {
+            set_post_thumbnail($postId, $thumbnailId);
+            return true;
+        } else {
+            return new WP_Error('invalid_attachment', 'Attachment is not an image or does not exist.');
+        }
+    }
+
+    public static function removeThumbnail(int $postId): void
+    {
+        delete_post_thumbnail($postId);
     }
 
     public static function assignAcf(int $postId, array $fields)
@@ -56,7 +75,9 @@ class Post
     public static function createOrUpdate(
         array $args,
         array $postTerms = [],
-        array $acfFields = []
+        array $acfFields = [],
+        int   $thumbnailId = 0,
+              $file = null
     )
     {
         $postId = $args['id'] ?? 0;
@@ -64,12 +85,18 @@ class Post
             return new WP_Error('createOrUpdateWrong', 'post_title empty');
         }
 
-
         if ($postId > 0 && get_post($postId)) {
             $postId = wp_update_post($args);
         } else {
             $postId = wp_insert_post($args);
         }
+
+        if ($thumbnailId)
+            Post::assignImageById($postId, $thumbnailId);
+        elseif ($file)
+            Post::uploadImageThenAssign($postId, $file);
+        else
+            Post::removeThumbnail($postId);
 
         if (is_wp_error($postId)) {
             return new WP_Error('createOrUpdateWrong', 'Create or update post failed', $postId);

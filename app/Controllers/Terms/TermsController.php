@@ -2,7 +2,7 @@
 
 namespace App\Controllers\Terms;
 
-use App\Helpers\Media;
+use App\Services\MediaService;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -40,17 +40,17 @@ class TermsController
         }
 
         if ($_FILES['thumbnail']) {
-            $imageId = Media::uploadImageFromFile($_FILES['thumbnail']);
+            $imageId = MediaService::uploadImageFromFile($_FILES['thumbnail']);
             $this->assignAcfImage($imageId, $termId, TermsAcfEnum::Thumbnail);
         }
 
         if ($_FILES['imageFullSize']) {
-            $imageId = Media::uploadImageFromFile($_FILES['imageFullSize']);
+            $imageId = MediaService::uploadImageFromFile($_FILES['imageFullSize']);
             $this->assignAcfImage($imageId, $termId, TermsAcfEnum::ImageFullSize);
         }
 
         if ($_FILES['childBlockImage']) {
-            $imageId = Media::uploadImageFromFile($_FILES['childBlockImage']);
+            $imageId = MediaService::uploadImageFromFile($_FILES['childBlockImage']);
             $this->assignAcfImage($imageId, $termId, TermsAcfEnum::ChildBlockImage);
         }
 

@@ -81,7 +81,15 @@ export const useDimensionsStore = defineStore('dimensions', () => {
 
 	function setCardDefault() {
 		state.selectedProductTypeId = state.productTypes?.[0]?.id ?? 0
-		state.selectedConfigurationId = state.productTypes?.[0]?.id ?? 0
+
+		// watch fix
+		setTimeout(() => {
+			if (state.selectedProductTypeId && state.configurations?.length) {
+				state.selectedConfigurationId = state.configurations.find(
+					item => item.productTypeParentId === state.selectedProductTypeId,
+				)?.id ?? 0
+			}
+		}, 100)
 	}
 
 	watch(() => state.selectedProductTypeId, () => {

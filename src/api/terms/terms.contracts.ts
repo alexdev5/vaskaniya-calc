@@ -1,14 +1,7 @@
-export interface TermImage {
-	id: number
-	title: string
-	fullName: string
-	url: string
-}
-
 export interface ImageContract {
 	id: number
-	icon: string
-	modified: string
+	date: string
+	title: string
 	name: string
 	fullName: string
 	url: string

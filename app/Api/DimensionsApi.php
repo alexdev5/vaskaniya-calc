@@ -8,7 +8,7 @@ use App\Controllers\Route\VsRoute;
 
 class DimensionsApi implements ApiContract
 {
-    const route = '/dimensions';
+    const baseRoute = '/dimensions';
 
     public static function register()
     {
@@ -21,10 +21,14 @@ class DimensionsApi implements ApiContract
             self::route('/update-term-title'),
             [DimensionsController::class, 'updateTermTitle']
         );
+        VsRoute::post(
+            self::route('/change-figure'),
+            [DimensionsController::class, 'changeFigure']
+        );
     }
 
     public static function route(string $name = ''): string
     {
-        return self::route . $name;
+        return self::baseRoute . $name;
     }
 }

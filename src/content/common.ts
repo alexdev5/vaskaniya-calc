@@ -1,4 +1,4 @@
-export const content = {
+export const common = {
 	label: {
 		number: 'Номер',
 		blockTitle: 'Тайтл',
@@ -9,7 +9,8 @@ export const content = {
 		price: 'Цена',
 		description: 'Описание',
 		preview: 'Превью',
-		selectImage: 'Изображение',
+		uploadFromDevice: 'Загрузить с устройства',
+		selectFromLibrary: 'Выбрать с библиотеки',
 	},
 	term: {
 		fullImage: 'Полноразмерное изображение',
@@ -44,8 +45,6 @@ export const content = {
 		settings: 'Настройки',
 	},
 	dimensions: {
-		type: 'Тип',
-		chapter: 'Раздел',
 		productType: {
 			title: 'Добавить тип изделия',
 		},
@@ -56,7 +55,6 @@ export const content = {
 			form: {
 				btnLabel: 'Лейбл кнопки',
 				area: 'Площадь',
-				description: 'Описание (на сером фоне)',
 			},
 		},
 	},

@@ -45,3 +45,12 @@ export interface CreateTermInDrawerParams {
 	title: string
 	parentId?: number
 }
+
+export enum ProductTypeTermSlug {
+	TableTops = 'table-tops',
+	BarCounters = 'bar-counters',
+	WindowSills = 'window-sills',
+	Backsplashes = 'backsplashes',
+	Washbasins = 'washbasins',
+	ArtObject = 'art-object',
+}

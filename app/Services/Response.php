@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Response;
+namespace App\Services;
 
 use WP_REST_Response;
 
@@ -13,9 +13,13 @@ class Response
             'message' => $message,
         ];
 
-        if (!is_array($params)) {
-            return new WP_REST_Response($params, $status);
-        }
+        $isPrimitive =
+            is_numeric($params) ||
+            is_string($params) ||
+            is_bool($params) ||
+            is_null($params);
+
+        if (!$isPrimitive) return new WP_REST_Response($params, $status);
 
         return new WP_REST_Response($data, $status);
     }

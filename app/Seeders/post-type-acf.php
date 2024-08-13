@@ -7,10 +7,12 @@ return [
     'price' => 'Стоимость',
     'vendor_code' => 'Артикул',
     'supplement_amount' => 'Сумма надбавки',
-    'area' => 'Площадь', // m2
+    'area' => 'Площадь', //m2
+    'btn_label' => 'Лейбл кнопки',
+    'description' => 'Description',
 
     // Отображать во вкладках
-    'countertops' => 'Столешницы',
+    'table_tops' => 'Столешницы',
     'window_sills' => 'Подоконники',
     'bar_counters' => 'Барные стойки',
     'washbasins' => 'Умывальники',

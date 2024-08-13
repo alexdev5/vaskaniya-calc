@@ -6,7 +6,7 @@ return [
         'children' => [
             [
                 'term' => 'Столешницы',
-                'slug' => 'countertops',
+                'slug' => 'table-tops',
                 'children' => [
                     [
                         'term' => 'Прямая',

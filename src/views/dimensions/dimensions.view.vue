@@ -35,7 +35,7 @@
 
 			<template #footer>
 				<VsBlockAdd :sort="false" @added="addTermFromRef?.open({
-					title: 'Add configuration',
+					title: content.dimensions.productType.title,
 					taxonomy: store.state.taxonomy,
 					parentId: store.state.parent?.id,
 				})" />
@@ -79,7 +79,7 @@
 
 			<template #footer>
 				<VsBlockAdd @added="addTermFromRef?.open({
-				title: 'Add dimensions',
+				title: content.dimensions.configuration.title,
 				taxonomy: store.state.taxonomy,
 				parentId: store.state.selectedProductTypeId,
 			})" />
@@ -93,7 +93,7 @@
 	<AppMediaModal
 		ref="mediaModal"
 		:callback="store.loadDimensions"
-		@selected="mediaModal?.assignImageToTerm($event, store.termImageToUpload)"
+		@selected="mediaModal?.assignImageToTerm($event.id, store.termImageToUpload)"
 	/>
 
 	<AddTermForm ref="addTermFromRef" :callback="store.loadDimensions" />
@@ -111,7 +111,7 @@ import EditTermInfoBlockForm from '@/components/terms/edit-info/edit-term-info-b
 import DimensionsFigure from './components/blocks/dimensions-figure.component.vue'
 
 import draggable from 'vuedraggable'
-
+import { content } from '@/content'
 import { onMounted, onUnmounted, ref } from 'vue'
 import { useDimensionsStore } from './dimensions.store.ts'
 import { ImageType } from '@/models/terms'

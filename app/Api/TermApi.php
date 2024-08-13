@@ -8,7 +8,7 @@ use App\Controllers\Terms\TermsController;
 
 class TermApi implements ApiContract
 {
-    const route = '/terms';
+    const baseRoute = '/terms';
 
     public static function register()
     {
@@ -25,6 +25,6 @@ class TermApi implements ApiContract
 
     public static function route(string $name = ''): string
     {
-        return self::route . $name;
+        return self::baseRoute . $name;
     }
 }

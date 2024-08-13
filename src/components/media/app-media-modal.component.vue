@@ -35,7 +35,7 @@
 				flat
 				:disabled="!mediaSelected.id"
 				:loading="loading"
-				@click="emit('selected', mediaSelected.id)"
+				@click="emit('selected', mediaSelected)"
 			>
 				Выбрать
 			</AppBtn>
@@ -53,7 +53,7 @@
 import AppModal from '@/components/elements/app-modal.component.vue'
 import AppBtn from '@/components/elements/app-btn.component.vue'
 import { ref } from 'vue'
-import { TermImage } from '@/api/terms/terms.contracts'
+import { ImageContract } from '@/api/terms/terms.contracts'
 import { useMediaStore } from '@/stores'
 import { termsApi } from '@/services'
 import { Terms } from '@/models'
@@ -68,7 +68,7 @@ const emit = defineEmits(['selected'])
 const mediaStore = useMediaStore()
 
 const mediaModal = ref()
-const mediaSelected = ref({} as TermImage)
+const mediaSelected = ref({} as ImageContract)
 const mediaLoading = ref(false)
 const loading = ref(false)
 
@@ -78,7 +78,7 @@ async function open() {
 }
 
 function close() {
-	mediaSelected.value = {} as TermImage
+	mediaSelected.value = {} as ImageContract
 	mediaModal.value?.close()
 }
 

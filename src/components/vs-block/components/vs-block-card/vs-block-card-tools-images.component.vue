@@ -9,7 +9,7 @@
 			<div class="existing-image-info">
 				<ul class="app-list-standard small">
 					<li>{{ image.fullName }}</li>
-					<li>{{ image.modified }}</li>
+					<li>{{ image.date }}</li>
 				</ul>
 
 				<AppBtn

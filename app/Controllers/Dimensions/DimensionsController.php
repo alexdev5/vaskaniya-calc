@@ -2,11 +2,15 @@
 
 namespace App\Controllers\Dimensions;
 
+use App\Config\PostTypeEnum;
 use App\Config\TaxonomyEnum;
 use App\Controllers\TaxonomyController;
 use App\Controllers\Terms\TermsController;
 use App\Resources\Dimensions\ConfigurationResource;
 use App\Resources\Dimensions\TermResource;
+use App\Services\Post\Post;
+use App\Services\Post\PostAcfEnum;
+use App\Services\Response;
 use WP_REST_Request;
 use WP_REST_Response;
 
@@ -91,5 +95,35 @@ class DimensionsController
         );
 
         return new WP_REST_Response("Term updated successfully", 200);
+    }
+
+    public function changeFigure(WP_REST_Request $request): WP_REST_Response
+    {
+        $params = $request->get_params();
+        $postType = PostTypeEnum::Products;
+        $acf = [];
+
+        if (isset($params['btnLabel'])) $acf[PostAcfEnum::BtnLabel] = $params['btnLabel'];
+        if (isset($params['description'])) $acf[PostAcfEnum::Description] = $params['description'];
+
+        $postId = Post::createOrUpdate(
+            [
+                'id' => $params['id'] ?? null,
+                'post_title' => $params['title'] ?? 'Product type',
+                'post_content' => $params['content'] ?? '',
+                'post_status' => $params['status'] ?? 'publish',
+                'post_type' => $postType, //$params['postType']
+            ],
+            $params['taxonomies'],
+            $acf,
+            $params['thumbnailId'] ?? 0,
+            $params['thumbnailId'] ?? null
+        );
+
+        if (is_wp_error($postId)) {
+            return Response::error($postId->get_error_data(), __LINE__ . ':: ' . $postId->get_error_message());
+        }
+
+        return Response::success($postId);
     }
 }

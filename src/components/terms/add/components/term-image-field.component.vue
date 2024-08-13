@@ -9,7 +9,7 @@
 			<div class="existing-image-info">
 				<ul class="app-list-standard small">
 					<li>{{ image.fullName }}</li>
-					<li>{{ image.modified }}</li>
+					<li>{{ image.date }}</li>
 				</ul>
 
 				<AppBtn
@@ -47,7 +47,7 @@
 			</AppFileInput>
 
 			<AppBtn
-				v-if="!noSelectImage"
+				v-if="!imageSelected"
 				icon
 				x-small
 				@click="emit('lib-opened')"
@@ -67,12 +67,12 @@ import IconListSearch from '@/components/icons/IconListSearch.vue'
 import IconTrash from '@/components/icons/IconTrash.vue'
 import { ImageContract } from '@/api/terms'
 
-const props = defineProps<{
+defineProps<{
 	label?: string,
 	image?: ImageContract,
 	modelValue: any,
 	deleteLoading?: boolean,
-	noSelectImage?: boolean
+	imageSelected?: boolean
 }>()
 
 const emit = defineEmits(['update:model-value', 'lib-opened', 'removed'])

@@ -8,7 +8,7 @@ use App\Controllers\Route\VsRoute;
 
 class PostApi implements ApiContract
 {
-    const route = '/posts';
+    const baseRoute = '/posts';
 
     public static function register()
     {
@@ -20,6 +20,6 @@ class PostApi implements ApiContract
 
     public static function route(string $name = ''): string
     {
-        return self::route . $name;
+        return self::baseRoute . $name;
     }
 }

@@ -13,10 +13,10 @@
 						<div class="app-drawer--header-title">
 							{{ title }}
 						</div>
-						<AppBtn icon small text @click="onClose">
-							<IconCloseCircleFilled />
-						</AppBtn>
 					</slot>
+					<AppBtn icon small text @click="onClose">
+						<IconCloseCircleFilled />
+					</AppBtn>
 				</div>
 			</template>
 
@@ -39,7 +39,6 @@ const props = defineProps({
 	opened: Boolean,
 	title: {
 		type: String,
-		required: true,
 	},
 })
 
