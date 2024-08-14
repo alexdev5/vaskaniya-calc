@@ -19,8 +19,10 @@ class PostResource extends JsonResource
             'modified' => $this->post_modified ?? null,
             'modifiedGmt' => $this->post_modified_gmt ?? null,
             'content' => $this->content ?? null,
-
-            'acf' => $this->acf ? $this->acf : [],
+            'thumbnail' => !empty($this->thumbnail)
+                ? PostImageResource::collection($this->thumbnail)
+                : null,
+            'acf' => $this->acf ? $this->acf : null,
         ];
     }
 }

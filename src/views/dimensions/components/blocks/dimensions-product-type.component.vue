@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts" setup>
-import VsBlock, { BlockInfo } from '@/components/vs-block/vs-block.component.vue'
+import VsBlock, { BlockInfo } from '@/components/app-block/vs-block.component.vue'
 import AppCheckbox from '@/components/forms/app-checkbox.vue'
 import { useDimensionsStore } from '@/views/dimensions/dimensions.store.ts'
 import { computed } from 'vue'

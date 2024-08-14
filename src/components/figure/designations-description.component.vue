@@ -49,5 +49,7 @@ import { content } from '@/content'
 	display: grid;
 	grid-template-columns: 300px 300px;
 	gap: var(--app-offset-xs);
+	padding-bottom: 16px;
+	border-bottom: 2px solid var(--app-color-light-grey);
 }
 </style>

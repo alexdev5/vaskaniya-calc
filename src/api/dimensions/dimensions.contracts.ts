@@ -22,20 +22,21 @@ export interface ConfigurationContract extends ProductTypeContract {
 	productTypeParentId: number | null
 }
 
-export interface UpdateTermTitleCommand {
-	termId: number,
-	blockTitle: string,
-	blockNumber: string,
-}
-
 export interface CreateFigureCommand {
-	id?: number
 	title?: string
 	btnLabel: string
 	taxonomy: string
 	taxonomies: number[]
 	area?: string // in m2
-	description?: string
+	notification?: string
+}
+
+export interface UpdateFigureCommand {
+	id: number
+	title?: string
+	btnLabel: string
+	area?: string // in m2
+	notification?: string
 }
 
 export interface PostFigureContract {
@@ -45,6 +46,6 @@ export interface PostFigureContract {
 	taxonomy: string
 	taxonomies: number[]
 	area?: string
-	description?: string
+	notification?: string
 	thumbnail: ImageContract | null
 }

@@ -103,15 +103,14 @@
 <script lang="ts" setup>
 import DimensionsProductType from './components/blocks/dimensions-product-type.component.vue'
 import DimensionsConfiguration from './components/blocks/dimensions-configuration.component.vue'
-import VsBlockCard from '@/components/vs-block/components/vs-block-card.component.vue'
+import VsBlockCard from '@/components/app-block/components/vs-block-card.component.vue'
 import AppMediaModal from '@/components/media/app-media-modal.component.vue'
-import VsBlockAdd from '@/components/vs-block/components/vs-block-add.component.vue'
+import VsBlockAdd from '@/components/app-block/components/vs-block-add.component.vue'
 import AddTermForm from '@/components/terms/add/add-term-form.drawer.vue'
 import EditTermInfoBlockForm from '@/components/terms/edit-info/edit-term-info-block-form.drawer.vue'
 import DimensionsFigure from './components/blocks/dimensions-figure.component.vue'
 
 import draggable from 'vuedraggable'
-import { content } from '@/content'
 import { onMounted, onUnmounted, ref } from 'vue'
 import { useDimensionsStore } from './dimensions.store.ts'
 import { ImageType } from '@/models/terms'

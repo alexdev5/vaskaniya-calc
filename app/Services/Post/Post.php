@@ -47,6 +47,9 @@ class Post
                 $post->taxonomies = array_map(function ($item) {
                     return $item->term_id;
                 }, $terms);
+
+                //$post->thumbnail = get_the_post_thumbnail_url($post->ID);
+                $post->thumbnail = self::getThumbnail($post->ID);
             }
 
             $post->acf = get_fields($post->ID);
@@ -149,5 +152,19 @@ class Post
         }
 
         return $postId;
+    }
+
+    public static function getThumbnail($postId)
+    {
+        $thumbnail_id = get_post_thumbnail_id($postId);
+
+        if ($thumbnail_id) {
+            $post = get_post($thumbnail_id);
+            $post->url = get_the_post_thumbnail_url($postId);
+
+            return $post;
+        }
+
+        return null;
     }
 }

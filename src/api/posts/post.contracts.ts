@@ -5,7 +5,14 @@ export interface PostContract {
 	date: string
 	excerpt: string
 	postType: string
-	categories: number[]
+	thumbnail: string
+	taxonomies: number[]
+	acf: PostAcfContract | null
+}
+
+export interface PostAcfContract {
+	btnLabel: string
+	notification: string | null
 }
 
 export interface UploadImageCommand {

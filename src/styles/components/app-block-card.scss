@@ -1,4 +1,4 @@
-.vs-block-card {
+.app-block-card {
   width: 200px;
   min-height: 200px;
   border: 1px solid var(--app-color-primary);
@@ -15,20 +15,20 @@
     @include boxShadow
   }
 
-  .vs-block-card-tools {
+  .app-block-card-tools {
     display: flex;
     gap: var(--app-offset-s);
   }
 
-  .vs-block-card-description {
+  .app-block-card-description {
     font-size: var(--app-font-size-s);
   }
 
-  .vs-block-card-price {
+  .app-block-card-price {
     font-weight: 600;
   }
 
-  .vs-block-card-image {
+  .app-block-card-image {
     flex-grow: 1;
     max-height: 130px;
 
@@ -52,7 +52,7 @@
   }
 
   &.is-term-visibility {
-    & > div:not(.vs-block-card-tools) {
+    & > div:not(.app-block-card-tools) {
       opacity: 0.2;
     }
   }

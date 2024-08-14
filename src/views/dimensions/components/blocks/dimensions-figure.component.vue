@@ -1,14 +1,19 @@
 <template>
-	<VsBlock :info="blockInfo" @edit-info-requested="openTermChildInfoBlock" v-if="store.state.parent">
+	<VsBlock :info="blockInfo" @edit-info-requested="editTermChildInfoBlock" v-if="store.state.parent">
 		<template #prepend>
 			<DesignationsDescription />
 		</template>
 
 		<template v-if="store.state.selectedConfigurationId">
-			<div class="post-figure">
-
+			<div class="post-figure-block-wrapper" v-if="figureSelected?.length">
+				<FigureBlock
+					v-for="figure in figureSelected"
+					:figure="figure"
+					@edited="	changePostFigureRef.value?.open(figure, drawerTitle)"
+				/>
 			</div>
-			<VsBlockAdd @added="openChangingPostFigure()" />
+
+			<VsBlockAdd @added="createFigure()" v-else />
 		</template>
 	</VsBlock>
 
@@ -17,11 +22,12 @@
 </template>
 
 <script lang="ts" setup>
-import VsBlock, { BlockInfo } from '@/components/vs-block/vs-block.component.vue'
+import VsBlock, { BlockInfo } from '@/components/app-block/vs-block.component.vue'
 import DesignationsDescription from '@/components/figure/designations-description.component.vue'
 import EditLastChildInfo from '@/components/terms/edit-last-child-info/edit-last-child-info.drawer.vue'
-import VsBlockAdd from '@/components/vs-block/components/vs-block-add.component.vue'
+import VsBlockAdd from '@/components/app-block/components/vs-block-add.component.vue'
 import ChangePostFigure from '../forms/change-post-figure.drawer.vue'
+import FigureBlock from './components/figure-block.componet.vue'
 
 import { computed, ref } from 'vue'
 import { useDimensionsStore } from '@/views/dimensions/dimensions.store.ts'
@@ -39,7 +45,7 @@ const blockInfo = computed(() => ({
 	info: store.selectedProductType?.acf.lastChildBlockInfo,
 } as BlockInfo))
 
-function openTermChildInfoBlock() {
+function editTermChildInfoBlock() {
 	if (!store.selectedProductType) {
 		console.error('store.state.selectedProductTypeId: ', store.state.selectedProductTypeId)
 		return
@@ -59,20 +65,21 @@ const drawerTitle = computed(() =>
 	${content.dimensions.type}: ${store.selectedConfiguration?.title}`,
 )
 
-function openChangingPostFigure() {
+function createFigure() {
 	changePostFigureRef.value?.open({
 		taxonomies: [
 			store.state.selectedProductTypeId,
 			store.state.selectedConfigurationId,
 		],
 		title: store.selectedConfiguration?.title,
-		parentId: store.state.parent?.id,
 		taxonomy: store.state.taxonomy,
 	}, drawerTitle.value)
 }
 
 const figureSelected = computed(() => {
-	return store.state.figures
+	if (!store.state.figures?.length) return null
+
+	return store.state.figures.filter(figure => figure.taxonomies.includes(store.state.selectedConfigurationId))
 })
 </script>
 

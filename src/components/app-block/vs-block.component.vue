@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts" setup>
-import VsBlockTools from '@/components/vs-block/components/vs-block-tools.component.vue'
+import VsBlockTools from '@/components/app-block/components/vs-block-tools.component.vue'
 import AppBtn from '@/components/elements/app-btn.component.vue'
 import IconInfoCircle from '@/components/icons/IconInfoCircle.vue'
 import IconEdit from '@/components/icons/IconEdit.vue'

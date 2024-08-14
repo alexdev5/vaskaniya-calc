@@ -5,7 +5,7 @@
 
   @include boxShadow;
 
-  .vs-block-tools {
+  .app-block-tools {
     display: inline-grid;
     position: absolute;
     top: 10px;
@@ -50,7 +50,7 @@
     gap: var(--app-offset-middle);
   }
 
-  .vs-block-settings {
+  .app-block-settings {
     @include boxShadow;
     border: 1px solid red;
   }
@@ -60,7 +60,7 @@
   margin-bottom: var(--app-offset-normal);
 }
 
-.vs-block-tools-settings {
+.app-block-tools-settings {
   background-color: #fff;
   min-width: 300px;
   border-radius: 4px;
@@ -68,14 +68,14 @@
   gap: 16px;
 }
 
-.vs-block-tools-settings-container {
+.app-block-tools-settings-container {
   overflow-y: auto;
   height: 100%;
   background: #fff;
   padding: 16px;
 }
 
-.vs-block-tools-settings-image {
+.app-block-tools-settings-image {
   border-bottom: 1px solid var(--app-color-grey);
   padding-bottom: var(--app-offset-normal);
 
@@ -112,7 +112,7 @@
   }
 }
 
-.vs-block-tools-settings-image-actions {
+.app-block-tools-settings-image-actions {
   display: flex;
   gap: 16px;
   align-items: center;

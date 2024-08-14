@@ -1,5 +1,5 @@
 <template>
-	<div class="vs-block-card">
+	<div class="app-block-card">
 		<VsBlockCardTools
 			ref="vsBlockCardToolsRef"
 			:class="{ 'hidden': record.acf.isHidden }"
@@ -14,16 +14,16 @@
 			@duplicated="emit('duplicated')"
 		/>
 
-		<div class="vs-block-card-image">
+		<div class="app-block-card-image">
 			<img :src="record.thumbnailImageUrl" alt="">
 		</div>
-		<div class="vs-block-card-title">
+		<div class="app-block-card-title">
 			{{ record.title }}
 		</div>
-		<div class="vs-block-card-description" v-if="record.description">
+		<div class="app-block-card-description" v-if="record.description">
 			{{ record.description }}
 		</div>
-		<div class="vs-block-card-price" v-if="record.acf?.price">
+		<div class="app-block-card-price" v-if="record.acf?.price">
 			{{ record.acf.price }}
 		</div>
 	</div>

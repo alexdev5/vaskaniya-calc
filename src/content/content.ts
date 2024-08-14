@@ -46,6 +46,7 @@ export const content = {
 	dimensions: {
 		type: 'Тип',
 		chapter: 'Раздел',
+		addFigureButton: 'Добавить размер',
 		productType: {
 			title: 'Добавить тип изделия',
 		},

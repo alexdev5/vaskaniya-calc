@@ -1,5 +1,5 @@
 <template>
-	<div class="vs-block-card-tools">
+	<div class="app-block-card-tools">
 		<v-menu v-model="widgetOpened" :close-on-content-click="false" bottom>
 			<template v-slot:activator="{ props }">
 				<div class="vs-icon-btn" v-bind="props">
@@ -7,7 +7,7 @@
 				</div>
 			</template>
 
-			<div class="vs-block-tools-settings-container">
+			<div class="app-block-tools-settings-container">
 				<TermFormFields
 					:record="record"
 					@fields-updated="updateFields"

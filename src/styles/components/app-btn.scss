@@ -1,0 +1,11 @@
+
+.app-btn:not(.v-btn--icon) {
+  padding-inline: 24px;
+}
+
+.app-btn {
+  &.app-btn-red {
+    background: var(--app-color-red);
+    color: #fff !important;
+  }
+}

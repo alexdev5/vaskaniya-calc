@@ -1,10 +1,10 @@
 export interface ImageContract {
 	id: number
+	name: string
+	title: string
+	fullName: string
 	modified: string
 	date: string
-	title: string
-	name: string
-	fullName: string
 	url: string
 }
 

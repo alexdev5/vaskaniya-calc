@@ -26,7 +26,7 @@
 				:deleteLoading="deletingFigure"
 				:image-selected="Boolean(mediaModel)"
 				@lib-opened="mediaLibraryModal?.open()"
-				@removed="removeFigure"
+				@removed="removeFigureImage"
 			/>
 
 		</div>
@@ -84,33 +84,37 @@ const titlePrepared = computed(() => {
 	return passedTitle.value.split('\n')
 })
 
+function getBaseInputs() {
+	return {
+		btnLabel: figureFields.value.btnLabel,
+		title: currentFigure.value.title,
+		notification: figureFields.value.notification, // acf
+		area: figureFields.value.area, // acf
+	}
+}
+
 async function submit() {
 	if (!checkFigureFields()) throw new Error('Check failed `FigurePost From`')
-	if (!currentFigure.value.taxonomies.length) throw new Error('`taxonomies` empty')
 
 	loading.value = true
 
-	const inputs = {
-		id: figureFields.value.id,
-		btnLabel: figureFields.value.btnLabel,
-		title: currentFigure.value.title,
-		taxonomy: currentFigure.value.taxonomy,
-		taxonomies: currentFigure.value.taxonomies,
-		description: figureFields.value.description, // acf
-		area: figureFields.value.area, // acf
-	}
-
 	try {
-		const postId = await dimensionsApi.changeFigure(inputs)
+		let postId
 
-		if (mediaModel.value) {
-			console.log(postId, mediaModel.value)
-			if (mediaModel.value.id)
-				await postApi.assignImage(postId, mediaModel.value.id)
-			else
-				await postApi.uploadImage(postId, mediaModel.value[0] as File)
+		if (figureFields.value.id)
+			postId = await update()
+		else
+			postId = await create()
+
+		if (mediaModel.value && mediaModel.value?.id !== currentFigure.value.thumbnail?.id) {
+			if (mediaModel.value.id) {
+				const image = mediaModel.value as ImageContract
+				await postApi.assignImage(postId, image.id)
+			} else {
+				const image = mediaModel.value as File[]
+				await postApi.uploadImage(postId, image[0])
+			}
 		}
-
 
 		if (props.callback) await props.callback()
 
@@ -130,11 +134,41 @@ function selectFigure(image: ImageContract) {
 	mediaLibraryModal.value?.close()
 }
 
-function removeFigure() {
+function removeFigureImage() {
 	mediaModel.value = null
 
 	if (currentFigure.value.thumbnail)
 		currentFigure.value.thumbnail = null
+}
+
+async function create() {
+	if (!currentFigure.value.taxonomies.length) throw new Error('`taxonomies` empty')
+
+	let inputs = getBaseInputs()
+
+	return await dimensionsApi.createFigure({
+		...inputs,
+		taxonomy: currentFigure.value.taxonomy,
+		taxonomies: currentFigure.value.taxonomies,
+	})
+}
+
+async function update() {
+	if (!currentFigure.value.id) throw new Error('`id` empty')
+
+	let inputs = getBaseInputs()
+
+	await dimensionsApi.updateFigure({
+		...inputs,
+		id: currentFigure.value.id,
+	})
+
+	if (!mediaModel.value && currentFigure.value.thumbnail?.id) {
+		await postApi.removeImage(currentFigure.value.id)
+		console.log('removed image')
+	}
+
+	return currentFigure.value.id
 }
 
 async function open(figure: PostFigureContract, title: string) {

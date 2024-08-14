@@ -1,6 +1,6 @@
 <template>
-	<div class="vs-block-tools-settings-image">
-		<p class="vs-label">
+	<div class="app-block-tools-settings-image">
+		<p class="app-label">
 			{{ label }}:
 		</p>
 
@@ -25,7 +25,7 @@
 
 		<div
 			v-else
-			class="vs-block-tools-settings-image-actions"
+			class="app-block-tools-settings-image-actions"
 			:class="{ 'loading-image-info': modelValue?.[0]?.name }"
 		>
 			<AppFileInput

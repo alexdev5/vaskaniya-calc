@@ -1,5 +1,5 @@
 <template>
-	<div class="vs-block-add" @click="emit('added')">
+	<div class="app-block-add" @click="emit('added')">
 		<IconPlus />
 	</div>
 </template>

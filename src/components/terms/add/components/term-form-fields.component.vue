@@ -1,5 +1,5 @@
 <template>
-	<div class="vs-block-tools-settings">
+	<div class="app-block-tools-settings">
 		<AppTextField
 			v-if="settingsForm.id"
 			:label="content.label.id"

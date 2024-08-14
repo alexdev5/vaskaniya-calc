@@ -51,7 +51,7 @@ class DimensionsController
             'configurations' => ConfigurationResource::collection($configurations),
             'figures' => PostResource::collection($postsFigure),
 
-            //
+            // TODO: remove
             'terms' => $productTypesTerms['terms'],
             'originalFigure' => $postsFigure,
         ];
