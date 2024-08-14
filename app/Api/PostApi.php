@@ -13,7 +13,7 @@ class PostApi implements ApiContract
     public static function register()
     {
         VsRoute::post(self::route('/create-or-update'), [PostController::class, 'create']);
-        VsRoute::post(self::route('/add-image'), [PostController::class, 'addImage']);
+        VsRoute::post(self::route('/upload-image'), [PostController::class, 'uploadImage']);
         VsRoute::post(self::route('/assign-image'), [PostController::class, 'assignImage']);
         VsRoute::post(self::route('/assign-terms'), [PostController::class, 'assignTerms']);
     }

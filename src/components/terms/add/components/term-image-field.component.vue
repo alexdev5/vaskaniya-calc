@@ -4,12 +4,12 @@
 			{{ label }}:
 		</p>
 
-		<div class="existing-image" v-if="image">
-			<img :src="image.url" alt="">
+		<div class="existing-image" v-if="preview && preview.name">
+			<img :src="preview.url" alt="">
 			<div class="existing-image-info">
 				<ul class="app-list-standard small">
-					<li>{{ image.fullName }}</li>
-					<li>{{ image.date }}</li>
+					<li>{{ preview.name }}</li>
+					<li v-if="preview.date">{{ preview.date }}</li>
 				</ul>
 
 				<AppBtn
@@ -66,16 +66,70 @@ import AppBtn from '@/components/elements/app-btn.component.vue'
 import IconListSearch from '@/components/icons/IconListSearch.vue'
 import IconTrash from '@/components/icons/IconTrash.vue'
 import { ImageContract } from '@/api/terms'
+import { onMounted, ref, watch } from 'vue'
 
-defineProps<{
+interface ImagePreview {
+	url: string
+	name: string
+	date: string
+}
+
+const props = defineProps<{
 	label?: string,
-	image?: ImageContract,
+	image?: ImageContract | File[],
 	modelValue: any,
 	deleteLoading?: boolean,
 	imageSelected?: boolean
 }>()
 
 const emit = defineEmits(['update:model-value', 'lib-opened', 'removed'])
+
+const imageSrc = ref('')
+
+const preview = ref<ImagePreview>()
+
+function setPreview() {
+	if (!props.image) return {} as ImagePreview
+
+	const result = {
+		url: '',
+		name: '',
+		date: '',
+	}
+
+	if (imageSrc.value) URL.revokeObjectURL(imageSrc.value)
+
+	if (props.image?.length) {
+		const images = props.image as File[]
+		const image = images[0]
+
+		imageSrc.value = result.url = URL.createObjectURL(image)
+		result.name = image.name
+		result.date = `${image!.lastModifiedDate?.getDay()}.${image!.lastModifiedDate?.getMonth()}.${image!.lastModifiedDate?.getFullYear()}`
+	} else {
+		const image = props.image as ImageContract
+
+		result.url = image.url
+		result.name = image.fullName
+		result.date = image.modified
+
+		console.log(image)
+	}
+	return result as ImagePreview
+}
+
+watch(() => props.image, () => {
+	preview.value = setPreview()
+	console.log('setPreview')
+})
+
+watch(() => props.modelValue, () => {
+	console.log(props.modelValue)
+})
+
+onMounted(() => {
+	preview.value = setPreview()
+})
 </script>
 
 <style lang="scss">

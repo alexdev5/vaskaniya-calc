@@ -26,11 +26,6 @@ class StonePaletteSeeder extends Seeders
             $this->taxonomies
         );
 
-//       $this->assignTermsToPost(
-//           Config::get('post_type.palette'),
-//           $this->posts
-//       );
-
         $this->createPosts(
             PostTypeEnum::Palette,
             $this->posts

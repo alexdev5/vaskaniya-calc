@@ -5,10 +5,7 @@
 		</template>
 
 		<template v-if="store.state.selectedConfigurationId">
-			<VsBlockAdd @added="changePostFigureRef?.open({
-					taxonomies: [store.state.selectedProductTypeId, store.state.selectedConfigurationId],
-					parentId: store.state.parent?.id,
-				}, drawerTitle)" />
+			<VsBlockAdd @added="openChangingPostFigure()" />
 		</template>
 	</VsBlock>
 
@@ -58,6 +55,18 @@ const drawerTitle = computed(() =>
 	`${content.dimensions.chapter}: ${store.selectedProductType?.title}\n
 	${content.dimensions.type}: ${store.selectedConfiguration?.title}`,
 )
+
+function openChangingPostFigure() {
+	changePostFigureRef.value?.open({
+		taxonomies: [
+			store.state.selectedProductTypeId,
+			store.state.selectedConfigurationId,
+		],
+		title: store.selectedConfiguration?.title,
+		parentId: store.state.parent?.id,
+		taxonomy: store.state.taxonomy,
+	}, drawerTitle.value)
+}
 </script>
 
 <style lang="scss">

@@ -30,17 +30,17 @@ export interface CreateFigureCommand {
 	id?: number
 	title?: string
 	btnLabel: string
+	taxonomy: string
 	taxonomies: number[]
 	area?: string // in m2
 	description?: string
-	thumbnailId?: number
-	file?: File
 }
 
 export interface PostFigureContract {
 	id?: number
 	title?: string
 	btnLabel: string
+	taxonomy: string
 	taxonomies: number[]
 	area?: string
 	description?: string

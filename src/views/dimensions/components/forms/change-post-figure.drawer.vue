@@ -21,7 +21,7 @@
 			/>
 			<TermImageField
 				:label="content.label.selectImage"
-				:image="currentFigure.thumbnail ?? undefined"
+				:image="mediaModel ?? undefined"
 				v-model="mediaModel"
 				:deleteLoading="deletingFigure"
 				:image-selected="Boolean(mediaModel)"
@@ -55,7 +55,7 @@ import AppFormButtons from '@/components/forms/app-form-buttons.component.vue'
 import { computed, ref } from 'vue'
 import { content } from '@/content'
 import { PostFigureContract } from '@/api/dimensions'
-import { dimensionsApi } from '@/services'
+import { dimensionsApi, postApi } from '@/services'
 import AppTextfield from '@/components/forms/app-textfield.vue'
 import TermImageField from '@/components/terms/add/components/term-image-field.component.vue'
 import { usePostFigure } from '@/views/dimensions/components/forms/post-figure.composable.ts'
@@ -77,16 +77,14 @@ const disabled = ref(false)
 const widgetOpened = ref(false)
 const passedTitle = ref()
 const mediaLibraryModal = ref()
-const mediaModel = ref<File | ImageContract | null>(null)
+const mediaModel = ref<File[] | ImageContract | null>(null)
 
 const titlePrepared = computed(() => {
-	if (!passedTitle.value) return []
+	if (!passedTitle.value?.length) return []
 	return passedTitle.value.split('\n')
 })
 
 async function submit() {
-	console.log(mediaModel.value)
-
 	if (!checkFigureFields()) throw new Error('Check failed `FigurePost From`')
 	if (!currentFigure.value.taxonomies.length) throw new Error('`taxonomies` empty')
 
@@ -95,20 +93,24 @@ async function submit() {
 	const inputs = {
 		id: figureFields.value.id,
 		btnLabel: figureFields.value.btnLabel,
+		title: currentFigure.value.title,
+		taxonomy: currentFigure.value.taxonomy,
 		taxonomies: currentFigure.value.taxonomies,
 		description: figureFields.value.description, // acf
 		area: figureFields.value.area, // acf
-		thumbnailId: undefined,
-		file: undefined,
 	}
-
-	if (mediaModel.value) {
-		if (mediaModel.value.id) inputs.thumbnailId = mediaModel.value.id
-		else inputs.file = mediaModel.value.file
-	}
-
+	console.log(mediaModel.value)
+	return
 	try {
-		await dimensionsApi.changeFigure(inputs)
+		const postId = await dimensionsApi.changeFigure(inputs)
+
+		if (mediaModel.value) {
+			if (mediaModel.value.id)
+				await postApi.assignImage(postId, mediaModel.value.id)
+			else
+				await postApi.uploadImage(postId, mediaModel.value as File)
+		}
+
 
 		if (props.callback) await props.callback()
 
@@ -123,12 +125,13 @@ async function submit() {
 }
 
 function selectFigure(image: ImageContract) {
-	currentFigure.value.thumbnail = image
+	mediaModel.value = image
+
 	mediaLibraryModal.value?.close()
 }
 
 function removeFigure() {
-	mediaModel.value = undefined
+	mediaModel.value = null
 
 	if (currentFigure.value.thumbnail)
 		currentFigure.value.thumbnail = null
@@ -136,6 +139,7 @@ function removeFigure() {
 
 async function open(figure: PostFigureContract, title: string) {
 	currentFigure.value = figure
+	mediaModel.value = figure.thumbnail
 	passedTitle.value = title
 	widgetOpened.value = true
 }

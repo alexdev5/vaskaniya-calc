@@ -103,6 +103,8 @@ class DimensionsController
         $postType = PostTypeEnum::Products;
         $acf = [];
 
+        if (!isset($params['taxonomy'])) Response::error(null, 'taxonomy empty');
+
         if (isset($params['btnLabel'])) $acf[PostAcfEnum::BtnLabel] = $params['btnLabel'];
         if (isset($params['description'])) $acf[PostAcfEnum::Description] = $params['description'];
 
@@ -114,10 +116,8 @@ class DimensionsController
                 'post_status' => $params['status'] ?? 'publish',
                 'post_type' => $postType, //$params['postType']
             ],
-            $params['taxonomies'],
+            [$params['taxonomy'] => $params['taxonomies']],
             $acf,
-            $params['thumbnailId'] ?? 0,
-            $params['thumbnailId'] ?? null
         );
 
         if (is_wp_error($postId)) {

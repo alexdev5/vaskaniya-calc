@@ -45,7 +45,7 @@ class Post
 
         if (wp_attachment_is_image($thumbnailId)) {
             set_post_thumbnail($postId, $thumbnailId);
-            return true;
+            return $thumbnailId;
         } else {
             return new WP_Error('invalid_attachment', 'Attachment is not an image or does not exist.');
         }
@@ -75,9 +75,7 @@ class Post
     public static function createOrUpdate(
         array $args,
         array $postTerms = [],
-        array $acfFields = [],
-        int   $thumbnailId = 0,
-              $file = null
+        array $acfFields = []
     )
     {
         $postId = $args['id'] ?? 0;
@@ -90,13 +88,6 @@ class Post
         } else {
             $postId = wp_insert_post($args);
         }
-
-        if ($thumbnailId)
-            Post::assignImageById($postId, $thumbnailId);
-        elseif ($file)
-            Post::uploadImageThenAssign($postId, $file);
-        else
-            Post::removeThumbnail($postId);
 
         if (is_wp_error($postId)) {
             return new WP_Error('createOrUpdateWrong', 'Create or update post failed', $postId);

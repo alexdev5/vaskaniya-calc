@@ -1,5 +1,6 @@
 export interface ImageContract {
 	id: number
+	modified: string
 	date: string
 	title: string
 	name: string

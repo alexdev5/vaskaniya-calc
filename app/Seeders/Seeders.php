@@ -147,11 +147,11 @@ abstract class Seeders implements SeederContract
         return include($file);
     }
 
-    public function assignTermsToPost(int $postId, string $postType, array $postsData)
+    public function assignTermsToPost(int $postId, array $postsData)
     {
         foreach ($postsData as $post) {
             if (!empty($postData['acf'])) {
-                Post::assignAcf($postId, $postType, $postData['acf']);
+                Post::assignAcf($postId, $postData['acf']);
             }
 
             if (!empty($postData['terms'])) {
