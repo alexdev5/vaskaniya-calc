@@ -5,6 +5,9 @@
 		</template>
 
 		<template v-if="store.state.selectedConfigurationId">
+			<div class="post-figure">
+
+			</div>
 			<VsBlockAdd @added="openChangingPostFigure()" />
 		</template>
 	</VsBlock>
@@ -67,6 +70,10 @@ function openChangingPostFigure() {
 		taxonomy: store.state.taxonomy,
 	}, drawerTitle.value)
 }
+
+const figureSelected = computed(() => {
+	return store.state.figures
+})
 </script>
 
 <style lang="scss">

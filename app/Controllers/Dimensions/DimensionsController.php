@@ -7,7 +7,8 @@ use App\Config\TaxonomyEnum;
 use App\Controllers\TaxonomyController;
 use App\Controllers\Terms\TermsController;
 use App\Resources\Dimensions\ConfigurationResource;
-use App\Resources\Dimensions\TermResource;
+use App\Resources\Posts\PostResource;
+use App\Resources\Terms\TermResource;
 use App\Services\Post\Post;
 use App\Services\Post\PostAcfEnum;
 use App\Services\Response;
@@ -36,6 +37,10 @@ class DimensionsController
             $configurationsIds[] = $configuration['id'];
         }
 
+        $postsFigure = Post::getPosts(PostTypeEnum::Products, [
+            TaxonomyEnum::Categories => $configurationsIds
+        ]);
+
         // TODO: Place all data in one array.
         // To implement on the client the ability to create additional blocks at the root of the parent taxonomy.
 
@@ -44,9 +49,11 @@ class DimensionsController
             'parent' => TermResource::collection($productTypesTerms['parent']),
             'productTypes' => TermResource::collection($productTypesTerms['terms']),
             'configurations' => ConfigurationResource::collection($configurations),
-            'figures' => Post::getPosts(PostTypeEnum::Products, [
-                TaxonomyEnum::Categories => $configurationsIds
-            ]),
+            'figures' => PostResource::collection($postsFigure),
+
+            //
+            'terms' => $productTypesTerms['terms'],
+            'originalFigure' => $postsFigure,
         ];
 
         return new WP_REST_Response(

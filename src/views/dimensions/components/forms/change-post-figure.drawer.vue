@@ -51,17 +51,17 @@
 <script lang="ts" setup>
 import AppDrawer from '@/components/elements/app-drawer.component.vue'
 import AppFormButtons from '@/components/forms/app-form-buttons.component.vue'
+import TermImageField from '@/components/terms/add/components/term-image-field.component.vue'
+import AppMediaModal from '@/components/media/app-media-modal.component.vue'
+import AppTextarea from '@/components/forms/app-textarea.vue'
+import AppTextfield from '@/components/forms/app-textfield.vue'
 
 import { computed, ref } from 'vue'
 import { content } from '@/content'
 import { PostFigureContract } from '@/api/dimensions'
 import { dimensionsApi, postApi } from '@/services'
-import AppTextfield from '@/components/forms/app-textfield.vue'
-import TermImageField from '@/components/terms/add/components/term-image-field.component.vue'
 import { usePostFigure } from '@/views/dimensions/components/forms/post-figure.composable.ts'
-import AppMediaModal from '@/components/media/app-media-modal.component.vue'
 import { ImageContract } from '@/api/terms'
-import AppTextarea from '@/components/forms/app-textarea.vue'
 
 const props = defineProps<{
 	callback?: () => Promise<void>

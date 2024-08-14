@@ -1,5 +1,6 @@
 <?php
-namespace App\Resources\Dimensions;
+
+namespace App\Resources\Terms;
 
 use App\Resources\Acf\AcfTerm;
 use App\Resources\JsonResource;

@@ -3,6 +3,7 @@ import { computed, reactive, ref, watch } from 'vue'
 import { dimensionsApi, termsApi } from '@/services'
 import { ImageType, TermState } from '@/models/terms'
 import { TaxonomyName } from '@/api/terms'
+import { PostContract } from '@/api/posts'
 
 export const useDimensionsStore = defineStore('dimensions', () => {
 	const state = reactive({
@@ -10,6 +11,8 @@ export const useDimensionsStore = defineStore('dimensions', () => {
 		parent: null as TermState | null,
 		productTypes: null as TermState[] | null,
 		configurations: null as TermState[] | null,
+		figures: null as PostContract[] | null,
+
 		loading: false,
 		selectedProductTypeId: 0 as number,
 		selectedConfigurationId: 0 as number,
@@ -55,6 +58,8 @@ export const useDimensionsStore = defineStore('dimensions', () => {
 			state.configurations = (result.configurations ?? []).map(
 				configuration => new TermState(configuration),
 			)
+			state.figures = result.figures
+
 		} catch (error: any) {
 			console.log(error)
 		} finally {

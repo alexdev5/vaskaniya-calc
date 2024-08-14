@@ -38,8 +38,18 @@ class Post
 
         foreach ($posts as &$post) {
             foreach ($taxonomies as $taxonomy => $termIds) {
-                $post->$taxonomy = get_the_terms($post->ID, $taxonomy);
+                $terms = get_the_terms($post->ID, $taxonomy);
+
+//                $post->taxonomies = [$taxonomy => array_map(function ($item) {
+//                    return $item->term_id;
+//                }, $terms)];
+
+                $post->taxonomies = array_map(function ($item) {
+                    return $item->term_id;
+                }, $terms);
             }
+
+            $post->acf = get_fields($post->ID);
         }
 
         return $posts;
