@@ -19,7 +19,7 @@ class Response
             is_bool($params) ||
             is_null($params);
 
-        if (!$isPrimitive) return new WP_REST_Response($params, $status);
+        if ($isPrimitive) return new WP_REST_Response($params, $status);
 
         return new WP_REST_Response($data, $status);
     }

@@ -22,6 +22,9 @@ class PostController
 
         $thumbnailId = Post::uploadImageThenAssign($params['postId'], $params['image']);
 
+        if (is_wp_error($thumbnailId))
+            return Response::error($thumbnailId);
+
         return Response::success($thumbnailId);
     }
 
@@ -55,4 +58,5 @@ class PostController
         $params = $request->get_params();
 
     }
+
 }

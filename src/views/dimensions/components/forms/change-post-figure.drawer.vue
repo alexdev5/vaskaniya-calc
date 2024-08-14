@@ -99,16 +99,16 @@ async function submit() {
 		description: figureFields.value.description, // acf
 		area: figureFields.value.area, // acf
 	}
-	console.log(mediaModel.value)
-	return
+
 	try {
 		const postId = await dimensionsApi.changeFigure(inputs)
 
 		if (mediaModel.value) {
+			console.log(postId, mediaModel.value)
 			if (mediaModel.value.id)
 				await postApi.assignImage(postId, mediaModel.value.id)
 			else
-				await postApi.uploadImage(postId, mediaModel.value as File)
+				await postApi.uploadImage(postId, mediaModel.value[0] as File)
 		}
 
 

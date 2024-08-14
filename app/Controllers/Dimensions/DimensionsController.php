@@ -22,6 +22,7 @@ class DimensionsController
         $productTypesTerms = $this->getProductTypeCategories();
 
         $configurations = [];
+        $configurationsIds = []; // for filter posts
 
         foreach ($productTypesTerms['terms'] as $productType) {
             if (!empty($productType['children'])) {
@@ -29,6 +30,10 @@ class DimensionsController
                     $configurations[] = array_merge($child, ['productTypeParentId' => $productType['id']]);
                 }
             }
+        }
+
+        foreach ($configurations as $configuration) {
+            $configurationsIds[] = $configuration['id'];
         }
 
         // TODO: Place all data in one array.
@@ -39,7 +44,9 @@ class DimensionsController
             'parent' => TermResource::collection($productTypesTerms['parent']),
             'productTypes' => TermResource::collection($productTypesTerms['terms']),
             'configurations' => ConfigurationResource::collection($configurations),
-            'figures' => ConfigurationResource::collection($configurations), // post
+            'figures' => Post::getPosts(PostTypeEnum::Products, [
+                TaxonomyEnum::Categories => $configurationsIds
+            ]),
         ];
 
         return new WP_REST_Response(
@@ -114,7 +121,7 @@ class DimensionsController
                 'post_title' => $params['title'] ?? 'Product type',
                 'post_content' => $params['content'] ?? '',
                 'post_status' => $params['status'] ?? 'publish',
-                'post_type' => $postType, //$params['postType']
+                'post_type' => $postType,
             ],
             [$params['taxonomy'] => $params['taxonomies']],
             $acf,

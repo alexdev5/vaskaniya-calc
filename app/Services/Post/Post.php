@@ -5,9 +5,46 @@ namespace App\Services\Post;
 use App\Services\MediaService;
 use App\Services\Response;
 use WP_Error;
+use WP_Query;
 
 class Post
 {
+    public static function getPosts(string $postType, array $taxonomies = [], int $numberposts = -1): array
+    {
+        $args = [
+            'post_type' => $postType,
+            'posts_per_page' => $numberposts,
+            'post_status' => 'publish',
+            'tax_query' => [],
+        ];
+
+        if (!empty($taxonomies)) {
+            foreach ($taxonomies as $taxonomy => $termIds) {
+                $args['tax_query'][] = [
+                    'taxonomy' => $taxonomy,
+                    'field' => 'term_id',
+                    'terms' => $termIds,
+                ];
+            }
+
+            if (count($args['tax_query']) > 1) {
+                $args['tax_query']['relation'] = 'OR';
+            }
+        }
+
+        $query = new WP_Query($args);
+
+        $posts = $query->get_posts();
+
+        foreach ($posts as &$post) {
+            foreach ($taxonomies as $taxonomy => $termIds) {
+                $post->$taxonomy = get_the_terms($post->ID, $taxonomy);
+            }
+        }
+
+        return $posts;
+    }
+
     public static function assignTerms(int $postId, array $postTerms)
     {
         foreach ($postTerms as $taxonomy => $terms) {
