@@ -33,7 +33,7 @@ export function useTerm(callback?: () => Promise<void>) {
 
 			if (callback) await callback()
 
-			console.log(content.term.visibilityChangedSuccessfully)
+			console.log(content.common.term.visibilityChangedSuccessfully)
 		} catch (error) {
 			console.log(error)
 		} finally {
@@ -52,7 +52,7 @@ export function useTerm(callback?: () => Promise<void>) {
 
 			if (callback) await callback()
 
-			console.log(content.term.visibilityChangedSuccessfully)
+			console.log(content.common.term.visibilityChangedSuccessfully)
 		} catch (error) {
 			console.log(error)
 		} finally {
@@ -71,7 +71,7 @@ export function useTerm(callback?: () => Promise<void>) {
 
 			if (callback) await callback()
 
-			console.log(content.term.visibilityChangedSuccessfully)
+			console.log(content.common.term.visibilityChangedSuccessfully)
 		} catch (error) {
 			console.log(error)
 		} finally {
@@ -105,7 +105,7 @@ export function useTerm(callback?: () => Promise<void>) {
 
 			if (callback) await callback()
 
-			console.log(content.notifications.updated)
+			console.log(content.common.notifications.updated)
 		} catch (error: any) {
 			console.error(error)
 		} finally {

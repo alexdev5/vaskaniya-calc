@@ -1,28 +1,28 @@
 <template>
 	<div class="app-block-figure-description">
 		<p class="app-block-figure-description-title">
-			{{ content.designations.title }}
+			{{ content.common.designations.title }}
 		</p>
 		<div class="app-block-figure-description-items">
 			<div class="app-block-figure-description-item">
 				<IconCircleRed />
-				= {{ content.designations.frontChamfer }}
+				= {{ content.common.designations.frontChamfer }}
 			</div>
 			<div class="app-block-figure-description-item">
 				<IconSquareRed />
-				= {{ content.designations.sideSkirting }}
+				= {{ content.common.designations.sideSkirting }}
 			</div>
 			<div class="app-block-figure-description-item">
 				<IconCircleRedFilled />
-				= {{ content.designations.roundingChamfer }}
+				= {{ content.common.designations.roundingChamfer }}
 			</div>
 			<div class="app-block-figure-description-item">
 				<IconSquareRedFilled />
-				= {{ content.designations.integratedSkirting }}
+				= {{ content.common.designations.integratedSkirting }}
 			</div>
 			<div class="app-block-figure-description-item">
 				<IconTriangleRed />
-				= {{ content.designations.frontWithoutChamfer }}
+				= {{ content.common.designations.frontWithoutChamfer }}
 			</div>
 		</div>
 	</div>

@@ -2,14 +2,14 @@
 	<div class="app-block-tools-settings">
 		<AppTextField
 			v-if="settingsForm.id"
-			:label="content.label.id"
+			:label="content.common.label.id"
 			v-model="settingsForm.id"
 			compact
 			disabled
 		/>
 		<AppTextField
 			v-if="settingsForm.slug"
-			:label="content.label.slug"
+			:label="content.common.label.slug"
 			v-model="settingsForm.slug"
 			compact
 			disabled
@@ -17,24 +17,24 @@
 
 		<AppTextField
 			compact
-			:label="content.label.title"
+			:label="content.common.label.title"
 
 			v-model="settingsForm.title"
 		/>
 
 		<AppTextField
 			compact
-			:label="content.label.price"
+			:label="content.common.label.price"
 			v-model="settingsForm.price"
 		/>
 		<!--        <AppTextarea
 							compact
-							:label="content.label.description"
+							:label="content.common.label.description"
 							v-model="settingsForm.description"
 						/>-->
 
 		<TermImageField
-			:label="content.label.preview"
+			:label="content.common.label.preview"
 			:image="props.record?.acf.thumbnail ?? undefined"
 			v-model="settingsForm.thumbnail"
 			:deleteLoading="deleteLoading?.[ImageType.Thumbnail]"
@@ -44,7 +44,7 @@
 		/>
 
 		<TermImageField
-			:label="content.term.fullImage"
+			:label="content.common.term.fullImage"
 			:image="props.record?.acf.imageFullSize ?? undefined"
 			v-model="settingsForm.imageFullSize"
 			:deleteLoading="deleteLoading?.[ImageType.ImageFullSize]"
@@ -54,7 +54,7 @@
 		/>
 
 		<TermImageField
-			:label="content.term.childImage"
+			:label="content.common.term.childImage"
 			:image="props.record?.acf.childBlockImage ?? undefined"
 			v-model="settingsForm.childBlockImage"
 			:deleteLoading="deleteLoading?.[ImageType.ChildBlockImage]"

@@ -70,7 +70,7 @@ async function submit() {
 
 		if (props.callback) await props.callback()
 
-		console.log(content.notifications.updated)
+		console.log(content.common.notifications.updated)
 
 		close()
 	} catch (error: any) {

@@ -9,8 +9,7 @@ export const common = {
 		price: 'Цена',
 		description: 'Описание',
 		preview: 'Превью',
-		uploadFromDevice: 'Загрузить с устройства',
-		selectFromLibrary: 'Выбрать с библиотеки',
+		selectImage: 'Изображение',
 	},
 	term: {
 		fullImage: 'Полноразмерное изображение',
@@ -45,6 +44,9 @@ export const common = {
 		settings: 'Настройки',
 	},
 	dimensions: {
+		type: 'Тип',
+		chapter: 'Раздел',
+		addFigureButton: 'Добавить размер',
 		productType: {
 			title: 'Добавить тип изделия',
 		},
@@ -55,6 +57,7 @@ export const common = {
 			form: {
 				btnLabel: 'Лейбл кнопки',
 				area: 'Площадь',
+				description: 'Описание (на сером фоне)',
 			},
 		},
 	},

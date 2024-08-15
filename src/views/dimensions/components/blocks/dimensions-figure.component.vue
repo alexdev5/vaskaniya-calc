@@ -61,8 +61,8 @@ function editTermChildInfoBlock() {
 }
 
 const drawerTitle = computed(() =>
-	`${content.dimensions.chapter}: ${store.selectedProductType?.title}\n
-	${content.dimensions.type}: ${store.selectedConfiguration?.title}`,
+	`${content.common.dimensions.chapter}: ${store.selectedProductType?.title}\n
+	${content.common.dimensions.type}: ${store.selectedConfiguration?.title}`,
 )
 
 function createFigure() {

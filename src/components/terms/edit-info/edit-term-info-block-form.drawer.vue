@@ -3,21 +3,21 @@
 		class="app-edit-info-drawer"
 		:opened="widgetOpened"
 		@closed="close"
-		:title="drawerTitle ?? content.editBlockInfo.title"
+		:title="drawerTitle ?? content.common.editBlockInfo.title"
 	>
 
 		<div class="app-edit-info-form" v-if="formFields">
 			<AppTextfield
 				class="app-color-red"
-				:label="content.label.number"
+				:label="content.common.label.number"
 				v-model="formFields.number"
 			/>
 			<AppTextfield
-				:label="content.label.blockTitle"
+				:label="content.common.label.blockTitle"
 				v-model="formFields.title"
 			/>
 			<AppTextfield
-				:label="content.label.blockInfo"
+				:label="content.common.label.blockInfo"
 				v-model="formFields.info"
 			/>
 		</div>

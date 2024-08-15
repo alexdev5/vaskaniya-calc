@@ -11,16 +11,16 @@
 		<div class="change-figure-drawer-body">
 			<AppTextfield
 				compact
-				:label="content.dimensions.figure.form.btnLabel"
+				:label="content.common.dimensions.figure.form.btnLabel"
 				v-model="figureFields.btnLabel"
 			/>
 			<AppTextarea
 				compact
-				:label="content.dimensions.figure.form.description"
+				:label="content.common.dimensions.figure.form.description"
 				v-model="figureFields.notification"
 			/>
 			<TermImageField
-				:label="content.label.selectImage"
+				:label="content.common.label.selectImage"
 				:image="mediaModel ?? undefined"
 				v-model="mediaModel"
 				:deleteLoading="deletingFigure"
@@ -110,7 +110,7 @@ async function submit() {
 
 		if (props.callback) await props.callback()
 
-		console.log(content.notifications.updated)
+		console.log(content.common.notifications.updated)
 
 		close()
 	} catch (error: any) {

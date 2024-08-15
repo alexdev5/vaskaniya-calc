@@ -5,7 +5,7 @@
 			v-if="!submitOnly"
 			@click="emit('closed')"
 		>
-			{{ labelCansel ? labelCansel : content.button.cancel }}
+			{{ labelCansel ? labelCansel : content.common.button.cancel }}
 		</AppBtn>
 		<AppBtn
 			flat
@@ -13,7 +13,7 @@
 			:disabled="disabled"
 			@click="emit('submitted')"
 		>
-			{{ labelSuccess ? labelCansel : content.button.save }}
+			{{ labelSuccess ? labelCansel : content.common.button.save }}
 		</AppBtn>
 	</div>
 </template>

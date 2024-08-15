@@ -35,7 +35,7 @@
 
 			<template #footer>
 				<VsBlockAdd :sort="false" @added="addTermFromRef?.open({
-					title: content.dimensions.productType.title,
+					title: content.common.dimensions.productType.title,
 					taxonomy: store.state.taxonomy,
 					parentId: store.state.parent?.id,
 				})" />
@@ -79,7 +79,7 @@
 
 			<template #footer>
 				<VsBlockAdd @added="addTermFromRef?.open({
-				title: content.dimensions.configuration.title,
+				title: content.common.dimensions.configuration.title,
 				taxonomy: store.state.taxonomy,
 				parentId: store.state.selectedProductTypeId
 			})" />
