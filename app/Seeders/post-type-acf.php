@@ -8,8 +8,8 @@ return [
     'vendor_code' => 'Артикул',
     'supplement_amount' => 'Сумма надбавки',
     'area' => 'Площадь', //m2
-    'btn_label' => 'Лейбл кнопки',
-    'description' => 'Description',
+    'btnLabel' => 'Лейбл кнопки',
+    'notification' => 'Notification',
 
     // Отображать во вкладках
     'table_tops' => 'Столешницы',

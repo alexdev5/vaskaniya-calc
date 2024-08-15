@@ -1,3 +1,5 @@
+import { ImageContract } from '@/api/terms'
+
 export interface PostContract {
 	id: number
 	title: string
@@ -5,7 +7,7 @@ export interface PostContract {
 	date: string
 	excerpt: string
 	postType: string
-	thumbnail: string
+	thumbnail: ImageContract | null
 	taxonomies: number[]
 	acf: PostAcfContract | null
 }

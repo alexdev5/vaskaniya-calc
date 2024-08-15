@@ -18,12 +18,12 @@ class DimensionsApi implements ApiContract
             [DimensionsController::class, 'updateTerm']
         );
         VsRoute::post(
-            self::route('/update-term-title'),
-            [DimensionsController::class, 'updateTermTitle']
+            self::route('/create-figure'),
+            [DimensionsController::class, 'createFigure']
         );
         VsRoute::post(
-            self::route('/change-figure'),
-            [DimensionsController::class, 'changeFigure']
+            self::route('/update-figure'),
+            [DimensionsController::class, 'updateFigure']
         );
     }
 

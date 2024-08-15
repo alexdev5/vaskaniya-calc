@@ -81,7 +81,7 @@
 				<VsBlockAdd @added="addTermFromRef?.open({
 				title: content.dimensions.configuration.title,
 				taxonomy: store.state.taxonomy,
-				parentId: store.state.selectedProductTypeId,
+				parentId: store.state.selectedProductTypeId
 			})" />
 			</template>
 
@@ -115,6 +115,7 @@ import { onMounted, onUnmounted, ref } from 'vue'
 import { useDimensionsStore } from './dimensions.store.ts'
 import { ImageType } from '@/models/terms'
 import { useTerm } from '@/composables'
+import { content } from '@/content'
 
 const store = useDimensionsStore()
 

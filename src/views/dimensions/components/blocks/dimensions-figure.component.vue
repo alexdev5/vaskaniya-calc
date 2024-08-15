@@ -9,11 +9,11 @@
 				<FigureBlock
 					v-for="figure in figureSelected"
 					:figure="figure"
-					@edited="	changePostFigureRef.value?.open(figure, drawerTitle)"
+					@edited="	changePostFigureRef?.open(figure, drawerTitle)"
 				/>
 			</div>
 
-			<VsBlockAdd @added="createFigure()" v-else />
+			<VsBlockAdd @added="createFigure" v-else />
 		</template>
 	</VsBlock>
 
@@ -66,14 +66,18 @@ const drawerTitle = computed(() =>
 )
 
 function createFigure() {
-	changePostFigureRef.value?.open({
-		taxonomies: [
-			store.state.selectedProductTypeId,
-			store.state.selectedConfigurationId,
-		],
-		title: store.selectedConfiguration?.title,
-		taxonomy: store.state.taxonomy,
-	}, drawerTitle.value)
+	changePostFigureRef.value?.open(
+		{
+			taxonomies: [
+				store.state.selectedProductTypeId,
+				store.state.selectedConfigurationId,
+			],
+			title: store.selectedConfiguration?.title,
+			taxonomy: store.state.taxonomy,
+		},
+		drawerTitle.value,
+		store.state.taxonomy,
+	)
 }
 
 const figureSelected = computed(() => {

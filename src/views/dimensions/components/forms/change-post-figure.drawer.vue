@@ -17,7 +17,7 @@
 			<AppTextarea
 				compact
 				:label="content.dimensions.figure.form.description"
-				v-model="figureFields.description"
+				v-model="figureFields.notification"
 			/>
 			<TermImageField
 				:label="content.label.selectImage"
@@ -58,18 +58,19 @@ import AppTextfield from '@/components/forms/app-textfield.vue'
 
 import { computed, ref } from 'vue'
 import { content } from '@/content'
-import { PostFigureContract } from '@/api/dimensions'
 import { dimensionsApi, postApi } from '@/services'
 import { usePostFigure } from '@/views/dimensions/components/forms/post-figure.composable.ts'
 import { ImageContract } from '@/api/terms'
+import { PostContract } from '@/api/posts'
 
 const props = defineProps<{
 	callback?: () => Promise<void>
 }>()
 
-const { figureFields, checkFigureFields } = usePostFigure()
+const { figureFields, checkFigureFields, getBaseInputs } = usePostFigure()
 
-const currentFigure = ref<PostFigureContract>({} as PostFigureContract)
+const currentFigure = ref<PostContract>({} as PostContract)
+const currentTaxonomy = ref()
 
 const loading = ref(false)
 const deletingFigure = ref(false)
@@ -84,15 +85,6 @@ const titlePrepared = computed(() => {
 	return passedTitle.value.split('\n')
 })
 
-function getBaseInputs() {
-	return {
-		btnLabel: figureFields.value.btnLabel,
-		title: currentFigure.value.title,
-		notification: figureFields.value.notification, // acf
-		area: figureFields.value.area, // acf
-	}
-}
-
 async function submit() {
 	if (!checkFigureFields()) throw new Error('Check failed `FigurePost From`')
 
@@ -101,7 +93,7 @@ async function submit() {
 	try {
 		let postId
 
-		if (figureFields.value.id)
+		if (currentFigure.value.id)
 			postId = await update()
 		else
 			postId = await create()
@@ -136,19 +128,16 @@ function selectFigure(image: ImageContract) {
 
 function removeFigureImage() {
 	mediaModel.value = null
-
-	if (currentFigure.value.thumbnail)
-		currentFigure.value.thumbnail = null
 }
 
 async function create() {
 	if (!currentFigure.value.taxonomies.length) throw new Error('`taxonomies` empty')
 
-	let inputs = getBaseInputs()
+	let inputs = getBaseInputs(currentFigure.value)
 
 	return await dimensionsApi.createFigure({
 		...inputs,
-		taxonomy: currentFigure.value.taxonomy,
+		taxonomy: currentTaxonomy.value,
 		taxonomies: currentFigure.value.taxonomies,
 	})
 }
@@ -156,7 +145,7 @@ async function create() {
 async function update() {
 	if (!currentFigure.value.id) throw new Error('`id` empty')
 
-	let inputs = getBaseInputs()
+	let inputs = getBaseInputs(currentFigure.value)
 
 	await dimensionsApi.updateFigure({
 		...inputs,
@@ -171,16 +160,27 @@ async function update() {
 	return currentFigure.value.id
 }
 
-async function open(figure: PostFigureContract, title: string) {
+async function open(figure: PostContract, title: string, taxonomy: string) {
 	currentFigure.value = figure
 	mediaModel.value = figure.thumbnail
+
+	console.log(figure)
+	figure.acf?.btnLabel
+		? figureFields.value.btnLabel = figure.acf.btnLabel
+		: figureFields.value.btnLabel = ''
+
+	figure.acf?.notification
+		? figureFields.value.notification = figure.acf.notification
+		: figureFields.value.notification = ''
+
 	passedTitle.value = title
+	currentTaxonomy.value = taxonomy
 	widgetOpened.value = true
 }
 
 function close() {
 	widgetOpened.value = false
-	currentFigure.value = {} as PostFigureContract
+	currentFigure.value = {} as PostContract
 }
 
 defineExpose({

@@ -10,7 +10,7 @@
 		</div>
 
 		<div class="post-figure-block-image" v-if="figure.thumbnail">
-			<img :src="figure.thumbnail" alt="thumbnail">
+			<img :src="figure.thumbnail.url" alt="thumbnail">
 		</div>
 
 		<div class="post-figure-block-footer">
@@ -18,11 +18,8 @@
 				<template #prepend>+</template>
 				{{ figure.acf?.btnLabel ?? content.dimensions.addFigureButton }}
 			</AppBtn>
-			<div class="post-figure-block-notification" v-if="figure.acf?.notification">
-				{{ figure.acf?.notification }}
-			</div>
+			<div class="post-figure-block-notification" v-html="figure.acf?.notification" v-if="figure.acf?.notification" />
 		</div>
-		{{ figure }}
 	</div>
 </template>
 
@@ -45,6 +42,8 @@ const emit = defineEmits(['edited', 'removed'])
 .post-figure-block {
 	border-bottom: 1px solid var(--app-color-light-grey);
 	padding-block: 16px;
+	display: grid;
+	gap: var(--app-offset-normal);
 
 	&:first-child {
 		padding-block-start: 0;
@@ -55,16 +54,37 @@ const emit = defineEmits(['edited', 'removed'])
 		border-bottom: none;
 	}
 
-	.post-figure-block-footer {
-		display: grid;
-		grid-template-columns: min-content minmax(0, 1fr);
-		gap: 32px;
-	}
-
 	.post-figure-block-actions {
 		display: flex;
 		gap: 12px;
-		padding-block-end: 16px;
+	}
+
+	.post-figure-block-image {
+		max-height: 600px;
+		display: flex;
+		justify-content: center;
+
+		img {
+			object-fit: contain;
+		}
+	}
+
+	.post-figure-block-footer {
+		display: grid;
+		grid-template-columns: minmax(150px, min-content) minmax(0, 1fr);
+		gap: 32px;
+		align-items: center;
+	}
+}
+
+.post-figure-block-notification {
+	background: var(--app-color-dark-grey);
+	color: #fff;
+	border-radius: 6px;
+	padding: 6px 16px;
+
+	span {
+		color: var(--app-color-red);
 	}
 }
 </style>

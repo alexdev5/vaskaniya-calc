@@ -1,16 +1,15 @@
 import { ref } from 'vue'
 import { CreateFigureCommand } from '@/api/dimensions'
+import { PostContract } from '@/api/posts'
 
 export function usePostFigure() {
 	const figureFields = ref<CreateFigureCommand>({
-		id: undefined,
-		title: undefined,
+		title: '',
 		btnLabel: '',
-		taxonomies: [],
+		taxonomy: '',
+		taxonomies: [] as number[],
 		area: undefined,
-		description: undefined,
-		thumbnailId: undefined,
-		file: undefined,
+		notification: undefined,
 	})
 
 	function checkFigureFields() {
@@ -18,8 +17,18 @@ export function usePostFigure() {
 		return true
 	}
 
+	function getBaseInputs(currentFigure: PostContract) {
+		return {
+			btnLabel: figureFields.value.btnLabel,
+			title: currentFigure.title,
+			notification: figureFields.value.notification, // acf
+			area: figureFields.value.area, // acf
+		}
+	}
+
 	return {
 		figureFields,
 		checkFigureFields,
+		getBaseInputs,
 	}
 }

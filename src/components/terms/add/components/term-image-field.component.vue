@@ -112,19 +112,12 @@ function setPreview() {
 		result.url = image.url
 		result.name = image.fullName
 		result.date = image.modified
-
-		console.log(image)
 	}
 	return result as ImagePreview
 }
 
 watch(() => props.image, () => {
 	preview.value = setPreview()
-	console.log('setPreview')
-})
-
-watch(() => props.modelValue, () => {
-	console.log(props.modelValue)
 })
 
 onMounted(() => {

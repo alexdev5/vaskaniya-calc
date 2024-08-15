@@ -12,6 +12,7 @@ use App\Resources\Terms\TermResource;
 use App\Services\Post\Post;
 use App\Services\Post\PostAcfEnum;
 use App\Services\Response;
+use Exception;
 use WP_REST_Request;
 use WP_REST_Response;
 
@@ -111,33 +112,64 @@ class DimensionsController
         return new WP_REST_Response("Term updated successfully", 200);
     }
 
-    public function changeFigure(WP_REST_Request $request): WP_REST_Response
+    public function createFigure(WP_REST_Request $request): WP_REST_Response
     {
         $params = $request->get_params();
-        $postType = PostTypeEnum::Products;
+
+        if (!isset($params['taxonomy'])) return Response::error($params, 'taxonomy empty');
+        if (empty($params['taxonomies'])) return Response::error($params, 'taxonomies empty');
+
+        return $this->createOrUpdateFigure($params, null, PostTypeEnum::Products);
+    }
+
+    public function updateFigure(WP_REST_Request $request): WP_REST_Response
+    {
+        $params = $request->get_params();
+
+        if (empty($params['id'])) Response::error($params['id'], 'post Id empty');
+
+        return $this->createOrUpdateFigure($params, $params['id']);
+    }
+
+    private function createOrUpdateFigure(
+        array  $params,
+               $postId = null,
+        string $postType = null
+    ): WP_REST_Response
+    {
         $acf = [];
+        $taxonomies = [];
+        $args = [
+            'id' => $postId,
+            'post_title' => $params['title'] ?? 'Product type',
+            'post_content' => $params['content'] ?? '',
+            'post_status' => $params['status'] ?? 'publish',
+        ];
 
-        if (!isset($params['taxonomy'])) Response::error(null, 'taxonomy empty');
+        try {
+            if ($postType) $args['post_type'] = $postType;
 
-        if (isset($params['btnLabel'])) $acf[PostAcfEnum::BtnLabel] = $params['btnLabel'];
-        if (isset($params['description'])) $acf[PostAcfEnum::Description] = $params['description'];
+            if (!empty($params['taxonomies']))
+                $taxonomies = [$params['taxonomy'] => $params['taxonomies']];
 
-        $postId = Post::createOrUpdate(
-            [
-                'id' => $params['id'] ?? null,
-                'post_title' => $params['title'] ?? 'Product type',
-                'post_content' => $params['content'] ?? '',
-                'post_status' => $params['status'] ?? 'publish',
-                'post_type' => $postType,
-            ],
-            [$params['taxonomy'] => $params['taxonomies']],
-            $acf,
-        );
+            if (isset($params[PostAcfEnum::BtnLabel]))
+                $acf[PostAcfEnum::BtnLabel] = $params[PostAcfEnum::BtnLabel];
+            if (isset($params[PostAcfEnum::Notification]))
+                $acf[PostAcfEnum::Notification] = $params[PostAcfEnum::Notification];
 
-        if (is_wp_error($postId)) {
-            return Response::error($postId->get_error_data(), __LINE__ . ':: ' . $postId->get_error_message());
+            $postId = Post::createOrUpdate(
+                $args,
+                $taxonomies,
+                $acf,
+            );
+
+            if (is_wp_error($postId)) {
+                return Response::error($postId->get_error_data(), __LINE__ . ':: ' . $postId->get_error_message());
+            }
+        } catch (Exception $e) {
+            return Response::error($e->getTrace(), $e->getMessage());
         }
 
-        return Response::success($postId);
+        return Response::success(null);
     }
 }

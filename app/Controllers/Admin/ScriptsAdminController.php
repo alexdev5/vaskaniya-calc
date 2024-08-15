@@ -38,5 +38,22 @@ class ScriptsAdminController
     {
         add_action('admin_vascaniya_calc_app_init', [$this, 'enqueueCalculatorScripts']);
         add_action('admin_enqueue_scripts', [$this, 'enqueueScripts']);
+
+        add_shortcode('vcalc_shortcode', [$this, 'renderCalculator']);
+    }
+
+    public function renderCalculator()
+    {
+        // Этот метод будет вызван при использовании шорткода на странице
+        ob_start();
+
+        // Вызов функции для подключения скриптов
+        $this->enqueueCalculatorScripts();
+        $this->enqueueScripts();
+
+        // Здесь можно добавить HTML или другой контент, который должен быть выведен вместе со скриптами
+        echo '<div id="app"></div>';
+
+        return ob_get_clean();
     }
 }

@@ -19,7 +19,7 @@ export class DimensionsApi extends AxiosApi {
 
 	// create-or-update
 	async createFigure(params: CreateFigureCommand): Promise<number> {
-		return this.post(`${this.baseUrl}/change-figure`, params)
+		return this.post(`${this.baseUrl}/create-figure`, params)
 	}
 
 	async updateFigure(params: UpdateFigureCommand) {

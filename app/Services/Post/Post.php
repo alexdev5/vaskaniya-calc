@@ -129,12 +129,13 @@ class Post
     )
     {
         $postId = $args['id'] ?? 0;
+
         if (!$args['post_title']) {
             return new WP_Error('createOrUpdateWrong', 'post_title empty');
         }
 
         if ($postId > 0 && get_post($postId)) {
-            $postId = wp_update_post($args);
+            wp_update_post($args);
         } else {
             $postId = wp_insert_post($args);
         }

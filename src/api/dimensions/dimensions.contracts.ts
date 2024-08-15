@@ -1,5 +1,5 @@
 import { Terms } from '@/models'
-import { ImageContract, TaxonomyName } from '@/api/terms/terms.contracts'
+import { TaxonomyName } from '@/api/terms'
 import { PostContract } from '@/api/posts'
 
 export interface DimensionsContract {
@@ -37,15 +37,4 @@ export interface UpdateFigureCommand {
 	btnLabel: string
 	area?: string // in m2
 	notification?: string
-}
-
-export interface PostFigureContract {
-	id?: number
-	title?: string
-	btnLabel: string
-	taxonomy: string
-	taxonomies: number[]
-	area?: string
-	notification?: string
-	thumbnail: ImageContract | null
 }
