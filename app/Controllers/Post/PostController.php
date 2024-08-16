@@ -14,6 +14,17 @@ class PostController
 
     }
 
+    public function remove(WP_REST_Request $request): WP_REST_Response
+    {
+        $params = $request->get_params();
+
+        if (Post::remove($params['id'])) {
+            return Response::success(null, 'Post removed successfully.');
+        }
+
+        return Response::error('Post could not be removed.');
+    }
+
     public function uploadImage(WP_REST_Request $request): WP_REST_Response
     {
         $params = $request->get_params();

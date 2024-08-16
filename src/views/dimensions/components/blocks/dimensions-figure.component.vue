@@ -10,6 +10,7 @@
 					v-for="figure in figureSelected"
 					:figure="figure"
 					@edited="	changePostFigureRef?.open(figure, drawerTitle)"
+					@removed="confirmationRemovingRef?.open(figure)"
 				/>
 			</div>
 
@@ -19,6 +20,7 @@
 
 	<EditLastChildInfo ref="editLastChildInfoRef" :callback="store.loadDimensions" />
 	<ChangePostFigure ref="changePostFigureRef" :callback="store.loadDimensions" />
+	<FigureRemovingConfirmation ref="confirmationRemovingRef" :callback="store.loadDimensions" />
 </template>
 
 <script lang="ts" setup>
@@ -28,6 +30,7 @@ import EditLastChildInfo from '@/components/terms/edit-last-child-info/edit-last
 import VsBlockAdd from '@/components/app-block/components/vs-block-add.component.vue'
 import ChangePostFigure from '../forms/change-post-figure.drawer.vue'
 import FigureBlock from './components/figure-block.componet.vue'
+import FigureRemovingConfirmation from './components/figure-removing-confirmation.component.vue'
 
 import { computed, ref } from 'vue'
 import { useDimensionsStore } from '@/views/dimensions/dimensions.store.ts'
@@ -38,6 +41,7 @@ const store = useDimensionsStore()
 
 const editLastChildInfoRef = ref()
 const changePostFigureRef = ref()
+const confirmationRemovingRef = ref()
 
 const blockInfo = computed(() => ({
 	number: store.selectedProductType?.acf.lastChildBlockNumber,
@@ -61,8 +65,8 @@ function editTermChildInfoBlock() {
 }
 
 const drawerTitle = computed(() =>
-	`${content.common.dimensions.chapter}: ${store.selectedProductType?.title}\n
-	${content.common.dimensions.type}: ${store.selectedConfiguration?.title}`,
+	`${content.common.chapter}: ${store.selectedProductType?.title}\n
+	${content.common.type}: ${store.selectedConfiguration?.title}`,
 )
 
 function createFigure() {

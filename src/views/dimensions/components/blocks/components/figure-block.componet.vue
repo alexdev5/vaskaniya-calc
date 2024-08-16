@@ -16,7 +16,7 @@
 		<div class="post-figure-block-footer">
 			<AppBtn red rounded>
 				<template #prepend>+</template>
-				{{ figure.acf?.btnLabel ?? content.common.dimensions.addFigureButton }}
+				{{ figure.acf?.btnLabel ?? content.dimensions.addFigureButton }}
 			</AppBtn>
 			<div class="post-figure-block-notification" v-html="figure.acf?.notification" v-if="figure.acf?.notification" />
 		</div>

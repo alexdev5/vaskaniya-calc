@@ -1,4 +1,6 @@
-export const content = {
+export const common = {
+	type: 'Тип',
+	chapter: 'Раздел',
 	label: {
 		number: 'Номер',
 		blockTitle: 'Тайтл',
@@ -8,6 +10,7 @@ export const content = {
 		slug: 'Slug',
 		price: 'Цена',
 		description: 'Описание',
+		notification: 'Уведомление',
 		preview: 'Превью',
 		selectImage: 'Изображение',
 	},
@@ -22,7 +25,9 @@ export const content = {
 	},
 	button: {
 		save: 'Сохранить',
+		confirm: 'Подтвердить',
 		cancel: 'Отмена',
+		ok: 'Да',
 	},
 	notifications: {
 		updated: 'Данные обновлены успешно',
@@ -42,24 +47,6 @@ export const content = {
 		addons: 'Дополнения',
 		result: 'Результат',
 		settings: 'Настройки',
-	},
-	dimensions: {
-		type: 'Тип',
-		chapter: 'Раздел',
-		addFigureButton: 'Добавить размер',
-		productType: {
-			title: 'Добавить тип изделия',
-		},
-		configuration: {
-			title: 'Конфигурация {name}',
-		},
-		figure: {
-			form: {
-				btnLabel: 'Лейбл кнопки',
-				area: 'Площадь',
-				description: 'Описание (на сером фоне)',
-			},
-		},
 	},
 	designations: {
 		title: 'Обозначения',

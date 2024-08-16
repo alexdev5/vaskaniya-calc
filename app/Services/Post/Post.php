@@ -168,4 +168,9 @@ class Post
 
         return null;
     }
+
+    public static function remove($postId)
+    {
+        return wp_delete_post($postId, true);
+    }
 }

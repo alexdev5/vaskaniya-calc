@@ -11,12 +11,12 @@
 		<div class="change-figure-drawer-body">
 			<AppTextfield
 				compact
-				:label="content.common.dimensions.figure.form.btnLabel"
+				:label="content.dimensions.figure.form.btnLabel"
 				v-model="figureFields.btnLabel"
 			/>
 			<AppTextarea
 				compact
-				:label="content.common.dimensions.figure.form.description"
+				:label="content.dimensions.figure.form.description"
 				v-model="figureFields.notification"
 			/>
 			<TermImageField
@@ -93,6 +93,8 @@ async function submit() {
 	try {
 		let postId
 
+		console.log(currentFigure.value.id)
+
 		if (currentFigure.value.id)
 			postId = await update()
 		else
@@ -145,6 +147,7 @@ async function create() {
 async function update() {
 	if (!currentFigure.value.id) throw new Error('`id` empty')
 
+	console.log('update start')
 	let inputs = getBaseInputs(currentFigure.value)
 
 	await dimensionsApi.updateFigure({
@@ -157,6 +160,7 @@ async function update() {
 		console.log('removed image')
 	}
 
+	console.log('update end')
 	return currentFigure.value.id
 }
 

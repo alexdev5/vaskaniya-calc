@@ -1,0 +1,36 @@
+.app-dialog {
+  .v-overlay__content {
+    background: #fff;
+    border-radius: 6px;
+    //padding-block: var(--app-offset-s);
+    //padding-inline: var(--app-offset-normal);
+    max-width: 540px;
+    //overflow: hidden;
+  }
+
+  .v-card-item {
+    border-bottom: 2px solid var(--app-color-grey);
+    padding-inline: var(--app-offset-normal) !important;
+    padding-block: var(--app-offset-s) !important;
+
+    .v-card-title {
+      font-size: var(--app-font-size-l);
+    }
+  }
+
+  .app-dialog-content {
+    padding: var(--app-offset-s) var(--app-offset-normal);
+  }
+
+  .v-card-actions {
+    border-top: 1px solid var(--app-color-grey);
+    padding-inline: var(--app-offset-normal);
+    justify-content: flex-end;
+  }
+}
+
+.app-confirmation-dialog {
+  .v-overlay__content {
+
+  }
+}

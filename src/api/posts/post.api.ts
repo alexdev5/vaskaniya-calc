@@ -28,4 +28,10 @@ export class PostApi extends AxiosApi {
 			postId,
 		})
 	}
+
+	async remove(id: number) {
+		return this.post(`${this.baseUrl}/remove`, {
+			id,
+		})
+	}
 }

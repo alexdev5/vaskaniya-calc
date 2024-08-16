@@ -170,6 +170,6 @@ class DimensionsController
             return Response::error($e->getTrace(), $e->getMessage());
         }
 
-        return Response::success(null);
+        return Response::success($postId);
     }
 }

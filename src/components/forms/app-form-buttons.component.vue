@@ -13,7 +13,7 @@
 			:disabled="disabled"
 			@click="emit('submitted')"
 		>
-			{{ labelSuccess ? labelCansel : content.common.button.save }}
+			{{ labelSuccess ? labelSuccess : content.common.button.save }}
 		</AppBtn>
 	</div>
 </template>

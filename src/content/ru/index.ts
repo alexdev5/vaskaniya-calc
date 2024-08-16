@@ -1,2 +1,2 @@
-export * from './content'
-export * from './common'
+export * from './common.content'
+export * from './dimensions.content'
