@@ -1,8 +1,11 @@
 <?php
+
+use App\Services\Taxonomy\CategoryEnum;
+
 return [
     [
         'term' => 'Тип изделия',
-        'slug' => 'product-type',
+        'slug' => CategoryEnum::ProductType,
         'children' => [
             [
                 'term' => 'Столешницы',
@@ -125,8 +128,38 @@ return [
         ]
     ],
     [
+        'term' => 'Тип плинтуса',
+        'slug' => CategoryEnum::TypeOfPlinth,
+        'children' => [
+            [
+                'term' => 'Без плинтуса',
+                'slug' => 'without-plinth',
+            ],
+            [
+                'term' => 'M-701 Hazel Flow',
+                'slug' => 'm-701-hazel-flow',
+            ],
+            [
+                'term' => 'M-702 Hazel Flow',
+                'slug' => 'm-702-hazel-flow',
+            ],
+            [
+                'term' => 'M-703 Hazel Flow',
+                'slug' => 'm-703-hazel-flow',
+            ],
+            [
+                'term' => 'M-704 Hazel Flow',
+                'slug' => 'm-704-hazel-flow',
+            ],
+            [
+                'term' => 'M-705 Hazel Flow',
+                'slug' => 'm-705-hazel-flow',
+            ],
+        ]
+    ],
+    [
         'term' => 'Категория продукта',
-        'slug' => 'product',
+        'slug' => CategoryEnum::Product,
         'children' => [
             [
                 'term' => 'Смесители',
@@ -144,7 +177,7 @@ return [
     ],
     [
         'term' => 'Тип монтажа мойки',
-        'slug' => 'sink-installation-type',
+        'slug' => CategoryEnum::SinkInstallationType,
         'children' => [
             [
                 'term' => 'без мойки',
@@ -168,8 +201,22 @@ return [
             ],
         ]
     ],
-    /*    [
-            'term' => 'Конфигурация столешницы',
-            'slug' => 'table-configuration',
-        ]*/
+    [
+        'term' => 'Толщина столешницы',
+        'slug' => CategoryEnum::TableTopThickness,
+        'children' => [
+            [
+                'term' => '12мм',
+                'slug' => 'thickness-12mm',
+            ],
+            [
+                'term' => '24мм',
+                'slug' => 'thickness-24mm',
+            ],
+            [
+                'term' => '40мм',
+                'slug' => 'thickness-40mm',
+            ],
+        ]
+    ],
 ];

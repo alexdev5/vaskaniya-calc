@@ -99,24 +99,55 @@ class AdminSubMenu
                 17 => ["Теги"],
                 22 => ["Настройки"],
             ];*/
-            $desired_order = [18, 5, 19, 20, 21, 15, 16, 17, 21];
+            $desiredOrder = [18, 5, 19, 20, 21, 15, 16, 17, 21];
 
-            $sorted_menu_items = [];
+            $sortedMenuItems = [];
 
-            foreach ($desired_order as $index) {
+            foreach ($desiredOrder as $index) {
                 if (array_key_exists($index, $submenu['edit.php?post_type=' . $this->generalPostType])) {
-                    $sorted_menu_items[$index] = $submenu['edit.php?post_type=' . $this->generalPostType][$index];
+                    $sortedMenuItems[$index] = $submenu['edit.php?post_type=' . $this->generalPostType][$index];
                 }
             }
-            $submenu['edit.php?post_type=' . $this->generalPostType] = $sorted_menu_items;
+            $submenu['edit.php?post_type=' . $this->generalPostType] = $sortedMenuItems;
         }
+    }
+
+    public function sortMenuByName()
+    {
+        global $submenu;
+
+        $order = [
+            "Калькулятор",
+            "Продукты",
+            "Палтира",
+            "Дополнения",
+            "Услуги",
+            "Категории камня",
+            "Категории",
+            "Теги",
+            "Настройки"
+        ];
+
+        $submenuItems = &$submenu['edit.php?post_type=' . $this->generalPostType];
+
+        // Пользовательская функция сравнения
+        usort($submenuItems, function ($a, $b) use ($order) {
+            $pos_a = array_search($a[0], $order);
+            $pos_b = array_search($b[0], $order);
+
+            // Если какой-то из элементов не найден в массиве $order, возвращаем его в конец
+            if ($pos_a === false) $pos_a = count($order);
+            if ($pos_b === false) $pos_b = count($order);
+
+            return $pos_a - $pos_b;
+        });
     }
 
     public function create()
     {
         $this->addMenuPages();
         $this->removeFromMenu();
-        $this->sortMenu();
+        $this->sortMenuByName();
     }
 
     public function init()

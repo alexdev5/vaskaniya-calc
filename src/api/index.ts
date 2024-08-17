@@ -3,6 +3,7 @@ import * as Dimensions from './dimensions'
 import * as Terms from './terms'
 import * as Media from './media'
 import * as Post from './posts'
+import * as Edge from './edges'
 
 export {
 	Axios,
@@ -10,4 +11,5 @@ export {
 	Terms,
 	Media,
 	Post,
+	Edge,
 }

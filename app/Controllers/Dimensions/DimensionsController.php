@@ -12,6 +12,7 @@ use App\Resources\Terms\TermResource;
 use App\Services\Post\Post;
 use App\Services\Post\PostAcfEnum;
 use App\Services\Response;
+use App\Services\Taxonomy\CategoryEnum;
 use Exception;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -68,7 +69,7 @@ class DimensionsController
     {
         $parentTerm = get_term_by(
             'slug',
-            'product-type',
+            CategoryEnum::ProductType,
             TaxonomyEnum::Categories
         );
 

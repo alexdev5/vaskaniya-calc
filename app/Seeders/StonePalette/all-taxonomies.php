@@ -1,8 +1,11 @@
 <?php
+
+use App\Services\Taxonomy\StonePaletteEnum;
+
 return [
     [
         'term' => 'Тон камня',
-        'slug' => 'stone-color',
+        'slug' => StonePaletteEnum::StoneColor,
         'children' => [
             [
                 'term' => 'Белый',
@@ -53,7 +56,7 @@ return [
     ],
     [
         'term' => 'Фильтр стоимости',
-        'slug' => 'cost-filter',
+        'slug' => StonePaletteEnum::CostFilter,
         'children' => [
             [
                 'term' => 'Дешевые',
@@ -71,7 +74,7 @@ return [
     ],
     [
         'term' => 'Ценовая категория',
-        'slug' => 'price-category',
+        'slug' => StonePaletteEnum::PriceCategory,
         'children' => [
             [
                 'term' => '1 категория',
@@ -117,7 +120,7 @@ return [
     ],
     [
         'term' => 'Бренд',
-        'slug' => 'vs-brand',
+        'slug' => StonePaletteEnum::StoneBrand,
         'children' => [
             [
                 'term' => 'Grandex',
@@ -143,7 +146,7 @@ return [
     ],
     [
         'term' => 'Категория камня',
-        'slug' => 'stone-category',
+        'slug' => StonePaletteEnum::StoneCategory,
         'children' => [
             [
                 'term' => 'N',
@@ -273,7 +276,7 @@ return [
     ],
     [
         'term' => 'Тип вкраплений',
-        'slug' => 'type-inclusions',
+        'slug' => StonePaletteEnum::TypeInclusions,
         'description' => 'Текстура',
         'children' => [
             [
@@ -300,7 +303,7 @@ return [
     ],
     [
         'term' => 'Тип предложения',
-        'slug' => 'type-sentence',
+        'slug' => StonePaletteEnum::TypeSentence,
         'children' => [
             [
                 'term' => 'Новые',
