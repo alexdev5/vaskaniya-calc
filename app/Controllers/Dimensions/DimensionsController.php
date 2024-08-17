@@ -4,7 +4,6 @@ namespace App\Controllers\Dimensions;
 
 use App\Config\PostTypeEnum;
 use App\Config\TaxonomyEnum;
-use App\Controllers\TaxonomyController;
 use App\Controllers\Terms\TermsController;
 use App\Resources\Dimensions\ConfigurationResource;
 use App\Resources\Posts\PostResource;
@@ -13,6 +12,7 @@ use App\Services\Post\Post;
 use App\Services\Post\PostAcfEnum;
 use App\Services\Response;
 use App\Services\Taxonomy\CategoryEnum;
+use App\Services\Taxonomy\TaxonomyService;
 use Exception;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -22,12 +22,13 @@ class DimensionsController
 
     public function getAll(WP_REST_Request $request): WP_REST_Response
     {
-        $productTypesTerms = $this->getProductTypeCategories();
+        $parentTerm = TaxonomyService::getTermBySlug(TaxonomyEnum::Categories, CategoryEnum::ProductType);
+        $childTerms = TaxonomyService::getChildrenByParent(TaxonomyEnum::Categories, $parentTerm->term_id);
 
         $configurations = [];
         $configurationsIds = []; // for filter posts
 
-        foreach ($productTypesTerms['terms'] as $productType) {
+        foreach ($childTerms as $productType) {
             if (!empty($productType['children'])) {
                 foreach ($productType['children'] as $child) {
                     $configurations[] = array_merge($child, ['productTypeParentId' => $productType['id']]);
@@ -43,50 +44,21 @@ class DimensionsController
             TaxonomyEnum::Categories => $configurationsIds
         ]);
 
-        // TODO: Place all data in one array.
+        // TODO: Place all data in one array, for sorting by vertical
         // To implement on the client the ability to create additional blocks at the root of the parent taxonomy.
 
         $returned = [
             'taxonomy' => TaxonomyEnum::Categories,
-            'parent' => TermResource::collection($productTypesTerms['parent']),
-            'productTypes' => TermResource::collection($productTypesTerms['terms']),
+            'parent' => TermResource::collection($parentTerm),
+            'productTypes' => TermResource::collection($childTerms),
             'configurations' => ConfigurationResource::collection($configurations),
             'figures' => PostResource::collection($postsFigure),
-
-            // TODO: remove
-            'terms' => $productTypesTerms['terms'],
-            'originalFigure' => $postsFigure,
         ];
 
         return new WP_REST_Response(
             $returned,
             200
         );
-    }
-
-    // step 1, block 1
-    public function getProductTypeCategories(): array
-    {
-        $parentTerm = get_term_by(
-            'slug',
-            CategoryEnum::ProductType,
-            TaxonomyEnum::Categories
-        );
-
-        if (!empty($parentTerm)) {
-            $parentTerm->acf = get_fields('term_' . $parentTerm->term_id);
-        }
-
-        // children
-        $terms = TaxonomyController::getChildTaxonomiesByParentId(
-            TaxonomyEnum::Categories,
-            $parentTerm->term_id
-        );
-
-        return [
-            'terms' => $terms,
-            'parent' => $parentTerm,
-        ];
     }
 
     /**
