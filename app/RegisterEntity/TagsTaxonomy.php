@@ -3,8 +3,8 @@
 namespace App\RegisterEntity;
 
 use App\Config\PostTypeEnum;
-use App\Config\TaxonomyEnum;
 use App\Contracts\TaxonomyContract;
+use App\Services\Taxonomy\TaxonomyEnum;
 
 class TagsTaxonomy implements TaxonomyContract
 {

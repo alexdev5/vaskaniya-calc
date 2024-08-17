@@ -3,8 +3,8 @@
 namespace App\Seeders\StonePalette;
 
 use App\Config\PostTypeEnum;
-use App\Config\TaxonomyEnum;
 use App\Seeders\Seeders;
+use App\Services\Taxonomy\TaxonomyEnum;
 
 class StonePaletteSeeder extends Seeders
 {

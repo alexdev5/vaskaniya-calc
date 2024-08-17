@@ -1,13 +1,8 @@
 import { AxiosApi } from '@/api/axios'
 import { Terms } from '@/models'
-import {
-	CreateTaxonomyCommand,
-	UpdateSortIndexCommand,
-	UpdateTermChildInfoBlockCommand,
-	UpdateTermInfoBlockCommand,
-} from '@/api/terms/terms.contracts'
+import { TermContracts } from '@/api'
 
-export class TermsApi extends AxiosApi {
+export class TermApi extends AxiosApi {
 	public baseUrl = '/terms'
 
 	async addImages(params: Terms.AddImagesCommand) {
@@ -43,19 +38,19 @@ export class TermsApi extends AxiosApi {
 		})
 	}
 
-	async create(command: CreateTaxonomyCommand) {
+	async create(command: TermContracts.CreateTaxonomyCommand) {
 		return this.post(`${this.baseUrl}/create`, command)
 	}
 
-	async updateSortIndex(command: UpdateSortIndexCommand) {
+	async updateSortIndex(command: TermContracts.UpdateSortIndexCommand) {
 		return this.post(`${this.baseUrl}/update-sort-index`, command)
 	}
 
-	async updateInfoBlock(command: UpdateTermInfoBlockCommand) {
+	async updateInfoBlock(command: TermContracts.UpdateTermInfoBlockCommand) {
 		return this.post(`${this.baseUrl}/update-info-block`, command)
 	}
 
-	async updateChildInfoBlock(command: UpdateTermChildInfoBlockCommand) {
+	async updateChildInfoBlock(command: TermContracts.UpdateTermChildInfoBlockCommand) {
 		return this.post(`${this.baseUrl}/update-child-info-block`, command)
 	}
 }

@@ -111,7 +111,7 @@ import EditTermInfoBlockForm from '@/components/terms/edit-info/edit-term-info-b
 import DimensionsFigure from './components/blocks/dimensions-figure.component.vue'
 
 import draggable from 'vuedraggable'
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useDimensionsStore } from './dimensions.store.ts'
 import { ImageType } from '@/models/terms'
 import { useTerm } from '@/composables'
@@ -148,13 +148,8 @@ async function loadImages(termId: number, mediaType: ImageType) {
 	mediaModal.value?.open()
 }
 
-
 onMounted(async () => {
 	await store.loadDimensions()
 	store.setCardDefault()
-})
-
-onUnmounted(() => {
-
 })
 </script>

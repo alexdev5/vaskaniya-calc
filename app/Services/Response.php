@@ -8,20 +8,20 @@ class Response
 {
     static public function success($params, $message = 'Saved', $status = 200): WP_REST_Response
     {
-        $data = [
-            'data' => $params,
-            'message' => $message,
-        ];
+//        $data = [
+//            'data' => $params,
+//            'message' => $message,
+//        ];
+//
+//        $isPrimitive =
+//            is_numeric($params) ||
+//            is_string($params) ||
+//            is_bool($params) ||
+//            is_null($params);
 
-        $isPrimitive =
-            is_numeric($params) ||
-            is_string($params) ||
-            is_bool($params) ||
-            is_null($params);
+        //if ($isPrimitive) return new WP_REST_Response($params, $status);
 
-        if ($isPrimitive) return new WP_REST_Response($params, $status);
-
-        return new WP_REST_Response($data, $status);
+        return new WP_REST_Response($params, $status);
     }
 
     static public function error($params, $message = 'Bad request'): WP_REST_Response

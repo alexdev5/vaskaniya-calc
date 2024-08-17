@@ -1,24 +1,14 @@
-import { Terms } from '@/models'
-import { TaxonomyName } from '@/api/terms'
-import { PostContract } from '@/api/posts'
+import { PostContracts, TermContracts } from '@/api'
 
 export interface DimensionsContract {
-	taxonomy: TaxonomyName
-	parent: ProductTypeContract
-	productTypes: ProductTypeContract[]
+	taxonomy: TermContracts.TaxonomyName
+	parent: TermContracts.TermContract
+	productTypes: TermContracts.TermContract[]
 	configurations: ConfigurationContract[]
-	figures: PostContract[]
+	figures: PostContracts.PostContract[]
 }
 
-export interface ProductTypeContract {
-	id: number
-	slug: string
-	name: string
-	description?: string
-	acf: Terms.Acf
-}
-
-export interface ConfigurationContract extends ProductTypeContract {
+export interface ConfigurationContract extends TermContracts.TermContract {
 	productTypeParentId: number | null
 }
 

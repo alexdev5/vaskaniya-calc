@@ -158,6 +158,24 @@ return [
         ]
     ],
     [
+        'term' => 'Толщина столешницы',
+        'slug' => CategoryEnum::TableTopThickness,
+        'children' => [
+            [
+                'term' => '12мм',
+                'slug' => 'thickness-12mm',
+            ],
+            [
+                'term' => '24мм',
+                'slug' => 'thickness-24mm',
+            ],
+            [
+                'term' => '40мм',
+                'slug' => 'thickness-40mm',
+            ],
+        ]
+    ],
+    [
         'term' => 'Категория продукта',
         'slug' => CategoryEnum::Product,
         'children' => [
@@ -198,24 +216,6 @@ return [
             [
                 'term' => 'врезной монтаж',
                 'slug' => 'drop-in',
-            ],
-        ]
-    ],
-    [
-        'term' => 'Толщина столешницы',
-        'slug' => CategoryEnum::TableTopThickness,
-        'children' => [
-            [
-                'term' => '12мм',
-                'slug' => 'thickness-12mm',
-            ],
-            [
-                'term' => '24мм',
-                'slug' => 'thickness-24mm',
-            ],
-            [
-                'term' => '40мм',
-                'slug' => 'thickness-40mm',
             ],
         ]
     ],

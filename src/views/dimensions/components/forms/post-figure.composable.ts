@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { CreateFigureCommand } from '@/api/dimensions'
-import { PostContract } from '@/api/posts'
+import { PostContracts } from '@/api'
 
 export function usePostFigure() {
 	const figureFields = ref<CreateFigureCommand>({
@@ -17,7 +17,7 @@ export function usePostFigure() {
 		return true
 	}
 
-	function getBaseInputs(currentFigure: PostContract) {
+	function getBaseInputs(currentFigure: PostContracts.PostContract) {
 		return {
 			btnLabel: figureFields.value.btnLabel,
 			title: currentFigure.title,

@@ -29,10 +29,10 @@ import IconTrash from '@/components/icons/IconTrash.vue'
 import IconEdit from '@/components/icons/IconEdit.vue'
 
 import { content } from '@/content'
-import { PostContract } from '@/api/posts'
+import { PostContracts } from '@/api'
 
 defineProps<{
-	figure: PostContract
+	figure: PostContracts.PostContract
 }>()
 
 const emit = defineEmits(['edited', 'removed'])

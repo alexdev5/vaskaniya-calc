@@ -2,6 +2,7 @@ import { dimensionsApi, termsApi } from '@/services'
 import { content } from '@/content'
 import { computed, reactive } from 'vue'
 import { UpdateSortIndexCommand, UpdateTermCommand } from '@/api/terms'
+import { ImageType } from '@/models/terms'
 
 export function useTerm(callback?: () => Promise<void>) {
 	const progress = reactive({
@@ -21,6 +22,12 @@ export function useTerm(callback?: () => Promise<void>) {
 		progress.moving ||
 		progress.savingCardSettings,
 	)
+
+	const selectedImageToUpload = reactive({
+		type: ImageType.None,
+		termId: 0,
+		loading: false,
+	})
 
 	async function changeVisibility(
 		termId: number,
@@ -135,6 +142,7 @@ export function useTerm(callback?: () => Promise<void>) {
 	return {
 		progress,
 		loading,
+		selectedImageToUpload,
 		removeTerm,
 		saveCardSettings,
 		duplicateTerm,

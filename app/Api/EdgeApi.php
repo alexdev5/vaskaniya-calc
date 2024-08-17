@@ -12,7 +12,7 @@ class EdgeApi implements ApiContract
 
     public static function register()
     {
-        VsRoute::get(self::route('/edges'), [EdgesController::class, 'edges']);
+        VsRoute::get(self::route(), [EdgesController::class, 'edges']);
     }
 
     public static function route(string $name = ''): string

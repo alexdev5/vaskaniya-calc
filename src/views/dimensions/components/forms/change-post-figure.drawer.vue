@@ -60,8 +60,7 @@ import { computed, ref } from 'vue'
 import { content } from '@/content'
 import { dimensionsApi, postApi } from '@/services'
 import { usePostFigure } from '@/views/dimensions/components/forms/post-figure.composable.ts'
-import { ImageContract } from '@/api/terms'
-import { PostContract } from '@/api/posts'
+import { PostContracts, TermContracts } from '@/api'
 
 const props = defineProps<{
 	callback?: () => Promise<void>
@@ -69,7 +68,7 @@ const props = defineProps<{
 
 const { figureFields, checkFigureFields, getBaseInputs } = usePostFigure()
 
-const currentFigure = ref<PostContract>({} as PostContract)
+const currentFigure = ref<PostContracts.PostContract>({} as PostContracts.PostContract)
 const currentTaxonomy = ref()
 
 const loading = ref(false)
@@ -78,7 +77,7 @@ const disabled = ref(false)
 const widgetOpened = ref(false)
 const passedTitle = ref()
 const mediaLibraryModal = ref()
-const mediaModel = ref<File[] | ImageContract | null>(null)
+const mediaModel = ref<File[] | TermContracts.ImageContract | null>(null)
 
 const titlePrepared = computed(() => {
 	if (!passedTitle.value?.length) return []
@@ -102,7 +101,7 @@ async function submit() {
 
 		if (mediaModel.value && mediaModel.value?.id !== currentFigure.value.thumbnail?.id) {
 			if (mediaModel.value.id) {
-				const image = mediaModel.value as ImageContract
+				const image = mediaModel.value as TermContracts.ImageContract
 				await postApi.assignImage(postId, image.id)
 			} else {
 				const image = mediaModel.value as File[]
@@ -122,7 +121,7 @@ async function submit() {
 	}
 }
 
-function selectFigure(image: ImageContract) {
+function selectFigure(image: TermContracts.ImageContract) {
 	mediaModel.value = image
 
 	mediaLibraryModal.value?.close()
@@ -164,7 +163,7 @@ async function update() {
 	return currentFigure.value.id
 }
 
-async function open(figure: PostContract, title: string, taxonomy: string) {
+async function open(figure: PostContracts.PostContract, title: string, taxonomy: string) {
 	currentFigure.value = figure
 	mediaModel.value = figure.thumbnail
 
@@ -184,7 +183,7 @@ async function open(figure: PostContract, title: string, taxonomy: string) {
 
 function close() {
 	widgetOpened.value = false
-	currentFigure.value = {} as PostContract
+	currentFigure.value = {} as PostContracts.PostContract
 }
 
 defineExpose({

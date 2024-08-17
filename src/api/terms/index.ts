@@ -1,2 +1,2 @@
-export * from './terms.api'
-export * from './terms.contracts'
+export * from './term.api.ts'
+export * as TermContracts from './term.contracts'

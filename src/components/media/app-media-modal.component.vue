@@ -53,7 +53,7 @@
 import AppModal from '@/components/elements/app-modal.component.vue'
 import AppBtn from '@/components/elements/app-btn.component.vue'
 import { ref } from 'vue'
-import { ImageContract } from '@/api/terms/terms.contracts'
+import { TermContracts } from '@/api'
 import { useMediaStore } from '@/stores'
 import { termsApi } from '@/services'
 import { Terms } from '@/models'
@@ -68,7 +68,7 @@ const emit = defineEmits(['selected'])
 const mediaStore = useMediaStore()
 
 const mediaModal = ref()
-const mediaSelected = ref({} as ImageContract)
+const mediaSelected = ref({} as TermContracts.ImageContract)
 const mediaLoading = ref(false)
 const loading = ref(false)
 
@@ -78,7 +78,7 @@ async function open() {
 }
 
 function close() {
-	mediaSelected.value = {} as ImageContract
+	mediaSelected.value = {} as TermContracts.ImageContract
 	mediaModal.value?.close()
 }
 
@@ -94,6 +94,7 @@ async function loadMedia() {
 	}
 }
 
+// TODO: move to composable
 async function assignImageToTerm(mediaId: number, params: Terms.AssignImageCommand) {
 	loading.value = true
 

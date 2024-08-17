@@ -1,2 +1,2 @@
 export * from './post.api'
-export * from './post.contracts'
+export * as PostContracts from './post.contracts'

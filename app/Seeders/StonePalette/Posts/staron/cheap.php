@@ -1,6 +1,6 @@
 <?php
 $imageDir = VS_ASSETS_PATH . 'images/stone-palette/grandex/';
-$categoriesStone = \App\Config\TaxonomyEnum::CategoryStone;
+$categoriesStone = \App\Services\Taxonomy\TaxonomyEnum::CategoryStone;
 $taxonomiesLocal = ['brand-staron', 'price-category-one'];
 
 return [

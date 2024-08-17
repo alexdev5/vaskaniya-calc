@@ -2,8 +2,8 @@
 
 namespace App\Seeders\Category;
 
-use App\Config\TaxonomyEnum;
 use App\Seeders\Seeders;
+use App\Services\Taxonomy\TaxonomyEnum;
 
 class CategorySeeder extends Seeders
 {

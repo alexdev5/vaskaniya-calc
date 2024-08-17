@@ -1,3 +1,25 @@
+export interface TermContract {
+	id: number
+	slug: string
+	name: string
+	description?: string
+	acf: AcfContract
+}
+
+export interface AcfContract {
+	isHidden: boolean
+	price?: number
+	thumbnail: ImageContract | null
+	childBlockImage: ImageContract | null
+	imageFullSize?: ImageContract | null
+	lastChildBlockNumber: string
+	lastChildBlockTitle: string
+	lastChildBlockInfo: string
+	blockNumber: string
+	blockTitle: string
+	blockInfo: string
+}
+
 export interface ImageContract {
 	id: number
 	name: string

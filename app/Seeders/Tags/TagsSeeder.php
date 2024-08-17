@@ -2,8 +2,8 @@
 
 namespace App\Seeders\Tags;
 
-use App\Config\TaxonomyEnum;
 use App\Seeders\Seeders;
+use App\Services\Taxonomy\TaxonomyEnum;
 
 class TagsSeeder extends Seeders
 {

@@ -2,16 +2,15 @@ import { defineStore } from 'pinia'
 import { computed, reactive, ref, watch } from 'vue'
 import { dimensionsApi, termsApi } from '@/services'
 import { ImageType, TermState } from '@/models/terms'
-import { TaxonomyName } from '@/api/terms'
-import { PostContract } from '@/api/posts'
+import { PostContracts, TermContracts } from '@/api'
 
 export const useDimensionsStore = defineStore('dimensions', () => {
 	const state = reactive({
-		taxonomy: '' as TaxonomyName,
+		taxonomy: '' as TermContracts.TaxonomyName,
 		parent: null as TermState | null,
 		productTypes: null as TermState[] | null,
 		configurations: null as TermState[] | null,
-		figures: null as PostContract[] | null,
+		figures: null as PostContracts.PostContract[] | null,
 
 		loading: false,
 		selectedProductTypeId: 0 as number,

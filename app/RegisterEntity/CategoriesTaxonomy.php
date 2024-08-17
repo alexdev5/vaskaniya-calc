@@ -3,9 +3,9 @@
 namespace App\RegisterEntity;
 
 use App\Config\PostTypeEnum;
-use App\Config\TaxonomyEnum;
 use App\Contracts\TaxonomyContract;
 use App\Controllers\Admin\AcfCreator;
+use App\Services\Taxonomy\TaxonomyEnum;
 
 class CategoriesTaxonomy implements TaxonomyContract
 {

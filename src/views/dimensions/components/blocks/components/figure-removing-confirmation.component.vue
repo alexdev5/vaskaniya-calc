@@ -18,7 +18,7 @@ import AppConfirmationDialog from '@/components/modals/app-confirmation-dialog.c
 import { computed, ref } from 'vue'
 import { content } from '@/content'
 import { postApi } from '@/services'
-import { PostContract } from '@/api/posts'
+import { PostContracts } from '@/api'
 
 const props = defineProps<{
 	callback?: () => Promise<void>
@@ -26,7 +26,7 @@ const props = defineProps<{
 
 const loading = ref(false)
 const confirmationDialogRef = ref()
-const figure = ref<PostContract>()
+const figure = ref<PostContracts.PostContract>()
 
 const description = computed(() =>
 	content.dimensions.figureRemove.description
@@ -52,7 +52,7 @@ async function removeFigure() {
 	}
 }
 
-async function open(post: PostContract) {
+async function open(post: PostContracts.PostContract) {
 	figure.value = post
 	confirmationDialogRef.value?.open()
 }

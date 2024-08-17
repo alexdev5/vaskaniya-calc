@@ -3,7 +3,6 @@
 namespace App\Controllers\Dimensions;
 
 use App\Config\PostTypeEnum;
-use App\Config\TaxonomyEnum;
 use App\Controllers\Terms\TermsController;
 use App\Resources\Dimensions\ConfigurationResource;
 use App\Resources\Posts\PostResource;
@@ -12,6 +11,7 @@ use App\Services\Post\Post;
 use App\Services\Post\PostAcfEnum;
 use App\Services\Response;
 use App\Services\Taxonomy\CategoryEnum;
+use App\Services\Taxonomy\TaxonomyEnum;
 use App\Services\Taxonomy\TaxonomyService;
 use Exception;
 use WP_REST_Request;
@@ -24,6 +24,11 @@ class DimensionsController
     {
         $parentTerm = TaxonomyService::getTermBySlug(TaxonomyEnum::Categories, CategoryEnum::ProductType);
         $childTerms = TaxonomyService::getChildrenByParent(TaxonomyEnum::Categories, $parentTerm->term_id);
+
+        if (is_wp_error($parentTerm))
+            return Response::error($parentTerm, $parentTerm->get_error_message());
+        if (is_wp_error($childTerms))
+            return Response::error($childTerms, $childTerms->get_error_message());
 
         $configurations = [];
         $configurationsIds = []; // for filter posts
