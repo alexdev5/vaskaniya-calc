@@ -9,7 +9,7 @@ class TermResource extends JsonResource
 {
     public function toArray(): array
     {
-        return [
+        $result = [
             'id' => $this->id ?? $this->term_id ?? null,
             'title' => $this->name ?? null,
             'slug' => $this->slug ?? null,
@@ -19,5 +19,11 @@ class TermResource extends JsonResource
                 ? AcfTerm::collection($this->acf)
                 : [],
         ];
+
+        if (!empty($this->children)) {
+            $result['children'] = self::collection($this->children);
+        }
+
+        return $result;
     }
 }

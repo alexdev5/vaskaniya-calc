@@ -21,6 +21,21 @@ class TaxonomyService
         return $term;
     }
 
+    static function getTermBySlugWithChildren(string $taxonomy, string $slug)
+    {
+        $term = self::getTermBySlug($taxonomy, $slug);
+
+        if (!empty($term)) {
+            $term->acf = get_fields('term_' . $term->term_id);
+        }
+
+        $children = self::getChildrenByParent($taxonomy, $term->term_id);
+
+        $term->children = $children;
+
+        return $term;
+    }
+
     public static function getChildrenByParent(string $taxonomy, $parentTermId)
     {
         if (!$parentTermId) {
@@ -32,9 +47,7 @@ class TaxonomyService
         $categories = self::getTermsRecursiveByParentId($taxonomy, $parentTermId);
 
         if (empty($categories)) {
-            return new WP_Error('no_categories', 'Children terms not found', [
-                'categories' => $categories
-            ]);
+            return [];
         }
 
         return $categories;

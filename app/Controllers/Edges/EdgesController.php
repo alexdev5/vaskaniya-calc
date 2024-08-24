@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Edges;
 
+use App\Resources\Terms\TermResource;
 use App\Services\Response;
 use App\Services\Taxonomy\CategoryEnum;
 use App\Services\Taxonomy\TaxonomyEnum;
@@ -13,18 +14,21 @@ class EdgesController
 {
     public function edges(WP_REST_Request $request): WP_REST_Response
     {
-        $plinthTypes = TaxonomyService::getTermBySlug(TaxonomyEnum::Categories, CategoryEnum::ProductType);
-        $tableTopThickness = TaxonomyService::getTermBySlug(TaxonomyEnum::Categories, CategoryEnum::TableTopThickness);
+        $plinthType = TaxonomyService::getTermBySlugWithChildren(TaxonomyEnum::Categories, CategoryEnum::TypeOfPlinth);
+        $tableTopThickness = TaxonomyService::getTermBySlugWithChildren(TaxonomyEnum::Categories, CategoryEnum::TableTopThickness);
+
         $frontEdgeViews = [];
 
-        if (is_wp_error($plinthTypes))
-            return Response::error($plinthTypes, $plinthTypes->get_error_message());
+        if (is_wp_error($plinthType))
+            return Response::error($plinthType, $plinthType->get_error_message());
+        if (is_wp_error($tableTopThickness))
+            return Response::error($tableTopThickness, $tableTopThickness->get_error_message());
 
         return Response::success([
             'taxonomy' => TaxonomyEnum::Categories,
-            'plinthTypes' => $plinthTypes,
-            'tableThickness' => $tableTopThickness,
-            'frontEdgeViews' => $frontEdgeViews,
+            'plinthType' => $plinthType,
+            'tableThickness' => TermResource::collection($tableTopThickness),
+            'frontEdgeViews' => TermResource::collection($frontEdgeViews),
         ]);
     }
 }

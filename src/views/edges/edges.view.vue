@@ -1,5 +1,6 @@
 <template>
-	<h1>edges</h1>
+	<PlinthTypes />
+
 	{{ content.common.button.cancel }}
 
 	<AppMediaModal
@@ -11,6 +12,7 @@
 
 <script lang="ts" setup>
 import AppMediaModal from '@/components/media/app-media-modal.component.vue'
+import PlinthTypes from './components/plinth-types.component.vue'
 
 import { content } from '@/content'
 import { useTerm } from '@/composables'
@@ -19,6 +21,7 @@ import { onMounted, ref } from 'vue'
 import { ImageType } from '@/models/terms'
 
 const store = useEdgesStore()
+
 const {
 	changeVisibility,
 	duplicateTerm,

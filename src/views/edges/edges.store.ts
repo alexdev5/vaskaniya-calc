@@ -1,32 +1,21 @@
 import { defineStore } from 'pinia'
-import { computed, reactive, ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { edgeApi, termsApi } from '@/services'
 import { ImageType, TermState } from '@/models/terms'
 import { PostContracts, TermContracts } from '@/api'
+import { EdgePlinthType, EdgeTableThickness } from '@/api/edges/edge.contracts.ts'
 
 export const useEdgesStore = defineStore('edges', () => {
 	const state = reactive({
 		taxonomy: '' as TermContracts.TaxonomyName,
-		plinthTypes: null as TermState[] | null,
-		tableThickness: null as TermState[] | null,
+		plinthTypes: null as EdgePlinthType | null,
+		tableThickness: null as EdgeTableThickness | null,
 		frontEdgeViews: null as PostContracts.PostContract[] | null,
 
 		loading: false,
-		selectedPlinthTypeId: 0 as number,
-		selectedTableThicknessId: 0 as number,
+		selectedPlinthType: null as TermState | null,
+		selectedTableThickness: null as TermState | null,
 		selectedFrontEdgeViewId: 0 as number,
-	})
-
-	const selectedPlinthType = computed((): TermState | null => {
-		if (!state.plinthTypes?.length) return null
-
-		return state.plinthTypes.find(item => item.id === state.selectedPlinthTypeId) ?? null
-	})
-
-	const selectedFrontEdgeView = computed((): PostContracts.PostContract | null => {
-		if (!state.frontEdgeViews?.length) return null
-
-		return state.frontEdgeViews.find(item => item.id === state.selectedFrontEdgeViewId) ?? null
 	})
 
 	const imageDeleting = ref({} as Record<ImageType, boolean>)
@@ -65,8 +54,8 @@ export const useEdgesStore = defineStore('edges', () => {
 	}
 
 	function setCardDefault() {
-		state.selectedPlinthTypeId = state.plinthTypes?.[0]?.id ?? 0
-		state.selectedTableThicknessId = state.tableThickness?.[0]?.id ?? 0
+		state.selectedPlinthType = state.plinthTypes?.children[0] ?? null
+		state.selectedTableThickness = state.tableThickness?.children[0] ?? null
 		state.selectedFrontEdgeViewId = state.frontEdgeViews?.[0]?.id ?? 0
 	}
 
