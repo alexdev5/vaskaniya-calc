@@ -79,7 +79,7 @@
 
 			<template #footer>
 				<VsBlockAdd @added="addTermFromRef?.open({
-				title: content.common.configuration.title,
+				title: content.dimensions.configuration.title,
 				taxonomy: store.state.taxonomy,
 				parentId: store.state.selectedProductTypeId
 			})" />
@@ -125,12 +125,10 @@ const {
 	saveCardSettings,
 	removeTerm,
 	dragTerm,
-	loading,
 	progress,
 } = useTerm(store.loadDimensions)
 
 const mediaModal = ref()
-const currentTaxSeparate = ref()
 const addTermFromRef = ref()
 const editTermInfoBlockFormRef = ref()
 

@@ -1,5 +1,5 @@
-const baseApiURL = 'https://st.wooh.cc'
-//const baseApiURL = 'http://vaskania-new.loc'
+//const baseApiURL = 'https://st.wooh.cc'
+const baseApiURL = 'http://vaskania-new.loc'
 const restApiURL = '/wp-json/vs-calculator/v1'
 const apiDistDir = baseApiURL + '/wp-content/plugins/vaskaniya-calc/dist'
 

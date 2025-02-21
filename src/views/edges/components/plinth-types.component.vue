@@ -45,17 +45,20 @@
 </template>
 
 <script lang="ts" setup>
+import AddTermForm from '@/components/terms/add/add-term-form.drawer.vue'
 import VsBlock, { BlockInfo } from '@/components/app-block/vs-block.component.vue'
-import { useEdgesStore } from '@/views/edges/edges.store.ts'
-import { computed, ref } from 'vue'
 import VsBlockAdd from '@/components/app-block/components/vs-block-add.component.vue'
 import VsBlockCard from '@/components/app-block/components/vs-block-card.component.vue'
+import EditTermInfoBlockForm from '@/components/terms/edit-info/edit-term-info-block-form.drawer.vue'
+
+import { useEdgesStore } from '@/views/edges/edges.store.ts'
+import { computed, ref } from 'vue'
 
 import draggable from 'vuedraggable'
 import { useTerm } from '@/composables'
 import { ImageType } from '@/models/terms'
-import EditTermInfoBlockForm from '@/components/terms/edit-info/edit-term-info-block-form.drawer.vue'
-import AddTermForm from '@/components/terms/add/add-term-form.drawer.vue'
+
+import { content } from '@/content'
 
 const emit = defineEmits(['edit-info-requested', 'load-library-requested'])
 
