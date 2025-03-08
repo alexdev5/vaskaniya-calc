@@ -5,6 +5,7 @@ namespace App\Controllers\Terms;
 class TermsAcfEnum
 {
     const Thumbnail = 'thumbnail';
+    const ThumbnailActive = 'thumbnail_image_active';
     const ImageFullSize = 'image_full_size';
     const ChildBlockImage = 'child_block_image';
     const BlockTitle = 'block_title';

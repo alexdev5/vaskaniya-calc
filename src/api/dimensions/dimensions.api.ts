@@ -1,6 +1,6 @@
 import { AxiosApi } from '@/api/axios/axios.api'
 import { CreateFigureCommand, DimensionsContract, UpdateFigureCommand } from '@/api/dimensions/dimensions.contracts.ts'
-import { UpdateTermCommand } from '@/api/terms'
+import { UpdateTermCommand } from '@/api/terms/term.contracts.ts'
 
 export class DimensionsApi extends AxiosApi {
 	public baseUrl = '/dimensions'

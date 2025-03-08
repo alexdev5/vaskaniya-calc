@@ -27,3 +27,4 @@ define('VS_BASE_PATH', wp_get_upload_dir());
 require_once __DIR__ . '/vendor/autoload.php';
 require(VS_APP . "routes.php");
 require(VS_APP . "app.php");
+require_once VS_APP . 'functions.php';

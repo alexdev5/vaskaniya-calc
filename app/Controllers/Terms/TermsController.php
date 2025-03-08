@@ -23,6 +23,9 @@ class TermsController
             case 3:
                 $this->assignAcfImage($params['imageId'], $params['termId'], TermsAcfEnum::ChildBlockImage);
                 break;
+            case 4:
+                $this->assignAcfImage($params['imageId'], $params['termId'], TermsAcfEnum::ThumbnailActive);
+                break;
         }
 
         return new WP_REST_Response([
@@ -52,6 +55,11 @@ class TermsController
         if ($_FILES['childBlockImage']) {
             $imageId = MediaService::uploadImageFromFile($_FILES['childBlockImage']);
             $this->assignAcfImage($imageId, $termId, TermsAcfEnum::ChildBlockImage);
+        }
+
+        if ($_FILES['thumbnailActive']) {
+            $imageId = MediaService::uploadImageFromFile($_FILES['thumbnailActive']);
+            $this->assignAcfImage($imageId, $termId, TermsAcfEnum::ThumbnailActive);
         }
 
         return new WP_REST_Response(null, 200);

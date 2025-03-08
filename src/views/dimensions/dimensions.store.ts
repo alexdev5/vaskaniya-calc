@@ -8,9 +8,9 @@ export const useDimensionsStore = defineStore('dimensions', () => {
 	const state = reactive({
 		taxonomy: '' as TermContracts.TaxonomyName,
 		parent: null as TermState | null,
-		productTypes: null as TermState[] | null,
-		configurations: null as TermState[] | null,
-		figures: null as PostContracts.PostContract[] | null,
+		productTypes: [] as TermState[],
+		configurations: [] as TermState[],
+		figures: [] as PostContracts.PostContract[],
 
 		loading: false,
 		selectedProductTypeId: 0 as number,
