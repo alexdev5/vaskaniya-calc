@@ -1,36 +1,40 @@
 .app-media-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  cursor: pointer;
-  gap: var(--app-offset-normal);
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	cursor: pointer;
+	gap: var(--app-offset-normal);
 
-  .app-media-list-item {
-    padding: var(--app-offset-normal);
-    border: 1px solid transparent;
-    display: grid;
-    @include boxShadow;
+	.app-media-list-item {
+		padding: var(--app-offset-normal);
+		border: 1px solid transparent;
+		display: grid;
+		@include boxShadow;
 
-    &.active {
-      background-color: rgba(var(--app-color-red-rgb), 0.2);
-    }
+		&.active {
+			background-color: rgba(var(--app-color-red-rgb), 0.2);
+		}
 
-    &:hover {
-      @include cardHover();
-    }
-  }
+		&:hover {
+			@include cardHover();
+		}
+	}
 
-  .app-media-list-item-description {
-    font-size: var(--app-font-size-s);
-    margin-top: auto;
-    padding-top: var(--app-offset-s);
+	.app-media-list-item-img {
+		max-width: 100%;
+	}
 
-    p b {
-      min-width: 40px;
-      display: inline-block;
-    }
-  }
+	.app-media-list-item-description {
+		font-size: var(--app-font-size-s);
+		margin-top: auto;
+		padding-top: var(--app-offset-s);
 
-  img {
-    max-width: 100%;
-  }
+		p b {
+			min-width: 40px;
+			display: inline-block;
+		}
+	}
+
+	img {
+		max-width: 100%;
+	}
 }

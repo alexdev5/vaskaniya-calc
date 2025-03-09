@@ -21,7 +21,7 @@ class MediaService
     public static function getMediaList(array $query = []): array
     {
         $page = !empty($query['page']) ? intval($query['page']) : 1;
-        $perPage = !empty($query['per_page']) ? intval($query['per_page']) : 20;
+        $perPage = !empty($query['per_page']) ? intval($query['perPage']) : 40;
 
         $args = array(
             'post_type' => 'attachment',
@@ -48,7 +48,12 @@ class MediaService
             ];
         }
 
-        return $images;
+        return [
+            'data' => $images,
+            'total' => $query->found_posts,
+            'page' => $page,
+            'perPage' => $perPage,
+        ];
     }
 
     public const TEMP_DIR = VS_ASSETS_PATH . 'temp/';

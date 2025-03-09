@@ -1,38 +1,35 @@
 <template>
-  <v-dialog
-    class="app-modal"
-    :max-width="maxWidth"
-    v-model="opened"
-    @update:model-value="changeModal"
-  >
-    <div
-      v-if="hasSlot('header-fixed')"
-      class="app-modal-header-fixed"
+    <v-dialog
+        class="app-modal"
+        :max-width="maxWidth"
+        v-model="opened"
+        @update:model-value="changeModal"
     >
-      <slot name="header-fixed" />
-    </div>
-    <v-card :title="title">
-      <slot />
+        <div v-if="hasSlot('header-fixed')" class="app-modal-header-fixed">
+            <slot name="header-fixed" />
+        </div>
+        <v-card :title="title">
+            <slot />
 
-      <v-card-actions v-if="hasSlot('actions')">
-        <slot name="actions" />
-      </v-card-actions>
-    </v-card>
-  </v-dialog>
+            <v-card-actions v-if="hasSlot('actions')" class="app-modal-footer">
+                <slot name="actions" />
+            </v-card-actions>
+        </v-card>
+    </v-dialog>
 </template>
 
 <script lang="ts" setup>
 import { ref, useSlots } from 'vue'
 
-const props = defineProps({
-  title: {
-    type: [String, Number],
-    default: ''
-  },
-  maxWidth: {
-    type: [String, Number],
-    default: 1200
-  },
+defineProps({
+    title: {
+        type: [String, Number],
+        default: '',
+    },
+    maxWidth: {
+        type: [String, Number],
+        default: 1200,
+    },
 })
 
 const emit = defineEmits(['opened', 'closed'])
@@ -43,23 +40,21 @@ const slots = useSlots()
 const hasSlot = (name: string) => Boolean(slots[name])
 
 function open() {
-  opened.value = true
+    opened.value = true
 }
 
 function close() {
-  opened.value = false
+    opened.value = false
 }
 
 function changeModal(flag: boolean) {
-  flag ? emit('opened') : emit('closed')
+    flag ? emit('opened') : emit('closed')
 }
 
 defineExpose({
-  open,
-  close,
+    open,
+    close,
 })
 </script>
 
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>
