@@ -1,121 +1,123 @@
 
 .app-term-info-block {
-  position: relative;
-  padding: var(--app-offset-normal);
+	position: relative;
+	padding: var(--app-offset-normal);
 
-  @include boxShadow;
+	@include boxShadow;
 
-  .app-block-tools {
-    display: inline-grid;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-  }
+	.app-block-tools {
+		display: inline-grid;
+		position: absolute;
+		top: 10px;
+		right: 10px;
+	}
 
-  .app-term-info-block-header {
-    display: grid;
-    grid-template-columns: min-content 1fr min-content;
-    align-items: center;
-    gap: 8px var(--app-offset-normal);
-    row-gap: 0;
-    margin-inline-end: 40px;
-    margin-bottom: 24px;
-    padding: 8px 12px;
-    width: 97%;
-    border: 1px solid var(--app-color-grey);
-    background: var(--app-color-light-grey);
-    font-size: var(--app-font-size-l);
-    border-radius: 6px;
-    position: relative;
+	.app-term-info-block-header {
+		display: grid;
+		grid-template-columns: min-content 1fr min-content;
+		align-items: center;
+		gap: 8px var(--app-offset-normal);
+		row-gap: 0;
+		margin-inline-end: 40px;
+		margin-bottom: 24px;
+		padding: 8px 12px;
+		width: 97%;
+		border: 1px solid var(--app-color-grey);
+		background: var(--app-color-light-grey);
+		font-size: var(--app-font-size-l);
+		border-radius: 6px;
+		position: relative;
 
-    .app-term-info-block-header-info {
-      font-size: var(--app-font-size-base);
-      align-items: center;
-      grid-column: 1/-1;
-      grid-row: 2;
-    }
+		.app-term-info-block-header-info {
+			font-size: var(--app-font-size-base);
+			align-items: center;
+			grid-column: 1/-1;
+			grid-row: 2;
+		}
 
-    .app-color-red {
-      white-space: nowrap;
-    }
+		.app-color-red {
+			white-space: nowrap;
+		}
 
-    .app-btn {
-      margin-left: auto;
-    }
-  }
+		.app-btn {
+			margin-left: auto;
+		}
+	}
 
-  .app-term-block-body, .block-draggable {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--app-offset-middle);
-  }
+	.app-term-block-body, .block-draggable {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--app-offset-middle);
+	}
 
-  .app-block-settings {
-    @include boxShadow;
-    border: 1px solid red;
-  }
+	.app-block-settings {
+		@include boxShadow;
+		border: 1px solid red;
+	}
 }
 
 .app-term-block-prepend {
-  margin-bottom: var(--app-offset-normal);
+	margin-bottom: var(--app-offset-normal);
 }
 
 .app-block-tools-settings {
-  background-color: #fff;
-  min-width: 300px;
-  border-radius: 4px;
-  display: grid;
-  gap: 16px;
+	background-color: #fff;
+	min-width: 300px;
+	border-radius: 4px;
+	display: grid;
+	gap: 16px;
 }
 
 .app-block-tools-settings-container {
-  overflow-y: auto;
-  height: 100%;
-  background: #fff;
-  padding: 16px;
+	overflow-y: auto;
+	height: 100%;
+	background: #fff;
+	padding: 16px;
 }
 
 .app-block-tools-settings-image {
-  border-bottom: 1px solid var(--app-color-grey);
-  padding-bottom: var(--app-offset-normal);
+	border-bottom: 1px solid var(--app-color-grey);
+	padding-bottom: var(--app-offset-normal);
 
-  &:last-child {
-    border: none;
-  }
+	&:last-child {
+		border: none;
+	}
 
-  .existing-image {
-    img {
-      max-width: 150px;
-    }
-  }
+	.existing-image {
 
-  .existing-image-info {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+		img {
+			max-height: 100px;
+			max-width: 150px;
+		}
+	}
 
-  .loading-image-info {
-    .app-form-field-file-input {
-      flex-grow: 1;
-    }
+	.existing-image-info {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
 
-    .v-field {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+	.loading-image-info {
+		.app-form-field-file-input {
+			flex-grow: 1;
+		}
 
-    .v-field__clearable {
-      padding: 0;
-    }
-  }
+		.v-field {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+		}
+
+		.v-field__clearable {
+			padding: 0;
+		}
+	}
 }
 
 .app-block-tools-settings-image-actions {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-  padding-block-start: 16px;
+	display: flex;
+	gap: 16px;
+	align-items: center;
+	padding-block-start: 16px;
 
 }
