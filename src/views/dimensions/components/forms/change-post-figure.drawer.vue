@@ -1,51 +1,50 @@
 <template>
-	<AppDrawer :opened="widgetOpened" @closed="close">
-		<template #header>
-			<div class="change-figure-drawer-header">
-				<p v-for="titleItem in titlePrepared">
-					{{ titleItem }}
-				</p>
-			</div>
-		</template>
+    <AppDrawer :opened="widgetOpened" @closed="close">
+        <template #header>
+            <div class="change-figure-drawer-header">
+                <p v-for="titleItem in titlePrepared">
+                    {{ titleItem }}
+                </p>
+            </div>
+        </template>
 
-		<div class="change-figure-drawer-body">
-			<AppTextfield
-				compact
-				:label="content.dimensions.figure.form.btnLabel"
-				v-model="figureFields.btnLabel"
-			/>
-			<AppTextarea
-				compact
-				:label="content.dimensions.figure.form.description"
-				v-model="figureFields.notification"
-			/>
-			<TermImageField
-				:label="content.common.label.selectImage"
-				:image="mediaModel ?? undefined"
-				v-model="mediaModel"
-				:deleteLoading="deletingFigure"
-				:image-selected="Boolean(mediaModel)"
-				@lib-opened="mediaLibraryModal?.open()"
-				@removed="removeFigureImage"
-			/>
+        <div class="change-figure-drawer-body">
+            <AppTextfield
+                compact
+                :label="content.dimensions.figure.form.btnLabel"
+                v-model="figureFields.btnLabel"
+            />
+            <AppTextarea
+                compact
+                :label="content.dimensions.figure.form.description"
+                v-model="figureFields.notification"
+            />
+            <TermImageField
+                :label="content.common.label.selectImage"
+                :image="mediaModel ?? undefined"
+                v-model="mediaModel"
+                :deleteLoading="deletingFigure"
+                :image-selected="Boolean(mediaModel)"
+                @lib-opened="mediaLibraryModal?.open()"
+                @removed="removeFigureImage"
+            />
+        </div>
 
-		</div>
+        <template #footer>
+            <AppFormButtons
+                :disabled="disabled"
+                :loading="loading"
+                @closed="close()"
+                @submitted="submit"
+            />
+        </template>
+    </AppDrawer>
 
-		<template #footer>
-			<AppFormButtons
-				:disabled="disabled"
-				:loading="loading"
-				@closed="close()"
-				@submitted="submit"
-			/>
-		</template>
-	</AppDrawer>
-
-	<AppMediaModal
-		ref="mediaLibraryModal"
-		:callback="callback"
-		@selected="selectFigure"
-	/>
+    <AppMediaModal
+        ref="mediaLibraryModal"
+        :callback="callback"
+        @selected="selectFigure"
+    />
 </template>
 
 <script lang="ts" setup>
@@ -63,12 +62,14 @@ import { usePostFigure } from '@/views/dimensions/components/forms/post-figure.c
 import { PostContracts, TermContracts } from '@/api'
 
 const props = defineProps<{
-	callback?: () => Promise<void>
+    callback?: () => Promise<void>
 }>()
 
 const { figureFields, checkFigureFields, getBaseInputs } = usePostFigure()
 
-const currentFigure = ref<PostContracts.PostContract>({} as PostContracts.PostContract)
+const currentFigure = ref<PostContracts.PostContract>(
+    {} as PostContracts.PostContract
+)
 const currentTaxonomy = ref()
 
 const loading = ref(false)
@@ -80,125 +81,127 @@ const mediaLibraryModal = ref()
 const mediaModel = ref<File[] | TermContracts.ImageContract | null>(null)
 
 const titlePrepared = computed(() => {
-	if (!passedTitle.value?.length) return []
-	return passedTitle.value.split('\n')
+    if (!passedTitle.value?.length) return []
+    return passedTitle.value.split('\n')
 })
 
 async function submit() {
-	if (!checkFigureFields()) throw new Error('Check failed `FigurePost From`')
+    if (!checkFigureFields()) throw new Error('Check failed `FigurePost From`')
 
-	loading.value = true
+    loading.value = true
 
-	try {
-		let postId
+    try {
+        let postId
+        let file = mediaModel.value?.[0]
 
-		console.log(currentFigure.value.id)
+        console.log(file)
+        if (currentFigure.value.id) postId = await update()
+        else postId = await create()
 
-		if (currentFigure.value.id)
-			postId = await update()
-		else
-			postId = await create()
+        if (
+            mediaModel.value &&
+            mediaModel.value?.id !== currentFigure.value.thumbnail?.id
+        ) {
+            console.log('assign', mediaModel.value)
+            if (mediaModel.value.id) {
+                const image = mediaModel.value as TermContracts.ImageContract
+                await postApi.assignImage(postId, image.id)
+            } else {
+                const image = mediaModel.value as File[]
+                await postApi.uploadImage(postId, image[0])
+            }
+        }
 
-		if (mediaModel.value && mediaModel.value?.id !== currentFigure.value.thumbnail?.id) {
-			if (mediaModel.value.id) {
-				const image = mediaModel.value as TermContracts.ImageContract
-				await postApi.assignImage(postId, image.id)
-			} else {
-				const image = mediaModel.value as File[]
-				await postApi.uploadImage(postId, image[0])
-			}
-		}
+        if (props.callback) await props.callback()
 
-		if (props.callback) await props.callback()
-
-		console.log(content.common.notifications.updated)
-
-		close()
-	} catch (error: any) {
-		console.log(error)
-	} finally {
-		loading.value = false
-	}
+        close()
+    } catch (error: any) {
+        console.log(error)
+    } finally {
+        loading.value = false
+    }
 }
 
 function selectFigure(image: TermContracts.ImageContract) {
-	mediaModel.value = image
+    mediaModel.value = image
 
-	mediaLibraryModal.value?.close()
+    mediaLibraryModal.value?.close()
 }
 
 function removeFigureImage() {
-	mediaModel.value = null
+    mediaModel.value = null
 }
 
 async function create() {
-	if (!currentFigure.value.taxonomies.length) throw new Error('`taxonomies` empty')
+    if (!currentFigure.value.taxonomies.length)
+        throw new Error('`taxonomies` empty')
 
-	let inputs = getBaseInputs(currentFigure.value)
+    let inputs = getBaseInputs(currentFigure.value)
 
-	return await dimensionsApi.createFigure({
-		...inputs,
-		taxonomy: currentTaxonomy.value,
-		taxonomies: currentFigure.value.taxonomies,
-	})
+    return await dimensionsApi.createFigure({
+        ...inputs,
+        taxonomy: currentTaxonomy.value,
+        taxonomies: currentFigure.value.taxonomies,
+    })
 }
 
 async function update() {
-	if (!currentFigure.value.id) throw new Error('`id` empty')
+    if (!currentFigure.value.id) throw new Error('`id` empty')
 
-	console.log('update start')
-	let inputs = getBaseInputs(currentFigure.value)
+    let inputs = getBaseInputs(currentFigure.value)
 
-	await dimensionsApi.updateFigure({
-		...inputs,
-		id: currentFigure.value.id,
-	})
+    await dimensionsApi.updateFigure({
+        ...inputs,
+        id: currentFigure.value.id,
+    })
 
-	if (!mediaModel.value && currentFigure.value.thumbnail?.id) {
-		await postApi.removeImage(currentFigure.value.id)
-		console.log('removed image')
-	}
+    if (!mediaModel.value && currentFigure.value.thumbnail?.id) {
+        await postApi.removeImage(currentFigure.value.id)
+    }
 
-	console.log('update end')
-	return currentFigure.value.id
+    return currentFigure.value.id
 }
 
-async function open(figure: PostContracts.PostContract, title: string, taxonomy: string) {
-	currentFigure.value = figure
-	mediaModel.value = figure.thumbnail
+async function open(
+    figure: PostContracts.PostContract,
+    title: string,
+    taxonomy: string
+) {
+    currentFigure.value = figure
+    mediaModel.value = figure.thumbnail
 
-	console.log(figure)
-	figure.acf?.btnLabel
-		? figureFields.value.btnLabel = figure.acf.btnLabel
-		: figureFields.value.btnLabel = ''
+    console.log(figure)
+    figure.acf?.btnLabel
+        ? (figureFields.value.btnLabel = figure.acf.btnLabel)
+        : (figureFields.value.btnLabel = '')
 
-	figure.acf?.notification
-		? figureFields.value.notification = figure.acf.notification
-		: figureFields.value.notification = ''
+    figure.acf?.notification
+        ? (figureFields.value.notification = figure.acf.notification)
+        : (figureFields.value.notification = '')
 
-	passedTitle.value = title
-	currentTaxonomy.value = taxonomy
-	widgetOpened.value = true
+    passedTitle.value = title
+    currentTaxonomy.value = taxonomy
+    widgetOpened.value = true
 }
 
 function close() {
-	widgetOpened.value = false
-	currentFigure.value = {} as PostContracts.PostContract
+    widgetOpened.value = false
+    currentFigure.value = {} as PostContracts.PostContract
 }
 
 defineExpose({
-	open,
-	close,
+    open,
+    close,
 })
 </script>
 
 <style lang="scss">
 .change-figure-drawer-body {
-	display: grid;
-	gap: var(--app-offset-normal);
+    display: grid;
+    gap: var(--app-offset-normal);
 
-	.v-field__input {
-		border-bottom: none !important;
-	}
+    .v-field__input {
+        border-bottom: none !important;
+    }
 }
 </style>
