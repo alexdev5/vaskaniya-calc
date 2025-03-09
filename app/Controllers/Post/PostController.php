@@ -28,10 +28,11 @@ class PostController
     public function uploadImage(WP_REST_Request $request): WP_REST_Response
     {
         $params = $request->get_params();
+        $file = $request->get_file_params();
 
-        if (!$params['image']) Response::error($params['image'], 'Image must be File type');
+        if (!$file['image']) Response::error($file['image'], 'Image must be File type');
 
-        $thumbnailId = Post::uploadImageThenAssign($params['postId'], $params['image']);
+        $thumbnailId = Post::uploadImageThenAssign($params['postId'], $file['image']);
 
         if (is_wp_error($thumbnailId))
             return Response::error($thumbnailId);

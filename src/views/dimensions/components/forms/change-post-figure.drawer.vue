@@ -94,22 +94,14 @@ async function submit() {
         let postId
         let file = mediaModel.value?.[0]
 
-        console.log(file)
         if (currentFigure.value.id) postId = await update()
         else postId = await create()
 
-        if (
-            mediaModel.value &&
-            mediaModel.value?.id !== currentFigure.value.thumbnail?.id
-        ) {
-            console.log('assign', mediaModel.value)
-            if (mediaModel.value.id) {
-                const image = mediaModel.value as TermContracts.ImageContract
-                await postApi.assignImage(postId, image.id)
-            } else {
-                const image = mediaModel.value as File[]
-                await postApi.uploadImage(postId, image[0])
-            }
+        if (file) {
+            await postApi.uploadImage(postId, file)
+        } else if (mediaModel.value?.id !== currentFigure.value.thumbnail?.id) {
+            const image = mediaModel.value as TermContracts.ImageContract
+            await postApi.assignImage(postId, image.id)
         }
 
         if (props.callback) await props.callback()
