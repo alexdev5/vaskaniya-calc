@@ -57,6 +57,45 @@ class CustomPostsType implements TaxonomyContract
         register_post_type($postType, $args);
     }
 
+    public function vsProductConfigurations()
+    {
+        $postType = PostTypeEnum::ProductConfiguration;
+
+        $labels = array(
+            'name' => __('Конфигурации изделий', $this->domain),
+            'singular_name' => __('Конфигурация изделия', $this->domain),
+            'menu_name' => __('Конфигурации изделий', $this->domain),
+            'name_admin_bar' => __('Конфигурация изделия', $this->domain),
+            'add_new' => __('Добавить новую', $this->domain),
+            'add_new_item' => __('Добавить', $this->domain),
+            'new_item' => __('Новая конфигурация', $this->domain),
+            'edit_item' => __('Редактировать конфигурацию', $this->domain),
+            'view_item' => __('Просмотр конфигурации', $this->domain),
+            'all_items' => __('Конфигурации', $this->domain),
+            'search_items' => __('Поиск конфигураций', $this->domain),
+            'parent_item_colon' => __('Родительская конфигурация:', $this->domain),
+            'not_found' => __('Конфигурации не найдены.', $this->domain),
+            'not_found_in_trash' => __('Конфигурации не найдены в корзине.', $this->domain)
+        );
+
+        $args = array(
+            'labels' => $labels,
+            'description' => __('Конфигурации изделий для калькулятора Vascania.', $this->domain),
+            'public' => true,
+            'publicly_queryable' => true,
+            'show_ui' => true,
+            'show_in_menu' => false,
+            'menu_icon' => 'dashicons-calculator',
+            'query_var' => true,
+            'rewrite' => ['slug' => $postType, 'with_front' => false],
+            'has_archive' => false,
+            'hierarchical' => false,
+            'supports' => ['title', 'editor', 'thumbnail', 'excerpt']
+        );
+
+        register_post_type($postType, $args);
+    }
+
     public function vsServices()
     {
         $postType = PostTypeEnum::Services;
@@ -134,12 +173,12 @@ class CustomPostsType implements TaxonomyContract
 //        $acf->text('vendor_code', 'Артикул');
     }
 
-
     public function register()
     {
         $this->vsProducts();
         $this->vsPalette();
         $this->vsAddons();
         $this->vsServices();
+        $this->vsProductConfigurations();
     }
 }

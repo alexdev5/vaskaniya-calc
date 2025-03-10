@@ -30,17 +30,6 @@ class JsonResource
         return $resource;
     }
 
-//    protected static function convertToResource($value) {
-//        if (is_array($value) || is_object($value)) {
-//            $resource = new static();
-//            foreach ($value as $property => $val) {
-//                $resource->$property = static::convertToResource($val);
-//            }
-//            return $resource;
-//        }
-//        return $value;
-//    }
-
     public function toArray()
     {
         return get_object_vars($this);

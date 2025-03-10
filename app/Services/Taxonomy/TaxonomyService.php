@@ -81,4 +81,23 @@ class TaxonomyService
 
         return $categories;
     }
+
+    public static function getTermByPostId(int $postId, string $taxonomy): ?array
+    {
+        $terms = get_the_terms($postId, $taxonomy);
+
+        if (empty($terms) || is_wp_error($terms)) {
+            return null;
+        }
+
+        $term = $terms[0]; // Берем первый термин
+
+        return [
+            'id' => $term->term_id,
+            'name' => $term->name,
+            'slug' => $term->slug,
+            'description' => $term->description,
+            'acf' => get_fields('term_' . $term->term_id),
+        ];
+    }
 }

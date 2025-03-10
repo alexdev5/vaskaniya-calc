@@ -30,6 +30,13 @@ class AdminSubMenu
         );
         add_submenu_page(
             $this->linkEdit,
+            'Конфигурации',
+            'Конфигурации',
+            'edit_posts',
+            $this->getEditLink(PostTypeEnum::ProductConfiguration)
+        );
+        add_submenu_page(
+            $this->linkEdit,
             'Палтира',
             'Палтира',
             'edit_posts',
@@ -75,8 +82,11 @@ class AdminSubMenu
 
         // Remove add submenu
         if (isset($submenu[$this->linkEdit])) {
+            //dd($submenu[$this->linkEdit]);
             foreach ($submenu[$this->linkEdit] as $key => $item) {
                 if ($item[0] === CustomPostsType::LabelAdd) {
+                    unset($submenu[$this->linkEdit][$key]);
+                } elseif ($item[0] === 'Add New Product') {
                     unset($submenu[$this->linkEdit][$key]);
                 }
             }
@@ -119,6 +129,7 @@ class AdminSubMenu
         $order = [
             "Калькулятор",
             "Продукты",
+            "Конфигурации",
             "Палтира",
             "Дополнения",
             "Услуги",

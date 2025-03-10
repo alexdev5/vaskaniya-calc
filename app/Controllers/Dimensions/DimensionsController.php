@@ -45,7 +45,7 @@ class DimensionsController
             $configurationsIds[] = $configuration['id'];
         }
 
-        $postsFigure = Post::getPosts(PostTypeEnum::Products, [
+        $figures = Post::getPosts(PostTypeEnum::ProductConfiguration, [
             TaxonomyEnum::Categories => $configurationsIds
         ]);
 
@@ -54,10 +54,10 @@ class DimensionsController
 
         $returned = [
             'taxonomy' => TaxonomyEnum::Categories,
-            'parent' => TermResource::collection($parentTerm),
+            'parentTerm' => TermResource::collection($parentTerm),
             'productTypes' => TermResource::collection($childTerms),
             'configurations' => ConfigurationResource::collection($configurations),
-            'figures' => PostResource::collection($postsFigure),
+            'figures' => PostResource::collection($figures),
         ];
 
         return new WP_REST_Response(
