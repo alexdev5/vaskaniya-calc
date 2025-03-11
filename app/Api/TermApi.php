@@ -14,6 +14,7 @@ class TermApi implements ApiContract
     {
         VsRoute::post(self::route('/add-images'), [TermsController::class, 'addImages']);
         VsRoute::post(self::route('/assign-image'), [TermsController::class, 'assignImage']);
+        VsRoute::post(self::route('/assign-images'), [TermsController::class, 'assignImages']);
         VsRoute::post(self::route('/change-visible'), [TermsController::class, 'changeVisible']);
         VsRoute::post(self::route('/create'), [TermsController::class, 'create']);
         VsRoute::post(self::route('/remove'), [TermsController::class, 'remove']);

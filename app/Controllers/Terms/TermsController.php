@@ -34,6 +34,32 @@ class TermsController
         ], 200);
     }
 
+    public function assignImages(WP_REST_Request $request): WP_REST_Response
+    {
+        $params = $request->get_params();
+
+        if ($params['imageFullSizeId']) {
+            $this->assignAcfImage($params['imageId'], $params['termId'], TermsAcfEnum::ImageFullSize);
+        }
+
+        if ($params['thumbnailId']) {
+            $this->assignAcfImage($params['imageId'], $params['termId'], TermsAcfEnum::ImageFullSize);
+        }
+        
+        if ($params['thumbnailActiveId']) {
+            $this->assignAcfImage($params['imageId'], $params['termId'], TermsAcfEnum::ImageFullSize);
+        }
+
+        if ($params['childBlockImageId']) {
+            $this->assignAcfImage($params['imageId'], $params['termId'], TermsAcfEnum::ImageFullSize);
+        }
+
+        return new WP_REST_Response([
+            'params' => $params,
+            'message' => 'Assignment successfully',
+        ], 200);
+    }
+
     public function addImages(WP_REST_Request $request): WP_REST_Response
     {
         $termId = $request->get_param('termId');

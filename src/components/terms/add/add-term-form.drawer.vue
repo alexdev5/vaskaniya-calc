@@ -6,13 +6,13 @@
     >
         <div class="app-block-tools-settings" v-if="widgetOpened">
             <AppTextField
-                :label="content.common.label.name"
-                v-model="values.name"
+                :label="content.common.label.slug"
+                v-model="values.slug"
                 compact
             />
             <AppTextField
-                :label="content.common.label.slug"
-                v-model="values.slug"
+                :label="content.common.label.name"
+                v-model="values.name"
                 compact
             />
             <AppTextField
@@ -29,26 +29,42 @@
 
             <TermImageField
                 :label="content.common.label.preview"
-                v-model="values.thumbnail"
+                :image="values.thumbnail"
+                @file-selected="
+                    selectImageToUpload($event, ImageType.Thumbnail)
+                "
                 @lib-opened="mediaModal.open(ImageType.Thumbnail)"
+                @removed="removeImage(ImageType.Thumbnail)"
             />
 
             <TermImageField
                 :label="content.common.label.previewActive"
-                v-model="values.thumbnailActive"
+                :image="values.thumbnailActive"
+                @file-selected="
+                    selectImageToUpload($event, ImageType.ThumbnailActive)
+                "
                 @lib-opened="mediaModal.open(ImageType.ThumbnailActive)"
+                @removed="removeImage(ImageType.ThumbnailActive)"
             />
 
             <TermImageField
                 :label="content.common.term.fullImage"
-                v-model="values.imageFullSize"
+                :image="values.imageFullSize"
+                @file-selected="
+                    selectImageToUpload($event, ImageType.ImageFullSize)
+                "
                 @lib-opened="mediaModal.open(ImageType.ImageFullSize)"
+                @removed="removeImage(ImageType.ImageFullSize)"
             />
 
             <TermImageField
                 :label="content.common.term.childImage"
-                v-model="values.childBlockImage"
+                :image="values.childBlockImage"
+                @file-selected="
+                    selectImageToUpload($event, ImageType.ChildBlockImage)
+                "
                 @lib-opened="mediaModal.open(ImageType.ChildBlockImage)"
+                @removed="removeImage(ImageType.ChildBlockImage)"
             />
 
             <slot name="settings" />
@@ -78,7 +94,7 @@ import TermImageField from '@/components/terms/add/components/term-image-field.c
 import AppTextField from '@/components/forms/app-textfield.vue'
 import AppMediaModal from '@/components/media/app-media-modal.component.vue'
 
-import { reactive, ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import {
     CreateTermInDrawerParams,
     ImageType,
@@ -87,6 +103,7 @@ import {
 import { termsApi } from '@/services'
 import { content } from '@/content'
 import { TermContracts } from '@/api'
+import { ImageContract } from '@/api/terms/term.contracts.ts'
 
 const props = defineProps<{
     callback?: () => Promise<void>
@@ -100,6 +117,13 @@ const loading = ref(false)
 const disabled = ref(false)
 const widgetOpened = ref(false)
 
+const imagesToUpload = reactive({
+    thumbnail: null as File | null,
+    thumbnailActive: null as File | null,
+    imageFullSize: null as File | null,
+    childBlockImage: null as File | null,
+})
+
 const values = reactive({
     id: 0,
     slug: '',
@@ -107,11 +131,26 @@ const values = reactive({
     name: '',
     description: '',
     price: null,
-    thumbnail: null,
-    thumbnailActive: null,
-    imageFullSize: null,
-    childBlockImage: null,
+    thumbnail: null as ImageContract | null,
+    thumbnailActive: null as ImageContract | null,
+    imageFullSize: null as ImageContract | null,
+    childBlockImage: null as ImageContract | null,
 } as TermFromFields)
+
+const isImageFromLibrary = computed(
+    () =>
+        values.imageFullSize?.length ||
+        values.thumbnailActive?.length ||
+        values.thumbnail?.length ||
+        values.childBlockImage?.length
+)
+const isImageToUpload = computed(
+    () =>
+        imagesToUpload.imageFullSize ||
+        imagesToUpload.thumbnailActive ||
+        imagesToUpload.thumbnail ||
+        imagesToUpload.childBlockImage
+)
 
 async function submit() {
     if (!values.name) throw new Error("'name' in values is empty")
@@ -130,18 +169,23 @@ async function submit() {
             price: values.price,
         })
 
-        if (
-            values.imageFullSize?.length ||
-            values.thumbnailActive?.length ||
-            values.thumbnail?.length ||
-            values.childBlockImage?.length
-        ) {
+        if (isImageFromLibrary.value) {
+            await termsApi.assignImages({
+                termId,
+                imageFullSizeId: values.imageFullSize?.id ?? null,
+                thumbnailId: values.thumbnail?.id ?? null,
+                thumbnailActiveId: values.thumbnailActive?.id ?? null,
+                childBlockImageId: values.childBlockImage?.id ?? null,
+            })
+        }
+
+        if (isImageToUpload.value) {
             await termsApi.addImages({
                 termId,
-                imageFullSize: values.imageFullSize?.[0] ?? null,
-                thumbnail: values.thumbnail?.[0] ?? null,
-                thumbnailActive: values.thumbnailActive?.[0] ?? null,
-                childBlockImage: values.childBlockImage?.[0] ?? null,
+                imageFullSize: imagesToUpload.imageFullSize ?? null,
+                thumbnail: imagesToUpload.thumbnail ?? null,
+                thumbnailActive: imagesToUpload.thumbnailActive ?? null,
+                childBlockImage: imagesToUpload.childBlockImage ?? null,
             })
         }
 
@@ -168,6 +212,23 @@ function close() {
     //values = null
 }
 
+function selectImageToUpload(file: File, imageType: ImageType) {
+    switch (imageType) {
+        case ImageType.Thumbnail:
+            imagesToUpload.thumbnail = file
+            break
+        case ImageType.ImageFullSize:
+            imagesToUpload.imageFullSize = file
+            break
+        case ImageType.ChildBlockImage:
+            imagesToUpload.childBlockImage = file
+            break
+        case ImageType.ThumbnailActive:
+            imagesToUpload.thumbnailActive = file
+            break
+    }
+}
+
 function prepareAssignmentImage(image: TermContracts.ImageContract) {
     if (!image.type) {
         console.error('image.type is empty: ', image)
@@ -186,6 +247,30 @@ function prepareAssignmentImage(image: TermContracts.ImageContract) {
             break
         case ImageType.ThumbnailActive:
             values.thumbnailActive = image
+            break
+    }
+
+    mediaModal.value.close()
+}
+
+function removeImage(imageType: ImageType) {
+    console.log(imageType)
+    switch (imageType) {
+        case ImageType.Thumbnail:
+            values.thumbnail = null
+            imagesToUpload.thumbnail = null
+            break
+        case ImageType.ImageFullSize:
+            values.imageFullSize = null
+            imagesToUpload.imageFullSize = null
+            break
+        case ImageType.ChildBlockImage:
+            values.childBlockImage = null
+            imagesToUpload.childBlockImage = null
+            break
+        case ImageType.ThumbnailActive:
+            values.thumbnailActive = null
+            imagesToUpload.thumbnailActive = null
             break
     }
 }
