@@ -15,6 +15,7 @@ class TermsAcfEnum
     const LastChildBlockNumber = 'last_child_block_number';
     const LastChildBlockInfo = 'last_child_block_info';
     const Price = 'price';
+    const Name = 'name';
     const IsHidden = 'is_hidden';
 
     private function __construct()

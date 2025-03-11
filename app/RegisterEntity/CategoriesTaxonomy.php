@@ -31,6 +31,7 @@ class CategoriesTaxonomy implements TaxonomyContract
             $taxonomy,
             [
                 PostTypeEnum::Products,
+                PostTypeEnum::ProductConfiguration,
                 PostTypeEnum::Addons,
                 PostTypeEnum::Services,
             ],
