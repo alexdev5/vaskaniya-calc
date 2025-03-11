@@ -5,7 +5,6 @@ import { TermContracts } from '@/api'
 export class TermState {
     id!: number
     slug!: string
-    name!: string
     title!: string
     description: string = ''
     acf!: TermContracts.AcfContract

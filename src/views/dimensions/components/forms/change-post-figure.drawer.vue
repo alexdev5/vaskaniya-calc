@@ -2,7 +2,7 @@
     <AppDrawer :opened="widgetOpened" @closed="close">
         <template #header>
             <div class="change-figure-drawer-header">
-                <p v-for="titleItem in titlePrepared">
+                <p v-for="titleItem in titlePrepared" :key="titleItem">
                     {{ titleItem }}
                 </p>
             </div>
@@ -19,12 +19,11 @@
                 :label="content.dimensions.figure.form.description"
                 v-model="figureFields.notification"
             />
+
             <TermImageField
                 :label="content.common.label.selectImage"
-                :image="mediaModel ?? undefined"
-                v-model="mediaModel"
-                :deleteLoading="deletingFigure"
-                :image-selected="Boolean(mediaModel)"
+                :image="selectedImage"
+                @file-selected="selectImageToUpload"
                 @lib-opened="mediaLibraryModal?.open()"
                 @removed="removeFigureImage"
             />
@@ -34,7 +33,7 @@
             <AppFormButtons
                 :disabled="disabled"
                 :loading="loading"
-                @closed="close()"
+                @closed="close"
                 @submitted="submit"
             />
         </template>
@@ -71,37 +70,54 @@ const currentFigure = ref<PostContracts.PostContract>(
     {} as PostContracts.PostContract
 )
 const currentTaxonomy = ref()
-
 const loading = ref(false)
-const deletingFigure = ref(false)
 const disabled = ref(false)
 const widgetOpened = ref(false)
 const passedTitle = ref()
 const mediaLibraryModal = ref()
-const mediaModel = ref<File[] | TermContracts.ImageContract | null>(null)
+
+// Додаємо окремі змінні для файлу та об'єкта зображення
+const selectedFile = ref<File | null>(null)
+const selectedImage = ref<TermContracts.ImageContract | null>(null)
 
 const titlePrepared = computed(() => {
     if (!passedTitle.value?.length) return []
     return passedTitle.value.split('\n')
 })
 
+// Обчислюване значення для прев'ю зображення
+// const imagePreview = computed(() => {
+//     if (selectedFile.value) {
+//         return {
+//             url: URL.createObjectURL(selectedFile.value),
+//             name: selectedFile.value.name,
+//         }
+//     }
+//     return selectedImage.value ?? null
+// })
+
 async function submit() {
-    if (!checkFigureFields()) throw new Error('Check failed `FigurePost From`')
+    console.log('change post figure')
+    return
+    if (!checkFigureFields()) throw new Error('Check failed `FigurePost Form`')
 
     loading.value = true
 
     try {
         let postId
-        let file = mediaModel.value?.[0]
 
-        if (currentFigure.value.id) postId = await update()
-        else postId = await create()
+        if (currentFigure.value.id) {
+            postId = await update()
+        } else {
+            postId = await create()
+        }
 
-        if (file) {
-            await postApi.uploadImage(postId, file)
-        } else if (mediaModel.value?.id !== currentFigure.value.thumbnail?.id) {
-            const image = mediaModel.value as TermContracts.ImageContract
-            await postApi.assignImage(postId, image.id)
+        if (selectedFile.value) {
+            await postApi.uploadImage(postId, selectedFile.value)
+        } else if (
+            selectedImage.value?.id !== currentFigure.value.thumbnail?.id
+        ) {
+            await postApi.assignImage(postId, selectedImage.value!.id)
         }
 
         if (props.callback) await props.callback()
@@ -115,13 +131,19 @@ async function submit() {
 }
 
 function selectFigure(image: TermContracts.ImageContract) {
-    mediaModel.value = image
-
+    selectedImage.value = image
+    selectedFile.value = null
     mediaLibraryModal.value?.close()
 }
 
+function selectImageToUpload(file: File) {
+    selectedFile.value = file
+    selectedImage.value = null
+}
+
 function removeFigureImage() {
-    mediaModel.value = null
+    selectedFile.value = null
+    selectedImage.value = null
 }
 
 async function create() {
@@ -147,7 +169,7 @@ async function update() {
         id: currentFigure.value.id,
     })
 
-    if (!mediaModel.value && currentFigure.value.thumbnail?.id) {
+    if (!selectedImage.value && currentFigure.value.thumbnail?.id) {
         await postApi.removeImage(currentFigure.value.id)
     }
 
@@ -160,9 +182,9 @@ async function open(
     taxonomy: string
 ) {
     currentFigure.value = figure
-    mediaModel.value = figure.thumbnail
+    selectedImage.value = figure.thumbnail
+    selectedFile.value = null
 
-    console.log(figure)
     figure.acf?.btnLabel
         ? (figureFields.value.btnLabel = figure.acf.btnLabel)
         : (figureFields.value.btnLabel = '')

@@ -74,7 +74,7 @@ import { ImageContract } from '@/api/terms/term.contracts.ts'
 
 defineProps<{
     label?: string
-    image?: ImageContract
+    image?: ImageContract | null
     deleteLoading?: boolean
 }>()
 

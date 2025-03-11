@@ -65,6 +65,7 @@ export const useDimensionsStore = defineStore('dimensions', () => {
             state.configurations = (result.configurations ?? []).map(
                 (configuration) => new TermState(configuration)
             )
+            console.log(state.configurations)
             state.figures = result.figures
         } catch (error: any) {
             console.log(error)

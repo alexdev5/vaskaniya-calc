@@ -3,7 +3,6 @@ import { ImageType } from '@/models/terms'
 export interface TermContract {
     id: number
     slug: string
-    name: string
     title: string
     description?: string
     acf: AcfContract
@@ -12,6 +11,7 @@ export interface TermContract {
 export interface AcfContract {
     isHidden: boolean
     price?: number
+    name?: number
     thumbnail: ImageContract | null
     thumbnailActive: ImageContract | null
     childBlockImage: ImageContract | null

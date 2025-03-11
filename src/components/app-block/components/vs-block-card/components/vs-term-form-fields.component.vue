@@ -11,14 +11,13 @@
             :label="content.common.label.name"
             v-model="settingsForm.name"
             compact
-            disabled
+            :disabled="settingsForm.name"
         />
         <AppTextField
             v-if="settingsForm.slug"
             :label="content.common.label.slug"
             v-model="settingsForm.slug"
             compact
-            disabled
         />
 
         <AppTextField
@@ -32,11 +31,6 @@
             :label="content.common.label.price"
             v-model="settingsForm.price"
         />
-        <!--        <AppTextarea
-						compact
-						:label="content.common.label.description"
-						v-model="settingsForm.description"
-					/>-->
 
         <TermImageField
             :label="content.common.label.preview"
@@ -84,7 +78,7 @@
 
 <script lang="ts" setup>
 import AppTextField from '@/components/forms/app-textfield.vue'
-import TermImageField from './term-image-field.component.vue'
+import TermImageField from '@/components/terms/add/components/term-image-field.component.vue'
 
 import { content } from '@/content'
 import { ImageType, TermFromFields, TermState } from '@/models/terms'
@@ -134,7 +128,7 @@ watch(
 onMounted(() => {
     settingsForm.id = props.record?.id
     settingsForm.slug = props.record?.slug
-    settingsForm.name = props.record?.name
+    settingsForm.name = props.record?.acf?.name
     settingsForm.title = props.record?.title ?? ''
     settingsForm.description = props.record?.description ?? ''
     settingsForm.price = props.record?.acf?.price

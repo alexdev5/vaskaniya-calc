@@ -120,6 +120,7 @@
 
     <DimensionsFigure v-if="store.state.selectedProductTypeId" />
 
+    <!--  -->
     <AppMediaModal
         ref="mediaModal"
         :callback="store.loadDimensions"
