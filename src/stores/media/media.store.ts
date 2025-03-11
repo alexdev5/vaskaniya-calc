@@ -15,7 +15,6 @@ export const useMediaStore = defineStore('media', () => {
         const res = await mediaApi.getImages(query)
         state.data = res.data
         state.totalPage = Math.ceil(res.total / res.perPage)
-        console.log(state)
     }
 
     return {

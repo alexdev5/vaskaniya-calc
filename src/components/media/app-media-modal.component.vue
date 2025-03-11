@@ -43,7 +43,7 @@
                     flat
                     :disabled="!mediaSelected.id"
                     :loading="loading"
-                    @click="emit('selected', mediaSelected)"
+                    @click="selectImage()"
                 >
                     Выбрать
                 </AppBtn>
@@ -61,9 +61,9 @@ import { TermContracts } from '@/api'
 import { useMediaStore } from '@/stores'
 import { termsApi } from '@/services'
 import { Terms } from '@/models'
+import { ImageType } from '@/models/terms'
 
 const props = defineProps<{
-    //loading: boolean
     callback?: () => Promise<void>
 }>()
 
@@ -78,15 +78,29 @@ const loading = ref(false)
 
 const page = ref(1)
 const totalVisible = 6
+const currentImageType = ref()
 
-async function open() {
+async function open(imageType?: ImageType) {
     mediaModal.value?.open()
+    currentImageType.value = imageType
     await loadMedia(page.value)
 }
 
 function close() {
     mediaSelected.value = {} as TermContracts.ImageContract
+    currentImageType.value = undefined
     mediaModal.value?.close()
+}
+
+function selectImage() {
+    mediaSelected.value = {
+        ...mediaSelected.value,
+        type: currentImageType.value,
+    }
+
+    emit('selected', mediaSelected.value)
+
+    //close()
 }
 
 async function loadMedia(currentPage: number) {

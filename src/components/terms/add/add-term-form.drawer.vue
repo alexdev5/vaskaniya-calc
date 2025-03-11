@@ -1,113 +1,199 @@
 <template>
-  <AppDrawer
-    :opened="widgetOpened"
-    @closed="close"
-    :title="params?.title ?? ''"
-  >
-    <TermFormFields
-      v-if="widgetOpened"
-      image-selected
-      @fields-updated="updateFields"
-    />
+    <AppDrawer
+        :opened="widgetOpened"
+        @closed="close"
+        :title="params?.title ?? ''"
+    >
+        <div class="app-block-tools-settings" v-if="widgetOpened">
+            <AppTextField
+                :label="content.common.label.name"
+                v-model="values.name"
+                compact
+            />
+            <AppTextField
+                :label="content.common.label.slug"
+                v-model="values.slug"
+                compact
+            />
+            <AppTextField
+                compact
+                :label="content.common.label.title"
+                v-model="values.title"
+            />
 
-    <template #footer>
-      <AppFormButtons
-        :disabled="disabled"
-        :loading="loading"
-        @closed="close()"
-        @submitted="submit"
-      />
-    </template>
-  </AppDrawer>
+            <AppTextField
+                compact
+                :label="content.common.label.price"
+                v-model="values.price"
+            />
+
+            <TermImageField
+                :label="content.common.label.preview"
+                v-model="values.thumbnail"
+                @lib-opened="mediaModal.open(ImageType.Thumbnail)"
+            />
+
+            <TermImageField
+                :label="content.common.label.previewActive"
+                v-model="values.thumbnailActive"
+                @lib-opened="mediaModal.open(ImageType.ThumbnailActive)"
+            />
+
+            <TermImageField
+                :label="content.common.term.fullImage"
+                v-model="values.imageFullSize"
+                @lib-opened="mediaModal.open(ImageType.ImageFullSize)"
+            />
+
+            <TermImageField
+                :label="content.common.term.childImage"
+                v-model="values.childBlockImage"
+                @lib-opened="mediaModal.open(ImageType.ChildBlockImage)"
+            />
+
+            <slot name="settings" />
+        </div>
+
+        <template #footer>
+            <AppFormButtons
+                :disabled="disabled"
+                :loading="loading"
+                @closed="close()"
+                @submitted="submit"
+            />
+        </template>
+    </AppDrawer>
+
+    <AppMediaModal
+        ref="mediaModal"
+        :callback="callback"
+        @selected="prepareAssignmentImage"
+    />
 </template>
 
 <script lang="ts" setup>
-import AppDrawer from "@/components/elements/app-drawer.component.vue";
-import TermFormFields from "./components/term-form-fields.component.vue";
-import AppFormButtons from "@/components/forms/app-form-buttons.component.vue";
+import AppDrawer from '@/components/elements/app-drawer.component.vue'
+import AppFormButtons from '@/components/forms/app-form-buttons.component.vue'
+import TermImageField from '@/components/terms/add/components/term-image-field.component.vue'
+import AppTextField from '@/components/forms/app-textfield.vue'
+import AppMediaModal from '@/components/media/app-media-modal.component.vue'
 
-import { ref } from "vue";
-import { CreateTermInDrawerParams, TermFromFields } from "@/models/terms";
-import { termsApi } from "@/services";
-import { content } from "@/content";
+import { reactive, ref } from 'vue'
+import {
+    CreateTermInDrawerParams,
+    ImageType,
+    TermFromFields,
+} from '@/models/terms'
+import { termsApi } from '@/services'
+import { content } from '@/content'
+import { TermContracts } from '@/api'
 
 const props = defineProps<{
-  callback?: () => Promise<void>;
-}>();
+    callback?: () => Promise<void>
+}>()
 
-const formFields = ref<TermFromFields | null>(null);
+const emit = defineEmits(['fields-updated', 'assign-image-requested'])
+const mediaModal = ref()
 
-const params = ref<CreateTermInDrawerParams | null>(null);
-const loading = ref(false);
-const disabled = ref(false);
-const widgetOpened = ref(false);
+const params = ref<CreateTermInDrawerParams | null>(null)
+const loading = ref(false)
+const disabled = ref(false)
+const widgetOpened = ref(false)
+
+const values = reactive({
+    id: 0,
+    slug: '',
+    title: '',
+    name: '',
+    description: '',
+    price: null,
+    thumbnail: null,
+    thumbnailActive: null,
+    imageFullSize: null,
+    childBlockImage: null,
+} as TermFromFields)
 
 async function submit() {
-  if (!formFields.value)
-    throw new Error("formFields is null in add-term-form-drawer");
-  if (!params.value || !params.value?.taxonomy)
-    throw new Error("params is not passed in add-term-form-drawer");
+    if (!values.name) throw new Error("'name' in values is empty")
+    if (!params.value || !params.value?.taxonomy)
+        throw new Error('params is not passed in add-term-form-drawer')
 
-  loading.value = true;
+    loading.value = true
 
-  try {
-    const termId = await termsApi.create({
-      parentId: params.value?.parentId,
-      taxonomy: params.value!.taxonomy,
-      title: formFields.value!.title,
-      description: formFields.value?.description,
-      price: formFields.value?.price,
-    });
+    try {
+        const termId = await termsApi.create({
+            parentId: params.value?.parentId,
+            taxonomy: params.value!.taxonomy,
+            title: values.title,
+            name: values.name,
+            description: values.description,
+            price: values.price,
+        })
 
-    if (
-      formFields.value?.imageFullSize?.length ||
-      formFields.value?.thumbnailActive?.length ||
-      formFields.value?.thumbnail?.length ||
-      formFields.value?.childBlockImage?.length
-    ) {
-      await termsApi.addImages({
-        termId,
-        imageFullSize: formFields.value?.imageFullSize?.[0] ?? null,
-        thumbnail: formFields.value?.thumbnail?.[0] ?? null,
-        thumbnailActive: formFields.value?.thumbnailActive?.[0] ?? null,
-        childBlockImage: formFields.value?.childBlockImage?.[0] ?? null,
-      });
+        if (
+            values.imageFullSize?.length ||
+            values.thumbnailActive?.length ||
+            values.thumbnail?.length ||
+            values.childBlockImage?.length
+        ) {
+            await termsApi.addImages({
+                termId,
+                imageFullSize: values.imageFullSize?.[0] ?? null,
+                thumbnail: values.thumbnail?.[0] ?? null,
+                thumbnailActive: values.thumbnailActive?.[0] ?? null,
+                childBlockImage: values.childBlockImage?.[0] ?? null,
+            })
+        }
+
+        if (props.callback) await props.callback()
+
+        console.log(content.common.notifications.updated)
+
+        close()
+    } catch (error: any) {
+        console.log(error)
+    } finally {
+        loading.value = false
     }
-
-    if (props.callback) await props.callback();
-
-    console.log(content.common.notifications.updated);
-
-    close();
-  } catch (error: any) {
-    console.log(error);
-  } finally {
-    loading.value = false;
-  }
 }
 
 async function open(_params: CreateTermInDrawerParams) {
-  params.value = _params;
-  widgetOpened.value = true;
+    params.value = _params
+    widgetOpened.value = true
 }
 
 function close() {
-  widgetOpened.value = false;
-  params.value = null;
-  formFields.value = null;
+    widgetOpened.value = false
+    params.value = null
+    //values = null
 }
 
-function updateFields(fields: TermFromFields) {
-  formFields.value = fields;
-  disabled.value =
-    !Object.values(fields).filter((value) => Boolean(value)).length ||
-    !fields.title;
+function prepareAssignmentImage(image: TermContracts.ImageContract) {
+    if (!image.type) {
+        console.error('image.type is empty: ', image)
+        return
+    }
+
+    switch (image.type) {
+        case ImageType.Thumbnail:
+            values.thumbnail = image
+            break
+        case ImageType.ImageFullSize:
+            values.imageFullSize = image
+            break
+        case ImageType.ChildBlockImage:
+            values.childBlockImage = image
+            break
+        case ImageType.ThumbnailActive:
+            values.thumbnailActive = image
+            break
+    }
 }
 
 defineExpose({
-  open,
-  close,
-});
+    open,
+    close,
+})
 </script>
 
 <style lang="scss"></style>

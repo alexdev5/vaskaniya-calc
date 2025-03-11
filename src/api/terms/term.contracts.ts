@@ -1,6 +1,9 @@
+import { ImageType } from '@/models/terms'
+
 export interface TermContract {
     id: number
     slug: string
+    name: string
     title: string
     description?: string
     acf: AcfContract
@@ -36,6 +39,7 @@ export interface ImageContract {
     modified: string
     date: string
     url: string
+    type?: ImageType
 }
 
 export interface UpdateTermCommand {
@@ -43,6 +47,7 @@ export interface UpdateTermCommand {
     title: string
     description?: string
     price?: number
+    name: string
     thumbnail?: ImageContract[] // todo: remove
     thumbnailActive?: ImageContract[] // todo: remove
     childBlockImage?: ImageContract[] // todo: remove
@@ -64,6 +69,7 @@ export interface CreateTaxonomyCommand {
     parentId?: number
     description?: string
     price?: number
+    name?: string
 }
 
 export interface UpdateSortIndexCommand {

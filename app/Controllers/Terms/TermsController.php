@@ -126,11 +126,12 @@ class TermsController
     {
         $taxonomy = $request->get_param('taxonomy');
         $parentId = $request->get_param('parentId');
-        $termName = $request->get_param('title');
+        $title = $request->get_param('title');
+        $name = $request->get_param('name');
         $description = $request->get_param('description');
         $price = $request->get_param('price');
 
-        if (!isset($termName) || !isset($taxonomy)) {
+        if (!isset($title) || !isset($taxonomy)) {
             return debugRest('termName or taxonomy undefined');
         }
 
@@ -139,7 +140,7 @@ class TermsController
             $args['parent'] = $parentId;
         }
 
-        $result = wp_insert_term($termName, $taxonomy, [
+        $result = wp_insert_term($title, $taxonomy, [
             'description' => $description,
             'parent' => $parentId,
         ]);
@@ -152,6 +153,9 @@ class TermsController
 
         if ($price) {
             update_field(TermsAcfEnum::Price, $price, 'term_' . $termId);
+        }
+        if ($name) {
+            update_field(TermsAcfEnum::Name, $name, 'term_' . $termId);
         }
 
         return new WP_REST_Response($termId, 201);
