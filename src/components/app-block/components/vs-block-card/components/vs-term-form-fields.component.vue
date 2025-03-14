@@ -11,7 +11,7 @@
             :label="content.common.label.name"
             v-model="settingsForm.name"
             compact
-            :disabled="settingsForm.name"
+            :disabled="Boolean(settingsForm.name)"
         />
         <AppTextField
             v-if="settingsForm.slug"
@@ -34,40 +34,42 @@
 
         <TermImageField
             :label="content.common.label.preview"
-            :image="props.record?.acf.thumbnail ?? undefined"
-            v-model="settingsForm.thumbnail"
+            :image="settingsForm.thumbnail"
             :deleteLoading="deleteLoading?.[ImageType.Thumbnail]"
-            :image-selected="imageSelected"
+            @file-selected="selectImageToUpload($event, ImageType.Thumbnail)"
             @lib-opened="openMediaLib(ImageType.Thumbnail)"
             @removed="remove(ImageType.Thumbnail)"
         />
 
         <TermImageField
             :label="content.common.label.previewActive"
-            :image="props.record?.acf.thumbnailActive ?? undefined"
-            v-model="settingsForm.thumbnailActive"
+            :image="settingsForm.thumbnailActive"
             :deleteLoading="deleteLoading?.[ImageType.ThumbnailActive]"
-            :image-selected="imageSelected"
+            @file-selected="
+                selectImageToUpload($event, ImageType.ThumbnailActive)
+            "
             @lib-opened="openMediaLib(ImageType.ThumbnailActive)"
             @removed="remove(ImageType.ThumbnailActive)"
         />
 
         <TermImageField
             :label="content.common.term.fullImage"
-            :image="props.record?.acf.imageFullSize ?? undefined"
-            v-model="settingsForm.imageFullSize"
+            :image="settingsForm.imageFullSize"
             :deleteLoading="deleteLoading?.[ImageType.ImageFullSize]"
-            :image-selected="imageSelected"
+            @file-selected="
+                selectImageToUpload($event, ImageType.ImageFullSize)
+            "
             @lib-opened="openMediaLib(ImageType.ImageFullSize)"
             @removed="remove(ImageType.ImageFullSize)"
         />
 
         <TermImageField
             :label="content.common.term.childImage"
-            :image="props.record?.acf.childBlockImage ?? undefined"
-            v-model="settingsForm.childBlockImage"
+            :image="settingsForm.childBlockImage"
             :deleteLoading="deleteLoading?.[ImageType.ChildBlockImage]"
-            :image-selected="imageSelected"
+            @file-selected="
+                selectImageToUpload($event, ImageType.ChildBlockImage)
+            "
             @lib-opened="openMediaLib(ImageType.ChildBlockImage)"
             @removed="remove(ImageType.ChildBlockImage)"
         />
@@ -83,17 +85,18 @@ import TermImageField from '@/components/terms/add/components/term-image-field.c
 import { content } from '@/content'
 import { ImageType, TermFromFields, TermState } from '@/models/terms'
 import { onMounted, reactive, watch } from 'vue'
+import { ImageContract } from '@/api/terms/term.contracts.ts'
 
 const props = defineProps<{
     record?: TermState
     deleteLoading?: Record<ImageType, boolean>
-    imageSelected?: boolean
 }>()
 
 const emit = defineEmits([
     'fields-updated',
     'load-image-requested',
     'remove-image-requested',
+    'file-selected',
 ])
 
 const settingsForm = reactive({
@@ -103,10 +106,10 @@ const settingsForm = reactive({
     name: '',
     description: '',
     price: null,
-    thumbnail: null,
-    thumbnailActive: null,
-    imageFullSize: null,
-    childBlockImage: null,
+    thumbnail: null as ImageContract | null,
+    thumbnailActive: null as ImageContract | null,
+    imageFullSize: null as ImageContract | null,
+    childBlockImage: null as ImageContract | null,
 } as TermFromFields)
 
 async function openMediaLib(imageType: ImageType) {
@@ -115,6 +118,10 @@ async function openMediaLib(imageType: ImageType) {
 
 function remove(imageType: ImageType) {
     emit('remove-image-requested', imageType)
+}
+
+function selectImageToUpload(file: File, imageType: ImageType) {
+    emit('file-selected', file, imageType)
 }
 
 watch(
@@ -126,12 +133,17 @@ watch(
 )
 
 onMounted(() => {
-    settingsForm.id = props.record?.id
-    settingsForm.slug = props.record?.slug
-    settingsForm.name = props.record?.acf?.name
+    settingsForm.id = props.record?.id ?? 0
+    settingsForm.slug = props.record?.slug ?? ''
+    settingsForm.name = props.record?.acf?.name ?? ''
     settingsForm.title = props.record?.title ?? ''
     settingsForm.description = props.record?.description ?? ''
-    settingsForm.price = props.record?.acf?.price
+    settingsForm.price = props.record?.acf?.price ?? null
+
+    settingsForm.thumbnail = props.record?.acf?.thumbnail ?? null
+    settingsForm.thumbnailActive = props.record?.acf?.thumbnailActive ?? null
+    settingsForm.imageFullSize = props.record?.acf?.imageFullSize ?? null
+    settingsForm.childBlockImage = props.record?.acf?.childBlockImage ?? null
 })
 </script>
 
